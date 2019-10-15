@@ -1,4 +1,4 @@
-package com.dnd;
+package com.dnd.DataObjects;
 
 public class PartyInfo {
     int memberCount;

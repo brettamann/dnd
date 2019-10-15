@@ -1,12 +1,8 @@
-package com.dnd;
+package com.dnd.Utilities;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.*;
 
 public class Database {
     private String url = "jdbc:sqlite:/Users/bamann/Desktop/Scripts/Test_Files/bastion.db";
@@ -21,7 +17,6 @@ public class Database {
     private Connection conn = null;
 
     public void connect() {
-        DriverManager.registerDriver(new org.sqlite.JDBC());
         try {
             //String url = "jdbc:sqlite:C:/sqlite/bastion.db";
             conn = DriverManager.getConnection(url);

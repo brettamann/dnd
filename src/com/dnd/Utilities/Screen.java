@@ -1,4 +1,4 @@
-package com.dnd;
+package com.dnd.Utilities;
 
 public class Screen {
     public static final String ANSI_RESET = "\u001B[0m";

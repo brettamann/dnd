@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="" />
+    <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/libs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/dnd/Utilities/FileUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/dnd.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/Database.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/Input.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/Location.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dnd/com/dnd/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/PartyInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/PartyMember.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dnd/com/dnd/Screen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DBConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DBConnectionHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/Utilities/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/Utilities/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/PartyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/PartyMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/SQLiteDialect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/Utilities/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/SqlHelper.java" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,36 +52,113 @@
     <select />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dnd/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="170">
+              <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/Screen.java">
+        <entry file="file://$PROJECT_DIR$/data.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="8" />
+            <state>
+              <caret column="24" selection-start-column="24" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/PartyMember.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/FileUtility.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#345#346#0" expanded="true" />
+                <element signature="e#377#378#0" expanded="true" />
+                <element signature="e#553#554#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#778#779#0" expanded="true" />
+                <element signature="e#810#811#0" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
+                <element signature="e#1017#1018#0" expanded="true" />
+                <element signature="e#1195#1196#0" expanded="true" />
+                <element signature="e#1230#1231#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/PartyInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Screen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding>
                 <element signature="e#1379#1380#0" expanded="true" />
-                <element signature="e#1400#1401#0" expanded="true" />
-                <element signature="e#1435#1436#0" expanded="true" />
-                <element signature="e#1456#1457#0" expanded="true" />
+                <element signature="e#1463#1464#0" expanded="true" />
+                <element signature="e#1754#1755#0" expanded="true" />
                 <element signature="e#1825#1826#0" expanded="true" />
+                <element signature="e#1875#1876#0" expanded="true" />
                 <element signature="e#1949#1950#0" expanded="true" />
+                <element signature="e#1998#1999#0" expanded="true" />
                 <element signature="e#2071#2072#0" expanded="true" />
+                <element signature="e#2121#2122#0" expanded="true" />
                 <element signature="e#2195#2196#0" expanded="true" />
+                <element signature="e#2243#2244#0" expanded="true" />
                 <element signature="e#2315#2316#0" expanded="true" />
+                <element signature="e#2364#2365#0" expanded="true" />
                 <element signature="e#2437#2438#0" expanded="true" />
+                <element signature="e#2485#2486#0" expanded="true" />
                 <element signature="e#2557#2558#0" expanded="true" />
               </folding>
             </state>
@@ -61,10 +166,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/Input.java">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Input.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+            <state relative-caret-position="168">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,104 +178,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/Location.java">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+            <state relative-caret-position="48">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/Database.java">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/DBConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="9" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="9" />
+            <state relative-caret-position="5">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/DBConnectionHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/SQLiteDialect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="67" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="67" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2096#2097#0" expanded="true" />
-                <element signature="e#2123#2124#0" expanded="true" />
-                <element signature="e#2293#2294#0" expanded="true" />
-                <element signature="e#2357#2358#0" expanded="true" />
-                <element signature="e#2812#2813#0" expanded="true" />
-                <element signature="e#2863#2864#0" expanded="true" />
-                <element signature="e#2911#2912#0" expanded="true" />
-                <element signature="e#2938#2939#0" expanded="true" />
-                <element signature="e#2991#2992#0" expanded="true" />
-                <element signature="e#3052#3053#0" expanded="true" />
-                <element signature="e#3103#3104#0" expanded="true" />
-                <element signature="e#3131#3132#0" expanded="true" />
-                <element signature="e#3189#3190#0" expanded="true" />
-                <element signature="e#3216#3217#0" expanded="true" />
-                <element signature="e#3279#3280#0" expanded="true" />
-                <element signature="e#3307#3308#0" expanded="true" />
-                <element signature="e#3362#3363#0" expanded="true" />
-                <element signature="e#3411#3412#0" expanded="true" />
-                <element signature="e#3452#3453#0" expanded="true" />
-                <element signature="e#3479#3480#0" expanded="true" />
-                <element signature="e#3517#3518#0" expanded="true" />
-                <element signature="e#3581#3582#0" expanded="true" />
-                <element signature="e#3621#3622#0" expanded="true" />
-                <element signature="e#3649#3650#0" expanded="true" />
-                <element signature="e#3691#3692#0" expanded="true" />
-                <element signature="e#3726#3727#0" expanded="true" />
-                <element signature="e#3768#3769#0" expanded="true" />
-                <element signature="e#3793#3794#0" expanded="true" />
-                <element signature="e#3844#3845#0" expanded="true" />
-                <element signature="e#3872#3873#0" expanded="true" />
-                <element signature="e#4661#4662#0" expanded="true" />
-                <element signature="e#4688#4689#0" expanded="true" />
-                <element signature="e#4734#4735#0" expanded="true" />
-                <element signature="e#4762#4763#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/SqlHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/sql/DriverManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="265" column="29" selection-start-line="265" selection-start-column="29" selection-end-line="265" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -189,6 +212,9 @@
       <find>conn</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -202,13 +228,20 @@
         <option value="$PROJECT_DIR$/src/com/dnd/PartyStats.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/PartyMember.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/Location.java" />
-        <option value="$PROJECT_DIR$/src/com/dnd/Main.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/Input.java" />
-        <option value="$PROJECT_DIR$/src/com/dnd/Database.java" />
-        <option value="$PROJECT_DIR$/src/com/dnd/DBConfig.java" />
-        <option value="$PROJECT_DIR$/src/com/dnd/DBConnectionHelper.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/SqlHelper.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/SQLiteDialect.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DBConfig.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/Database.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DBConnectionHelper.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyInfo.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/Utilities/Input.java" />
+        <option value="$PROJECT_DIR$/data.txt" />
+        <option value="$PROJECT_DIR$/src/com/dnd/Utilities/FileUtility.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyMember.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/Main.java" />
       </list>
     </option>
   </component>
@@ -219,16 +252,17 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1805" />
-    <option name="y" value="-911" />
-    <option name="width" value="1805" />
-    <option name="height" value="1334" />
+    <option name="x" value="210" />
+    <option name="y" value="143" />
+    <option name="width" value="1470" />
+    <option name="height" value="723" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -248,11 +282,28 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="dnd" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="dnd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dnd" type="462c0819:PsiDirectoryNode" />
+              <item name="DataObjects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dnd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dnd" type="462c0819:PsiDirectoryNode" />
+              <item name="Utilities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dnd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,14 +311,19 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -331,44 +387,47 @@
       <option name="presentableId" value="Default" />
       <updated>1570659932525</updated>
       <workItem from="1570659937893" duration="26908000" />
+      <workItem from="1571113477651" duration="3120000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26908000" />
+    <option name="totallyTimeSpent" value="30028000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1805" y="-911" width="1805" height="1334" extended-state="0" />
+    <frame x="210" y="143" width="1470" height="723" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30459443" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2640056" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32930756" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3993559" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32894737" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39802632" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" weight="0.3295519" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" weight="0.3295519" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32894737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24957459" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.3295519" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.3295519" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,13 +436,11 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Input.java</url>
-          <line>7</line>
-          <properties class="com.dnd.Input" method="readInputText">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/dnd/Main.java</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -393,110 +450,26 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/sql/PreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1233">
-          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
-        </state>
-      </provider>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/sql/PreparedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/PartyStats.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/sql/DriverManager.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DBConfig.java">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/PartyStats.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/SQLiteDialect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/PartyMember.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/PartyInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Screen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="8" />
-          <folding>
-            <element signature="e#1379#1380#0" expanded="true" />
-            <element signature="e#1400#1401#0" expanded="true" />
-            <element signature="e#1435#1436#0" expanded="true" />
-            <element signature="e#1456#1457#0" expanded="true" />
-            <element signature="e#1825#1826#0" expanded="true" />
-            <element signature="e#1949#1950#0" expanded="true" />
-            <element signature="e#2071#2072#0" expanded="true" />
-            <element signature="e#2195#2196#0" expanded="true" />
-            <element signature="e#2315#2316#0" expanded="true" />
-            <element signature="e#2437#2438#0" expanded="true" />
-            <element signature="e#2557#2558#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Input.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+        <state relative-caret-position="222">
+          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/sql/DriverManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="265" column="29" selection-start-line="265" selection-start-column="29" selection-end-line="265" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dnd/SqlHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DBConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="9" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="9" />
+        <state relative-caret-position="313">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -505,54 +478,205 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dnd/DBConnectionHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/SQLiteDialect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="67" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="67" />
+        <state relative-caret-position="-3035">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2096#2097#0" expanded="true" />
-            <element signature="e#2123#2124#0" expanded="true" />
-            <element signature="e#2293#2294#0" expanded="true" />
-            <element signature="e#2357#2358#0" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2863#2864#0" expanded="true" />
-            <element signature="e#2911#2912#0" expanded="true" />
-            <element signature="e#2938#2939#0" expanded="true" />
-            <element signature="e#2991#2992#0" expanded="true" />
-            <element signature="e#3052#3053#0" expanded="true" />
-            <element signature="e#3103#3104#0" expanded="true" />
-            <element signature="e#3131#3132#0" expanded="true" />
-            <element signature="e#3189#3190#0" expanded="true" />
-            <element signature="e#3216#3217#0" expanded="true" />
-            <element signature="e#3279#3280#0" expanded="true" />
-            <element signature="e#3307#3308#0" expanded="true" />
-            <element signature="e#3362#3363#0" expanded="true" />
-            <element signature="e#3411#3412#0" expanded="true" />
-            <element signature="e#3452#3453#0" expanded="true" />
-            <element signature="e#3479#3480#0" expanded="true" />
-            <element signature="e#3517#3518#0" expanded="true" />
-            <element signature="e#3581#3582#0" expanded="true" />
-            <element signature="e#3621#3622#0" expanded="true" />
-            <element signature="e#3649#3650#0" expanded="true" />
-            <element signature="e#3691#3692#0" expanded="true" />
-            <element signature="e#3726#3727#0" expanded="true" />
-            <element signature="e#3768#3769#0" expanded="true" />
-            <element signature="e#3793#3794#0" expanded="true" />
-            <element signature="e#3844#3845#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
-            <element signature="e#4688#4689#0" expanded="true" />
-            <element signature="e#4734#4735#0" expanded="true" />
-            <element signature="e#4762#4763#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#1379#1380#0" expanded="true" />
+            <element signature="e#1463#1464#0" expanded="true" />
+            <element signature="e#1754#1755#0" expanded="true" />
+            <element signature="e#1825#1826#0" expanded="true" />
+            <element signature="e#1875#1876#0" expanded="true" />
+            <element signature="e#1949#1950#0" expanded="true" />
+            <element signature="e#1998#1999#0" expanded="true" />
+            <element signature="e#2071#2072#0" expanded="true" />
+            <element signature="e#2121#2122#0" expanded="true" />
+            <element signature="e#2195#2196#0" expanded="true" />
+            <element signature="e#2243#2244#0" expanded="true" />
+            <element signature="e#2315#2316#0" expanded="true" />
+            <element signature="e#2364#2365#0" expanded="true" />
+            <element signature="e#2437#2438#0" expanded="true" />
+            <element signature="e#2485#2486#0" expanded="true" />
+            <element signature="e#2557#2558#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Input.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/FileUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="24" selection-start-column="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#345#346#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+            <element signature="e#553#554#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1017#1018#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
+            <element signature="e#1230#1231#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/PartyInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/PartyMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>libs</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
