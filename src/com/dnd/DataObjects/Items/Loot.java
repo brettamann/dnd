@@ -1,5 +1,7 @@
 package com.dnd.DataObjects.Items;
 
+import com.dnd.Utilities.Screen;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,5 +31,28 @@ public class Loot {
         this.goldValuePer = goldValuePer;
         this.silverValuePer = silverValuePer;
         this.copperValuePer = copperValuePer;
+    }
+
+    public String getDescriptionStringForDisplay(Screen screen) {
+        String stringToReturn = name + " (x" + quantity + ", " + rarity + ", " + itemType;
+        if (platinumValuePer > 0) {
+            stringToReturn = stringToReturn + ", " + platinumValuePer + "pp";
+        }
+        if (goldValuePer > 0) {
+            stringToReturn = stringToReturn + ", " + goldValuePer + "gp";
+        }
+        if (silverValuePer > 0) {
+            stringToReturn = stringToReturn + ", " + silverValuePer + "sp";
+        }
+        if (copperValuePer > 0) {
+            stringToReturn = stringToReturn + ", " + copperValuePer + "cp";
+        }
+        stringToReturn = stringToReturn + "): " + description;
+        for (int i = 0; i < abilities.size() - 1; i++) {
+            if (!abilities.get(i).equals("")) {
+                stringToReturn = stringToReturn + "\n\t" + abilities.get(i);
+            }
+        }
+        return stringToReturn;
     }
 }

@@ -1,5 +1,8 @@
 package com.dnd.DataObjects.Items;
 
+import com.dnd.Utilities.RandomGenerator;
+import com.dnd.Utilities.Screen;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,5 +36,31 @@ public class Armor {
         this.valueSilver = valueSilver;
         this.valueCopper = valueCopper;
         this.rarity = rarity;
+    }
+
+    public void setPlusEnchantmentByLevel(int plusEnchantmentLevel) {
+        ac += plusEnchantmentLevel;
+    }
+
+    public void addRandomAbilityByTier(int tier) {
+        RandomGenerator randgen = new RandomGenerator();
+        abilities.add(randgen.getRandomArmorAbilityByTier(tier));
+    }
+
+    public void displayArmorStats() {
+        Screen screen = new Screen();
+        screen.print("Armor: " + name + ", AC: " + ac + " + " + dexBonusMax + " max DEX bonus ");
+        for (int i = 0; i < abilities.size() - 1; i++){
+            screen.print(abilities.get(i));
+        }
+    }
+
+    public String getArmorStatsStringForDisplay(Screen screen) {
+        String stringToReturn = "Armor: " + name + ", AC: " + ac + " + " + dexBonusMax + " max DEX bonus ";
+        for (int i = 0; i < abilities.size() - 1; i++) {
+            if (!abilities.get(i).equals(""))
+            stringToReturn = stringToReturn + "\n\t" + abilities.get(i);
+        }
+        return stringToReturn;
     }
 }

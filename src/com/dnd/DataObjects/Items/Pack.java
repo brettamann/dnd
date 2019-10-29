@@ -1,7 +1,7 @@
 package com.dnd.DataObjects.Items;
 
 import com.dnd.DataObjects.Location;
-import com.dnd.DataObjects.Races.EconomicClasses;
+import com.dnd.DataObjects.EconomicClasses;
 import com.dnd.Utilities.RandomCollectionWeighted;
 import com.dnd.Utilities.RandomGenerator;
 

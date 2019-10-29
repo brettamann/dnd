@@ -1,5 +1,7 @@
 package com.dnd.DataObjects.Items;
 
+import com.dnd.Utilities.Screen;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,8 +20,6 @@ public class Weapon {
     public int valueSilver;
     public int valueCopper;
     public String rarity;
-
-
 
     public int toHitBonus;
 
@@ -136,7 +136,8 @@ public class Weapon {
     }
 
     public int getTotalUntypedDamageMax() {
-        return slashingDamageMin + slashingDamageMax
+        return slashingDamageMin
+            + slashingDamageMax
             + bludgeoningDamageMax
             + piercingDamageMax
             + fireDamageMax
@@ -148,5 +149,287 @@ public class Weapon {
             + lightningDamageMax
             + thunderDamageMax
             + forceDamageMax;
+    }
+
+    public String getMainPhysicalDamageType() {
+        if (piercingDamageMax > 0 && piercingDamageMax > bludgeoningDamageMax && piercingDamageMax > slashingDamageMax) {
+            return DamageTypes.piercing;
+        } else if (bludgeoningDamageMax > 0 && bludgeoningDamageMax > piercingDamageMax && bludgeoningDamageMax > slashingDamageMax) {
+            return DamageTypes.bludgeoning;
+        } else if (slashingDamageMax > 0 && slashingDamageMax > piercingDamageMax && slashingDamageMax > bludgeoningDamageMax) {
+            return DamageTypes.slashing;
+        } else {
+            return "none";
+        }
+    }
+
+    public void setPlusLevelEnchantment(int levelEnchantment) {
+        toHitBonus = levelEnchantment;
+        switch (getMainPhysicalDamageType()) {
+            case DamageTypes.piercing:
+                piercingDamageMin += levelEnchantment;
+                piercingDamageMax += levelEnchantment;
+                break;
+            case DamageTypes.slashing:
+                slashingDamageMin += levelEnchantment;
+                slashingDamageMax += levelEnchantment;
+                break;
+            case DamageTypes.bludgeoning:
+                bludgeoningDamageMin += levelEnchantment;
+                bludgeoningDamageMax += levelEnchantment;
+                break;
+            default:
+                Screen screen = new Screen();
+                screen.print("Looks like a +" + levelEnchantment + " damage enchantment couldn't be applied to " + name);
+                break;
+        }
+    }
+
+    public String returnStringIfHasDamage(String damageType) {
+        switch (damageType) {
+            case DamageTypes.slashing:
+                if (slashingDamageMax > 0) {
+                    if (slashingDamageMin == slashingDamageMax) {
+                        return slashingDamageMax + " " + DamageTypes.slashing + " damage";
+                    } else {
+                        return slashingDamageMin + "-" + slashingDamageMax + DamageTypes.slashing + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.bludgeoning:
+                if (bludgeoningDamageMax > 0) {
+                    if (bludgeoningDamageMin == bludgeoningDamageMax) {
+                        return bludgeoningDamageMax + " " + DamageTypes.bludgeoning + " damage";
+                    } else {
+                        return bludgeoningDamageMin + "-" + bludgeoningDamageMax + DamageTypes.bludgeoning + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.piercing:
+                if (piercingDamageMax > 0) {
+                    if (piercingDamageMin == piercingDamageMax) {
+                        return piercingDamageMax + " " + DamageTypes.piercing + " damage";
+                    } else {
+                        return piercingDamageMin + "-" + piercingDamageMax + DamageTypes.piercing + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.fire:
+                if (fireDamageMax > 0) {
+                    if (fireDamageMin == fireDamageMax) {
+                        return fireDamageMax + " " + DamageTypes.fire + " damage";
+                    } else {
+                        return fireDamageMin + "-" + fireDamageMax + DamageTypes.fire + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.cold:
+                if (coldDamageMax > 0) {
+                    if (coldDamageMin == coldDamageMax) {
+                        return coldDamageMax + " " + DamageTypes.cold + " damage";
+                    } else {
+                        return coldDamageMin + "-" + coldDamageMax + DamageTypes.cold + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.poison:
+                if (poisonDamageMax > 0) {
+                    if (poisonDamageMin == poisonDamageMax) {
+                        return poisonDamageMax + " " + DamageTypes.poison + " damage";
+                    } else {
+                        return poisonDamageMin + "-" + poisonDamageMax + DamageTypes.poison + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.psychic:
+                if (psychicDamageMax > 0) {
+                    if (psychicDamageMin == psychicDamageMax) {
+                        return psychicDamageMax + " " + DamageTypes.psychic + " damage";
+                    } else {
+                        return psychicDamageMin + "-" + psychicDamageMax + DamageTypes.psychic + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.necrotic:
+                if (necroticDamageMax > 0) {
+                    if (necroticDamageMin == necroticDamageMax) {
+                        return necroticDamageMax + " " + DamageTypes.necrotic + " damage";
+                    } else {
+                        return necroticDamageMin + "-" + necroticDamageMax + DamageTypes.necrotic + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.radiant:
+                if (radiantDamageMax > 0) {
+                    if (radiantDamageMin == radiantDamageMax) {
+                        return radiantDamageMax + " " + DamageTypes.radiant + " damage";
+                    } else {
+                        return radiantDamageMin + "-" + radiantDamageMax + DamageTypes.radiant + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.lightning:
+                if (lightningDamageMax > 0) {
+                    if (lightningDamageMin == lightningDamageMax) {
+                        return lightningDamageMax + " " + DamageTypes.lightning + " damage";
+                    } else {
+                        return lightningDamageMin + "-" + lightningDamageMax + DamageTypes.lightning + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.thunder:
+                if (thunderDamageMax > 0) {
+                    if (thunderDamageMin == thunderDamageMax) {
+                        return thunderDamageMax + " " + DamageTypes.thunder + " damage";
+                    } else {
+                        return thunderDamageMin + "-" + thunderDamageMax + DamageTypes.thunder + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.force:
+                if (forceDamageMax > 0) {
+                    if (forceDamageMin == forceDamageMax) {
+                        return forceDamageMax + " " + DamageTypes.force + " damage";
+                    } else {
+                        return forceDamageMin + "-" + forceDamageMax + DamageTypes.force + " damage";
+                    }
+                }
+                break;
+
+        }
+        return "";
+    }
+
+    public String returnStringIfHasDamageNoPhysical(String damageType) {
+        switch (damageType) {
+            case DamageTypes.fire:
+                if (fireDamageMax > 0) {
+                    if (fireDamageMin == fireDamageMax) {
+                        return fireDamageMax + " " + DamageTypes.fire + " damage";
+                    } else {
+                        return fireDamageMin + "-" + fireDamageMax + DamageTypes.fire + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.cold:
+                if (coldDamageMax > 0) {
+                    if (coldDamageMin == coldDamageMax) {
+                        return coldDamageMax + " " + DamageTypes.cold + " damage";
+                    } else {
+                        return coldDamageMin + "-" + coldDamageMax + DamageTypes.cold + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.poison:
+                if (poisonDamageMax > 0) {
+                    if (poisonDamageMin == poisonDamageMax) {
+                        return poisonDamageMax + " " + DamageTypes.poison + " damage";
+                    } else {
+                        return poisonDamageMin + "-" + poisonDamageMax + DamageTypes.poison + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.psychic:
+                if (psychicDamageMax > 0) {
+                    if (psychicDamageMin == psychicDamageMax) {
+                        return psychicDamageMax + " " + DamageTypes.psychic + " damage";
+                    } else {
+                        return psychicDamageMin + "-" + psychicDamageMax + DamageTypes.psychic + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.necrotic:
+                if (necroticDamageMax > 0) {
+                    if (necroticDamageMin == necroticDamageMax) {
+                        return necroticDamageMax + " " + DamageTypes.necrotic + " damage";
+                    } else {
+                        return necroticDamageMin + "-" + necroticDamageMax + DamageTypes.necrotic + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.radiant:
+                if (radiantDamageMax > 0) {
+                    if (radiantDamageMin == radiantDamageMax) {
+                        return radiantDamageMax + " " + DamageTypes.radiant + " damage";
+                    } else {
+                        return radiantDamageMin + "-" + radiantDamageMax + DamageTypes.radiant + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.lightning:
+                if (lightningDamageMax > 0) {
+                    if (lightningDamageMin == lightningDamageMax) {
+                        return lightningDamageMax + " " + DamageTypes.lightning + " damage";
+                    } else {
+                        return lightningDamageMin + "-" + lightningDamageMax + DamageTypes.lightning + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.thunder:
+                if (thunderDamageMax > 0) {
+                    if (thunderDamageMin == thunderDamageMax) {
+                        return thunderDamageMax + " " + DamageTypes.thunder + " damage";
+                    } else {
+                        return thunderDamageMin + "-" + thunderDamageMax + DamageTypes.thunder + " damage";
+                    }
+                }
+                break;
+            case DamageTypes.force:
+                if (forceDamageMax > 0) {
+                    if (forceDamageMin == forceDamageMax) {
+                        return forceDamageMax + " " + DamageTypes.force + " damage";
+                    } else {
+                        return forceDamageMin + "-" + forceDamageMax + DamageTypes.force + " damage";
+                    }
+                }
+                break;
+
+        }
+        return "";
+    }
+
+    public String getDamageForDisplay() {
+        String weaponDamageText = "+" + combinedToHitBonus + " to hit, ";
+        switch (getMainPhysicalDamageType()) {
+            case DamageTypes.piercing:
+                weaponDamageText = weaponDamageText + piercingDamageMin + "-" + piercingDamageMax + " " + DamageTypes.piercing + " ";
+                break;
+            case DamageTypes.slashing:
+                weaponDamageText = weaponDamageText + slashingDamageMin + "-" + slashingDamageMax + " " + DamageTypes.slashing + " ";
+                break;
+            case DamageTypes.bludgeoning:
+                weaponDamageText = weaponDamageText + bludgeoningDamageMin + "-" + bludgeoningDamageMax + " " + DamageTypes.bludgeoning + " ";
+                break;
+            default:
+                weaponDamageText = "(No physical damage)";
+                break;
+        }
+        for (int i = 0; i < DamageTypes.damageTypesList.size() - 1; i++) {
+            if (!returnStringIfHasDamageNoPhysical(DamageTypes.damageTypesList.get(i)).equals("")) {
+                weaponDamageText = weaponDamageText + " + " + returnStringIfHasDamageNoPhysical(DamageTypes.damageTypesList.get(i));
+            }
+        }
+        return weaponDamageText;
+    }
+
+    public boolean getIsTwoHanded() {
+        for (int i = 0; i < abilities.size() - 1; i++) {
+            if (abilities.get(i).equals(WeaponTypes.twoHanded)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getWeaponStatsStringForDisplay() {
+        String textToReturn = name + ": " + getDamageForDisplay();
+        if (abilities.size() > 0) {
+            for (int i = 0; i < abilities.size() - 1; i++) {
+                if (!abilities.get(i).equals("")) {
+                    textToReturn = textToReturn + "\n\t" + name + " ability " + i + ": " + abilities.get(i);
+                }
+            }
+        }
+        return textToReturn;
     }
 }
