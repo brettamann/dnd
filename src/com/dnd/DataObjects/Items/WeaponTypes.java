@@ -16,4 +16,6 @@ public class WeaponTypes {
     public static final String ranged = "ranged";
     public static final String ammo = "ranged";
     public static final String unarmed = "unarmed";
+    public static final String heavy = "heavy";
+    public static final String martial = "martial";
 }

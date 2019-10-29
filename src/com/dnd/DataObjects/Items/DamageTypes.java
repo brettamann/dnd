@@ -1,5 +1,9 @@
 package com.dnd.DataObjects.Items;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DamageTypes {
     public static final String acid = "acid";
     public static final String bludgeoning = "bludgeoning";
@@ -14,4 +18,7 @@ public class DamageTypes {
     public static final String radiant = "radiant";
     public static final String slashing = "slashing";
     public static final String thunder = "thunder";
+
+    public static final List<String> damageTypesList = new ArrayList<>(Arrays.asList(acid, bludgeoning, cold, fire, necrotic, force, lightning, piercing, poison, psychic, radiant, slashing, thunder));
+
 }

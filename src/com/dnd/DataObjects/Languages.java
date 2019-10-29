@@ -1,4 +1,4 @@
-package com.dnd.DataObjects.Races;
+package com.dnd.DataObjects;
 
 public class Languages {
     public static final String abyssal = "Abyssal (Demons, chaotic evil outsiders)";
