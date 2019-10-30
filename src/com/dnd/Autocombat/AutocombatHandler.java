@@ -5,14 +5,16 @@ public class AutocombatHandler {
     I can show the raw bash code I used for this function but I think a summary of what it was accomplishing would be
     a lot more clear, easy to read, and much quicker to get a grasp of so here's what it's trying to do:
 
-    receive a list of players
-    receive a list of opponents (commoners, guards, whatever)
-    compute a "braveryChallenge" value which is (area's reputation / 250)+(player reputation / 100)
+    receive a list of players (off partyInfo or partyMember classes)
+    receive a list of opponents (commoners, guards, whatever - they'll be based on the Person class)
+    recieve the Location that the players are in (Location object) NOTE THAT THE HARD-DATA FOR LOCATIONS ARE FOUND IN THE HardData object as a list of locations when they get passed in
+    compute a "braveryChallenge" value which is (location's reputation / 250)+(player reputation / 100) player rep should be on partyInfo
 
-    Give the players a chance to goad the commoners into staying, scare them into running away, or attempt to run/hide/get away without combat
+    Give the players a chance to goad the commoners into staying, scare them into running away, or attempt to run/hide/get away without combat.
+        this should be inside the simulator and recieve input from the players as to what they want to do. See the Input class for helper methods with that
     if running/hiding: Make everybody do a survival roll (wisdom modifier). If the player average is higher than the opponent average, the players get away without a fight.
         award 1/4 the xp for the encounter.
-    if goading: each party member makes a performance, deception, or persuasion roll (the players actually roll them and then they are received here)
+    if goading: each party member makes a performance, deception, or persuasion roll (the players actually roll them and then they are received here from input)
         Average the rolls (player average roll)
         compute a "crowd bravery" modifier which is (# of opponents / 10)
         braveryChallenge = braveryChallenge - ((crowd bravery) + (player average roll from above)).
@@ -24,6 +26,7 @@ public class AutocombatHandler {
 
     once all that is figured out, calculate a call time. a "call time" represents the time it takes for someone with a call glyph to be found, that glyph activated, the message recieved, reinforcements gathered together, and then teleported to the approximate location where they are needed. Wealthier areas tend to get priority and thus have very short call times whereas less populated or more ghetto areas tend to take longer.
         if anybody in the crowd has a call glyph, whether they flee or not, make the call time a random value in the location's range
+            hasCallGlyph is a boolean element of a Person
         if nobody in the crowd has a call glyph and nobody fled the area, the call time is a random number between 50-300 rounds (5-30 minutes) + the random value in the location's range to estimate when somebody else would stumble across the scene
         if nobody in the crowd has a call glyph and at least 1 person fled the area, the call time = (random number between 4 and 12) + (random number in location's range) + (random number in location's range)
     the call time determines how many rounds of autocombat can happen before it stops. Once reinforcements show up, the players go into manual combat
@@ -42,6 +45,7 @@ public class AutocombatHandler {
             we can group the party and opponents into separate initiative groups
             make every single person into their own initiative entity
             do it the way a manual combat would work, where each player rolls their own initiative and then enemies are grouped by type
+            regardless, if you need the initiative bonus it's the dexMod element of a Person
         The way I was doing it (which might not be the best) was to group all commoners and all players into 2 groups, then either the commoners went first or the players. Mostly it was just the easiest way to write it in bash. Within those groups each round I would randomly shuffle the order of who attacked when
         either way, decide who is going first, second, etc, in the turn order.
         Get the group who goes first, get the person who attacks first, then assign them a person to attack.
@@ -52,6 +56,7 @@ public class AutocombatHandler {
         otherwise add the to-hit modifier of the weapon + proficiencies (on the Weapon object it's the total combined to-hit bonus)
             compare that number to the AC of the target
             if the number is greater than or equal to the target's AC, do a damage roll and subtract that hp from the target. Make sure to account for all damage types that might be added in
+                All of these will be held within the Person object
             if the attack reduces the target to 0 hp, add that person to the killed list to track, for fun. If a player dies it'd be fun to see who.what killed them
             then remove the person from combat if they're dead
         If the person has more than 1 attack, keep going until they're out of attacks
@@ -88,6 +93,7 @@ public class AutocombatHandler {
             if they run, just end the combat and award experience
             if they leave calling cards, read input for how long it'll take for players to leave their "cards" and then fast-forward that many rounds, checking if reinforcements show up
             if the loot, each player gets to grab the stuff off of one dead combatant per round. At the end of each round, if the call timer hasn't run out, they get to choose again if they want to keep looting or get out of there (or leave calling cards if they haven't yet)
+                the "loot" gained off a Person is the wornArmor list + the wornWeapon list + platinum + gold + silver + copper + all object held in the packCarried object. You could probably add the objects worn to the packCarried and then just grab the packCarried object off of the Person but as long as all those items are grabbed that works
             if the players loot all the bodies before the timer runs out, the combat ends and they escape before reinforcements arrive.
             if the timer runs out while they're looting/leaving cards, generate the guards that show up and go into manual combat.
             alternatively the players can try to hide in the area. they make stealth rolls and then when the guards show up, if they didn't roll garbage stealth, they can decide whether to fight the reinforcements or not.
@@ -95,7 +101,7 @@ public class AutocombatHandler {
     after the combat is over, we need rewards!
     to calculate experience:
         add up the experience from fled commoners separately (if the players fled instead, they get 1/4 xp from everyone they fled from).
-        then add up the xpValue of each individual opponent killed
+        then add up the xpValue of each individual opponent killed (part of Person object)
         add up how MANY opponents were killed
         the kill experience is = Math.round((Added up xp from kills)^(1 + ((# of kills)^1.5 / 1500))))
             take the 1.5 power of the number of kills. Divide that by 1500, then add 1. Then make that number the power of the total xp earned, then round that up to the nearest 1.
