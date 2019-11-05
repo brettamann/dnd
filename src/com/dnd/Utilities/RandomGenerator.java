@@ -7,7 +7,9 @@ import java.util.Random;
 import com.dnd.DataObjects.*;
 import com.dnd.DataObjects.Items.*;
 import com.dnd.DataObjects.Races.Races;
+import com.dnd.DataObjects.Spells.Spell;
 
+import javax.swing.text.MaskFormatter;
 import java.util.List;
 
 public class RandomGenerator {
@@ -1632,5 +1634,17 @@ public class RandomGenerator {
                 .add(5,"stressed")
                 .add(5,"boisterous");
         return rc.next();
+    }
+
+    public Spell getRandomSpellsByLevel(int spellLevel, List<Spell> masterSpellList) {
+        //build a list of possible spells by level
+        List<Spell> spellsOfLevel = new ArrayList<Spell>(Arrays.asList());
+        for (Spell temp : masterSpellList) {
+            if (temp.level == spellLevel) {
+                spellsOfLevel.add(temp);
+            }
+        }
+        //Get a random entry on that list
+        return spellsOfLevel.get(randomIntInRange(0, (spellsOfLevel.size() - 1)));
     }
 }

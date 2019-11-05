@@ -3,16 +3,15 @@ package com.dnd.DataObjects;
 import com.dnd.DataObjects.Items.*;
 import com.dnd.DataObjects.Races.Race;
 import com.dnd.DataObjects.Races.Races;
-import com.dnd.Utilities.Colors;
+import com.dnd.DataObjects.Spells.Spell;
 import com.dnd.Utilities.RandomCollectionWeighted;
 import com.dnd.Utilities.RandomGenerator;
 import com.dnd.Utilities.Screen;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Person {
+    //TODO: give the ability for some people with higher intelligence or wisdom to have a chance of knowing spells
     Rarities rarities = new Rarities();
     private RandomCollectionWeighted<String> rc;
     private RandomGenerator randGen = new RandomGenerator();
@@ -28,6 +27,14 @@ public class Person {
     private int age;
     private int agePercent;
     private int xpValue;
+
+    private boolean isSpellcaster = false; //Many races innately can cast a few spells. This determines if they know extra spells, which goes into a deeper creation dive.
+    private int spellProficiencyBonus;
+    private int spellDc;
+    private int spellAttackMod;
+    private int spellcasterLevel;
+    private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
+    private List<Spell> spellsKnown;
 
     private Boolean hasFamily;
     private int familyMemberCount;
@@ -51,6 +58,7 @@ public class Person {
 
     private int passivePerception;
     private int bravery;//what intimidation roll (&+) that makes them flee or submit
+    private int tolerance; //1-20 value. If a check is higher than this value they will want to call for guards if able on an action that would warrant it
 
     private int strength;
     private int strMod;
@@ -155,6 +163,7 @@ public class Person {
         getAlignmentFromRace(hardData);
         getRacialTraitsFromRace();
         getStatsBasedOnLevel();
+        determineSpellcasterTraits(hardData);
         calculateDcToPickpocket();
         determineBodyguards();
         determineCallGlyphs();
@@ -617,6 +626,32 @@ public class Person {
         return (stat - 10) / 2;
     }
 
+    private void boostRandomSkill(int timesToBoost) {
+        for (int i = 0; i < timesToBoost; i++) {
+            String skillToBoost = randGen.getRandomPrimarySkill();
+            switch (skillToBoost) {
+                case PrimarySkills.strength:
+                    raceData.strMod += 1;
+                    break;
+                case PrimarySkills.dexterity:
+                    raceData.dexMod += 1;
+                    break;
+                case PrimarySkills.constitution:
+                    raceData.conMod += 1;
+                    break;
+                case PrimarySkills.wisdom:
+                    raceData.wisMod += 1;
+                    break;
+                case PrimarySkills.intelligence:
+                    raceData.intMod += 1;
+                    break;
+                case PrimarySkills.charisma:
+                    raceData.chrMod += 1;
+                    break;
+            }
+        }
+    }
+
     private void getStatsBasedOnLevel() {
         //calculate bonuses and penalties for economic classes
         hpMax = 5;//all creatures get at least 5 hp to start with.
@@ -690,6 +725,78 @@ public class Person {
             classInt += randGen.randomIntInRange(1, 4);
             raceData.walkSpeed -= randGen.randomIntInRange(1, 3) * 5;
         }
+
+        if (raceData.raceName.equals(Races.genasi)) {
+            //Can be air (+1 DEX, endless hold breath, levitate spell once per rest), earth (+1 STR, not affected by difficult earth or stone terrain, can cast pass without trace once per rest), fire (+1 INT, darkvision 60 ft, fire resistance, has produce flame cantrip, @ lvl 3 can cast burning hands), and water (+1 WIS, resistant to acid, can breath underwater, swim @ 30 speed, knows shape water cantrip, @ lvl 3 can cast create or destroy water once per rest) types. Knows common and primordial
+            switch (randGen.randomIntInRange(1,4)) {
+                case 1:
+                    raceData.abilities.add("Air Element");
+                    raceData.abilities.add("Can hold breath indefinitely");
+                    raceData.abilities.add("Levitate spell once per rest");
+                    raceData.dexMod = 1;
+                    break;
+                case 2:
+                    raceData.abilities.add("Earth Element");
+                    raceData.abilities.add("Not affected by difficult earth or stone terrain");
+                    raceData.abilities.add("Can cast 'Pass Without Trace' once per rest");
+                    raceData.strMod = 1;
+                    break;
+                case 3:
+                    raceData.abilities.add("Fire Element");
+                    raceData.abilities.add("Darkvision 60 ft");
+                    raceData.abilities.add("Resistant to fire damage");
+                    raceData.abilities.add("Produce Flame cantrip");
+                    if (level >= 3) {
+                        raceData.abilities.add("Can cast burning hands");
+                    }
+                    raceData.intMod = 1;
+                    break;
+                case 4:
+                    raceData.abilities.add("Water Element");
+                    raceData.abilities.add("Resistant to acid damage");
+                    raceData.abilities.add("Can breath underwater");
+                    raceData.abilities.add("Knows 'Shape Water' cantrip");
+                    if (level >= 3) {
+                        raceData.abilities.add("Can cast 'Create or Destroy Water' once per rest");
+                    }
+                    raceData.swimSpeed = 30;
+                    raceData.languages.add(Languages.primordial);
+                    raceData.wisMod = 1;
+                    break;
+            }
+        }
+
+        if (raceData.raceName.equals(Races.gith)) {
+            raceData.abilities.add("Knows 'Mage Hand' cantrip");
+            //The hash is a quick lookup that doesn't instantiate a list or require lots of || checks in an if statement https://stackoverflow.com/questions/7604814/best-way-to-format-multiple-or-conditions-in-an-if-statement-java
+            Set<String> evilValues = new HashSet<String>(Arrays.asList(Alignments.chaoticEvil, Alignments.lawfulEvil, Alignments.neutralEvil));
+            if (evilValues.contains(alignment)) {
+                raceData.strMod = 2;
+                if (level >= 3) {
+                    raceData.abilities.add("Can cast 'Jump' once per rest without components");
+                }
+                if (level >= 5) {
+                    raceData.abilities.add("Can cast 'Misty Step' once per rest without components");
+                }
+            } else  {
+                raceData.wisMod = 2;
+                if (level >= 3) {
+                    raceData.abilities.add("Can cast 'Shield' once per rest without components");
+                }
+                if (level >= 5) {
+                    raceData.abilities.add("Can cast 'Detect Thoughts' once per rest without components");
+                }
+            }
+        }
+
+        if (raceData.raceName.equals(Races.halfElf)) {
+            boostRandomSkill(2);
+        } else if (raceData.raceName.equals(Races.human)) {
+            boostRandomSkill(3);
+        } else if (raceData.raceName.equals(Races.halfOrc)) {
+            boostRandomSkill(1);
+        }
+
         strength = randGen.randomIntInRange(((level / 2) + 7), ((level / 2) + 15)) + raceData.strMod + classStr;
         strMod = getModifierForStat(strength);
 
@@ -711,6 +818,20 @@ public class Person {
 
         charisma = randGen.randomIntInRange(((level / 2) + 7), ((level / 2) + 15)) + raceData.chrMod + classChr;
         chrMod = getModifierForStat(charisma);
+
+        //even if the person is not a "spellcaster" many races innately know a few spells so all persons need to have these.
+        spellDc = 8;
+        int spellStatBonus;
+        setSpellcasterProficiencyBonusByLevel();
+        if (randGen.randomIntInRange(1,2) == 1) {
+            //spellcasting ability is INT
+            spellStatBonus = intMod;
+        } else {
+            //spellcasting ability is WIS
+            spellStatBonus = wisMod;
+        }
+        spellDc += spellProficiencyBonus + spellStatBonus;
+        spellAttackMod = spellProficiencyBonus + spellStatBonus;
 
         passivePerception = 10 + wisMod;
     }
@@ -745,6 +866,7 @@ public class Person {
         } else {
             gender = Genders.female;
         }
+        tolerance = randGen.randomIntInRange(1,20) + livesIn.chanceToCallGuardsModifier;
     }
 
     private void getInventoryFromClass(Location currentLocation) {
@@ -1152,19 +1274,290 @@ public class Person {
         }
     }
 
+    private void setSpellcasterProficiencyBonusByLevel() {
+        if (level <= 4) {
+            spellProficiencyBonus = 2;
+        } else if (level <= 8) {
+            spellProficiencyBonus = 3;
+        } else if (level <= 12) {
+            spellProficiencyBonus = 4;
+        } else if (level <= 16) {
+            spellProficiencyBonus = 5;
+        } else {
+            spellProficiencyBonus = 6;
+        }
+    }
+
+    private void setSpellcasterLevel() {
+        //determines the highest spell slot level(s) the Person will know
+        if (level <= 2) {
+            spellcasterLevel = 1;
+        } else if (level <= 4) {
+            spellcasterLevel = 2;
+        } else if (level <= 6) {
+            spellcasterLevel = 3;
+        } else if (level <= 8) {
+            spellcasterLevel = 4;
+        } else if (level <= 10) {
+            spellcasterLevel = 5;
+        } else if (level <= 12) {
+            spellcasterLevel = 6;
+        } else if (level <= 14) {
+            spellcasterLevel = 7;
+        } else if (level <= 16) {
+            spellcasterLevel = 8;
+        } else {
+            spellcasterLevel = 9;
+        }
+    }
+
+    private void determineSpellcasterTraits(HardData hardData) {
+        //the stats of a spellcaster (dc and attack mod) are already determined. This class is to see if they're a learned spellcaster, and if so, what spells / spell slots they know.
+        int spellCasterDeterminerRoll = randGen.randomIntInRange(1,1000);
+        switch (economicClass) {
+            case EconomicClasses.beggar:
+                if (spellCasterDeterminerRoll <= 1) {
+                    isSpellcaster = true;
+                }
+                break;
+            case EconomicClasses.poor:
+                if (spellCasterDeterminerRoll <= 5) {
+                    isSpellcaster = true;
+                }
+                break;
+            case EconomicClasses.middleClass:
+                if (spellCasterDeterminerRoll <= 50) {
+                    isSpellcaster = true;
+                }
+                break;
+            case EconomicClasses.wealthy:
+                if (spellCasterDeterminerRoll <= 125) {
+                    isSpellcaster = true;
+                }
+                break;
+            case EconomicClasses.elite:
+                if (spellCasterDeterminerRoll <= 333) {
+                    isSpellcaster = true;
+                }
+                break;
+        }
+        if (isSpellcaster) {
+            getSpellSlotsBySpellcasterLevel();
+            setSpellsKnownByLevel(hardData);
+        }
+    }
+
+    private void setSpellsKnownByLevel(HardData hardData) {
+        for (int i = 0; i <= spellcasterLevel; i++) {
+            for (int j = 0; j <= spellSlots[i][1]; j++) {
+                //get a spell, make sure it's not a duplicate, if it is, try again until you don't get a dupe
+                Spell spellToAdd = randGen.getRandomSpellsByLevel(i, hardData.spellList);
+                while (isSpellAlreadyInList(spellToAdd)) {
+                    spellToAdd = randGen.getRandomSpellsByLevel(i, hardData.spellList);
+                }
+            }
+        }
+    }
+
+    private boolean isSpellAlreadyInList(Spell spellToCheck) {
+        for (Spell temp : spellsKnown) {
+            if (temp.name.equals(spellToCheck.name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void getSpellSlotsBySpellcasterLevel() {
+        //spellSlots = {{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}};
+        switch (level) {
+            case 0:
+                spellSlots[0][1] = 0;
+                break;
+            case 1:
+                spellSlots[0][1] = randGen.randomIntInRange(1, 3);
+                spellSlots[1][1] = randGen.randomIntInRange(1, 2);
+                break;
+            case 2:
+                spellSlots[0][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[1][1] = randGen.randomIntInRange(1, 3);
+                break;
+            case 3:
+                spellSlots[0][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[1][1] = randGen.randomIntInRange(2, 4);
+                spellSlots[2][1] = randGen.randomIntInRange(1, 2);
+                break;
+            case 4:
+                spellSlots[0][1] = randGen.randomIntInRange(3, 4);
+                spellSlots[1][1] = randGen.randomIntInRange(3, 4);
+                spellSlots[2][1] = randGen.randomIntInRange(1, 3);
+                break;
+            case 5:
+                spellSlots[0][1] = 4;
+                spellSlots[1][1] = randGen.randomIntInRange(3, 4);
+                spellSlots[2][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[3][1] = randGen.randomIntInRange(1, 2);
+                break;
+            case 6:
+                spellSlots[0][1] = 4;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[3][1] = randGen.randomIntInRange(1, 3);
+                break;
+            case 7:
+                spellSlots[0][1] = 4;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[3][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[4][1] = 1;
+                break;
+            case 8:
+                spellSlots[0][1] = 4;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[4][1] = randGen.randomIntInRange(1, 2);
+                break;
+            case 9:
+                spellSlots[0][1] = 4;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[4][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[5][1] = 1;
+                break;
+            case 10:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[5][1] = randGen.randomIntInRange(1, 2);
+                break;
+            case 11:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = randGen.randomIntInRange(2, 3);
+                spellSlots[5][1] = randGen.randomIntInRange(1, 2);
+                spellSlots[6][1] = 1;
+                break;
+            case 12:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = randGen.randomIntInRange(1, 2);
+                spellSlots[6][1] = 1;
+                break;
+            case 13:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = randGen.randomIntInRange(1, 2);
+                spellSlots[6][1] = 1;
+                spellSlots[7][1] = 1;
+                break;
+            case 14:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 1;
+                spellSlots[7][1] = 1;
+                break;
+            case 15:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 1;
+                spellSlots[7][1] = 1;
+                spellSlots[8][1] = 1;
+                break;
+            case 16:
+                spellSlots[0][1] = randGen.randomIntInRange(4, 5);
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 1;
+                spellSlots[7][1] = 1;
+                spellSlots[8][1] = 1;
+                break;
+            case 17:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 1;
+                spellSlots[7][1] = 1;
+                spellSlots[8][1] = 1;
+                spellSlots[9][1] = 1;
+                break;
+            case 18:
+                spellSlots[0][1] = randGen.randomIntInRange(4, 5);
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 1;
+                spellSlots[7][1] = 1;
+                spellSlots[8][1] = 1;
+                spellSlots[9][1] = 1;
+                break;
+            case 19:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 2;
+                spellSlots[7][1] = 1;
+                spellSlots[8][1] = 1;
+                spellSlots[9][1] = 1;
+                break;
+            case 20:
+                spellSlots[0][1] = 5;
+                spellSlots[1][1] = 4;
+                spellSlots[2][1] = 3;
+                spellSlots[3][1] = 3;
+                spellSlots[4][1] = 3;
+                spellSlots[5][1] = 2;
+                spellSlots[6][1] = 2;
+                spellSlots[7][1] = 2;
+                spellSlots[8][1] = 1;
+                spellSlots[9][1] = 1;
+                break;
+        }
+    }
+
     public void calculateXPValue() {
         xpValue = ((hpMax / 9) * hpMax)
-            + (level * 5) //5 pts per level. As most other xp related traits are boosted by this it will get minimal attention, but guarantees a little bit.
-            + (wornWeapons.get(0).combinedToHitBonus * 5)
-            + ((wornWeapons.get(0).getTotalUntypedDamageMin() + 1) * wornWeapons.get(0).getTotalUntypedDamageMax())
-            + ((ac - 10) * 20) //20 pts for each ac above 10
-            + (strMod * 10) //10 pts for each 2 main stats (can detract from xp value if less than 10 main stat)
-            + (dexMod * 10)
-            + (conMod * 5) //conMod is already partially accounted for in the hpMax bonus (more conMod = more hp = more xp)
-            + (wisMod * 10)
-            + (intMod * 10)
-            + (chrMod * 10)
-            + dcToPickpocket; //as it's not a combat trait it won't add much, but it'll still add
+                + (level * 5) //5 pts per level. As most other xp related traits are boosted by this it will get minimal attention, but guarantees a little bit.
+                + (wornWeapons.get(0).combinedToHitBonus * 5)
+                + ((wornWeapons.get(0).getTotalUntypedDamageMin() + 1) * wornWeapons.get(0).getTotalUntypedDamageMax())
+                + ((ac - 10) * 20) //20 pts for each ac above 10
+                + (strMod * 10) //10 pts for each 2 main stats (can detract from xp value if less than 10 main stat)
+                + (dexMod * 10)
+                + (conMod * 5) //conMod is already partially accounted for in the hpMax bonus (more conMod = more hp = more xp)
+                + (wisMod * 10)
+                + (intMod * 10)
+                + (chrMod * 10)
+                + dcToPickpocket; //as it's not a combat trait it won't add much, but it'll still add
         //account for dual-wielding
         if (!wornWeapons.get(1).name.equals(StandardWeapons.unarmed.name) && !hasShield) {
             xpValue = xpValue + ((wornWeapons.get(1).getTotalUntypedDamageMin() + 1) * wornWeapons.get(1).getTotalUntypedDamageMax()) + (wornWeapons.get(1).combinedToHitBonus * 5);
@@ -1188,6 +1581,9 @@ public class Person {
             case EconomicClasses.elite:
                 xpValue = xpValue + 200;
                 break;
+        }
+        if (isSpellcaster) {
+            xpValue += (Math.pow(spellcasterLevel, 5)) / 2;
         }
     }
 }
