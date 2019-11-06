@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" afterDir="false" />
@@ -35,26 +33,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+            <state relative-caret-position="24161">
+              <caret line="1664" column="26" selection-start-line="1664" selection-start-column="26" selection-end-line="1664" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#97600#97601#0" expanded="true" />
-                <element signature="e#97638#97639#0" expanded="true" />
-                <element signature="e#105632#105640#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java">
+        <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardArmor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+            <state relative-caret-position="270">
+              <caret line="18" column="162" lean-forward="true" selection-start-line="18" selection-start-column="162" selection-end-line="18" selection-end-column="162" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,7 +60,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
+            <state relative-caret-position="345">
               <caret line="23" column="62" selection-start-line="23" selection-start-column="62" selection-end-line="23" selection-end-column="62" />
             </state>
           </provider>
@@ -72,10 +70,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="40" lean-forward="true" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
-              <folding>
-                <element signature="e#11530#11537#0" expanded="true" />
-              </folding>
+              <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -83,17 +78,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-215">
-              <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="150">
+              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="62" column="96" selection-start-line="62" selection-start-column="96" selection-end-line="62" selection-end-column="96" />
+            <state relative-caret-position="105">
+              <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,11 +108,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="1639" column="50" selection-start-line="1639" selection-start-column="50" selection-end-line="1639" selection-end-column="50" />
+            <state relative-caret-position="529">
+              <caret line="1675" column="59" selection-start-line="1675" selection-start-column="59" selection-end-line="1675" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#97385#97392#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -220,10 +214,10 @@
         <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/SecondarySkills.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/Menus/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java" />
-        <option value="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java" />
-        <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java" />
+        <option value="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java" />
       </list>
     </option>
@@ -246,6 +240,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -284,6 +280,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="dnd" type="462c0819:PsiDirectoryNode" />
               <item name="DataObjects" type="462c0819:PsiDirectoryNode" />
+              <item name="Items" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dnd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dnd" type="462c0819:PsiDirectoryNode" />
+              <item name="DataObjects" type="462c0819:PsiDirectoryNode" />
               <item name="Races" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -297,8 +301,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -385,17 +387,18 @@
       <workItem from="1570659937893" duration="26908000" />
       <workItem from="1571113477651" duration="3120000" />
       <workItem from="1572551110412" duration="10757000" />
+      <workItem from="1573058911613" duration="4262000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196762000" />
+    <option name="totallyTimeSpent" value="202260000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2202" y="-846" width="2202" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16944444" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17083333" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -600,16 +603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardArmor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="162" lean-forward="true" selection-start-line="18" selection-start-column="162" selection-end-line="18" selection-end-column="162" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Input.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -757,6 +750,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="62" selection-start-line="23" selection-start-column="62" selection-end-line="23" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/SecondarySkills.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -774,74 +802,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/SecondarySkills.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardArmor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        <state relative-caret-position="270">
+          <caret line="18" column="162" lean-forward="true" selection-start-line="18" selection-start-column="162" selection-end-line="18" selection-end-column="162" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="1639" column="50" selection-start-line="1639" selection-start-column="50" selection-end-line="1639" selection-end-column="50" />
+        <state relative-caret-position="529">
+          <caret line="1675" column="59" selection-start-line="1675" selection-start-column="59" selection-end-line="1675" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#97385#97392#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="62" column="96" selection-start-line="62" selection-start-column="96" selection-end-line="62" selection-end-column="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="23" column="62" selection-start-line="23" selection-start-column="62" selection-end-line="23" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-215">
-          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="40" lean-forward="true" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
-          <folding>
-            <element signature="e#11530#11537#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state relative-caret-position="24161">
+          <caret line="1664" column="26" selection-start-line="1664" selection-start-column="26" selection-end-line="1664" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#97600#97601#0" expanded="true" />
-            <element signature="e#97638#97639#0" expanded="true" />
-            <element signature="e#105632#105640#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
