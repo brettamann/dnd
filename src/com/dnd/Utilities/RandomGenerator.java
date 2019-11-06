@@ -13,11 +13,20 @@ import javax.swing.text.MaskFormatter;
 import java.util.List;
 
 public class RandomGenerator {
-    public int randomIntInRange(int min, int max) {
+    public static int randomIntInRange(int min, int max) {
         //https://www.mkyong.com/java/java-generate-random-integers-in-a-range/
         //this function includes both the max and the min in the range. entering min=3 and max=22 can be any number 3-22
         Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+        try {
+            return r.nextInt((max - min) + 1) + min;
+        }
+        catch (IllegalArgumentException ex){
+            return min;
+        }
+    }
+
+    public static int randomD20Roll(){
+        return randomIntInRange(1, 20);
     }
 
     public double randomDouble() {
@@ -1510,7 +1519,7 @@ public class RandomGenerator {
             PrimarySkills.wisdom,
             PrimarySkills.charisma
         ));
-        return primarySkillList.get(randomIntInRange(0, primarySkillList.size()));
+        return primarySkillList.get(randomIntInRange(0, primarySkillList.size() - 1));
     }
 
     public String getRandomSecondarySkill() {
@@ -1534,7 +1543,7 @@ public class RandomGenerator {
             SecondarySkills.performance,
             SecondarySkills.persuasion
         ));
-        return secondarySkillList.get(randomIntInRange(0, secondarySkillList.size()));
+        return secondarySkillList.get(randomIntInRange(0, secondarySkillList.size() - 1));
     }
 
     public String getRandomDamageType() {
@@ -1553,7 +1562,7 @@ public class RandomGenerator {
             DamageTypes.piercing,
             DamageTypes.thunder
         ));
-        return damageTypeList.get(randomIntInRange(0, damageTypeList.size()));
+        return damageTypeList.get(randomIntInRange(0, damageTypeList.size() - 1));
     }
 
     public String getRandomColorName() {

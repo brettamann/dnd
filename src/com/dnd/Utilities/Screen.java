@@ -43,7 +43,7 @@ public class Screen {
         System.out.println("----------------------------------------------");
     }
 
-    public void print(String textToPrint) {
+    public static void print(String textToPrint) {
         System.out.println(textToPrint);
     }
 
@@ -52,7 +52,7 @@ public class Screen {
         System.out.println();
     }
 
-    public void redText(String textToPrint) {
+    public static void redText(String textToPrint) {
         System.out.println(Colors.ANSI_RED + textToPrint + Colors.ANSI_RESET);
     }
 
