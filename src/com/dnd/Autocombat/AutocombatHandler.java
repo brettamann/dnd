@@ -1,6 +1,19 @@
 package com.dnd.Autocombat;
 
+import com.dnd.DataObjects.*;
+import com.dnd.Utilities.Input;
+import com.dnd.Utilities.RandomGenerator;
+import com.dnd.Utilities.Screen;
+
+import java.lang.reflect.Member;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class AutocombatHandler {
+
+    public static final int ROLL_MIN = -10;
+    public static final int ROLL_MAX = 50;
     /*
     I can show the raw bash code I used for this function but I think a summary of what it was accomplishing would be
     a lot more clear, easy to read, and much quicker to get a grasp of so here's what it's trying to do:
@@ -115,4 +128,490 @@ public class AutocombatHandler {
 
     also, I'll write a function that figures out how many and what reinforcements show up.
      */
+
+
+    public static EncounterObject epicCombat(PartyInfo partyInfo, List<PartyMember> originalPartyMembers, List<Person> originalOpponents, Location location){
+
+
+        if(partyInfo == null || originalPartyMembers == null || originalOpponents == null || location == null){
+            Screen.redText("SOMETHING WAS PASSED IN AS NULL! NOT CONTINUING!");
+            return new EncounterObject();
+        }
+
+        List<PartyMember> partyMembers = new ArrayList<>();
+        for(PartyMember member : originalPartyMembers){
+            partyMembers.add(new PartyMember(member));
+        }
+
+        List<Person> opponents = new ArrayList<>();
+        for(Person opponent : originalOpponents){
+            opponents.add(new Person(opponent));
+        }
+
+        EncounterObject encounterObject = new EncounterObject();
+        double braveryChallenge = (location.reputationInArea/250d) + (partyInfo.getReputation()/100d);
+        boolean braveryChallengeCalculated = false;
+
+        String challengeType = Input.promptTextInput("How would you like to approach the encounter? \n1. run (Athleticism)\n2. hide (Survival)\n3. goad (Performance, Deception, or Persuasion) \n4. scare (Deception, Intimidation) \n5. bribe (Persuasion)) \n6. Do Nothing and just Fight!\nEnter Selection: ", List.of("run", "hide", "goad", "scare", "bribe", "nothing", "1", "2", "3", "4", "5", "6"));
+
+        if(challengeType.toLowerCase().equals("run") || challengeType.equals("1")){
+            boolean success = runSimulationToSeeIfSuccessful("Athleticism", "strength", partyMembers, opponents);
+
+            if(success){
+                int experience = 0;
+                for (Person opponent : opponents){
+                    experience += opponent.getXpValue()/4;
+                }
+
+                Screen.print("\nRan away successfully! Experience gained is: " + experience + "\nExperience per Party Member is: " + experience/partyInfo.getMemberCount());
+                encounterObject.experiencePerMember = experience; // I assumed this would be divided by the number of people, but according to comment above, this is how much they get per person.
+
+                return encounterObject;
+            }
+            else {
+                Screen.print("\nDid not get away! Continuing with Combat!\n");
+            }
+
+
+        }
+        else if (challengeType.toLowerCase().equals("hide") || challengeType.equals("2")){
+            boolean success = runSimulationToSeeIfSuccessful("Survival", "wisdom", partyMembers, opponents);
+
+            if(success){
+                int experience = 0;
+                for (Person opponent : opponents){
+                    experience += opponent.getXpValue()/4;
+                }
+
+                Screen.print("\nHid successfully! Experience gained is: " + experience + "\nExperience per Party Member is: " + experience/partyInfo.getMemberCount());
+                encounterObject.experiencePerMember = experience;
+
+                return encounterObject;
+            }
+            else {
+                Screen.print("\nDid not get away! Continuing with Combat!\n");
+            }
+        }
+        else if(challengeType.toLowerCase().equals("goad") || challengeType.equals("3")){
+            double averagePartyMemberRoll = collectAverageForRoll("Performance, Deception, or Persuasion", partyMembers);
+            double crowdBraveryModifier = opponents.size()/10d;
+
+            braveryChallenge = braveryChallenge - (crowdBraveryModifier + averagePartyMemberRoll);
+            braveryChallengeCalculated = true;
+
+        }
+        else if(challengeType.toLowerCase().equals("scare") || challengeType.equals("4")){
+            double averagePartyMemberRoll = collectAverageForRoll("Intimidation", partyMembers);
+            double crowdBraveryModifier = opponents.size()/10d;
+
+            braveryChallenge = braveryChallenge - crowdBraveryModifier + averagePartyMemberRoll;
+            braveryChallengeCalculated = true;
+
+        }
+        else if(challengeType.toLowerCase().equals("bribe") || challengeType.equals("5")){
+            // Brett does this
+        }
+
+        if(!braveryChallengeCalculated){
+            braveryChallenge = braveryChallenge - opponents.size()/10d;
+        }
+
+        boolean glyphPresent = false;
+
+        for(Person opponent : opponents){
+            if(opponent.getBravery() < braveryChallenge){
+                encounterObject.opponentsWhoRanAway.add(opponent);
+            }
+            else{
+                encounterObject.opponentsWhoStayed.add(opponent);
+            }
+            if(opponent.getHasCallGlyph()){
+                glyphPresent = true;
+            }
+        }
+
+        int callTime;
+
+        if(glyphPresent) {
+            callTime = RandomGenerator.randomIntInRange(location.fastestCallTime, location.slowestCallTime);
+        }
+        else{
+            boolean someoneCalled = false;
+
+            for( Person opponent : encounterObject.opponentsWhoRanAway){
+                if(opponent.getTolerance() < RandomGenerator.randomD20Roll()){
+                    someoneCalled = true;
+                    break;
+                }
+            }
+
+            if(someoneCalled){
+                callTime = RandomGenerator.randomIntInRange(4, 12) + RandomGenerator.randomIntInRange(location.fastestCallTime, location.slowestCallTime) + RandomGenerator.randomIntInRange(location.fastestCallTime, location.slowestCallTime);
+            }
+            else{
+                callTime = RandomGenerator.randomIntInRange(50, 300) + RandomGenerator.randomIntInRange(location.fastestCallTime, location.slowestCallTime);
+            }
+        }
+
+        // Players get to decide if they stay with Autocombat or switch to Manual (Brett, decide how to display this)
+
+        Screen.print("How many stayed: " + encounterObject.opponentsWhoStayed.size());
+        Screen.print("How many fled: " + encounterObject.opponentsWhoRanAway.size());
+        String continueCombat = Input.promptTextInput("\nWould you like to continue auto-combat? (yes/no)", List.of("yes", "no", "y", "n"));
+
+        if(continueCombat.toLowerCase().contains("n")){
+            return encounterObject;
+        }
+
+        int roundCount = 0;
+
+        int opponentAttackLimit = 0;
+
+        switch (partyInfo.getMemberCount()){
+            case 1:
+                opponentAttackLimit = 8;
+                break;
+            case 2:
+                opponentAttackLimit = 10;
+                break;
+            case 3:
+            case 4:
+                opponentAttackLimit = 12;
+                break;
+            case 5:
+            case 6:
+                opponentAttackLimit = 14;
+                break;
+            case 7:
+            case 8:
+            case 9:
+                opponentAttackLimit = 16;
+                break;
+            default:
+                opponentAttackLimit = 18;
+                break;
+        }
+
+        //for simplicity for now, we are just going to go players than opponents for attack order, in the same order. Can
+        // expand it later, but I don't think it would make a large difference, so we are just
+        // doing this for now
+
+        List<PartyMember> alivePartyMembers = new ArrayList<>(partyMembers);
+
+        while (encounterObject.playersWhoDied.size() != partyInfo.getMemberCount()
+        && ++roundCount <= callTime
+        && encounterObject.opponentsWhoStayed.size() != 0
+        && !encounterObject.encounterFinished) {
+
+            int numberOfOpponentsWhoAttacked = 0;
+
+
+            Screen.print("\n*** Round " + roundCount + "! ***");
+            Screen.print("Current number of enemies: " + encounterObject.opponentsWhoStayed.size());
+            Screen.print("Current number of party members: " + alivePartyMembers.size() + "\n");
+
+
+            for (PartyMember member : partyMembers) {
+                if (alivePartyMembers.contains(member)) {
+                    for (int i = 0; i < member.getNumberOfAttacks(); i++) {
+                        int roll = RandomGenerator.randomD20Roll();
+
+                        if(encounterObject.opponentsWhoStayed.size() == 0) {
+                            encounterObject.encounterFinished = true;
+                            break;
+                        }
+
+                        Person target = encounterObject.opponentsWhoStayed.get(RandomGenerator.randomIntInRange(0, encounterObject.opponentsWhoStayed.size() - 1));
+                        PartyMember friendlyTarget = null;
+                        int damage = 0;
+                        boolean critical = false;
+
+                        if (roll == 20) {
+                            damage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh()) + RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
+
+                            Screen.print("CRITICAL!!!! " + member.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage!");
+                            critical = true;
+                        } else if (roll == 1) {
+                            roll = RandomGenerator.randomD20Roll();
+                            friendlyTarget = partyMembers.get(RandomGenerator.randomIntInRange(0, partyMembers.size() - 1));
+                            if (roll + member.getToHitBonus() >= friendlyTarget.getAc()) {
+                                int friendlyDamage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
+                                friendlyTarget.setCurrentHp(friendlyTarget.getCurrentHp() - friendlyDamage);
+
+                                Screen.print("Whoops!!!! " + member.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage!");
+
+                                if (friendlyTarget.getCurrentHp() <= 0) {
+                                    encounterObject.playersWhoDied.add(friendlyTarget);
+                                    alivePartyMembers.remove(friendlyTarget);
+                                    Screen.print("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
+
+                                    if(alivePartyMembers.size() == 0) {
+                                        encounterObject.encounterFinished = true;
+                                        break;
+                                    }
+                                }
+
+                            } else {
+                                Screen.print("Whoops!!!! " + member.getName() + " almost hit  " + friendlyTarget.getName() + "!");
+
+                            }
+                        } else {
+                            if (roll + member.getToHitBonus() >= target.getAc()) {
+                                damage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
+                            } else {
+                                Screen.print(member.getName() + " rolled a " + (roll + member.getToHitBonus()) + " and missed " + target.getName() + "!");
+                            }
+                        }
+
+                        if (friendlyTarget == null && damage != 0) {
+                            target.setHpCurrent(target.getHpCurrent() - damage);
+
+                            if(!critical)
+                                Screen.print(member.getName() + " rolled " + (roll + member.getToHitBonus()) + "  and hit " + target.getName() + " for " + damage + "!");
+
+                            if (target.getHpCurrent() <= 0) {
+                                encounterObject.opponentsWhoDied.add(target);
+                                encounterObject.opponentsWhoStayed.remove(target);
+                                Screen.print(target.getName() + " Died!");
+
+                                if(encounterObject.opponentsWhoStayed.size() == 0){
+                                    encounterObject.encounterFinished = true;
+                                    break;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+
+            for (Person opponent : opponents) {
+                if (numberOfOpponentsWhoAttacked < opponentAttackLimit && encounterObject.opponentsWhoStayed.contains(opponent)) {
+                    numberOfOpponentsWhoAttacked++;
+
+                    for (int i = 0; i < opponent.getNumberOfAttacks(); i++) {
+                        int roll = RandomGenerator.randomD20Roll();
+                        if(alivePartyMembers.size() == 0) {
+                            encounterObject.encounterFinished = true;
+                            break;
+                        }
+
+                        PartyMember target = alivePartyMembers.get(RandomGenerator.randomIntInRange(0, alivePartyMembers.size() - 1));
+                        Person friendlyTarget = null;
+                        int damage = 0;
+                        boolean critical = false;
+
+                        if (roll == 20) {
+                            damage = RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMinimumDamage()) + RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMaximumDamage());
+
+                            Screen.print("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage!");
+                            critical = true;
+                        } else if (roll == 1) {
+                            roll = RandomGenerator.randomD20Roll();
+                            friendlyTarget = encounterObject.opponentsWhoStayed.get(RandomGenerator.randomIntInRange(0, encounterObject.opponentsWhoStayed.size() - 1));
+                            if (roll + opponent.getToHit() >= friendlyTarget.getAc()) {
+                                int friendlyDamage = RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMaximumDamage());
+                                friendlyTarget.setHpCurrent(friendlyTarget.getHpCurrent() - friendlyDamage);
+
+                                Screen.print("Whoops!!!! " + opponent.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage!");
+
+                                if (friendlyTarget.getHpCurrent() <= 0) {
+                                    encounterObject.opponentsWhoDied.add(friendlyTarget);
+                                    encounterObject.opponentsWhoStayed.remove(friendlyTarget);
+                                    Screen.print("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
+
+                                    if(encounterObject.opponentsWhoStayed.size() == 0) {
+                                        encounterObject.encounterFinished = true;
+                                        break;
+                                    }
+                                }
+
+                            } else {
+                                Screen.print("Whoops!!!! " + opponent.getName() + " almost hit  " + friendlyTarget.getName() + "!");
+
+                            }
+                        } else {
+                            if (roll + opponent.getToHit() >= target.getAc()) {
+                                damage = RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMaximumDamage());
+                            } else {
+                                Screen.print(opponent.getName() + " rolled a " + (roll + opponent.getToHit()) + " and missed " + target.getName() + "!");
+                            }
+                        }
+
+                        if (friendlyTarget == null && damage != 0) {
+                            target.setCurrentHp(target.getCurrentHp() - damage);
+
+                            if(!critical)
+                                Screen.print(opponent.getName() + " rolled " + (roll + opponent.getToHit()) + "  and hit " + target.getName() + " for " + damage + "!");
+
+                            if (target.getCurrentHp() <= 0) {
+                                encounterObject.playersWhoDied.add(target);
+                                alivePartyMembers.remove(target);
+                                Screen.print(target.getName() + " Died!");
+
+                                if(alivePartyMembers.size() == 0){
+                                    encounterObject.encounterFinished = true;
+                                    break;
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+
+            }
+
+            if(encounterObject.opponentsWhoStayed.size() == 0 || alivePartyMembers.size() == 0){
+                encounterObject.encounterFinished = true;
+                break;
+            }
+        }
+
+        if(roundCount > callTime && !encounterObject.encounterFinished) {
+            Screen.print("\n*****REINFORCEMENTS HAVE ARRIVED! ENDING AUTO COMBAT!*****");
+
+            Long experience = addUpExperience(encounterObject);
+            encounterObject.experiencePerMember += experience;
+            Screen.print("\nExperience gained so far (Per person): " + experience);
+
+            return encounterObject;
+        } else {
+            if(alivePartyMembers.size() == 0){
+                Screen.print("\nWhoa... you guys died!\n");
+
+                Long experience = addUpExperience(encounterObject);
+                encounterObject.experiencePerMember += experience;
+                Screen.print("Experience gained (Per person): " + experience);
+
+                return encounterObject;
+            }
+            else {
+                List<Person> opponentsWhoHaveLoot = new ArrayList<>(encounterObject.opponentsWhoDied);
+
+                Long experience = addUpExperience(encounterObject);
+                encounterObject.experiencePerMember += experience;
+                Screen.print("\nExperience gained (Per person): " + experience);
+
+                while (roundCount <= callTime) {
+
+                    String howToProceed = Input.promptTextInput("Current Round: " + roundCount + "\nAll enemies are dead! How would you like to proceed? \n1. loot\n2. callingcard \n3. leave\n4. hide\nSelection", List.of("1", "2", "3", "4", "loot", "callingcard", "leave", "hide"));
+
+                    int goldFound = 0;
+
+
+                    if (howToProceed.equals("1") || howToProceed.toLowerCase().equals("loot")) {
+                        for (int i = 0; i < partyInfo.getMemberCount(); i++) {
+                            if(opponentsWhoHaveLoot.size() != 0) {
+                                Person lootableOpponent = opponentsWhoHaveLoot.get(RandomGenerator.randomIntInRange(0, opponentsWhoHaveLoot.size() - 1));
+                                goldFound += lootableOpponent.getGold();
+                                opponentsWhoHaveLoot.remove(lootableOpponent);
+
+
+                                // BRETT, NOT SURE WHERE TO SEE WHAT LOOT THEY HAVE. PUT THE CODE HERE FOR IT
+                            }
+                        }
+
+                        Screen.print("\nLooted " + goldFound + " gold.");
+                        encounterObject.totalGoldFound += goldFound;
+
+                        if(opponentsWhoHaveLoot.size() == 0) {
+                            Screen.print("\nYou have looted all available enemies!\n");
+                        }
+
+                    } else if (howToProceed.equals("2") || howToProceed.toLowerCase().equals("callingcard")) {
+                        roundCount += Input.promptIntInputWithinRange("\nDescribe the Calling Card. How many rounds does it take to accomplish? ", 0, 100);
+
+                    } else if (howToProceed.equals("3") || howToProceed.toLowerCase().equals("leave")) {
+                        return encounterObject;
+                    } else if(howToProceed.equals("4") || howToProceed.toLowerCase().equals("hide")){
+                        double rollAverage = collectAverageForRoll("Stealth", partyMembers);
+
+                        Screen.print("Stealth roll averaged: " + rollAverage);
+
+                        // ADD REINFORCEMENTS COMING HERE
+
+                        return encounterObject;
+                    }
+                    roundCount++;
+                }
+
+                Screen.print("\n*****REINFORCEMENTS HAVE ARRIVED!!*****");
+                // call reinforcement method here
+
+                return encounterObject;
+            }
+        }
+    }
+
+    private static long addUpExperience(EncounterObject encounterObject){
+        double killedExperience = 0;
+        for(Person person : encounterObject.opponentsWhoDied){
+            killedExperience += person.getXpValue();
+        }
+
+        long experience = Math.round(Math.pow(killedExperience, (1 + Math.pow( encounterObject.opponentsWhoDied.size(),1.5) / 1500)));
+
+        double fledExperience = 0;
+        for(Person person : encounterObject.opponentsWhoRanAway){
+            fledExperience += person.getXpValue();
+        }
+
+        experience += fledExperience/4d;
+
+        return experience;
+    }
+
+
+    private static boolean runSimulationToSeeIfSuccessful(String typeOfRoll, String attribute, List<PartyMember> players, List<Person> opponents) {
+        double averagePartyRoll = collectAverageForRoll(typeOfRoll, players);
+        double averageOpponentRoll = 0;
+
+
+
+        for (Person opponent : opponents) {
+            if(attribute.toLowerCase().equals("strength"))
+                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getStrMod();
+            if(attribute.toLowerCase().equals("intelligence"))
+                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getIntMod();
+            if(attribute.toLowerCase().equals("wisdom"))
+                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getWisMod();
+            if(attribute.toLowerCase().equals("dexterity"))
+                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getDexMod();
+            if(attribute.toLowerCase().equals("charisma"))
+                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getChrMod();
+            if(attribute.toLowerCase().equals("constitution"))
+                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getConMod();
+        }
+
+        averageOpponentRoll = averageOpponentRoll / opponents.size();
+
+        Screen.print("\nPlayers Average Roll: " + averagePartyRoll);
+        Screen.print("\nOpponents Average Roll: " + averageOpponentRoll);
+
+        if(averagePartyRoll >= averageOpponentRoll )
+        {
+            Screen.print("\nSuccess!\n");
+            return true;
+        }
+        else {
+            Screen.print("\nFailure!\n");
+
+            return false;
+        }
+    }
+
+    private static double collectAverageForRoll(String typeOfRoll, List<PartyMember> players){
+        double averagePartyRoll = 0;
+
+        for(int i = 0; i < players.size(); i++){
+            averagePartyRoll += Input.promptIntInputWithinRange("Please enter " + typeOfRoll + " roll for Party Member " + (i + 1) + "", ROLL_MIN, ROLL_MAX);
+        }
+
+         return averagePartyRoll/players.size();
+    }
+
 }

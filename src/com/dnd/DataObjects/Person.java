@@ -23,7 +23,7 @@ public class Person {
     private String name;
     private String gender;
     private String alignment;
-    private List<String> quirks; //personality traits and physical descriptions
+    private List<String> quirks = new ArrayList<>(); //personality traits and physical descriptions
     private int age;
     private int agePercent;
     private int xpValue;
@@ -34,9 +34,10 @@ public class Person {
     private int spellAttackMod;
     private int spellcasterLevel;
     private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
-    private List<Spell> spellsKnown;
+    private List<Spell> spellsKnown = new ArrayList<>();
 
-    private Boolean hasFamily;
+
+    private boolean hasFamily;
     private int familyMemberCount;
     private String mood;
 
@@ -45,9 +46,13 @@ public class Person {
     private int hpCurrent;
     private int ac;
     //Equipped gear
-    private List<Weapon> wornWeapons;
+    private List<Weapon> wornWeapons = new ArrayList<>();
     private List<Armor> wornArmor = new ArrayList<>(2); //index 0 is the main armor, index 1 is shield, if applicable
     private boolean hasShield = false;
+    private int numberOfAttacks = 1;
+    private int minimumDamage = 1;
+    private int maximumDamage = 6;
+    private int toHit = 4;
 
     //non-equipped items that are being carried
     private Pack packCarried = new Pack();
@@ -79,11 +84,78 @@ public class Person {
     private int copper;
     private int dcToPickpocket;
 
-    private Boolean hasCallGlyph;
+    private boolean hasCallGlyph;
     private String callGlyphType;
-    private Boolean hasBodyguard;
+    private boolean hasBodyguard;
     //TODO: create a function that attaches bodyguards to the person
-    private List<Person> bodyguardList;
+    private List<Person> bodyguardList = new ArrayList<>();
+
+
+    public Person(){}
+
+    public Person(Person other) {
+        this.rarities = other.rarities;
+        this.rc = other.rc;
+        this.randGen = other.randGen;
+        this.economicClass = other.economicClass;
+        this.isTraveler = other.isTraveler;
+        this.livesIn = other.livesIn;
+        this.race = other.race;
+        this.name = other.name;
+        this.gender = other.gender;
+        this.alignment = other.alignment;
+        this.quirks = new ArrayList<>(other.quirks);
+        this.age = other.age;
+        this.agePercent = other.agePercent;
+        this.xpValue = other.xpValue;
+        this.isSpellcaster = other.isSpellcaster;
+        this.spellProficiencyBonus = other.spellProficiencyBonus;
+        this.spellDc = other.spellDc;
+        this.spellAttackMod = other.spellAttackMod;
+        this.spellcasterLevel = other.spellcasterLevel;
+        this.spellSlots = other.spellSlots;
+        this.spellsKnown = other.spellsKnown;
+        this.hasFamily = other.hasFamily;
+        this.familyMemberCount = other.familyMemberCount;
+        this.mood = other.mood;
+        this.level = other.level;
+        this.hpMax = other.hpMax;
+        this.hpCurrent = other.hpCurrent;
+        this.ac = other.ac;
+        this.wornWeapons = other.wornWeapons;
+        this.wornArmor = other.wornArmor;
+        this.hasShield = other.hasShield;
+        this.numberOfAttacks = other.numberOfAttacks;
+        this.minimumDamage = other.minimumDamage;
+        this.maximumDamage = other.maximumDamage;
+        this.toHit = other.toHit;
+        this.packCarried = other.packCarried;
+        this.raceData = other.raceData;
+        this.passivePerception = other.passivePerception;
+        this.bravery = other.bravery;
+        this.tolerance = other.tolerance;
+        this.strength = other.strength;
+        this.strMod = other.strMod;
+        this.dexterity = other.dexterity;
+        this.dexMod = other.dexMod;
+        this.constitution = other.constitution;
+        this.conMod = other.conMod;
+        this.intelligence = other.intelligence;
+        this.intMod = other.intMod;
+        this.wisdom = other.wisdom;
+        this.wisMod = other.wisMod;
+        this.charisma = other.charisma;
+        this.chrMod = other.chrMod;
+        this.platinum = other.platinum;
+        this.gold = other.gold;
+        this.silver = other.silver;
+        this.copper = other.copper;
+        this.dcToPickpocket = other.dcToPickpocket;
+        this.hasCallGlyph = other.hasCallGlyph;
+        this.callGlyphType = other.callGlyphType;
+        this.hasBodyguard = other.hasBodyguard;
+        this.bodyguardList = new ArrayList<>(other.bodyguardList);
+    }
 
     public void displayAll(Screen screen) {
         screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), name + ", the " + age + " (" + agePercent + "% of " + raceData.maxAge + ") yrs old " + gender + " " + raceData.raceName + ". Level " + level + ", EXP Value: " + xpValue);
@@ -151,17 +223,18 @@ public class Person {
         //screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass),name + ", the " + raceData.raceName + ", " + age + " yrs (" + "");
     }
 
-    public void create(Location currentLocation, HardData hardData) {
+    public Person create(Location currentLocation, HardData hardData) {
         //economic traits
         getEconomicClassFromLocation(currentLocation, hardData.locationList);
-        getQuirksFromEconomicClass();
+        //getQuirksFromEconomicClass(); Not currently working
         getLevelFromClass();
         getInventoryFromClass(currentLocation);
 
         getRaceFromLocation();
+        raceData = getRaceDataFromRace(hardData);
+        getRacialTraitsFromRace();
         getNameFromRace(raceData.raceName);
         getAlignmentFromRace(hardData);
-        getRacialTraitsFromRace();
         getStatsBasedOnLevel();
         determineSpellcasterTraits(hardData);
         calculateDcToPickpocket();
@@ -171,6 +244,8 @@ public class Person {
         mood = randGen.getRandomMood();
 
         calculateXPValue();
+
+        return this;
     }
 
     public void determineIfTraveler(Location currentLocation, List<Location> locationlist) {
@@ -896,53 +971,53 @@ public class Person {
         switch (economicClass) {
             case EconomicClasses.beggar:
                 if (armorTierSelected <= 75) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar,1));//75%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar,1));//75%
                 } else if (armorTierSelected <= 95) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar, 2));//20%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar, 2));//20%
                 } else {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar, 3));//5%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar, 3));//5%
                 }
                 break;
             case EconomicClasses.poor:
                 if (armorTierSelected <= 60) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, 1));//65%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, 1));//65%
                 } else if (armorTierSelected <= 90) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, 2));//30%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, 2));//30%
                 } else {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, 3));//5%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, 3));//5%
                 }
                 break;
             case EconomicClasses.middleClass:
                 if (armorTierSelected <= 50) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 1));//50%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 1));//50%
                 } else if (armorTierSelected <= 75) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 2));//25%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 2));//25%
                 } else if (armorTierSelected <= 90) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 3));//15%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 3));//15%
                 } else {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 4));//5%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, 4));//5%
                 }
                 break;
             case EconomicClasses.wealthy:
                 if (armorTierSelected <= 35) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 1));//35%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 1));//35%
                 } else if (armorTierSelected <= 60) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 2));//25%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 2));//25%
                 } else if (armorTierSelected <= 80) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 3));//20%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 3));//20%
                 } else if (armorTierSelected <= 95) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 4));//15%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 4));//15%
                 } else {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 5));//5%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 5));//5%
                 }
                 break;
             case EconomicClasses.elite:
                  if (armorTierSelected <= 50) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 3));//50%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 3));//50%
                 } else if (armorTierSelected <= 75) {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 4));//25%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 4));//25%
                 } else {
-                    wornArmor.set(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 5));//25%
+                    wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 5));//25%
                 }
                 break;
         }
@@ -959,9 +1034,10 @@ public class Person {
         }
 
         if (hasShield && economicClass.equals(EconomicClasses.beggar) || economicClass.equals(EconomicClasses.poor)) {
-            wornArmor.set(1, StandardArmor.shield);
+            wornArmor.add(1, StandardArmor.shield);
         } else {
             //TODO: allow wealthier people to have access to better shields
+            wornArmor.add(1, StandardArmor.shield);//placeholder for testing
         }
         if (hasShield) {
             ac = ac + wornArmor.get(1).ac;
@@ -974,8 +1050,8 @@ public class Person {
     private void getWeapons() {
         //TODO: make it so a versatile weapon is wielded as 2-handed (takes alt damage) when not using a shield
         wornWeapons = new ArrayList<Weapon>(Arrays.asList());
-        wornWeapons.set(0,StandardWeapons.unarmed);
-        wornWeapons.set(1, StandardWeapons.unarmed);
+        wornWeapons.add(0,StandardWeapons.unarmed);
+        wornWeapons.add(1, StandardWeapons.unarmed);
         if (hasShield) {
             getSingleWeapon(0, false);
         } else {
@@ -1031,44 +1107,44 @@ public class Person {
         switch (economicClass) {
             case EconomicClasses.beggar:
                 if (weaponTierSelected <= 75) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass,1));//75%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass,1));//75%
                 } else if (weaponTierSelected <= 95) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//20%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//20%
                 } else {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//5%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//5%
                 }
                 break;
             case EconomicClasses.poor:
                 if (weaponTierSelected <= 60) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//65%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//65%
                 } else if (weaponTierSelected <= 90) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//30%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//30%
                 } else {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//5%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//5%
                 }
                 break;
             case EconomicClasses.middleClass:
                 if (weaponTierSelected <= 50) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//50%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//50%
                 } else if (weaponTierSelected <= 75) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//25%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//25%
                 } else if (weaponTierSelected <= 90) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//15%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//15%
                 } else {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 4));//5%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 4));//5%
                 }
                 break;
             case EconomicClasses.wealthy:
                 if (weaponTierSelected <= 20) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//35%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//35%
                 } else if (weaponTierSelected <= 45) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//25%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//25%
                 } else if (weaponTierSelected <= 65) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//20%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//20%
                 } else if (weaponTierSelected <= 75) {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 4));//15%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 4));//15%
                 } else {
-                    wornWeapons.set(hand, randGen.getWeaponByEconomyAndTier(economicClass, 5));//5%
+                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 5));//5%
                 }
                 break;
             case EconomicClasses.elite:
@@ -1585,6 +1661,555 @@ public class Person {
         if (isSpellcaster) {
             xpValue += (Math.pow(spellcasterLevel, 5)) / 2;
         }
+    }
+
+    public Rarities getRarities() {
+        return rarities;
+    }
+
+    public Person setRarities(Rarities rarities) {
+        this.rarities = rarities;
+        return this;
+    }
+
+    public RandomCollectionWeighted<String> getRc() {
+        return rc;
+    }
+
+    public Person setRc(RandomCollectionWeighted<String> rc) {
+        this.rc = rc;
+        return this;
+    }
+
+    public RandomGenerator getRandGen() {
+        return randGen;
+    }
+
+    public Person setRandGen(RandomGenerator randGen) {
+        this.randGen = randGen;
+        return this;
+    }
+
+    public String getEconomicClass() {
+        return economicClass;
+    }
+
+    public Person setEconomicClass(String economicClass) {
+        this.economicClass = economicClass;
+        return this;
+    }
+
+    public boolean isTraveler() {
+        return isTraveler;
+    }
+
+    public Person setTraveler(boolean traveler) {
+        isTraveler = traveler;
+        return this;
+    }
+
+    public Location getLivesIn() {
+        return livesIn;
+    }
+
+    public Person setLivesIn(Location livesIn) {
+        this.livesIn = livesIn;
+        return this;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public Person setRace(String race) {
+        this.race = race;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Person setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public Person setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public String getAlignment() {
+        return alignment;
+    }
+
+    public Person setAlignment(String alignment) {
+        this.alignment = alignment;
+        return this;
+    }
+
+    public List<String> getQuirks() {
+        return quirks;
+    }
+
+    public Person setQuirks(List<String> quirks) {
+        this.quirks = quirks;
+        return this;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Person setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public int getAgePercent() {
+        return agePercent;
+    }
+
+    public Person setAgePercent(int agePercent) {
+        this.agePercent = agePercent;
+        return this;
+    }
+
+    public int getXpValue() {
+        return xpValue;
+    }
+
+    public Person setXpValue(int xpValue) {
+        this.xpValue = xpValue;
+        return this;
+    }
+
+    public boolean getHasFamily() {
+        return hasFamily;
+    }
+
+    public Person setHasFamily(boolean hasFamily) {
+        this.hasFamily = hasFamily;
+        return this;
+    }
+
+    public int getFamilyMemberCount() {
+        return familyMemberCount;
+    }
+
+    public Person setFamilyMemberCount(int familyMemberCount) {
+        this.familyMemberCount = familyMemberCount;
+        return this;
+    }
+
+    public String getMood() {
+        return mood;
+    }
+
+    public Person setMood(String mood) {
+        this.mood = mood;
+        return this;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public Person setLevel(int level) {
+        this.level = level;
+        return this;
+    }
+
+    public int getHpMax() {
+        return hpMax;
+    }
+
+    public Person setHpMax(int hpMax) {
+        this.hpMax = hpMax;
+        return this;
+    }
+
+    public int getHpCurrent() {
+        return hpCurrent;
+    }
+
+    public Person setHpCurrent(int hpCurrent) {
+        this.hpCurrent = hpCurrent;
+        return this;
+    }
+
+    public int getAc() {
+        return ac;
+    }
+
+    public Person setAc(int ac) {
+        this.ac = ac;
+        return this;
+    }
+
+    public List<Weapon> getWornWeapons() {
+        return wornWeapons;
+    }
+
+    public Person setWornWeapons(List<Weapon> wornWeapons) {
+        this.wornWeapons = wornWeapons;
+        return this;
+    }
+
+    public List<Armor> getWornArmor() {
+        return wornArmor;
+    }
+
+    public Person setWornArmor(List<Armor> wornArmor) {
+        this.wornArmor = wornArmor;
+        return this;
+    }
+
+    public boolean isHasShield() {
+        return hasShield;
+    }
+
+    public Person setHasShield(boolean hasShield) {
+        this.hasShield = hasShield;
+        return this;
+    }
+
+    public Pack getPackCarried() {
+        return packCarried;
+    }
+
+    public Person setPackCarried(Pack packCarried) {
+        this.packCarried = packCarried;
+        return this;
+    }
+
+    public Race getRaceData() {
+        return raceData;
+    }
+
+    public Person setRaceData(Race raceData) {
+        this.raceData = raceData;
+        return this;
+    }
+
+    public int getPassivePerception() {
+        return passivePerception;
+    }
+
+    public Person setPassivePerception(int passivePerception) {
+        this.passivePerception = passivePerception;
+        return this;
+    }
+
+    public int getBravery() {
+        return bravery;
+    }
+
+    public Person setBravery(int bravery) {
+        this.bravery = bravery;
+        return this;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public Person setStrength(int strength) {
+        this.strength = strength;
+        return this;
+    }
+
+    public int getStrMod() {
+        return strMod;
+    }
+
+    public Person setStrMod(int strMod) {
+        this.strMod = strMod;
+        return this;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public Person setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+        return this;
+    }
+
+    public int getDexMod() {
+        return dexMod;
+    }
+
+    public Person setDexMod(int dexMod) {
+        this.dexMod = dexMod;
+        return this;
+    }
+
+    public int getConstitution() {
+        return constitution;
+    }
+
+    public Person setConstitution(int constitution) {
+        this.constitution = constitution;
+        return this;
+    }
+
+    public int getConMod() {
+        return conMod;
+    }
+
+    public Person setConMod(int conMod) {
+        this.conMod = conMod;
+        return this;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public Person setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+        return this;
+    }
+
+    public int getIntMod() {
+        return intMod;
+    }
+
+    public Person setIntMod(int intMod) {
+        this.intMod = intMod;
+        return this;
+    }
+
+    public int getWisdom() {
+        return wisdom;
+    }
+
+    public Person setWisdom(int wisdom) {
+        this.wisdom = wisdom;
+        return this;
+    }
+
+    public int getWisMod() {
+        return wisMod;
+    }
+
+    public Person setWisMod(int wisMod) {
+        this.wisMod = wisMod;
+        return this;
+    }
+
+    public int getCharisma() {
+        return charisma;
+    }
+
+    public Person setCharisma(int charisma) {
+        this.charisma = charisma;
+        return this;
+    }
+
+    public int getChrMod() {
+        return chrMod;
+    }
+
+    public Person setChrMod(int chrMod) {
+        this.chrMod = chrMod;
+        return this;
+    }
+
+    public int getPlatinum() {
+        return platinum;
+    }
+
+    public Person setPlatinum(int platinum) {
+        this.platinum = platinum;
+        return this;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public Person setGold(int gold) {
+        this.gold = gold;
+        return this;
+    }
+
+    public int getSilver() {
+        return silver;
+    }
+
+    public Person setSilver(int silver) {
+        this.silver = silver;
+        return this;
+    }
+
+    public int getCopper() {
+        return copper;
+    }
+
+    public Person setCopper(int copper) {
+        this.copper = copper;
+        return this;
+    }
+
+    public int getDcToPickpocket() {
+        return dcToPickpocket;
+    }
+
+    public Person setDcToPickpocket(int dcToPickpocket) {
+        this.dcToPickpocket = dcToPickpocket;
+        return this;
+    }
+
+    public boolean getHasCallGlyph() {
+        return hasCallGlyph;
+    }
+
+    public Person setHasCallGlyph(boolean hasCallGlyph) {
+        this.hasCallGlyph = hasCallGlyph;
+        return this;
+    }
+
+    public String getCallGlyphType() {
+        return callGlyphType;
+    }
+
+    public Person setCallGlyphType(String callGlyphType) {
+        this.callGlyphType = callGlyphType;
+        return this;
+    }
+
+    public boolean getHasBodyguard() {
+        return hasBodyguard;
+    }
+
+    public Person setHasBodyguard(boolean hasBodyguard) {
+        this.hasBodyguard = hasBodyguard;
+        return this;
+    }
+
+    public List<Person> getBodyguardList() {
+        return bodyguardList;
+    }
+
+    public Person setBodyguardList(List<Person> bodyguardList) {
+        this.bodyguardList = bodyguardList;
+        return this;
+    }
+
+    public boolean isSpellcaster() {
+        return isSpellcaster;
+    }
+
+    public Person setSpellcaster(boolean spellcaster) {
+        isSpellcaster = spellcaster;
+        return this;
+    }
+
+    public int getSpellProficiencyBonus() {
+        return spellProficiencyBonus;
+    }
+
+    public Person setSpellProficiencyBonus(int spellProficiencyBonus) {
+        this.spellProficiencyBonus = spellProficiencyBonus;
+        return this;
+    }
+
+    public int getSpellDc() {
+        return spellDc;
+    }
+
+    public Person setSpellDc(int spellDc) {
+        this.spellDc = spellDc;
+        return this;
+    }
+
+    public int getSpellAttackMod() {
+        return spellAttackMod;
+    }
+
+    public Person setSpellAttackMod(int spellAttackMod) {
+        this.spellAttackMod = spellAttackMod;
+        return this;
+    }
+
+    public int getSpellcasterLevel() {
+        return spellcasterLevel;
+    }
+
+    public Person setSpellcasterLevel(int spellcasterLevel) {
+        this.spellcasterLevel = spellcasterLevel;
+        return this;
+    }
+
+    public int[][] getSpellSlots() {
+        return spellSlots;
+    }
+
+    public Person setSpellSlots(int[][] spellSlots) {
+        this.spellSlots = spellSlots;
+        return this;
+    }
+
+    public List<Spell> getSpellsKnown() {
+        return spellsKnown;
+    }
+
+    public Person setSpellsKnown(List<Spell> spellsKnown) {
+        this.spellsKnown = spellsKnown;
+        return this;
+    }
+
+    public int getTolerance() {
+        return tolerance;
+    }
+
+    public Person setTolerance(int tolerance) {
+        this.tolerance = tolerance;
+        return this;
+    }
+
+    public int getNumberOfAttacks() {
+        return numberOfAttacks;
+    }
+
+    public Person setNumberOfAttacks(int numberOfAttacks) {
+        this.numberOfAttacks = numberOfAttacks;
+        return this;
+    }
+
+    public int getMinimumDamage() {
+        return minimumDamage;
+    }
+
+    public Person setMinimumDamage(int minimumDamage) {
+        this.minimumDamage = minimumDamage;
+        return this;
+    }
+
+    public int getMaximumDamage() {
+        return maximumDamage;
+    }
+
+    public Person setMaximumDamage(int maximumDamage) {
+        this.maximumDamage = maximumDamage;
+        return this;
+    }
+
+    public int getToHit() {
+        return toHit;
+    }
+
+    public Person setToHit(int toHit) {
+        this.toHit = toHit;
+        return this;
     }
 }
 

@@ -10,7 +10,7 @@ import java.util.List;
 public class Armor {
     public String name;
     public String description;
-    public List<String> abilities;
+    public List<String> abilities = new ArrayList<>();
     public int strRequirement; //some armor requires certain strength levels
     public int ac;
     public int dexBonusMax; //some armor allows dexterity to add onto the AC of armor, up to a point. just use a huge number like 100 if it's unlimited
