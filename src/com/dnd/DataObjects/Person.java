@@ -36,8 +36,7 @@ public class Person {
     private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
     private List<Spell> spellsKnown = new ArrayList<>();
 
-
-    private boolean hasFamily;
+    private Boolean hasFamily;
     private int familyMemberCount;
     private String mood;
 
@@ -49,10 +48,6 @@ public class Person {
     private List<Weapon> wornWeapons = new ArrayList<>();
     private List<Armor> wornArmor = new ArrayList<>(2); //index 0 is the main armor, index 1 is shield, if applicable
     private boolean hasShield = false;
-    private int numberOfAttacks = 1;
-    private int minimumDamage = 1;
-    private int maximumDamage = 6;
-    private int toHit = 4;
 
     //non-equipped items that are being carried
     private Pack packCarried = new Pack();
@@ -125,10 +120,6 @@ public class Person {
         this.wornWeapons = other.wornWeapons;
         this.wornArmor = other.wornArmor;
         this.hasShield = other.hasShield;
-        this.numberOfAttacks = other.numberOfAttacks;
-        this.minimumDamage = other.minimumDamage;
-        this.maximumDamage = other.maximumDamage;
-        this.toHit = other.toHit;
         this.packCarried = other.packCarried;
         this.raceData = other.raceData;
         this.passivePerception = other.passivePerception;
@@ -226,7 +217,6 @@ public class Person {
     public Person create(Location currentLocation, HardData hardData) {
         //economic traits
         getEconomicClassFromLocation(currentLocation, hardData.locationList);
-        //getQuirksFromEconomicClass(); Not currently working
         getLevelFromClass();
         getInventoryFromClass(currentLocation);
 
@@ -235,12 +225,14 @@ public class Person {
         getRacialTraitsFromRace();
         getNameFromRace(raceData.raceName);
         getAlignmentFromRace(hardData);
+        getRacialTraitsFromRace();
         getStatsBasedOnLevel();
         determineSpellcasterTraits(hardData);
         calculateDcToPickpocket();
         determineBodyguards();
         determineCallGlyphs();
         determineFamily();
+        setQuirks();
         mood = randGen.getRandomMood();
 
         calculateXPValue();
@@ -801,6 +793,7 @@ public class Person {
             raceData.walkSpeed -= randGen.randomIntInRange(1, 3) * 5;
         }
 
+        //race specific additions
         if (raceData.raceName.equals(Races.genasi)) {
             //Can be air (+1 DEX, endless hold breath, levitate spell once per rest), earth (+1 STR, not affected by difficult earth or stone terrain, can cast pass without trace once per rest), fire (+1 INT, darkvision 60 ft, fire resistance, has produce flame cantrip, @ lvl 3 can cast burning hands), and water (+1 WIS, resistant to acid, can breath underwater, swim @ 30 speed, knows shape water cantrip, @ lvl 3 can cast create or destroy water once per rest) types. Knows common and primordial
             switch (randGen.randomIntInRange(1,4)) {
@@ -839,9 +832,7 @@ public class Person {
                     raceData.wisMod = 1;
                     break;
             }
-        }
-
-        if (raceData.raceName.equals(Races.gith)) {
+        } else if (raceData.raceName.equals(Races.gith)) {
             raceData.abilities.add("Knows 'Mage Hand' cantrip");
             //The hash is a quick lookup that doesn't instantiate a list or require lots of || checks in an if statement https://stackoverflow.com/questions/7604814/best-way-to-format-multiple-or-conditions-in-an-if-statement-java
             Set<String> evilValues = new HashSet<String>(Arrays.asList(Alignments.chaoticEvil, Alignments.lawfulEvil, Alignments.neutralEvil));
@@ -862,14 +853,33 @@ public class Person {
                     raceData.abilities.add("Can cast 'Detect Thoughts' once per rest without components");
                 }
             }
-        }
-
-        if (raceData.raceName.equals(Races.halfElf)) {
+        } else if (raceData.raceName.equals(Races.tiefling)) {
+            raceData.abilities.add("Knows Thaumaturgy cantrip");
+            if (level >= 3) {
+                raceData.abilities.add("Can cast a lvl 2 Hellish Rebuke once per rest");
+            }
+            if (level >= 5) {
+                raceData.abilities.add("Can cast Darkness once per rest");
+            }
+        } else if (raceData.raceName.equals(Races.halfElf)) {
             boostRandomSkill(2);
         } else if (raceData.raceName.equals(Races.human)) {
             boostRandomSkill(3);
         } else if (raceData.raceName.equals(Races.halfOrc)) {
             boostRandomSkill(1);
+        } else if (raceData.raceName.equals(Races.triton)) {
+            raceData.abilities.add("Can cast Fog once per rest");
+            if (level >= 3) {
+                raceData.abilities.add("Can cast 'Gust of Wind' once per rest");
+            }
+            if (level >= 5) {
+                raceData.abilities.add("Can cast 'Wall of Water' once per rest");
+            }
+        } else if (raceData.raceName.equals(Races.yuanTi)) {
+            raceData.abilities.add("Knows the 'Poison Spray' cantrip");
+            if (level >= 3) {
+                raceData.abilities.add("Can cast 'Suggestion' once per rest");
+            }
         }
 
         strength = randGen.randomIntInRange(((level / 2) + 7), ((level / 2) + 15)) + raceData.strMod + classStr;
@@ -893,6 +903,9 @@ public class Person {
 
         charisma = randGen.randomIntInRange(((level / 2) + 7), ((level / 2) + 15)) + raceData.chrMod + classChr;
         chrMod = getModifierForStat(charisma);
+        if (raceData.raceName.equals(Races.tortle)) {
+            ac = 13 + conMod;
+        }
 
         //even if the person is not a "spellcaster" many races innately know a few spells so all persons need to have these.
         spellDc = 8;
@@ -909,6 +922,18 @@ public class Person {
         spellAttackMod = spellProficiencyBonus + spellStatBonus;
 
         passivePerception = 10 + wisMod;
+        if (raceData.raceName.equals(Races.lizardfolk)) {
+            passivePerception += 4;
+            if (wornArmor.get(0).name.equals(StandardArmor.natural.name)) {
+                wornArmor.get(0).ac = 13;
+                ac = 13 + dexMod;
+            } else if (ac < 13) {
+                ac = 13;
+            }
+        }
+        if (raceData.raceName.equals(Races.tabaxi)) {
+            passivePerception += 6;
+        }
     }
 
     private void getLanguagesFromRace() {
@@ -946,7 +971,14 @@ public class Person {
 
     private void getInventoryFromClass(Location currentLocation) {
         //weapons, armor, gold, items carried
-        getArmor();
+        if (!raceData.raceName.equals(Races.tortle)) {
+            getArmor();
+        } else {
+            //Tortles can't wear typical armor. Once the CONMOD is figured out the AC will be 13 + conMod
+            wornArmor.set(0, StandardArmor.natural);
+            wornArmor.get(0).ac = 13;
+            wornArmor.get(0).name = "Natural (Shell)";
+        }
         getWeapons();
         getLoot();
     }
@@ -1157,7 +1189,7 @@ public class Person {
         }
     }
 
-    public void getLoot() {
+    private void getLoot() {
         platinum = randGen.randomIntInRange(livesIn.platinumLow, livesIn.platinumHigh);
         gold = randGen.randomIntInRange(livesIn.goldLow, livesIn.goldHigh);
         silver = randGen.randomIntInRange(livesIn.silverLow, livesIn.silverHigh);
@@ -1328,19 +1360,37 @@ public class Person {
         }
     }
 
-    public void determineFamily() {
-        if (economicClass.equals(EconomicClasses.beggar) && randGen.randomIntInRange(1,100) <= 10) { //10% chance to have a family. Most beggars will be those without families
-            hasFamily = true;
-        } else if (economicClass.equals(EconomicClasses.poor) && randGen.randomIntInRange(1, 100) <= 95) {
-            hasFamily = true;
-        } else if (economicClass.equals(EconomicClasses.middleClass) && randGen.randomIntInRange(1, 100) <= 92) {
-            hasFamily = true;
-        } else if (economicClass.equals(EconomicClasses.wealthy) && randGen.randomIntInRange(1, 100) <= 90) {
-            hasFamily = true;
-        } else if (economicClass.equals(EconomicClasses.elite) && randGen.randomIntInRange(1, 100) <= 40) {
-            hasFamily = true;
-        } else {
-            hasFamily = false;
+    private void determineFamily() {
+        int spellcasterDeterminer = randGen.randomIntInRange(1, 100);
+        switch (economicClass) {
+            case EconomicClasses.beggar:
+                if (spellcasterDeterminer <= 10) {
+                    hasFamily = true;
+                }
+                break;
+            case EconomicClasses.poor:
+                if (spellcasterDeterminer <= 95) {
+                    hasFamily = true;
+                }
+                break;
+            case EconomicClasses.middleClass:
+                if (spellcasterDeterminer <= 92) {
+                    hasFamily = true;
+                }
+                break;
+            case EconomicClasses.wealthy:
+                if (spellcasterDeterminer <= 90) {
+                    hasFamily = true;
+                }
+                break;
+            case EconomicClasses.elite:
+                if (spellcasterDeterminer <= 40) {
+                    hasFamily = true;
+                }
+                break;
+            default:
+                hasFamily = false;
+                break;
         }
         if (hasFamily) {
             //familyMemberCount represents how many members OTHER than this creature are in the family.
@@ -1418,6 +1468,7 @@ public class Person {
                 break;
         }
         if (isSpellcaster) {
+            setSpellcasterLevel();
             getSpellSlotsBySpellcasterLevel();
             setSpellsKnownByLevel(hardData);
         }
@@ -1621,7 +1672,7 @@ public class Person {
         }
     }
 
-    public void calculateXPValue() {
+    private void calculateXPValue() {
         xpValue = ((hpMax / 9) * hpMax)
                 + (level * 5) //5 pts per level. As most other xp related traits are boosted by this it will get minimal attention, but guarantees a little bit.
                 + (wornWeapons.get(0).combinedToHitBonus * 5)
@@ -1660,6 +1711,26 @@ public class Person {
         }
         if (isSpellcaster) {
             xpValue += (Math.pow(spellcasterLevel, 5)) / 2;
+        }
+    }
+
+    private void setQuirks() {
+        int quirkCount = randGen.randomIntInRange(1,3);
+        for (int i = 0; i < quirkCount; i++) {
+            switch (economicClass) {
+                case EconomicClasses.beggar:
+                    quirks.add(randGen.getRandomBeggarQuirk());
+                    break;
+                case EconomicClasses.poor:
+                    quirks.add(randGen.getRandomPoorQuirk());
+                    break;
+                case EconomicClasses.middleClass:
+                    quirks.add(randGen.getRandomMiddleClassQuirk());
+                    break;
+                default:
+                    quirks.add(randGen.getRandomWealthyQuirk());
+                    break;
+            }
         }
     }
 
@@ -2173,42 +2244,6 @@ public class Person {
 
     public Person setTolerance(int tolerance) {
         this.tolerance = tolerance;
-        return this;
-    }
-
-    public int getNumberOfAttacks() {
-        return numberOfAttacks;
-    }
-
-    public Person setNumberOfAttacks(int numberOfAttacks) {
-        this.numberOfAttacks = numberOfAttacks;
-        return this;
-    }
-
-    public int getMinimumDamage() {
-        return minimumDamage;
-    }
-
-    public Person setMinimumDamage(int minimumDamage) {
-        this.minimumDamage = minimumDamage;
-        return this;
-    }
-
-    public int getMaximumDamage() {
-        return maximumDamage;
-    }
-
-    public Person setMaximumDamage(int maximumDamage) {
-        this.maximumDamage = maximumDamage;
-        return this;
-    }
-
-    public int getToHit() {
-        return toHit;
-    }
-
-    public Person setToHit(int toHit) {
-        this.toHit = toHit;
         return this;
     }
 }
