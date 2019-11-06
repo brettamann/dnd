@@ -36,7 +36,8 @@ public class Person {
     private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
     private List<Spell> spellsKnown = new ArrayList<>();
 
-    private Boolean hasFamily;
+
+    private boolean hasFamily;
     private int familyMemberCount;
     private String mood;
 
@@ -48,6 +49,7 @@ public class Person {
     private List<Weapon> wornWeapons = new ArrayList<>();
     private List<Armor> wornArmor = new ArrayList<>(2); //index 0 is the main armor, index 1 is shield, if applicable
     private boolean hasShield = false;
+
 
     //non-equipped items that are being carried
     private Pack packCarried = new Pack();

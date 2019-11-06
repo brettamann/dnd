@@ -1,14 +1,13 @@
 package com.dnd.Autocombat;
 
 import com.dnd.DataObjects.*;
+import com.dnd.DataObjects.Items.Weapon;
 import com.dnd.Utilities.Input;
 import com.dnd.Utilities.RandomGenerator;
 import com.dnd.Utilities.Screen;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class AutocombatHandler {
 
@@ -391,7 +390,18 @@ public class AutocombatHandler {
                 if (numberOfOpponentsWhoAttacked < opponentAttackLimit && encounterObject.opponentsWhoStayed.contains(opponent)) {
                     numberOfOpponentsWhoAttacked++;
 
-                    for (int i = 0; i < opponent.getNumberOfAttacks(); i++) {
+                    boolean alreadyAttacked = false;
+
+                    for (Weapon weapon : opponent.getWornWeapons()) {
+
+                        int toHit = 0;
+                        if(alreadyAttacked)
+                            toHit = weapon.toHitBonus;
+                        else {
+                            toHit = weapon.combinedToHitBonus;
+                            alreadyAttacked = true;
+                        }
+
                         int roll = RandomGenerator.randomD20Roll();
                         if(alivePartyMembers.size() == 0) {
                             encounterObject.encounterFinished = true;
@@ -404,15 +414,17 @@ public class AutocombatHandler {
                         boolean critical = false;
 
                         if (roll == 20) {
-                            damage = RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMinimumDamage()) + RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMaximumDamage());
+                            damage = RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax()) + RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax());
 
                             Screen.print("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage!");
                             critical = true;
                         } else if (roll == 1) {
                             roll = RandomGenerator.randomD20Roll();
                             friendlyTarget = encounterObject.opponentsWhoStayed.get(RandomGenerator.randomIntInRange(0, encounterObject.opponentsWhoStayed.size() - 1));
-                            if (roll + opponent.getToHit() >= friendlyTarget.getAc()) {
-                                int friendlyDamage = RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMaximumDamage());
+
+
+                            if (roll + toHit >= friendlyTarget.getAc()) {
+                                int friendlyDamage = RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax());
                                 friendlyTarget.setHpCurrent(friendlyTarget.getHpCurrent() - friendlyDamage);
 
                                 Screen.print("Whoops!!!! " + opponent.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage!");
@@ -433,10 +445,10 @@ public class AutocombatHandler {
 
                             }
                         } else {
-                            if (roll + opponent.getToHit() >= target.getAc()) {
-                                damage = RandomGenerator.randomIntInRange(opponent.getMinimumDamage(), opponent.getMaximumDamage());
+                            if (roll + toHit >= target.getAc()) {
+                                damage = RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax());
                             } else {
-                                Screen.print(opponent.getName() + " rolled a " + (roll + opponent.getToHit()) + " and missed " + target.getName() + "!");
+                                Screen.print(opponent.getName() + " rolled a " + (roll + toHit) + " and missed " + target.getName() + "!");
                             }
                         }
 
@@ -444,7 +456,7 @@ public class AutocombatHandler {
                             target.setCurrentHp(target.getCurrentHp() - damage);
 
                             if(!critical)
-                                Screen.print(opponent.getName() + " rolled " + (roll + opponent.getToHit()) + "  and hit " + target.getName() + " for " + damage + "!");
+                                Screen.print(opponent.getName() + " rolled " + (roll + toHit) + "  and hit " + target.getName() + " for " + damage + "!");
 
                             if (target.getCurrentHp() <= 0) {
                                 encounterObject.playersWhoDied.add(target);
@@ -533,6 +545,7 @@ public class AutocombatHandler {
                         Screen.print("Stealth roll averaged: " + rollAverage);
 
                         // ADD REINFORCEMENTS COMING HERE
+                        Screen.print("\n*****REINFORCEMENTS HAVE ARRIVED!!*****");
 
                         return encounterObject;
                     }
