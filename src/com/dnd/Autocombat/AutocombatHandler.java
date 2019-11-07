@@ -375,7 +375,7 @@ public class AutocombatHandler {
                             if (roll + member.getToHitBonus() >= target.getAc()) {
                                 damage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
                             } else {
-                                Screen.println(green(member.getName()) + " rolled a " + (roll + member.getToHitBonus()) + " and missed " + target.getName() + "! (AC is " + target.getAc() + ")");
+                                Screen.println(green(member.getName()) + " rolled a " + (roll + member.getToHitBonus()) + " and missed " + red(target.getName()) + "! (AC is " + target.getAc() + ")");
                             }
                         }
 
