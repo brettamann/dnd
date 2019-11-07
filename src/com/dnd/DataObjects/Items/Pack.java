@@ -16,24 +16,30 @@ public class Pack {
     public List<Loot> lootCarried = new ArrayList<>();
 
     public void fillPackRandomly(String economicClass, RandomGenerator randGen, Location location) {
-        double itemTierSelector = randGen.randomIntInRange(1,100);
-        double itemsCarriedTotal = randGen.randomIntInRange(location.itemsCarriedLow, location.itemsCarriedHigh);
+        double itemsCarriedTotal = RandomGenerator.randomIntInRange(location.itemsCarriedLow, location.itemsCarriedHigh);
         switch (economicClass) {
-            //this takes the max range from the area and modifies it depending on the class
+            //this takes the max range from the area and modifies it depending on the class. Wealthy are the full range defined.
             case EconomicClasses.beggar:
-                itemsCarriedTotal = Math.round(itemsCarriedTotal / randGen.randomDoubleInRange(4, 8));
+                itemsCarriedTotal -= randGen.randomDoubleInRange(2, 4);
                 break;
             case EconomicClasses.poor:
-                itemsCarriedTotal = Math.round(itemsCarriedTotal / randGen.randomDoubleInRange(3, 6));
+                itemsCarriedTotal -= randGen.randomDoubleInRange(1, 3);
                 break;
             case EconomicClasses.middleClass:
-                itemsCarriedTotal = Math.round(itemsCarriedTotal / randGen.randomDoubleInRange(1, 4));
+                itemsCarriedTotal -= randGen.randomDoubleInRange(0, 2);
                 break;
+            case EconomicClasses.elite:
+                itemsCarriedTotal += randGen.randomDoubleInRange(1, 4);
+                break;
+        }
+        if (itemsCarriedTotal < 1) {
+            //make sure we don't get a negative
+            itemsCarriedTotal = 0;
         }
         int weaponsCarried = 0;
         int armorCarried = 0;
         int lootCarried = 0;
-        RandomCollectionWeighted<String> rc = new RandomCollectionWeighted<String>().add(30, "weapon").add(10, "armor").add(60, "loot"); //it's a lot more realistic to carry extra weapons than extra armor and as the creature is likely to be wearing armor that will be "loot" anyway, it's not super important to have it here
+        RandomCollectionWeighted<String> rc = new RandomCollectionWeighted<String>().add(15, "weapon").add(5, "armor").add(80, "loot"); //the worn weapons and armor are part of the "loot" but are not in the pack. As it'd be really rare to carry spare armor, it's reflected here. Spare weapons would be uncommon but not as rare as spare armor.
         for (int i = 0; i < itemsCarriedTotal; i++) {
             switch (rc.next()) {
                 case "weapon":
@@ -54,23 +60,21 @@ public class Pack {
 
     private void getWeaponsInPack(int amount, String economicClass, RandomGenerator randGen) {
         for (int i = 0; i < amount; i++) {
-            int tierSelector;
             switch (economicClass) {
                 case EconomicClasses.beggar:
-                    tierSelector = randGen.randomIntInRange(1, 3);
-                    weaponsCarried.add(i, randGen.getWeaponByEconomyAndTier(EconomicClasses.beggar, tierSelector));
+                    weaponsCarried.add(randGen.getWeaponByEconomyAndTier(EconomicClasses.beggar, RandomGenerator.randomIntInRange(1, 3)));
                     break;
                 case EconomicClasses.poor:
-                    tierSelector = randGen.randomIntInRange(1, 3);
-                    weaponsCarried.add(i, randGen.getWeaponByEconomyAndTier(EconomicClasses.poor, tierSelector));
+                    weaponsCarried.add(randGen.getWeaponByEconomyAndTier(EconomicClasses.poor, RandomGenerator.randomIntInRange(1, 3)));
                     break;
                 case EconomicClasses.middleClass:
-                    tierSelector = randGen.randomIntInRange(1, 4);
-                    weaponsCarried.add(i, randGen.getWeaponByEconomyAndTier(EconomicClasses.middleClass, tierSelector));
+                    weaponsCarried.add(randGen.getWeaponByEconomyAndTier(EconomicClasses.middleClass, RandomGenerator.randomIntInRange(1, 4)));
                     break;
                 case EconomicClasses.wealthy:
-                    tierSelector = randGen.randomIntInRange(1, 5);
-                    weaponsCarried.add(i, randGen.getWeaponByEconomyAndTier(EconomicClasses.wealthy, tierSelector));
+                    weaponsCarried.add(randGen.getWeaponByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(1, 5)));
+                    break;
+                case EconomicClasses.elite:
+                    weaponsCarried.add(randGen.getWeaponByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(4, 5)));
                     break;
             }
         }
@@ -78,23 +82,21 @@ public class Pack {
 
     private void getArmorInPack(int amount, String economicClass, RandomGenerator randGen) {
         for (int i = 0; i < amount; i++) {
-            int tierSelector;
             switch (economicClass) {
                 case EconomicClasses.beggar:
-                    tierSelector = randGen.randomIntInRange(1, 3);
-                    armorCarried.add(i, randGen.getArmorByEconomyAndTier(EconomicClasses.beggar, tierSelector));
+                    armorCarried.add(randGen.getArmorByEconomyAndTier(EconomicClasses.beggar, RandomGenerator.randomIntInRange(1, 3)));
                     break;
                 case EconomicClasses.poor:
-                    tierSelector = randGen.randomIntInRange(1, 3);
-                    armorCarried.add(i, randGen.getArmorByEconomyAndTier(EconomicClasses.poor, tierSelector));
+                    armorCarried.add(randGen.getArmorByEconomyAndTier(EconomicClasses.poor, RandomGenerator.randomIntInRange(1, 3)));
                     break;
                 case EconomicClasses.middleClass:
-                    tierSelector = randGen.randomIntInRange(1, 4);
-                    armorCarried.add(i, randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, tierSelector));
+                    armorCarried.add(randGen.getArmorByEconomyAndTier(EconomicClasses.middleClass, RandomGenerator.randomIntInRange(1, 4)));
                     break;
                 case EconomicClasses.wealthy:
-                    tierSelector = randGen.randomIntInRange(1, 5);
-                    armorCarried.add(i, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, tierSelector));
+                    armorCarried.add(randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(1, 5)));
+                    break;
+                case EconomicClasses.elite:
+                    armorCarried.add(randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(4, 5)));
                     break;
             }
         }
@@ -102,23 +104,21 @@ public class Pack {
 
     private void getLootInPack(int amount, String economicClass, RandomGenerator randGen) {
         for (int i = 0; i < amount; i++) {
-            int tierSelector;
             switch (economicClass) {
                 case EconomicClasses.beggar:
-                    tierSelector = randGen.randomIntInRange(1, 3);
-                    lootCarried.add(i, randGen.getLootByEconomyAndTier(EconomicClasses.beggar, tierSelector));
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.beggar, RandomGenerator.randomIntInRange(1, 3)));
                     break;
                 case EconomicClasses.poor:
-                    tierSelector = randGen.randomIntInRange(1, 3);
-                    lootCarried.add(i, randGen.getLootByEconomyAndTier(EconomicClasses.poor, tierSelector));
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.poor, RandomGenerator.randomIntInRange(1, 3)));
                     break;
                 case EconomicClasses.middleClass:
-                    tierSelector = randGen.randomIntInRange(1, 4);
-                    lootCarried.add(i, randGen.getLootByEconomyAndTier(EconomicClasses.middleClass, tierSelector));
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.middleClass, RandomGenerator.randomIntInRange(1, 4)));
                     break;
                 case EconomicClasses.wealthy:
-                    tierSelector = randGen.randomIntInRange(1, 5);
-                    lootCarried.add(i, randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, tierSelector));
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(1, 5)));
+                    break;
+                case EconomicClasses.elite:
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(4, 5)));
                     break;
             }
         }

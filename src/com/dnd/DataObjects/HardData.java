@@ -49,39 +49,4 @@ public class HardData {
     public List<Race> getRaceData() {
         return raceData;
     }
-
-    public List<Spell> spellList = new ArrayList<Spell>(Arrays.asList(
-        //TODO: fill out spell data
-        new Spell("Acid Splash",0,"","1 action", 60, "v,s","instant","sorc, wiz","You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage."),
-        new Spell("Chill Touch",0,"","1 action",120,"","1 round","sorc, wiz, war","You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can’t regain hit points until the start of your next turn. Until then, the hand clings to the target.\n" +
-                "\tIf you hit an undead target, it also has disadvantage on attack rolls against you until the end of your next turn."),
-        new Spell("Dancing Lights",0,"","1 action",120,"v,s,m","concentration, up to 1 min","","You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.\n" +
-                "\tAs a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell’s range"),
-        new Spell("Druidcraft",0,"","1 action",30,"v,s","instant","","Whispering to the spirits of nature, you create one of the following effects within range:\n" +
-                "\tYou create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.\n" +
-                "\tYou instantly make a flower blossom, a seed pod open, or a leaf bud bloom.\n" +
-                "\tYou create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.\n" +
-                "\tYou instantly light or snuff out a candle, a torch, or a small campfire."),
-        new Spell("Eldritch Blast",0,"","1 action",120,"v,s","instant","","A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage.\n" +
-                "\tThe spell creates more than one beam when you reach higher levels: two beams at 5th level, three beams at 11th level, and four beams at 17th level. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam."),
-        new Spell("Fire Bolt",0,"","1 action",0,"v,s","instant","","You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried."),
-        new Spell("Guidance",0,"","1 action",0,"v,s","conc, 1 min","","You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends."),
-        new Spell("Light",0,"","1 action",0,"v,m: firefly or phosphorescent moss","1 hr","","You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\n" +
-                "\tIf you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.\n"),
-        new Spell("Mage Hand",0,"","1 action",30,"v,s","1 min","","A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.\n" +
-                "\tYou can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.\n" +
-                "\tThe hand can’t attack, activate magic items, or carry more than 10 pounds."),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","",""),
-        new Spell("",0,"","",0,"","","","")
-
-    ));
 }
