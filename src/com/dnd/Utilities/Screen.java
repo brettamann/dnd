@@ -43,8 +43,12 @@ public class Screen {
         System.out.println("----------------------------------------------");
     }
 
-    public static void print(String textToPrint) {
+    public static void println(String textToPrint) {
         System.out.println(textToPrint);
+    }
+
+    public static void print(String textToPrint){
+        System.out.print(textToPrint);
     }
 
     public void blackText(String textToPrint) {
@@ -56,27 +60,27 @@ public class Screen {
         System.out.println(Colors.ANSI_RED + textToPrint + Colors.ANSI_RESET);
     }
 
-    public void purpleText(String textToPrint) {
+    public static void purpleText(String textToPrint) {
         System.out.println(Colors.ANSI_PURPLE + textToPrint + Colors.ANSI_RESET);
     }
 
-    public void greenText(String textToPrint) {
+    public static void greenText(String textToPrint) {
         System.out.println(Colors.ANSI_GREEN + textToPrint + Colors.ANSI_RESET);
     }
 
-    public void yellowText(String textToPrint) {
+    public static void yellowText(String textToPrint) {
         System.out.println(Colors.ANSI_YELLOW + textToPrint + Colors.ANSI_RESET);
     }
 
-    public void cyanText(String textToPrint) {
+    public static void cyanText(String textToPrint) {
         System.out.println(Colors.ANSI_CYAN + textToPrint + Colors.ANSI_RESET);
     }
 
-    public void whiteText(String textToPrint) {
+    public static void whiteText(String textToPrint) {
         System.out.println(Colors.ANSI_WHITE + textToPrint + Colors.ANSI_RESET);
     }
 
-    public void blueText(String textToPrint) {
+    public static void blueText(String textToPrint) {
         System.out.println(Colors.ANSI_BLUE + textToPrint + Colors.ANSI_RESET);
     }
 

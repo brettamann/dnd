@@ -36,6 +36,7 @@ public class Person {
     private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
     private List<Spell> spellsKnown = new ArrayList<>();
 
+
     private boolean hasFamily;
     private int familyMemberCount;
     private String mood;
@@ -45,9 +46,11 @@ public class Person {
     private int hpCurrent;
     private int ac;
     //Equipped gear
-    private List<Weapon> wornWeapons = new ArrayList<>();
+    private Weapon mainhandWeapon;
+    private Weapon offhandWeapon;
     private List<Armor> wornArmor = new ArrayList<>(2); //index 0 is the main armor, index 1 is shield, if applicable
     private boolean hasShield = false;
+
 
     //non-equipped items that are being carried
     private Pack packCarried = new Pack();
@@ -117,7 +120,8 @@ public class Person {
         this.hpMax = other.hpMax;
         this.hpCurrent = other.hpCurrent;
         this.ac = other.ac;
-        this.wornWeapons = other.wornWeapons;
+        this.mainhandWeapon = other.mainhandWeapon;
+        this.offhandWeapon = other.offhandWeapon;
         this.wornArmor = other.wornArmor;
         this.hasShield = other.hasShield;
         this.packCarried = other.packCarried;
@@ -196,12 +200,12 @@ public class Person {
                 screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), wornArmor.get(i).name + " ability " + j + ": " + wornArmor.get(i).abilities.get(j));
             }
         }
-        if (wornWeapons.get(0).getIsTwoHanded()) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Both Hands: " + wornWeapons.get(0).getWeaponStatsStringForDisplay());
-        } else {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Main Hand: " + wornWeapons.get(0).getWeaponStatsStringForDisplay());
-            if (wornWeapons.size() > 1) {
-                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: " + wornWeapons.get(1).getWeaponStatsStringForDisplay());
+        if (mainhandWeapon != null && mainhandWeapon.getIsTwoHanded()) {
+            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Both Hands: " + mainhandWeapon.getWeaponStatsStringForDisplay());
+        } else if(mainhandWeapon != null){
+            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Main Hand: " + mainhandWeapon.getWeaponStatsStringForDisplay());
+            if (offhandWeapon != null) {
+                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: " + offhandWeapon.getWeaponStatsStringForDisplay());
             } else if (hasShield) {
                 screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: (Shield)");
             }
@@ -218,10 +222,10 @@ public class Person {
         //economic traits
         getEconomicClassFromLocation(currentLocation, hardData.locationList);
         getLevelFromClass();
-        getInventoryFromClass(currentLocation);
 
         getRaceFromLocation();
         raceData = getRaceDataFromRace(hardData);
+        getInventoryFromClass(currentLocation);
         getRacialTraitsFromRace();
         getNameFromRace(raceData.raceName);
         getAlignmentFromRace(hardData);
@@ -494,6 +498,7 @@ public class Person {
                     firstName = randGen.getRandomFromStringList(genasiNames);
                 } else {
                     getNameFromRace(randGen.getRandomRace());
+                    return;
                 }
                 break;
             case Races.gith:
@@ -546,14 +551,14 @@ public class Person {
                 } else {
                     getNameFromRace(Races.elf);
                 }
-                break;
+                return;
             case Races.halfOrc:
                 if (randGen.randomIntInRange(1, 100) <= 50) {
                     getNameFromRace(Races.human);
                 } else {
                     getNameFromRace(Races.orc);
                 }
-                break;
+                return;
             case Races.halfling:
                 if (gender.equals(Genders.male)) {
                     possibleNames = new ArrayList<>(Arrays.asList("Zowan", "Quinlos", "Ribul", "Kaswan", "Teemin", "Daeagol", "Gruffo", "Jolly", "Largo", "Williabald", "Willimar", "Carl", "Tobold", "Togo", "Tolman", "Tammit", "Sordo", "Briffo", "Bruno", "Isengrin", "Otho", "Olo", "Ted", "Theodoric", "Tobias", "Andwise", "Ansegar", "Doderic", "Dinodas", "Cottar", "Cotman", "Cosimo", "Porro", "Renigard", "Robin", "Robur", "Roderic", "Erling", "Bladud", "Blanco", "Bucca", "Bob", "Ferumbras", "Garlos", "Belwan", "Ridal", "Merry", "Pippin", "Samwise", "Alton", "Ander", "Cade", "Corrin", "Eldon", "Errich", "Finnan", "Garret", "Lindal", "Lyle", "Merric", "Milo", "Osborn", "Perrin", "Reed", "Roscoe", "Wellby"));
@@ -658,10 +663,13 @@ public class Person {
                 firstName = randGen.getRandomFromStringList(possibleNames);
                 break;
         }
-        if (lastName.isEmpty() || lastName.equals("")) {
+        if (lastName.isEmpty() && !firstName.isEmpty()) {
             name = firstName;
-        } else {
+        } else if (!firstName.isEmpty()) {
             name = firstName + " " + lastName;
+        }
+        else if(name != null && name.isEmpty()) {
+            name = race + " Orphan";
         }
     }
 
@@ -671,7 +679,7 @@ public class Person {
                 return hardData.raceData.get(i);
             }
         }
-        return null;
+        return hardData.raceData.get(0);
     }
 
     private void getAlignmentFromRace(HardData hardData) {
@@ -975,7 +983,7 @@ public class Person {
             getArmor();
         } else {
             //Tortles can't wear typical armor. Once the CONMOD is figured out the AC will be 13 + conMod
-            wornArmor.set(0, StandardArmor.natural);
+            wornArmor.add(0, new Armor(StandardArmor.natural));
             wornArmor.get(0).ac = 13;
             wornArmor.get(0).name = "Natural (Shell)";
         }
@@ -1081,57 +1089,82 @@ public class Person {
 
     private void getWeapons() {
         //TODO: make it so a versatile weapon is wielded as 2-handed (takes alt damage) when not using a shield
-        wornWeapons = new ArrayList<Weapon>(Arrays.asList());
-        wornWeapons.add(0,StandardWeapons.unarmed);
-        wornWeapons.add(1, StandardWeapons.unarmed);
+        mainhandWeapon = StandardWeapons.unarmed;
+
         if (hasShield) {
             getSingleWeapon(0, false);
         } else {
             getSingleWeapon(0, true);
         }
 
-        if (!wornWeapons.get(0).type.equals(WeaponTypes.twoHanded) && randGen.randomIntInRange(0,100) < 25) {
+        if (mainhandWeapon != null && !mainhandWeapon.type.contains(WeaponTypes.twoHanded) && randGen.randomIntInRange(0,100) < 25) {
             //25% chance that somebody will duel-wield if using a 1-hander
             getSingleWeapon(1, false);
         }
 
-        for (int i = 0; i < wornWeapons.size() - 1; i++) {
-            if (wornWeapons.get(i).equals(WeaponTypes.finesse) || wornWeapons.get(i).equals(WeaponTypes.loading) || wornWeapons.get(i).equals(WeaponTypes.ranged) || wornWeapons.get(i).equals(WeaponTypes.thrown)) {
-                wornWeapons.get(i).toHitFromStats = dexMod;
-            } else {
-                wornWeapons.get(i).toHitFromStats = strMod;
+            if (mainhandWeapon != null && (mainhandWeapon.type.contains(WeaponTypes.finesse) || mainhandWeapon.type.contains(WeaponTypes.loading) || mainhandWeapon.type.contains(WeaponTypes.ranged) || mainhandWeapon.type.contains(WeaponTypes.thrown))) {
+                mainhandWeapon.toHitFromStats = dexMod;
+            } else if (mainhandWeapon != null) {
+                mainhandWeapon.toHitFromStats = strMod;
             }
+
+            if (offhandWeapon != null && (offhandWeapon.type.contains(WeaponTypes.finesse) || offhandWeapon.type.contains(WeaponTypes.loading) || offhandWeapon.type.contains(WeaponTypes.ranged) || offhandWeapon.type.contains(WeaponTypes.thrown))) {
+            offhandWeapon.toHitFromStats = dexMod;
+            } else if (offhandWeapon != null) {
+            offhandWeapon.toHitFromStats = strMod;
+            }
+
             int isProficientPicker = randGen.randomIntInRange(0, 100);
+            int isOffhandProficientPicker = randGen.randomIntInRange(0, 100);
             switch (economicClass) {
                 case EconomicClasses.beggar:
-                    if (isProficientPicker <= 15) {
-                        wornWeapons.get(i).userIsProficient = true;
-                    }
+                    if(mainhandWeapon != null)
+                        mainhandWeapon.userIsProficient = isProficientPicker <= 15;
+                    if(offhandWeapon != null)
+                        offhandWeapon.userIsProficient = isOffhandProficientPicker <= 15;
                     break;
                 case EconomicClasses.poor:
-                    if (isProficientPicker <= 20) {
-                        wornWeapons.get(i).userIsProficient = true;
-                    }
+                    if(mainhandWeapon != null)
+                        mainhandWeapon.userIsProficient = isProficientPicker <= 20;
+                    if(offhandWeapon != null)
+                        offhandWeapon.userIsProficient = isOffhandProficientPicker <= 20;
                     break;
                 case EconomicClasses.middleClass:
-                    if (isProficientPicker <= 40) {
-                        wornWeapons.get(i).userIsProficient = true;
-                    }
+                    if(mainhandWeapon != null)
+                        mainhandWeapon.userIsProficient = isProficientPicker <= 40;
+
+                    if(offhandWeapon != null)
+                        offhandWeapon.userIsProficient = isOffhandProficientPicker <= 40;
                     break;
                 case EconomicClasses.wealthy:
-                    if (isProficientPicker <= 75) {
-                        wornWeapons.get(i).userIsProficient = true;
-                    }
+                    if(mainhandWeapon != null)
+                        mainhandWeapon.userIsProficient = isProficientPicker <= 75;
+                    if(offhandWeapon != null)
+                        offhandWeapon.userIsProficient = isOffhandProficientPicker <= 75;
                     break;
                 case EconomicClasses.elite:
-                    wornWeapons.get(i).userIsProficient = true;
-                    break;
+                    if(mainhandWeapon != null)
+                        mainhandWeapon.userIsProficient = true;
+                    if(offhandWeapon != null)
+                        offhandWeapon.userIsProficient = true;
             }
-            if ( wornWeapons.get(i).userIsProficient = true) {
-                wornWeapons.get(i).combinedToHitBonus = (level / 5); //*IF* they are proficient, they gain +1 for every 2 levels so a level 10 with proficiency can actually be a threat with + stats to hit and +5 proficiency.
+            if(mainhandWeapon != null)
+                mainhandWeapon.combinedToHitBonus = 0;
+            if(offhandWeapon != null)
+                offhandWeapon.combinedToHitBonus = 0;
+
+            if (mainhandWeapon != null && mainhandWeapon.userIsProficient) {
+                mainhandWeapon.combinedToHitBonus = (level / 5); //*IF* they are proficient, they gain +1 for every 2 levels so a level 10 with proficiency can actually be a threat with + stats to hit and +5 proficiency.
             }
-            wornWeapons.get(i).combinedToHitBonus = wornWeapons.get(i).combinedToHitBonus + wornWeapons.get(i).toHitFromStats + wornWeapons.get(i).toHitBonus;
-        }
+            if(offhandWeapon != null && offhandWeapon.userIsProficient) {
+                offhandWeapon.combinedToHitBonus = (level / 5); //*IF* they are proficient, they gain +1 for every 2 levels so a level 10 with proficiency can actually be a threat with + stats to hit and +5 proficiency.
+            }
+
+            if(mainhandWeapon != null)
+                mainhandWeapon.combinedToHitBonus += mainhandWeapon.toHitFromStats + mainhandWeapon.toHitBonus;
+
+            if(offhandWeapon != null)
+                offhandWeapon.combinedToHitBonus +=  offhandWeapon.toHitFromStats + offhandWeapon.toHitBonus;
     }
 
     private void getSingleWeapon(int hand, boolean canBeTwoHanded) { //0 is 1 first hand, 1 is second hand
@@ -1139,51 +1172,104 @@ public class Person {
         switch (economicClass) {
             case EconomicClasses.beggar:
                 if (weaponTierSelected <= 75) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass,1));//75%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//75%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//75%
                 } else if (weaponTierSelected <= 95) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//20%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass, 2);//20%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass, 2); //20%
                 } else {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//5%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass, 3);//5%
+                    else if(hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass, 3);//5%
+
                 }
                 break;
             case EconomicClasses.poor:
                 if (weaponTierSelected <= 60) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//65%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//65%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//65%
                 } else if (weaponTierSelected <= 90) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//30%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,2);//30%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,2);//30%
                 } else {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//5%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,3);//5%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,3);//5%
                 }
                 break;
             case EconomicClasses.middleClass:
                 if (weaponTierSelected <= 50) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//50%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//50%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//50%
                 } else if (weaponTierSelected <= 75) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//25%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,2);//25%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,2);//25%
                 } else if (weaponTierSelected <= 90) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//15%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,3);//15%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,3);//15%
                 } else {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 4));//5%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,4);//5%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,4);//5%
                 }
                 break;
             case EconomicClasses.wealthy:
                 if (weaponTierSelected <= 20) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 1));//35%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//20%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,1);//20%
                 } else if (weaponTierSelected <= 45) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 2));//25%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,2);//25%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,2);//25%
                 } else if (weaponTierSelected <= 65) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 3));//20%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,3);//20%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,3);//20%
                 } else if (weaponTierSelected <= 75) {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 4));//15%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,4);//10%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,4);//10%
                 } else {
-                    wornWeapons.add(hand, randGen.getWeaponByEconomyAndTier(economicClass, 5));//5%
+                    if(hand == 0)
+                        mainhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,5);//25%
+                    else if (hand == 1)
+                        offhandWeapon = randGen.getWeaponByEconomyAndTier(economicClass,5);//25%
                 }
                 break;
             case EconomicClasses.elite:
-                randGen.getRandomCustomWeaponByTier(4);
+                if(hand == 0)
+                    mainhandWeapon = randGen.getRandomCustomWeaponByTier(4);
+                else if (hand == 1)
+                    offhandWeapon = randGen.getRandomCustomWeaponByTier(4);
                 break;
         }
-        if (wornWeapons.get(hand).type.equals(WeaponTypes.twoHanded) && !canBeTwoHanded) {
+        if (hand == 0 && mainhandWeapon != null && mainhandWeapon.type.contains(WeaponTypes.twoHanded) && !canBeTwoHanded) {
+            //if it has to be 1-handed and we rolled a 2-hander, roll again
+            getSingleWeapon(hand,false);
+        }
+        else if (hand == 1 && offhandWeapon != null && offhandWeapon.type.contains(WeaponTypes.twoHanded) && !canBeTwoHanded) {
             //if it has to be 1-handed and we rolled a 2-hander, roll again
             getSingleWeapon(hand,false);
         }
@@ -1675,8 +1761,8 @@ public class Person {
     private void calculateXPValue() {
         xpValue = ((hpMax / 9) * hpMax)
                 + (level * 5) //5 pts per level. As most other xp related traits are boosted by this it will get minimal attention, but guarantees a little bit.
-                + (wornWeapons.get(0).combinedToHitBonus * 5)
-                + ((wornWeapons.get(0).getTotalUntypedDamageMin() + 1) * wornWeapons.get(0).getTotalUntypedDamageMax())
+                + (mainhandWeapon.combinedToHitBonus * 5)
+                + (mainhandWeapon.getTotalUntypedDamageMin() + 1) * mainhandWeapon.getTotalUntypedDamageMax()
                 + ((ac - 10) * 20) //20 pts for each ac above 10
                 + (strMod * 10) //10 pts for each 2 main stats (can detract from xp value if less than 10 main stat)
                 + (dexMod * 10)
@@ -1686,8 +1772,8 @@ public class Person {
                 + (chrMod * 10)
                 + dcToPickpocket; //as it's not a combat trait it won't add much, but it'll still add
         //account for dual-wielding
-        if (!wornWeapons.get(1).name.equals(StandardWeapons.unarmed.name) && !hasShield) {
-            xpValue = xpValue + ((wornWeapons.get(1).getTotalUntypedDamageMin() + 1) * wornWeapons.get(1).getTotalUntypedDamageMax()) + (wornWeapons.get(1).combinedToHitBonus * 5);
+        if (offhandWeapon != null && !offhandWeapon.name.equals(StandardWeapons.unarmed.name) && !hasShield) {
+            xpValue = xpValue + (offhandWeapon.getTotalUntypedDamageMin() + 1) * offhandWeapon.getTotalUntypedDamageMax() + (offhandWeapon.combinedToHitBonus * 5);
         }
         if (hasBodyguard) {
             xpValue = xpValue + (100 * bodyguardList.size());
@@ -1920,15 +2006,6 @@ public class Person {
 
     public Person setAc(int ac) {
         this.ac = ac;
-        return this;
-    }
-
-    public List<Weapon> getWornWeapons() {
-        return wornWeapons;
-    }
-
-    public Person setWornWeapons(List<Weapon> wornWeapons) {
-        this.wornWeapons = wornWeapons;
         return this;
     }
 
@@ -2245,6 +2322,36 @@ public class Person {
     public Person setTolerance(int tolerance) {
         this.tolerance = tolerance;
         return this;
+    }
+
+    public boolean isHasFamily() {
+        return hasFamily;
+    }
+
+    public Weapon getMainhandWeapon() {
+        return mainhandWeapon;
+    }
+
+    public Person setMainhandWeapon(Weapon mainhandWeapon) {
+        this.mainhandWeapon = mainhandWeapon;
+        return this;
+    }
+
+    public Weapon getOffhandWeapon() {
+        return offhandWeapon;
+    }
+
+    public Person setOffhandWeapon(Weapon offhandWeapon) {
+        this.offhandWeapon = offhandWeapon;
+        return this;
+    }
+
+    public boolean isHasCallGlyph() {
+        return hasCallGlyph;
+    }
+
+    public boolean isHasBodyguard() {
+        return hasBodyguard;
     }
 }
 

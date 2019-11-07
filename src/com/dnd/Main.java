@@ -21,7 +21,7 @@ public class Main {
         List<Person> opponents = new ArrayList<>();
 
         CampaignObject gameObject = FileUtility.load();
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 25; i++){
             opponents.add(new Person().create(hardData.getLocationList().get(6), hardData));
         }
         AutocombatHandler.epicCombat(gameObject.getPartyInfo(), gameObject.getPartyMembers(), opponents, hardData.getLocationList().get(6));
