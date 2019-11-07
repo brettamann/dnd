@@ -11,7 +11,7 @@ public class Loot {
     public String name;
     public String description;
     public String itemType;
-    public List<String> abilities;
+    public List<String> abilities = new ArrayList<>();
 
     public int quantity; //set the value of the item to be what ONE is worth.
     public String rarity;
@@ -19,6 +19,19 @@ public class Loot {
     public int goldValuePer;
     public int silverValuePer;
     public int copperValuePer;
+
+    public Loot(Loot other) {
+        this.name = other.name;
+        this.description = other.description;
+        this.itemType = other.itemType;
+        this.abilities = new ArrayList<>(other.abilities);
+        this.quantity = other.quantity;
+        this.rarity = other.rarity;
+        this.platinumValuePer = other.platinumValuePer;
+        this.goldValuePer = other.goldValuePer;
+        this.silverValuePer = other.silverValuePer;
+        this.copperValuePer = other.copperValuePer;
+    }
 
     public Loot(String name, String description, String itemType, List<String> abilities, int quantity, String rarity, int platinumValuePer, int goldValuePer, int silverValuePer, int copperValuePer) {
         this.name = name;

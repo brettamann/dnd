@@ -128,13 +128,13 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getBeggarArmorTier1();
+                        return new Armor(getBeggarArmorTier1());
                     case 2:
-                        return getBeggarArmorTier2();
+                        return new Armor(getBeggarArmorTier2());
                     case 3:
-                        return getBeggarArmorTier3();
+                        return new Armor(getBeggarArmorTier3());
                     default:
-                        return null;
+                        return new Armor(getBeggarArmorTier1());
                 }
             case EconomicClasses.poor:
                 if (tier > 3 || tier <= 0) {
@@ -142,13 +142,13 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getPoorArmorTier1();
+                        return new Armor(getPoorArmorTier1());
                     case 2:
-                        return getPoorArmorTier2();
+                        return new Armor(getPoorArmorTier2());
                     case 3:
-                        return getPoorArmorTier3();
+                        return new Armor(getPoorArmorTier3());
                     default:
-                        return null;
+                        return new Armor(getPoorArmorTier1());
                 }
             case EconomicClasses.middleClass:
                 if (tier > 4 || tier <= 0) {
@@ -156,15 +156,15 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getMiddleClassArmorTier1();
+                        return new Armor(getMiddleClassArmorTier1());
                     case 2:
-                        return getMiddleClassArmorTier2();
+                        return new Armor(getMiddleClassArmorTier2());
                     case 3:
-                        return getMiddleClassArmorTier3();
+                        return new Armor(getMiddleClassArmorTier3());
                     case 4:
-                        return getMiddleClassArmorTier4();
+                        return new Armor(getMiddleClassArmorTier4());
                     default:
-                        return null;
+                        return new Armor(getMiddleClassArmorTier1());
                 }
             case EconomicClasses.wealthy:
                 if (tier > 5 || tier <= 0) {
@@ -172,20 +172,20 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getWealthyArmorTier1();
+                        return new Armor(getWealthyArmorTier1());
                     case 2:
-                        return getWealthyArmorTier2();
+                        return new Armor(getWealthyArmorTier2());
                     case 3:
-                        return getWealthyArmorTier3();
+                        return new Armor(getWealthyArmorTier3());
                     case 4:
-                        return getWealthyArmorTier4();
+                        return new Armor(getWealthyArmorTier4());
                     case 5:
-                        return getWealthyArmorTier5();
+                        return new Armor(getWealthyArmorTier5());
                     default:
-                        return null;
+                        return new Armor(getWealthyArmorTier1());
                 }
             default:
-                return null;
+                return new Armor(getBeggarArmorTier1());
         }
     }
 
@@ -203,70 +203,70 @@ public class RandomGenerator {
                 StandardArmor.ringMail,
                 StandardArmor.splint
         ));
-        return standardArmorList.get(randomIntInRange(0, standardArmorList.size() -1));
+        return new Armor(standardArmorList.get(randomIntInRange(0, standardArmorList.size() -1)));
     }
 
     private Armor getBeggarArmorTier1() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-            .add(100, StandardArmor.natural);
+            .add(100, new Armor(StandardArmor.natural));
         return rc.next();
     }
 
     private Armor getBeggarArmorTier2() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-            .add(50, StandardArmor.padded)
-            .add(30, StandardArmor.leather)
-            .add(20, StandardArmor.hide);
+            .add(50, new Armor(StandardArmor.padded))
+            .add(30, new Armor(StandardArmor.leather))
+            .add(20, new Armor(StandardArmor.hide));
         return rc.next();
     }
 
     private Armor getBeggarArmorTier3() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-            .add(50, StandardArmor.studdedLeather)
-            .add(50, StandardArmor.scaleMail);
+            .add(50, new Armor(StandardArmor.studdedLeather))
+            .add(50, new Armor(StandardArmor.scaleMail));
         return rc.next();
     }
 
     //TODO: add in weapon and armor data to these classes
     private Armor getPoorArmorTier1() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(100, StandardArmor.natural);
+                .add(100, new Armor(StandardArmor.natural));
         return rc.next();
     }
 
     private Armor getPoorArmorTier2() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(50, StandardArmor.padded)
-                .add(30, StandardArmor.leather)
-                .add(20, StandardArmor.hide);
+                .add(50, new Armor(StandardArmor.padded))
+                .add(30, new Armor(StandardArmor.leather))
+                .add(20, new Armor(StandardArmor.hide));
         return rc.next();
     }
 
     private Armor getPoorArmorTier3() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(50, StandardArmor.studdedLeather)
-                .add(50, StandardArmor.scaleMail);
+                .add(50, new Armor(StandardArmor.studdedLeather))
+                .add(50, new Armor(StandardArmor.scaleMail));
         return rc.next();
     }
 
     private Armor getMiddleClassArmorTier1() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(100, StandardArmor.natural);
+                .add(100, new Armor(StandardArmor.natural));
         return rc.next();
     }
 
     private Armor getMiddleClassArmorTier2() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(50, StandardArmor.padded)
-                .add(30, StandardArmor.leather)
-                .add(20, StandardArmor.hide);
+                .add(50, new Armor(StandardArmor.padded))
+                .add(30, new Armor(StandardArmor.leather))
+                .add(20, new Armor(StandardArmor.hide));
         return rc.next();
     }
 
     private Armor getMiddleClassArmorTier3() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(50, StandardArmor.studdedLeather)
-                .add(50, StandardArmor.scaleMail);
+                .add(50, new Armor(StandardArmor.studdedLeather))
+                .add(50, new Armor(StandardArmor.scaleMail));
         return rc.next();
     }
 
@@ -274,28 +274,28 @@ public class RandomGenerator {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
                 //.add(50, StandardArmor.studdedLeather)
                 //.add(50, StandardArmor.scaleMail)
-                .add(10,getRandomCustomArmorByTier(randomIntInRange(1,2), randomIntInRange(0,2)));
+                .add(10,new Armor(getRandomCustomArmorByTier(randomIntInRange(1,2), randomIntInRange(0,2))));
         return rc.next();
     }
 
     private Armor getWealthyArmorTier1() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
-                .add(25, StandardArmor.natural)
-                .add(70, getRandomStandardArmor())
-                .add(5, getRandomCustomArmorByTier(1,0));
+                .add(25, new Armor(StandardArmor.natural))
+                .add(70, new Armor(getRandomStandardArmor()))
+                .add(5, new Armor(getRandomCustomArmorByTier(1,0)));
         return rc.next();
     }
 
     private Armor getWealthyArmorTier2() {
-        return getRandomCustomArmorByTier(randomIntInRange(1,2),1);
+        return new Armor(getRandomCustomArmorByTier(randomIntInRange(1,2),1));
     }
 
     private Armor getWealthyArmorTier3() {
-        return getRandomCustomArmorByTier(randomIntInRange(2,3),1);
+        return new Armor(getRandomCustomArmorByTier(randomIntInRange(2,3),1));
     }
 
     private Armor getWealthyArmorTier4() {
-        Armor armorToReturn = getRandomCustomArmorByTier(randomIntInRange(3,4),2);;
+        Armor armorToReturn = new Armor(getRandomCustomArmorByTier(randomIntInRange(3,4),2));
         armorToReturn.setPlusEnchantmentByLevel(2);
         armorToReturn.addRandomAbilityByTier(3);
         if (randomIntInRange(1, 100) <= 50) {
@@ -308,7 +308,7 @@ public class RandomGenerator {
     }
 
     private Armor getWealthyArmorTier5() {
-        return getRandomCustomArmorByTier(5, 3);
+        return new Armor(getRandomCustomArmorByTier(5, 3));
     }
 
     public String getRandomArmorAbilityByTier(int tier) {
@@ -324,11 +324,11 @@ public class RandomGenerator {
             case 5:
                 return getRandomArmorAbilityTier5();
         }
-        return null;
+        return getRandomArmorAbilityTier1();
     }
 
     public Armor getRandomCustomArmorByTier(int tier, int enchantmentLevel) {
-        Armor armorToReturn = getRandomStandardArmor();
+        Armor armorToReturn = new Armor(getRandomStandardArmor());
         armorToReturn.setPlusEnchantmentByLevel(enchantmentLevel);
         armorToReturn.abilities.add(getRandomArmorAbilityByTier(tier));
         if (tier >= 3) { //tier 3 gets 2 enchantments, 4 gets 3, 5 gets 4
@@ -597,13 +597,13 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getBeggarWeaponTier1();
+                        return new Weapon(getBeggarWeaponTier1());
                     case 2:
-                        return getBeggarWeaponTier2();
+                        return new Weapon(getBeggarWeaponTier2());
                     case 3:
-                        return getBeggarWeaponTier3();
+                        return new Weapon(getBeggarWeaponTier3());
                     default:
-                        return null;
+                        return new Weapon(getBeggarWeaponTier1());
                 }
             case EconomicClasses.poor:
                 if (tier > 3 || tier <= 0) {
@@ -611,13 +611,13 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getPoorWeaponTier1();
+                        return new Weapon(getPoorWeaponTier1());
                     case 2:
-                        return getPoorWeaponTier2();
+                        return new Weapon(getPoorWeaponTier2());
                     case 3:
-                        return getPoorWeaponTier3();
+                        return new Weapon(getPoorWeaponTier3());
                     default:
-                        return null;
+                        return new Weapon(getPoorWeaponTier1());
                 }
             case EconomicClasses.middleClass:
                 if (tier > 4 || tier <= 0) {
@@ -625,15 +625,15 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getMiddleClassWeaponTier1();
+                        return new Weapon(getMiddleClassWeaponTier1());
                     case 2:
-                        return getMiddleClassWeaponTier2();
+                        return new Weapon(getMiddleClassWeaponTier2());
                     case 3:
-                        return getMiddleClassWeaponTier3();
+                        return new Weapon(getMiddleClassWeaponTier3());
                     case 4:
-                        return getMiddleClassWeaponTier4();
+                        return new Weapon(getMiddleClassWeaponTier4());
                     default:
-                        return null;
+                        return new Weapon(getMiddleClassWeaponTier1());
                 }
             case EconomicClasses.wealthy:
                 if (tier > 5 || tier <= 0) {
@@ -641,89 +641,90 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getWealthyWeaponTier1();
+                        return new Weapon(getWealthyWeaponTier1());
                     case 2:
-                        return getWealthyWeaponTier2();
+                        return new Weapon(getWealthyWeaponTier2());
                     case 3:
-                        return getWealthyWeaponTier3();
+                        return new Weapon(getWealthyWeaponTier3());
                     case 4:
-                        return getWealthyWeaponTier4();
+                        return new Weapon(getWealthyWeaponTier4());
                     case 5:
-                        return getWealthyWeaponTier5();
+                        return new Weapon(getWealthyWeaponTier5());
                     default:
-                        return null;
+                        return new Weapon(getWealthyWeaponTier1());
+
                 }
             default:
-                return null;
+                return new Weapon(getBeggarWeaponTier1());
         }
     }
 
     private Weapon getBeggarWeaponTier1() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getBeggarWeaponTier2() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getBeggarWeaponTier3() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getPoorWeaponTier1() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getPoorWeaponTier2() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getPoorWeaponTier3() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getMiddleClassWeaponTier1() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getMiddleClassWeaponTier2() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getMiddleClassWeaponTier3() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getMiddleClassWeaponTier4() {
         RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, StandardWeapons.club);
+                .add(100, new Weapon(StandardWeapons.club));
         return rc.next();
     }
 
     private Weapon getWealthyWeaponTier1() {
-        return getRandomStandardWeapon();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getWealthyWeaponTier2() {
-        Weapon selectedWeapon = getRandomStandardWeapon();
+        Weapon selectedWeapon = new Weapon(getRandomStandardWeapon());
         selectedWeapon.rarity = Rarities.rare;
         selectedWeapon.valueGold += Rarities.rareCostModlow;
         selectedWeapon.setPlusLevelEnchantment(1);
@@ -731,7 +732,7 @@ public class RandomGenerator {
     }
 
     private Weapon getWealthyWeaponTier3() {
-        Weapon selectedWeapon = getRandomStandardWeapon();
+        Weapon selectedWeapon = new Weapon(getRandomStandardWeapon());
         selectedWeapon.rarity = Rarities.veryRare;
         selectedWeapon.valueGold += Rarities.veryRareCostModlow;
         selectedWeapon.setPlusLevelEnchantment(2);
@@ -740,9 +741,9 @@ public class RandomGenerator {
 
     private Weapon getWealthyWeaponTier4() {
         if (randomIntInRange(1, 100) < 20) {
-            return getRandomCustomWeaponByTier(randomIntInRange(1, 2));
+            return new Weapon(getRandomCustomWeaponByTier(randomIntInRange(1, 2)));
         } else {
-            Weapon selectedWeapon = getRandomStandardWeapon();
+            Weapon selectedWeapon = new Weapon(getRandomStandardWeapon());
             selectedWeapon.rarity = Rarities.legendary;
             selectedWeapon.valueGold += Rarities.legendaryCostModlow;
             selectedWeapon.setPlusLevelEnchantment(3);
@@ -752,9 +753,9 @@ public class RandomGenerator {
 
     private Weapon getWealthyWeaponTier5() {
         if (randomIntInRange(1,100) < 20) {
-            return getRandomCustomWeaponByTier(randomIntInRange(3, 4));
+            return new Weapon(getRandomCustomWeaponByTier(randomIntInRange(3, 4)));
         } else {
-            Weapon selectedWeapon = getRandomStandardWeapon();
+            Weapon selectedWeapon = new Weapon(getRandomStandardWeapon());
             selectedWeapon.rarity = Rarities.legendary;
             selectedWeapon.valueGold += randomIntInRange(Rarities.legendaryCostModlow + 5000, Rarities.legendaryCostModlow + 20000);
             selectedWeapon.setPlusLevelEnchantment(4);
@@ -773,13 +774,13 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getBeggarLootTier1();
+                        return new Loot(getBeggarLootTier1());
                     case 2:
-                        return getBeggarLootTier2();
+                        return new Loot(getBeggarLootTier2());
                     case 3:
-                        return getBeggarLootTier3();
+                        return new Loot(getBeggarLootTier3());
                     default:
-                        return null;
+                        return new Loot(getBeggarLootTier1());
                 }
             case EconomicClasses.poor:
                 if (tier > 3 || tier <= 0) {
@@ -787,13 +788,13 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getPoorLootTier1();
+                        return new Loot(getPoorLootTier1());
                     case 2:
-                        return getPoorLootTier2();
+                        return new Loot(getPoorLootTier2());
                     case 3:
-                        return getPoorLootTier3();
+                        return new Loot(getPoorLootTier3());
                     default:
-                        return null;
+                        return new Loot(getPoorLootTier1());
                 }
             case EconomicClasses.middleClass:
                 if (tier > 4 || tier <= 0) {
@@ -801,15 +802,15 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getMiddleClassLootTier1();
+                        return new Loot(getMiddleClassLootTier1());
                     case 2:
-                        return getMiddleClassLootTier2();
+                        return new Loot(getMiddleClassLootTier2());
                     case 3:
-                        return getMiddleClassLootTier3();
+                        return new Loot(getMiddleClassLootTier3());
                     case 4:
-                        return getMiddleClassLootTier4();
+                        return new Loot(getMiddleClassLootTier4());
                     default:
-                        return null;
+                        return new Loot(getMiddleClassLootTier1());
                 }
             case EconomicClasses.wealthy:
                 if (tier > 5 || tier <= 0) {
@@ -817,110 +818,110 @@ public class RandomGenerator {
                 }
                 switch (tier) {
                     case 1:
-                        return getWealthyLootTier1();
+                        return new Loot(getWealthyLootTier1());
                     case 2:
-                        return getWealthyLootTier2();
+                        return new Loot(getWealthyLootTier2());
                     case 3:
-                        return getWealthyLootTier3();
+                        return new Loot(getWealthyLootTier3());
                     case 4:
-                        return getWealthyLootTier4();
+                        return new Loot(getWealthyLootTier4());
                     case 5:
-                        return getWealthyLootTier5();
+                        return new Loot(getWealthyLootTier5());
                     default:
-                        return null;
+                        return new Loot(getWealthyLootTier1());
                 }
             default:
-                return null;
+                return new Loot(getBeggarLootTier1());
         }
     }
 
     private Loot getBeggarLootTier1() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getBeggarLootTier2() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getBeggarLootTier3() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getPoorLootTier1() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getPoorLootTier2() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getPoorLootTier3() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getMiddleClassLootTier1() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getMiddleClassLootTier2() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getMiddleClassLootTier3() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getMiddleClassLootTier4() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getWealthyLootTier1() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getWealthyLootTier2() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getWealthyLootTier3() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getWealthyLootTier4() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
     private Loot getWealthyLootTier5() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(100, new Loot(StandardLoot.barrel));
         return rc.next();
     }
 
@@ -928,15 +929,15 @@ public class RandomGenerator {
         //TODO: make a way to randomly generate a weapon. This would be used in the high tiers for wealthy and for most elite commoners.
         switch (tier) {
             case 1:
-                return getCustomWeaponRandomTier1();
+                return new Weapon(getCustomWeaponRandomTier1());
             case 2:
-                return getCustomWeaponRandomTier2();
+                return new Weapon(getCustomWeaponRandomTier2());
             case 3:
-                return getCustomWeaponRandomTier3();
+                return new Weapon(getCustomWeaponRandomTier3());
             case 4:
-                return  getCustomWeaponRandomTier4();
+                return  new Weapon(getCustomWeaponRandomTier4());
         }
-        return null;
+        return new Weapon(getCustomWeaponRandomTier1());
     }
 
     public Weapon getRandomStandardWeapon() {
@@ -978,12 +979,12 @@ public class RandomGenerator {
             StandardWeapons.longbow,
             StandardWeapons.net
         ));
-        return standardWeaponList.get(randomIntInRange(0, (standardWeaponList.size() - 1)));
+        return new Weapon(standardWeaponList.get(randomIntInRange(0, (standardWeaponList.size() - 1))));
     }
 
     private Weapon getCustomWeaponRandomTier1() {
         //start with a base weapon and then change some values
-        Weapon customWeapon = getRandomStandardWeapon();
+        Weapon customWeapon = new Weapon(getRandomStandardWeapon());
         customWeapon.toHitBonus = randomIntInRange(0,1);
         customWeapon.rarity = Rarities.uncommon;
         customWeapon.valueGold = customWeapon.valueGold + randomIntInRange(Rarities.uncommonCostModlow, Rarities.uncommonCostModHigh);
@@ -1060,7 +1061,7 @@ public class RandomGenerator {
 
     private Weapon getCustomWeaponRandomTier2() {
         //start with a base weapon and then change some values
-        Weapon customWeapon = getRandomStandardWeapon();
+        Weapon customWeapon = new Weapon(getRandomStandardWeapon());
         customWeapon.toHitBonus = randomIntInRange(1, 2);
         customWeapon.rarity = Rarities.rare;
         customWeapon.valueGold += randomIntInRange(Rarities.rareCostModlow, Rarities.rareCostModHigh);
@@ -1142,7 +1143,7 @@ public class RandomGenerator {
 
     private Weapon getCustomWeaponRandomTier3() {
         //start with a base weapon and then change some values
-        Weapon customWeapon = getRandomStandardWeapon();
+        Weapon customWeapon = new Weapon(getRandomStandardWeapon());
         customWeapon.toHitBonus = randomIntInRange(2, 3);
         customWeapon.rarity = Rarities.veryRare;
         customWeapon.valueGold += randomIntInRange(Rarities.veryRareCostModlow, Rarities.veryRareCostModHigh);
@@ -1227,7 +1228,7 @@ public class RandomGenerator {
 
     private Weapon getCustomWeaponRandomTier4() {
         //start with a base weapon and then change some values
-        Weapon customWeapon = getRandomStandardWeapon();
+        Weapon customWeapon = new Weapon(getRandomStandardWeapon());
         customWeapon.toHitBonus = randomIntInRange(3, 4);
         customWeapon.rarity = Rarities.legendary;
         customWeapon.valueGold += randomIntInRange(Rarities.legendaryCostModlow, Rarities.legendaryCostModhigh);
@@ -1647,7 +1648,7 @@ public class RandomGenerator {
 
     public Spell getRandomSpellsByLevel(int spellLevel, List<Spell> masterSpellList) {
         //build a list of possible spells by level
-        List<Spell> spellsOfLevel = new ArrayList<Spell>(Arrays.asList());
+        List<Spell> spellsOfLevel = new ArrayList<Spell>(Arrays.asList(masterSpellList.get(0)));
         for (Spell temp : masterSpellList) {
             if (temp.level == spellLevel) {
                 spellsOfLevel.add(temp);

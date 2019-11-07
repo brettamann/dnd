@@ -13,8 +13,8 @@ public class Weapon {
     public int range;
     public int shortRange; //for throwing/missiles
     public int longRange; //for throwing/missiles
-    public List<String> type;
-    public List<String> abilities;
+    public List<String> type = new ArrayList<>();
+    public List<String> abilities = new ArrayList<>();
     public int valuePlatinum;
     public int valueGold;
     public int valueSilver;
@@ -78,7 +78,7 @@ public class Weapon {
         this.range = range;
         this.shortRange = shortRange;
         this.longRange = longRange;
-        this.type = type;
+        this.type = new ArrayList<>(type);
         this.abilities = abilities;
         this.valuePlatinum = valuePlatinum;
         this.valueGold = valueGold;
@@ -161,6 +161,54 @@ public class Weapon {
         } else {
             return "none";
         }
+    }
+
+    public Weapon(Weapon other) {
+        this.name = other.name;
+        this.description = other.description;
+        this.range = other.range;
+        this.shortRange = other.shortRange;
+        this.longRange = other.longRange;
+        this.type = new ArrayList<>(other.type);
+        this.abilities = new ArrayList<>(other.abilities);
+        this.valuePlatinum = other.valuePlatinum;
+        this.valueGold = other.valueGold;
+        this.valueSilver = other.valueSilver;
+        this.valueCopper = other.valueCopper;
+        this.rarity = other.rarity;
+        this.toHitBonus = other.toHitBonus;
+        this.slashingDamageMin = other.slashingDamageMin;
+        this.slashingDamageMax = other.slashingDamageMax;
+        this.bludgeoningDamageMin = other.bludgeoningDamageMin;
+        this.bludgeoningDamageMax = other.bludgeoningDamageMax;
+        this.piercingDamageMin = other.piercingDamageMin;
+        this.piercingDamageMax = other.piercingDamageMax;
+        this.alternateDamageMin = other.alternateDamageMin;
+        this.alternateDamageMax = other.alternateDamageMax;
+        this.alternateDamageType = other.alternateDamageType;
+        this.acidDamageMin = other.acidDamageMin;
+        this.acidDamageMax = other.acidDamageMax;
+        this.coldDamageMin = other.coldDamageMin;
+        this.coldDamageMax = other.coldDamageMax;
+        this.fireDamageMin = other.fireDamageMin;
+        this.fireDamageMax = other.fireDamageMax;
+        this.forceDamageMin = other.forceDamageMin;
+        this.forceDamageMax = other.forceDamageMax;
+        this.lightningDamageMin = other.lightningDamageMin;
+        this.lightningDamageMax = other.lightningDamageMax;
+        this.necroticDamageMin = other.necroticDamageMin;
+        this.necroticDamageMax = other.necroticDamageMax;
+        this.poisonDamageMin = other.poisonDamageMin;
+        this.poisonDamageMax = other.poisonDamageMax;
+        this.psychicDamageMin = other.psychicDamageMin;
+        this.psychicDamageMax = other.psychicDamageMax;
+        this.radiantDamageMin = other.radiantDamageMin;
+        this.radiantDamageMax = other.radiantDamageMax;
+        this.thunderDamageMin = other.thunderDamageMin;
+        this.thunderDamageMax = other.thunderDamageMax;
+        this.toHitFromStats = other.toHitFromStats;
+        this.userIsProficient = other.userIsProficient;
+        this.combinedToHitBonus = other.combinedToHitBonus;
     }
 
     public void setPlusLevelEnchantment(int levelEnchantment) {

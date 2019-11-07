@@ -1,6 +1,7 @@
 package com.dnd.Autocombat;
 
 import com.dnd.DataObjects.*;
+import com.dnd.DataObjects.Items.StandardWeapons;
 import com.dnd.DataObjects.Items.Weapon;
 import com.dnd.Utilities.Input;
 import com.dnd.Utilities.RandomGenerator;
@@ -319,8 +320,23 @@ public class AutocombatHandler {
                             encounterObject.encounterFinished = true;
                             break;
                         }
+                        List<Person> priorityTarget = new ArrayList<>();
 
-                        Person target = encounterObject.opponentsWhoStayed.get(RandomGenerator.randomIntInRange(0, encounterObject.opponentsWhoStayed.size() - 1));
+                        Person target;
+
+                        for(Person opponent : encounterObject.opponentsWhoStayed){
+                            if(opponent.getHpCurrent() < opponent.getHpMax()){
+                                priorityTarget.add(opponent);
+                            }
+                        }
+                        if(priorityTarget.size() != 0){
+                            target = priorityTarget.get(RandomGenerator.randomIntInRange(0, priorityTarget.size() - 1));
+                        }
+                        else {
+                           target = encounterObject.opponentsWhoStayed.get(RandomGenerator.randomIntInRange(0, encounterObject.opponentsWhoStayed.size() - 1));
+                        }
+
+
                         PartyMember friendlyTarget = null;
                         int damage = 0;
                         boolean critical = false;
@@ -392,13 +408,12 @@ public class AutocombatHandler {
 
                     boolean alreadyAttacked = false;
 
-                    for (Weapon weapon : opponent.getWornWeapons()) {
-
+                    if(opponent.getMainhandWeapon() != null){
                         int toHit = 0;
                         if(alreadyAttacked)
-                            toHit = weapon.toHitBonus;
+                            toHit = opponent.getMainhandWeapon().toHitBonus;
                         else {
-                            toHit = weapon.combinedToHitBonus;
+                            toHit = opponent.getMainhandWeapon().combinedToHitBonus;
                             alreadyAttacked = true;
                         }
 
@@ -414,7 +429,7 @@ public class AutocombatHandler {
                         boolean critical = false;
 
                         if (roll == 20) {
-                            damage = RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax()) + RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax());
+                            damage = RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax()) + RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax());
 
                             Screen.print("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage!");
                             critical = true;
@@ -424,7 +439,7 @@ public class AutocombatHandler {
 
 
                             if (roll + toHit >= friendlyTarget.getAc()) {
-                                int friendlyDamage = RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax());
+                                int friendlyDamage = RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax());
                                 friendlyTarget.setHpCurrent(friendlyTarget.getHpCurrent() - friendlyDamage);
 
                                 Screen.print("Whoops!!!! " + opponent.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage!");
@@ -446,7 +461,7 @@ public class AutocombatHandler {
                             }
                         } else {
                             if (roll + toHit >= target.getAc()) {
-                                damage = RandomGenerator.randomIntInRange(weapon.getTotalUntypedDamageMin(), weapon.getTotalUntypedDamageMax());
+                                damage = RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax());
                             } else {
                                 Screen.print(opponent.getName() + " rolled a " + (roll + toHit) + " and missed " + target.getName() + "!");
                             }
@@ -473,6 +488,85 @@ public class AutocombatHandler {
 
 
                     }
+
+                    if(opponent.getOffhandWeapon() != null && !opponent.getOffhandWeapon().name.equals(StandardWeapons.unarmed.name)) {
+                        int toHit = 0;
+                        if (alreadyAttacked)
+                            toHit = opponent.getOffhandWeapon().toHitBonus;
+                        else {
+                            toHit = opponent.getOffhandWeapon().combinedToHitBonus;
+                            alreadyAttacked = true;
+                        }
+
+                        int roll = RandomGenerator.randomD20Roll();
+                        if (alivePartyMembers.size() == 0) {
+                            encounterObject.encounterFinished = true;
+                            break;
+                        }
+
+                        PartyMember target = alivePartyMembers.get(RandomGenerator.randomIntInRange(0, alivePartyMembers.size() - 1));
+                        Person friendlyTarget = null;
+                        int damage = 0;
+                        boolean critical = false;
+
+                        if (roll == 20) {
+                            damage = RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax()) + RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax());
+
+                            Screen.print("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage! Remaining Health: " + target.getCurrentHp());
+                            critical = true;
+                        } else if (roll == 1) {
+                            roll = RandomGenerator.randomD20Roll();
+                            friendlyTarget = encounterObject.opponentsWhoStayed.get(RandomGenerator.randomIntInRange(0, encounterObject.opponentsWhoStayed.size() - 1));
+
+
+                            if (roll + toHit >= friendlyTarget.getAc()) {
+                                int friendlyDamage = RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax());
+                                friendlyTarget.setHpCurrent(friendlyTarget.getHpCurrent() - friendlyDamage);
+
+                                Screen.print("Whoops!!!! " + opponent.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage! ");
+
+                                if (friendlyTarget.getHpCurrent() <= 0) {
+                                    encounterObject.opponentsWhoDied.add(friendlyTarget);
+                                    encounterObject.opponentsWhoStayed.remove(friendlyTarget);
+                                    Screen.print("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
+
+                                    if (encounterObject.opponentsWhoStayed.size() == 0) {
+                                        encounterObject.encounterFinished = true;
+                                        break;
+                                    }
+                                }
+
+                            } else {
+                                Screen.print("Whoops!!!! " + opponent.getName() + " almost hit  " + friendlyTarget.getName() + "!");
+
+                            }
+                        } else {
+                            if (roll + toHit >= target.getAc()) {
+                                damage = RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax());
+                            } else {
+                                Screen.print(opponent.getName() + " rolled a " + (roll + toHit) + " and missed " + target.getName() + "!");
+                            }
+                        }
+
+                        if (friendlyTarget == null && damage != 0) {
+                            target.setCurrentHp(target.getCurrentHp() - damage);
+
+                            if (!critical)
+                                Screen.print(opponent.getName() + " rolled " + (roll + toHit) + "  and hit " + target.getName() + " for " + damage + "! Remaining Health: " + target.getCurrentHp());
+
+                            if (target.getCurrentHp() <= 0) {
+                                encounterObject.playersWhoDied.add(target);
+                                alivePartyMembers.remove(target);
+                                Screen.print(target.getName() + " Died!");
+
+                                if (alivePartyMembers.size() == 0) {
+                                    encounterObject.encounterFinished = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                 }
 
             }

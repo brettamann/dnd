@@ -38,6 +38,22 @@ public class Armor {
         this.rarity = rarity;
     }
 
+    public Armor(Armor other) {
+        this.name = other.name;
+        this.description = other.description;
+        this.abilities = new ArrayList<>(other.abilities);
+        this.strRequirement = other.strRequirement;
+        this.ac = other.ac;
+        this.dexBonusMax = other.dexBonusMax;
+        this.material = other.material;
+        this.valuePlatinum = other.valuePlatinum;
+        this.valueGold = other.valueGold;
+        this.valueSilver = other.valueSilver;
+        this.valueCopper = other.valueCopper;
+        this.rarity = other.rarity;
+        this.hasCallGlyph = other.hasCallGlyph;
+    }
+
     public void setPlusEnchantmentByLevel(int plusEnchantmentLevel) {
         ac += plusEnchantmentLevel;
     }
