@@ -2,7 +2,7 @@ package com.dnd.Autocombat;
 
 import com.dnd.DataObjects.*;
 import com.dnd.DataObjects.Items.StandardWeapons;
-import com.dnd.DataObjects.Items.Weapon;
+import com.dnd.Utilities.Colors;
 import com.dnd.Utilities.Input;
 import com.dnd.Utilities.RandomGenerator;
 import com.dnd.Utilities.Screen;
@@ -163,13 +163,13 @@ public class AutocombatHandler {
                     experience += opponent.getXpValue()/4;
                 }
 
-                Screen.print("\nRan away successfully! Experience gained is: " + experience + "\nExperience per Party Member is: " + experience/partyInfo.getMemberCount());
-                encounterObject.experiencePerMember = experience; // I assumed this would be divided by the number of people, but according to comment above, this is how much they get per person.
+                Screen.println("\nRan away successfully! Experience gained is: " + experience + "\nExperience per Party Member is: " + experience/partyInfo.getMemberCount());
+                encounterObject.experiencePerMember = experience/partyMembers.size();
 
                 return encounterObject;
             }
             else {
-                Screen.print("\nDid not get away! Continuing with Combat!\n");
+                Screen.println("\nDid not get away! Continuing with Combat!\n");
             }
 
 
@@ -183,13 +183,13 @@ public class AutocombatHandler {
                     experience += opponent.getXpValue()/4;
                 }
 
-                Screen.print("\nHid successfully! Experience gained is: " + experience + "\nExperience per Party Member is: " + experience/partyInfo.getMemberCount());
-                encounterObject.experiencePerMember = experience;
+                Screen.println("\nHid successfully! Experience gained is: " + experience + "\nExperience per Party Member is: " + experience/partyInfo.getMemberCount());
+                encounterObject.experiencePerMember = experience/partyMembers.size();
 
                 return encounterObject;
             }
             else {
-                Screen.print("\nDid not get away! Continuing with Combat!\n");
+                Screen.println("\nDid not get away! Continuing with Combat!\n");
             }
         }
         else if(challengeType.toLowerCase().equals("goad") || challengeType.equals("3")){
@@ -255,8 +255,8 @@ public class AutocombatHandler {
 
         // Players get to decide if they stay with Autocombat or switch to Manual (Brett, decide how to display this)
 
-        Screen.print("How many stayed: " + encounterObject.opponentsWhoStayed.size());
-        Screen.print("How many fled: " + encounterObject.opponentsWhoRanAway.size());
+        Screen.println("How many stayed: " + encounterObject.opponentsWhoStayed.size());
+        Screen.println("How many fled: " + encounterObject.opponentsWhoRanAway.size());
         String continueCombat = Input.promptTextInput("\nWould you like to continue auto-combat? (yes/no)", List.of("yes", "no", "y", "n"));
 
         if(continueCombat.toLowerCase().contains("n")){
@@ -306,9 +306,9 @@ public class AutocombatHandler {
             int numberOfOpponentsWhoAttacked = 0;
 
 
-            Screen.print("\n*** Round " + roundCount + "! ***");
-            Screen.print("Current number of enemies: " + encounterObject.opponentsWhoStayed.size());
-            Screen.print("Current number of party members: " + alivePartyMembers.size() + "\n");
+            Screen.println("\n*** Round " + roundCount + "! ***");
+            Screen.println("Current number of enemies: " + red(String.valueOf(encounterObject.opponentsWhoStayed.size())));
+            Screen.println("Current number of party members: " + green(String.valueOf(alivePartyMembers.size())) + "\n");
 
 
             for (PartyMember member : partyMembers) {
@@ -344,7 +344,7 @@ public class AutocombatHandler {
                         if (roll == 20) {
                             damage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh()) + RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
 
-                            Screen.print("CRITICAL!!!! " + member.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage!");
+                            Screen.println("CRITICAL!!!! " + green(member.getName()) + " scored a Critical against " + target.getName() + " for " + damage + " damage! (" + (target.getHpCurrent() - damage) + " hp left)");
                             critical = true;
                         } else if (roll == 1) {
                             roll = RandomGenerator.randomD20Roll();
@@ -353,12 +353,12 @@ public class AutocombatHandler {
                                 int friendlyDamage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
                                 friendlyTarget.setCurrentHp(friendlyTarget.getCurrentHp() - friendlyDamage);
 
-                                Screen.print("Whoops!!!! " + member.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage!");
+                                Screen.println("Whoops!!!! " + green(member.getName()) + " accidentally hit "  + green(friendlyTarget.getName()) + " for " + friendlyDamage + " damage! (" + friendlyTarget.getCurrentHp() + " hp left)");
 
                                 if (friendlyTarget.getCurrentHp() <= 0) {
                                     encounterObject.playersWhoDied.add(friendlyTarget);
                                     alivePartyMembers.remove(friendlyTarget);
-                                    Screen.print("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
+                                    Screen.println("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
 
                                     if(alivePartyMembers.size() == 0) {
                                         encounterObject.encounterFinished = true;
@@ -367,14 +367,15 @@ public class AutocombatHandler {
                                 }
 
                             } else {
-                                Screen.print("Whoops!!!! " + member.getName() + " almost hit  " + friendlyTarget.getName() + "!");
+                                Screen.println("Whoops!!!! " + green(member.getName()) + " almost hit " + green(friendlyTarget.getName()) + "!");
+
 
                             }
                         } else {
                             if (roll + member.getToHitBonus() >= target.getAc()) {
                                 damage = RandomGenerator.randomIntInRange(member.getDamageRangeLow(), member.getDamageRangeHigh());
                             } else {
-                                Screen.print(member.getName() + " rolled a " + (roll + member.getToHitBonus()) + " and missed " + target.getName() + "!");
+                                Screen.println(green(member.getName()) + " rolled a " + (roll + member.getToHitBonus()) + " and missed " + target.getName() + "! (AC is " + target.getAc() + ")");
                             }
                         }
 
@@ -382,12 +383,12 @@ public class AutocombatHandler {
                             target.setHpCurrent(target.getHpCurrent() - damage);
 
                             if(!critical)
-                                Screen.print(member.getName() + " rolled " + (roll + member.getToHitBonus()) + "  and hit " + target.getName() + " for " + damage + "!");
+                                Screen.println(green(member.getName()) + " rolled " + (roll + member.getToHitBonus()) + " and hit " + red(target.getName()) + " for " + damage + "! (" + target.getHpCurrent() + " hp left)");
 
                             if (target.getHpCurrent() <= 0) {
                                 encounterObject.opponentsWhoDied.add(target);
                                 encounterObject.opponentsWhoStayed.remove(target);
-                                Screen.print(target.getName() + " Died!");
+                                Screen.println(yellow(target.getName() + " Died!"));
 
                                 if(encounterObject.opponentsWhoStayed.size() == 0){
                                     encounterObject.encounterFinished = true;
@@ -431,7 +432,7 @@ public class AutocombatHandler {
                         if (roll == 20) {
                             damage = RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax()) + RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax());
 
-                            Screen.print("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage!");
+                            Screen.println("CRITICAL!!!! " + red(opponent.getName()) + " scored a Critical against " + green(target.getName()) + " for " + damage + " damage! (" + (target.getCurrentHp() - damage) + " hp left)");
                             critical = true;
                         } else if (roll == 1) {
                             roll = RandomGenerator.randomD20Roll();
@@ -442,12 +443,12 @@ public class AutocombatHandler {
                                 int friendlyDamage = RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax());
                                 friendlyTarget.setHpCurrent(friendlyTarget.getHpCurrent() - friendlyDamage);
 
-                                Screen.print("Whoops!!!! " + opponent.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage!");
+                                Screen.println("Whoops!!!! " + red(opponent.getName()) + " accidentally hit " + red(friendlyTarget.getName()) + " for " + friendlyDamage + " damage! (" + friendlyTarget.getHpCurrent() + " hp left)");
 
                                 if (friendlyTarget.getHpCurrent() <= 0) {
                                     encounterObject.opponentsWhoDied.add(friendlyTarget);
                                     encounterObject.opponentsWhoStayed.remove(friendlyTarget);
-                                    Screen.print("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
+                                    Screen.println("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
 
                                     if(encounterObject.opponentsWhoStayed.size() == 0) {
                                         encounterObject.encounterFinished = true;
@@ -456,14 +457,14 @@ public class AutocombatHandler {
                                 }
 
                             } else {
-                                Screen.print("Whoops!!!! " + opponent.getName() + " almost hit  " + friendlyTarget.getName() + "!");
+                                Screen.println("Whoops!!!! " + red(opponent.getName()) + " almost hit  " + red(friendlyTarget.getName()) + "!");
 
                             }
                         } else {
                             if (roll + toHit >= target.getAc()) {
                                 damage = RandomGenerator.randomIntInRange(opponent.getMainhandWeapon().getTotalUntypedDamageMin(), opponent.getMainhandWeapon().getTotalUntypedDamageMax());
                             } else {
-                                Screen.print(opponent.getName() + " rolled a " + (roll + toHit) + " and missed " + target.getName() + "!");
+                                Screen.println(red(opponent.getName()) + " rolled a " + (roll + toHit) + " and missed " + green(target.getName()) + "! (AC is " + target.getAc() + ")");
                             }
                         }
 
@@ -471,12 +472,12 @@ public class AutocombatHandler {
                             target.setCurrentHp(target.getCurrentHp() - damage);
 
                             if(!critical)
-                                Screen.print(opponent.getName() + " rolled " + (roll + toHit) + "  and hit " + target.getName() + " for " + damage + "!");
+                                Screen.println(red(opponent.getName()) + " rolled " + (roll + toHit) + " and hit " + green(target.getName()) + " for " + damage + "!");
 
                             if (target.getCurrentHp() <= 0) {
                                 encounterObject.playersWhoDied.add(target);
                                 alivePartyMembers.remove(target);
-                                Screen.print(target.getName() + " Died!");
+                                Screen.println(yellow(target.getName() + " Died!"));
 
                                 if(alivePartyMembers.size() == 0){
                                     encounterObject.encounterFinished = true;
@@ -512,7 +513,7 @@ public class AutocombatHandler {
                         if (roll == 20) {
                             damage = RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax()) + RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax());
 
-                            Screen.print("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage! Remaining Health: " + target.getCurrentHp());
+                            Screen.println("CRITICAL!!!! " + opponent.getName() + " scored a Critical against " + target.getName() + " for " + damage + " damage! ( " + target.getCurrentHp() + " hp left)");
                             critical = true;
                         } else if (roll == 1) {
                             roll = RandomGenerator.randomD20Roll();
@@ -523,12 +524,12 @@ public class AutocombatHandler {
                                 int friendlyDamage = RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax());
                                 friendlyTarget.setHpCurrent(friendlyTarget.getHpCurrent() - friendlyDamage);
 
-                                Screen.print("Whoops!!!! " + opponent.getName() + " accidentally hit  " + friendlyTarget.getName() + " for " + friendlyDamage + " damage! ");
+                                Screen.println("Whoops!!!! " + red(opponent.getName()) + " accidentally hit  " + red(friendlyTarget.getName()) + " for " + friendlyDamage + " damage! (" + friendlyTarget.getHpCurrent() + " hp left)");
 
                                 if (friendlyTarget.getHpCurrent() <= 0) {
                                     encounterObject.opponentsWhoDied.add(friendlyTarget);
                                     encounterObject.opponentsWhoStayed.remove(friendlyTarget);
-                                    Screen.print("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
+                                    Screen.println("OH NO!!! " + friendlyTarget.getName() + " Died from Friendly Fire!");
 
                                     if (encounterObject.opponentsWhoStayed.size() == 0) {
                                         encounterObject.encounterFinished = true;
@@ -537,14 +538,14 @@ public class AutocombatHandler {
                                 }
 
                             } else {
-                                Screen.print("Whoops!!!! " + opponent.getName() + " almost hit  " + friendlyTarget.getName() + "!");
+                                Screen.println("Whoops!!!! " + red(opponent.getName()) + " almost hit  " + red(friendlyTarget.getName()) + "!");
 
                             }
                         } else {
                             if (roll + toHit >= target.getAc()) {
                                 damage = RandomGenerator.randomIntInRange(opponent.getOffhandWeapon().getTotalUntypedDamageMin(), opponent.getOffhandWeapon().getTotalUntypedDamageMax());
                             } else {
-                                Screen.print(opponent.getName() + " rolled a " + (roll + toHit) + " and missed " + target.getName() + "!");
+                                Screen.println(red(opponent.getName()) + " rolled a " + (roll + toHit) + " and missed " + green(target.getName()) + "! (AC is " + target.getAc() + ")");
                             }
                         }
 
@@ -552,12 +553,12 @@ public class AutocombatHandler {
                             target.setCurrentHp(target.getCurrentHp() - damage);
 
                             if (!critical)
-                                Screen.print(opponent.getName() + " rolled " + (roll + toHit) + "  and hit " + target.getName() + " for " + damage + "! Remaining Health: " + target.getCurrentHp());
+                                Screen.println(red(opponent.getName()) + " rolled " + (roll + toHit) + " and hit " + green(target.getName()) + " for " + damage + "! (" + target.getCurrentHp() + " hp left)");
 
                             if (target.getCurrentHp() <= 0) {
                                 encounterObject.playersWhoDied.add(target);
                                 alivePartyMembers.remove(target);
-                                Screen.print(target.getName() + " Died!");
+                                Screen.println(yellow(target.getName() + " Died!"));
 
                                 if (alivePartyMembers.size() == 0) {
                                     encounterObject.encounterFinished = true;
@@ -578,29 +579,29 @@ public class AutocombatHandler {
         }
 
         if(roundCount > callTime && !encounterObject.encounterFinished) {
-            Screen.print("\n*****REINFORCEMENTS HAVE ARRIVED! ENDING AUTO COMBAT!*****");
+            Screen.println("\n*****REINFORCEMENTS HAVE ARRIVED! ENDING AUTO COMBAT!*****");
 
-            Long experience = addUpExperience(encounterObject);
+            Long experience = addUpExperience(encounterObject, partyMembers);
             encounterObject.experiencePerMember += experience;
-            Screen.print("\nExperience gained so far (Per person): " + experience);
+            Screen.println("\nExperience gained so far (Per person): " + experience);
 
             return encounterObject;
         } else {
             if(alivePartyMembers.size() == 0){
-                Screen.print("\nWhoa... you guys died!\n");
+                Screen.println(yellow("\nWhoa... you guys died!\n"));
 
-                Long experience = addUpExperience(encounterObject);
+                Long experience = addUpExperience(encounterObject, partyMembers);
                 encounterObject.experiencePerMember += experience;
-                Screen.print("Experience gained (Per person): " + experience);
+                Screen.println("Experience gained (Per person): " + experience);
 
                 return encounterObject;
             }
             else {
                 List<Person> opponentsWhoHaveLoot = new ArrayList<>(encounterObject.opponentsWhoDied);
 
-                Long experience = addUpExperience(encounterObject);
+                Long experience = addUpExperience(encounterObject, partyMembers);
                 encounterObject.experiencePerMember += experience;
-                Screen.print("\nExperience gained (Per person): " + experience);
+                Screen.println("\nExperience gained (Per person): " + experience);
 
                 while (roundCount <= callTime) {
 
@@ -621,11 +622,11 @@ public class AutocombatHandler {
                             }
                         }
 
-                        Screen.print("\nLooted " + goldFound + " gold.");
+                        Screen.println("\nLooted " + goldFound + " gold.");
                         encounterObject.totalGoldFound += goldFound;
 
                         if(opponentsWhoHaveLoot.size() == 0) {
-                            Screen.print("\nYou have looted all available enemies!\n");
+                            Screen.println("\nYou have looted all available enemies!\n");
                         }
 
                     } else if (howToProceed.equals("2") || howToProceed.toLowerCase().equals("callingcard")) {
@@ -636,17 +637,17 @@ public class AutocombatHandler {
                     } else if(howToProceed.equals("4") || howToProceed.toLowerCase().equals("hide")){
                         double rollAverage = collectAverageForRoll("Stealth", partyMembers);
 
-                        Screen.print("Stealth roll averaged: " + rollAverage);
+                        Screen.println("Stealth roll averaged: " + rollAverage);
 
                         // ADD REINFORCEMENTS COMING HERE
-                        Screen.print("\n*****REINFORCEMENTS HAVE ARRIVED!!*****");
+                        Screen.println("\n*****REINFORCEMENTS HAVE ARRIVED!!*****");
 
                         return encounterObject;
                     }
                     roundCount++;
                 }
 
-                Screen.print("\n*****REINFORCEMENTS HAVE ARRIVED!!*****");
+                Screen.println("\n*****REINFORCEMENTS HAVE ARRIVED!!*****");
                 // call reinforcement method here
 
                 return encounterObject;
@@ -654,7 +655,7 @@ public class AutocombatHandler {
         }
     }
 
-    private static long addUpExperience(EncounterObject encounterObject){
+    private static long addUpExperience(EncounterObject encounterObject, List<PartyMember> members){
         double killedExperience = 0;
         for(Person person : encounterObject.opponentsWhoDied){
             killedExperience += person.getXpValue();
@@ -669,7 +670,7 @@ public class AutocombatHandler {
 
         experience += fledExperience/4d;
 
-        return experience;
+        return experience/members.size();
     }
 
 
@@ -681,31 +682,31 @@ public class AutocombatHandler {
 
         for (Person opponent : opponents) {
             if(attribute.toLowerCase().equals("strength"))
-                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getStrMod();
+                averageOpponentRoll += RandomGenerator.randomD20Roll() + opponent.getStrMod();
             if(attribute.toLowerCase().equals("intelligence"))
-                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getIntMod();
+                averageOpponentRoll += RandomGenerator.randomD20Roll() + opponent.getIntMod();
             if(attribute.toLowerCase().equals("wisdom"))
-                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getWisMod();
+                averageOpponentRoll += RandomGenerator.randomD20Roll() + opponent.getWisMod();
             if(attribute.toLowerCase().equals("dexterity"))
-                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getDexMod();
+                averageOpponentRoll += RandomGenerator.randomD20Roll() + opponent.getDexMod();
             if(attribute.toLowerCase().equals("charisma"))
-                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getChrMod();
+                averageOpponentRoll += RandomGenerator.randomD20Roll() + opponent.getChrMod();
             if(attribute.toLowerCase().equals("constitution"))
-                averageOpponentRoll = RandomGenerator.randomD20Roll() + opponent.getConMod();
+                averageOpponentRoll += RandomGenerator.randomD20Roll() + opponent.getConMod();
         }
 
         averageOpponentRoll = averageOpponentRoll / opponents.size();
 
-        Screen.print("\nPlayers Average Roll: " + averagePartyRoll);
-        Screen.print("\nOpponents Average Roll: " + averageOpponentRoll);
+        Screen.println("\nPlayers Average Roll: " + averagePartyRoll);
+        Screen.println("\nOpponents Average Roll: " + averageOpponentRoll);
 
         if(averagePartyRoll >= averageOpponentRoll )
         {
-            Screen.print("\nSuccess!\n");
+            Screen.println("\nSuccess!\n");
             return true;
         }
         else {
-            Screen.print("\nFailure!\n");
+            Screen.println("\nFailure!\n");
 
             return false;
         }
@@ -718,7 +719,21 @@ public class AutocombatHandler {
             averagePartyRoll += Input.promptIntInputWithinRange("Please enter " + typeOfRoll + " roll for Party Member " + (i + 1) + "", ROLL_MIN, ROLL_MAX);
         }
 
+        Screen.println("Average Roll: " + averagePartyRoll/players.size());
+
          return averagePartyRoll/players.size();
+    }
+
+    private static String green(String textThatIsGreen){
+        return Colors.ANSI_GREEN + textThatIsGreen + Colors.ANSI_RESET;
+    }
+
+    private static String red(String textThatIsRed){
+        return Colors.ANSI_RED + textThatIsRed + Colors.ANSI_RESET;
+    }
+
+    private static String yellow(String textThatIsYellow){
+        return Colors.ANSI_YELLOW + textThatIsYellow + Colors.ANSI_RESET;
     }
 
 }

@@ -498,6 +498,7 @@ public class Person {
                     firstName = randGen.getRandomFromStringList(genasiNames);
                 } else {
                     getNameFromRace(randGen.getRandomRace());
+                    return;
                 }
                 break;
             case Races.gith:
@@ -550,14 +551,14 @@ public class Person {
                 } else {
                     getNameFromRace(Races.elf);
                 }
-                break;
+                return;
             case Races.halfOrc:
                 if (randGen.randomIntInRange(1, 100) <= 50) {
                     getNameFromRace(Races.human);
                 } else {
                     getNameFromRace(Races.orc);
                 }
-                break;
+                return;
             case Races.halfling:
                 if (gender.equals(Genders.male)) {
                     possibleNames = new ArrayList<>(Arrays.asList("Zowan", "Quinlos", "Ribul", "Kaswan", "Teemin", "Daeagol", "Gruffo", "Jolly", "Largo", "Williabald", "Willimar", "Carl", "Tobold", "Togo", "Tolman", "Tammit", "Sordo", "Briffo", "Bruno", "Isengrin", "Otho", "Olo", "Ted", "Theodoric", "Tobias", "Andwise", "Ansegar", "Doderic", "Dinodas", "Cottar", "Cotman", "Cosimo", "Porro", "Renigard", "Robin", "Robur", "Roderic", "Erling", "Bladud", "Blanco", "Bucca", "Bob", "Ferumbras", "Garlos", "Belwan", "Ridal", "Merry", "Pippin", "Samwise", "Alton", "Ander", "Cade", "Corrin", "Eldon", "Errich", "Finnan", "Garret", "Lindal", "Lyle", "Merric", "Milo", "Osborn", "Perrin", "Reed", "Roscoe", "Wellby"));
@@ -662,10 +663,13 @@ public class Person {
                 firstName = randGen.getRandomFromStringList(possibleNames);
                 break;
         }
-        if (lastName.isEmpty() || lastName.equals("")) {
+        if (lastName.isEmpty() && !firstName.isEmpty()) {
             name = firstName;
-        } else {
+        } else if (!firstName.isEmpty()) {
             name = firstName + " " + lastName;
+        }
+        else if(name != null && name.isEmpty()) {
+            name = race + " Orphan";
         }
     }
 
@@ -979,7 +983,7 @@ public class Person {
             getArmor();
         } else {
             //Tortles can't wear typical armor. Once the CONMOD is figured out the AC will be 13 + conMod
-            wornArmor.set(0, StandardArmor.natural);
+            wornArmor.add(0, StandardArmor.natural);
             wornArmor.get(0).ac = 13;
             wornArmor.get(0).name = "Natural (Shell)";
         }
