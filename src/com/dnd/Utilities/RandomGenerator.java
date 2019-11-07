@@ -8,6 +8,7 @@ import com.dnd.DataObjects.*;
 import com.dnd.DataObjects.Items.*;
 import com.dnd.DataObjects.Races.Races;
 import com.dnd.DataObjects.Spells.Spell;
+import com.dnd.DataObjects.Spells.StandardSpells;
 
 import javax.swing.text.MaskFormatter;
 import java.util.List;
@@ -836,23 +837,252 @@ public class RandomGenerator {
 
     private Loot getBeggarLootTier1() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(5, StandardLoot.barrel)
+                .add(3, StandardLoot.basket)
+                .add(3, StandardLoot.arrow1)
+                .add(3, StandardLoot.bell)
+                .add(3, StandardLoot.blowgunNeedles1)
+                .add(3, StandardLoot.candle1)
+                .add(3, StandardLoot.chalk1)
+                .add(3, StandardLoot.commonClothes)
+                .add(3, StandardLoot.cooksUtinsels)
+                .add(3, StandardLoot.diceSet)
+                .add(3, StandardLoot.flask)
+                .add(3, StandardLoot.glassBottle)
+                .add(3, StandardLoot.ironPot)
+                .add(3, StandardLoot.ironSpikes1)
+                .add(5, StandardLoot.jug)
+                .add(5, StandardLoot.lamp)
+                .add(3, StandardLoot.manacles)
+                .add(3, StandardLoot.paperSheet1)
+                .add(3, StandardLoot.pouch)
+                .add(5, StandardLoot.dayRations1)
+                .add(5, StandardLoot.dayRations2)
+                .add(3, StandardLoot.shovel)
+                .add(3, StandardLoot.slingBullet1)
+                .add(3, StandardLoot.tankard)
+                .add(5, StandardLoot.tinderbox)
+                .add(5, StandardLoot.bundleOfSticks)
+                .add(3, StandardLoot.torch)
+                .add(5, StandardLoot.wornShoes);
         return rc.next();
     }
 
     private Loot getBeggarLootTier2() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(3, StandardLoot.blowgunNeedles5)
+                .add(3, StandardLoot.ironSpikes5)
+                .add(5, StandardLoot.signalWhistle)
+                .add(5, StandardLoot.backpack)
+                .add(5, StandardLoot.ballBearings)
+                .add(10, StandardLoot.blanket)
+                .add(5, StandardLoot.componentPouch)
+                .add(5, StandardLoot.wand)
+                .add(6, StandardLoot.waterskin)
+                .add(5, StandardLoot.vial)
+                .add(3, StandardLoot.sprigOfMistletoe)
+                .add(3, StandardLoot.slingBullet5)
+                .add(5, StandardLoot.robes)
+                .add(5, StandardLoot.sack)
+                .add(7, StandardLoot.dayRations3)
+                .add(7, StandardLoot.dayRations4)
+                .add(7, StandardLoot.dayRations5)
+                .add(2, StandardLoot.minersPick)
+                .add(5, StandardLoot.hammer)
+                .add(2, StandardLoot.caltropsBag);
         return rc.next();
     }
 
     private Loot getBeggarLootTier3() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
+                .add(2, StandardLoot.mapScrollCase)
+                .add(4, StandardLoot.bedroll)
+                .add(2, StandardLoot.messKit)
+                .add(2, StandardLoot.walkingStick)
+                .add(4, StandardLoot.travelersClothes)
+                .add(2, StandardLoot.trinket)
+                .add(2, StandardLoot.flute)
+                .add(2, StandardLoot.lock)
+                .add(2, StandardLoot.lute)
+                .add(2, StandardLoot.lyre)
+                .add(2, StandardLoot.violInstrument)
+                .add(2, StandardLoot.slingBullet10)
+                .add(2, StandardLoot.soap)
+                .add(2, StandardLoot.whetstone)
+                .add(2, StandardLoot.candle5)
+                .add(2, StandardLoot.arrows5)
+                .add(2, StandardLoot.bagofBallBearings1000)
+                .add(2, StandardLoot.paperSheet5)
+                .add(2, StandardLoot.playingCardSet)
+                .add(2, StandardLoot.chalk5)
+                .add(2, StandardLoot.healersKit)
+                .add(2, StandardLoot.hempenRope25ft)
+                .add(2, StandardLoot.herbalismKit)
+                .add(2, StandardLoot.holySymbol)
+                .add(2, StandardLoot.hoodedLantern)
+                .add(2, StandardLoot.hornInstrument)
+                .add(2, StandardLoot.ink1ozBottle)
+                .add(2, StandardLoot.inkPen)
+                .add(2, StandardLoot.mossAgateGem)
+                .add(4, StandardLoot.oilFlask)
+                .add(2, StandardLoot.pairEngravedBoneDice)
+                .add(2, StandardLoot.panFlute)
+                .add(2, StandardLoot.quiver)
+                .add(2, StandardLoot.signetRing)
+                .add(8, StandardLoot.twoPersonTent)
+                .add(2, StandardLoot.burglarsBackpack)
+                .add(2, StandardLoot.haversack)
+                .add(2, StandardLoot.grungyGlasses)
+                .add(2, StandardLoot.dayRations6)
+                .add(2, StandardLoot.dayRations7)
+                .add(2, StandardLoot.steelMirror)
+                .add(4, StandardLoot.thievesTools)
+                .add(2, StandardLoot.tigersEyeGem);
         return rc.next();
     }
 
     private Loot getPoorLootTier1() {
+        /*
+acid_vial
+arrows_x1
+arrows_x5
+arrows_x10
+backpack
+ball_bearings_bag_of_1000
+basket
+blanket
+block_and_tackle_for_lifting
+blowgun
+blowgun_needles_x1
+blowgun_needles_x5
+blowgun_needles_x10
+blue_quartz_10gp
+brewers_supplies
+bucket
+bullseye_lantern
+burglars_pack
+candle_x1
+candle_x5
+carpenters_tools
+cartographers_tools
+carved_bone_statuette_x1_25gp
+chalcedony_gem_50gp
+climbers_kit
+club
+cobblers_tools
+common_clothes
+component_pouch
+cooks_utinsels
+costume_clothes
+crossbow_bolt_case
+crossbow_bolts_x1
+crossbow_bolts_x5
+crossbow_bolts_x10
+crowbar
+crystal_10_gp
+dagger
+dagger_+1
+dart_x5
+dart_x_1
+dice_set
+disguise_kit
+dragon_chess_set
+drum
+entertainers_pack
+eye_agate_10gp
+fishing_tackle
+flask_x1
+flute
+forgery_kit
+glass_bottle
+glassblowers_tools
+hammer
+healers_kit
+hematite_10gp
+hempen_rope_25_ft
+hempen_rope_50_ft
+herbalism_kit
+holy_symbol_amulet
+holy_symbol_emblem
+holy_symbol_reliquary
+hooded_lantern
+horn_instrument
+hourglass
+hunting_trap
+ink_1_oz_bottle
+ink_pen
+iron_pot
+jasper_gem_50gp
+jewelers_tools
+jug
+lamp
+lapis_lazuli_10gp
+leatherworkers_tools
+light_crossbow
+light_hammer
+lock
+lute
+malachite_10gp
+manacles
+map_or_scroll_case
+masons_tools
+merchants_scale
+mess_kit
+miners_pick
+moss_agate_10gp
+net
+oil_flask
+pan_flute
+paper_x1_sheet
+paper_x5_sheet
+parchment_x1_sheet
+parchment_x5_sheet
+pitcher
+playing_card_set
+poisoners_kit
+potion_of_climbing
+potion_of_healing
+potters_tools
+pouch
+priests_pack
+quiver
+rations_1_day
+rations_2_days
+rations_3_days
+rhodochosite_10_gp
+robes
+rod
+sack
+sealing_wax
+shortbow
+shovel
+sickle
+signal_whistle
+sledge_hammer
+sling
+sling_bullets_x1
+sling_bullets_x5
+sling_bullets_x10
+smiths_tools
+soap
+staff
+tankard
+thieves_tools
+tigers_eye_10gp
+tinderbox
+torch
+totem
+travelers_clothes
+trinket
+turquise_10gp
+vial
+wand
+waterskin
+whetstone
+whip
+yew_wand
+
+     */
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
                 .add(100, StandardLoot.barrel);
         return rc.next();
@@ -871,6 +1101,339 @@ public class RandomGenerator {
     }
 
     private Loot getMiddleClassLootTier1() {
+    /*
+    abacus_x1
+alchemists_supplies
+amber_gem_100gp
+antitoxin
+arrows_+1_x1
+arrows_+1_x5
+arrows_x5
+arrows_x10
+arrows_x15
+azurite_gem_10gp
+backpack
+bagpipes
+ball_bearings_bag_of_1000
+banded_agate_gem_10gp
+basic_poison_vial
+basket
+bead_of_nourishment
+bead_of_refreshment
+bloodstone_gem_50gp
+blowgun
+blowgun_+1
+blowgun_needles_x5
+blowgun_needles_x10
+blowgun_needles_x15
+blue_quartz_10gp
+book_25_gp
+boots_of_false_tracks
+brewers_supplies
+burglars_pack
+caltrops_x5
+caltrops_x10
+caltrops_x15
+candle_x5
+carnelian_gem_50gp
+carpenters_tools
+cartographers_tools
+carved_bone_statuette_x1_25gp
+carved_ivory_statuette_250_gp
+chain_5_ft
+chain_10_ft
+climbers_kit
+cloak_of_billowing
+cloth_of_gold_vestments_25gp
+clothes_of_mending
+club
+club_+1
+cobblers_tools
+common_clothes
+component_pouch
+cooks_utinsels
+costume_clothes
+crossbow_bolts_+1_x1
+crossbow_bolts_+1_x5
+crossbow_bolts_x5
+crossbow_bolts_x10
+crossbow_bolts_x15
+crystal_10_gp
+dagger
+dagger_+1
+dart_+1_x1
+dart_+1_x5
+dart_x5
+dart_x10
+dice_set
+disguise_kit
+embroidered_silk_handkerchief_25_gp
+enduring_spellbook
+entertainers_pack
+explorers_pack
+eye_agate_10gp
+fine_clothes_15gp
+fishing_tackle
+flail
+flail_+1
+flask
+flute
+forgery_kit
+glaive
+glass_bottle
+glassblowers_tools
+gloves_of_thievery
+goggles_of_night
+grappling_hook_x1
+greataxe
+greatclub
+greatclub_+1
+greatsword
+greatsword_+1
+halberd
+halberd_+1
+hammer
+hand_crossbow
+hand_crossbow_+1
+handaxe
+handaxe_+1
+healers_kit
+hematite_10gp
+hempen_rope_25_ft
+hempen_rope_50_ft
+herbalism_kit
+holy_water_flask_25gp
+hooded_lantern
+horn_instrument
+hourglass_25gp
+hunting_trap
+ink_1_oz_bottle
+ink_pen
+instrument_of_illusions
+instrument_of_scribing
+iron_pot
+iron_spikes_x5
+iron_spikes_x10
+jade_gem_100gp
+jasper_gem_50gp
+javelin_+1_x1
+javelin_x1
+jewelers_tools
+jug
+lamp
+lance
+lance_+1
+lapis_lazuli_10gp
+leatherworkers_tools
+light_crossbow
+light_crossbow_+1
+light_hammer
+light_hammer_+1
+lock
+lock_of_trickery
+longbow
+longbow_+1
+longsword
+longsword_+1
+lute
+lyre
+mace
+mace_+1
+malachite_10gp
+manacles
+map_or_scroll_case
+masons_tools
+maul
+maul_+1
+merchants_scale
+mess_kit
+miners_pick
+monster_hunters_pack
+moonstone_gem_50gp
+morningstar
+morningstar_+1
+moss_agate_10gp
+mystery_key
+net
+net_+1_x1
+obsidian_10gp
+oil_flask
+oil_of_slipperiness_x1
+onyx_gem_50gp
+orb_of_direction
+painters_supplies
+pan_flute
+paper_bird_magical
+paper_x5_sheet
+parchment_x5_sheet
+perfume_vial_5gp
+pike
+pike_+1
+pitcher
+playing_card_set
+poisoners_kit
+potion_of_acid_resistance_x1
+potion_of_climbing
+potion_of_cold_resistance
+potion_of_fire_breath
+potion_of_fire_resistance
+potion_of_force_resistance
+potion_of_greater_healing
+potion_of_healing
+potion_of_hill_giant_strength
+potion_of_invisibility
+potion_of_lightning_resistance
+potion_of_necrotic_resistance
+potion_of_poison
+potion_of_poison_resistance
+potion_of_psychic_resistance
+potion_of_radiant_resistance
+potion_of_thunder_resistance
+potters_tools
+pouch
+quarterstaff
+quarterstaff_+1
+quartz_gem_50gp
+quiver
+rapier
+rapier_+1
+rations_1_day
+rations_2_days
+rations_3_days
+ring_of_feather_falling
+ring_of_force_resistance
+ring_of_swimming
+ring_of_truth_telling
+robes
+rope_of_mending
+sack
+sardonyx_gem_50gp
+scholars_pack_40gp
+scimitar_+1
+sealing_wax
+shield
+shield_+1
+shortbow
+shortbox_+1
+shortsword
+shortsword_+1
+shovel
+sickle
+sickle_+1
+signal_whistle
+signet_ring_5gp
+silk_rope_50ft
+silver_ewer_25gp
+sledge_hammer
+sling
+sling_+1
+sling_bullets_+1_x1
+sling_bullets_+1_x5
+sling_bullets_x5
+sling_bullets_x10
+sling_bullets_x15
+small_gold_bracelet_25gp
+small_mirror_set_in_a_painted_wooden_frame_25gp
+smiths_tools
+smokepowder
+soap
+spear
+spear_+1
+spell_scroll_cantrip
+spell_scroll_lvl_1
+spell_scroll_lvl_2
+spell_scroll_lvl_3
+spell_scroll_lvl_4
+spell_scroll_lvl_5
+spell_scroll_lvl_6
+spell_scroll_lvl_7
+spellbook_50gp
+staff
+staff_of_adornment
+staff_of_birdcalls
+staff_of_flowers
+staff_of_the_adder
+star_rose_quarts_50gp
+steel_mirror
+tankard
+tankard_of_sobriety
+thieves_tools
+tigers_eye_10gp
+tinderbox
+tinkers_tools
+torch
+totem
+travelers_clothes
+trident
+trident_+1
+trinket
+truth_serum_150_gp
+turquise_10gp
+two-person_tent
+unbreakable_arrow_x1
+vial
+vicious_battleaxe
+vicious_blowgun
+vicious_club
+vicious_dagger
+vicious_dart_x2
+vicious_dart_x5
+vicious_flail
+vicious_glaive
+vicious_greataxe
+vicious_greatclub
+vicious_greatsword
+vicious_halberd
+vicious_hand_crossbow
+vicious_handaxe
+vicious_heavy_crowssbow
+vicious_javelin
+vicious_lance
+vicious_light_crossbow
+vicious_light_hammer
+vicious_longbow
+vicious_longsword
+vicious_mace
+vicious_maul
+vicious_morningstar
+vicious_pike
+vicious_quarterstaff
+vicious_rapier
+vicious_scimitar
+vicious_shortbow
+vicious_shortsword
+vicious_sickle
+vicious_sling
+vicious_spear
+vicious_trident
+vicious_war_pick
+vicious_warhammer
+vicious_whip
+viol_instrument
+walloping_arrow_x1
+walloping_blowgun_needle_x1
+walloping_crossbow_bolt_x1
+walloping_sling_bullet_x1
+wand
+wand_of_conductiong
+wand_of_entangle
+wand_of_magic_missiles
+wand_of_scowls
+wand_of_smiles
+war_pick
+war_pick_+1
+warhammer
+warhammer_+1
+waterskin
+weavers_tools
+whetstone
+whip
+whip_+1
+woodcarvers_tools
+wooden_staff
+yew_wand
+zircon_gem_50gp
+     */
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
                 .add(100, StandardLoot.barrel);
         return rc.next();
@@ -1645,7 +2208,7 @@ public class RandomGenerator {
         return rc.next();
     }
 
-    public Spell getRandomSpellsByLevel(int spellLevel, List<Spell> masterSpellList) {
+    /*public Spell getRandomSpellsByLevel(int spellLevel, List<Spell> masterSpellList) {
         //build a list of possible spells by level
         List<Spell> spellsOfLevel = new ArrayList<Spell>(Arrays.asList());
         for (Spell temp : masterSpellList) {
@@ -1655,7 +2218,7 @@ public class RandomGenerator {
         }
         //Get a random entry on that list
         return spellsOfLevel.get(randomIntInRange(0, (spellsOfLevel.size() - 1)));
-    }
+    }*/
 
     public String getRandomBeggarQuirk() {
         List<String> quirkList = new ArrayList<>(Arrays.asList(
@@ -1683,5 +2246,20 @@ public class RandomGenerator {
                 "wears a monacle", "used to be a beggar and tells you all about it", "perfectly normal", "has a creeper stache", "is wearing shoes that are too big", "has an overbite", "has no iris", "smokes and blows ring in your face", "only speaks in insults", "is wearing too much perfume", "has 26 kids", "blames their parents for everything wrong in life", "is really into fitness", "has a creepy fetish for halflings", "dreams of making the worlds biggest flan", "never speaks, only sings", "can never say no to a dare", "loves raw onions", "complains a lot", "shy", "bold", "confident", "meticulously clean", "completely ignores the players", "dreams of being an adventurer", "dreams of being a portal chaser", "hates being outdoors", "has a lower voice than normal", "fat", "skinny", "extremely overweight", "likes to comment about the players weight", "very blunt", "thinks it is better than everyone else", "thinks it is a god among men", "expects all opposite genders to be swooning over it", "extremely self-absorbed", "much friendlier than expected", "very generous", "wants to help others", "thinks the party are beggars", "uses lots of big words", "tells you to get a job", "flaunts the fact that it is wealthy", "is very humble", "is allergic to a party members race", "has a strange accent", "has a huge nose", "has a smaller mouth than expected", "is extremely muscular", "looks like lifting a pen would count as a workout for it", "wants to improve the world", "is obsessed with rating others attractiveness", "talks way too much about the parties it has attended", "does not deem the players worthy of its attention", "envies the adventuring life", "wants to hear a good story", "tips those that help it", "has an alcohol problem", "has a gambling problem", "pretends, poorly, that it cannot speak the players languages", "rolls its eyes a lot", "has a really bad temper", "is very patient", "looks out for others", "does not want to be seen in the players company", "collects autographs", "wants to buy one of the players pieces of gear for more than it is worth", "is convinced it is going to run Grand Bastion some day", "thinks everyone wants to do it favors", "considers itself a blessing on everyone else", "inherited all its wealth and is very incompetent", "extremely shy", "very well dressed", "tells you to get a job", "tall", "short", "very alert", "smells nice", "wants to know who your stylist is", "judges everyone", "is very kind and gentle", "speaks very eloquently", "looks like they have had magic enhance their looks", "speaks condescendingly", "is an aspiring poet and wants to write one for you", "has a great singing voice", "thinks it sings well but it very much does not", "wears a stupid hat but is very proud of it", "looks like it is wearing a set of its grandmothers drapes but thinks it is the height of fashion", "is dressed in stripes and plaids", "refuses to talk to anyone not born in Grand Bastion", "is racist", "is very down-to-earth", "will pay to see a feat of magic", "handles itself with grace", "thinks that Grand Bastion needs a king, and that it should be the king", "treats everyone like they are idiots", "is well traveled", "loves a good drink", "easily pleased", "has a swollen cheek", "turned its skin a different color and loves it"
         ));
         return quirkList.get(randomIntInRange(0, (quirkList.size() - 1)));
+    }
+
+    private List<Spell> getSpellListByLevel(int level) {
+        List<Spell> listToReturn = new ArrayList<Spell>(Arrays.asList());
+        for (Spell temp : StandardSpells.masterSpellList) {
+            if (temp.level == level) {
+                listToReturn.add(temp);
+            }
+        }
+        return listToReturn;
+    }
+
+    public Spell getRandomSpellByLevel(int level) {
+        List<Spell> randomOptions = getSpellListByLevel(level);
+        return randomOptions.get(randomIntInRange(0,(randomOptions.size() - 1)));
     }
 }

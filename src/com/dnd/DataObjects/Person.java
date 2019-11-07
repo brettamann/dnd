@@ -36,7 +36,7 @@ public class Person {
     private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
     private List<Spell> spellsKnown = new ArrayList<>();
 
-    private Boolean hasFamily;
+    private boolean hasFamily;
     private int familyMemberCount;
     private String mood;
 
@@ -1346,7 +1346,7 @@ public class Person {
                 }
                 break;
             case EconomicClasses.elite:
-                if (randGen.randomIntInRange(1, 100) <= 70) {//70% chance
+                if (randGen.randomIntInRange(1, 100) <= 50) {//50% chance
                     hasCallGlyph = true;
                     if (wornArmor.get(0).name.equals(StandardArmor.natural.name)) {
                         callGlyphType = CallGlyphTypes.tablet;
@@ -1384,7 +1384,7 @@ public class Person {
                 }
                 break;
             case EconomicClasses.elite:
-                if (spellcasterDeterminer <= 40) {
+                if (spellcasterDeterminer <= 40) { //Many elite will be adventurers, soldiers, and the like so having a family is less likely
                     hasFamily = true;
                 }
                 break;
@@ -1478,9 +1478,9 @@ public class Person {
         for (int i = 0; i <= spellcasterLevel; i++) {
             for (int j = 0; j <= spellSlots[i][1]; j++) {
                 //get a spell, make sure it's not a duplicate, if it is, try again until you don't get a dupe
-                Spell spellToAdd = randGen.getRandomSpellsByLevel(i, hardData.spellList);
+                Spell spellToAdd = randGen.getRandomSpellByLevel(i);
                 while (isSpellAlreadyInList(spellToAdd)) {
-                    spellToAdd = randGen.getRandomSpellsByLevel(i, hardData.spellList);
+                    spellToAdd = randGen.getRandomSpellByLevel(i);
                 }
             }
         }
