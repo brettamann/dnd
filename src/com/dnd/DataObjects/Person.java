@@ -983,7 +983,7 @@ public class Person {
             getArmor();
         } else {
             //Tortles can't wear typical armor. Once the CONMOD is figured out the AC will be 13 + conMod
-            wornArmor.add(0, StandardArmor.natural);
+            wornArmor.add(0, new Armor(StandardArmor.natural));
             wornArmor.get(0).ac = 13;
             wornArmor.get(0).name = "Natural (Shell)";
         }
@@ -1432,7 +1432,7 @@ public class Person {
                 }
                 break;
             case EconomicClasses.elite:
-                if (randGen.randomIntInRange(1, 100) <= 70) {//70% chance
+                if (randGen.randomIntInRange(1, 100) <= 50) {//50% chance
                     hasCallGlyph = true;
                     if (wornArmor.get(0).name.equals(StandardArmor.natural.name)) {
                         callGlyphType = CallGlyphTypes.tablet;
@@ -1470,7 +1470,7 @@ public class Person {
                 }
                 break;
             case EconomicClasses.elite:
-                if (spellcasterDeterminer <= 40) {
+                if (spellcasterDeterminer <= 40) { //Many elite will be adventurers, soldiers, and the like so having a family is less likely
                     hasFamily = true;
                 }
                 break;
@@ -1564,9 +1564,9 @@ public class Person {
         for (int i = 0; i <= spellcasterLevel; i++) {
             for (int j = 0; j <= spellSlots[i][1]; j++) {
                 //get a spell, make sure it's not a duplicate, if it is, try again until you don't get a dupe
-                Spell spellToAdd = randGen.getRandomSpellsByLevel(i, hardData.spellList);
+                Spell spellToAdd = randGen.getRandomSpellByLevel(i);
                 while (isSpellAlreadyInList(spellToAdd)) {
-                    spellToAdd = randGen.getRandomSpellsByLevel(i, hardData.spellList);
+                    spellToAdd = randGen.getRandomSpellByLevel(i);
                 }
             }
         }
