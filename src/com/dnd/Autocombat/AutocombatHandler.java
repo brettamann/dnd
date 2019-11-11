@@ -155,7 +155,7 @@ public class AutocombatHandler {
         String challengeType = Input.promptTextInput("How would you like to approach the encounter? \n1. run (Athleticism)\n2. hide (Survival)\n3. goad (Performance, Deception, or Persuasion) \n4. scare (Deception, Intimidation) \n5. bribe (Persuasion)) \n6. Do Nothing and just Fight!\nEnter Selection: ", List.of("run", "hide", "goad", "scare", "bribe", "nothing", "1", "2", "3", "4", "5", "6"));
 
         if(challengeType.toLowerCase().equals("run") || challengeType.equals("1")){
-            boolean success = runSimulationToSeeIfSuccessful("Athleticism", "strength", partyMembers, opponents);
+            boolean success = runSimulationToSeeIfSuccessful("Athleticism", "strength", partyMembers, opponents, encounterObject);
 
             if(success){
                 int experience = 0;
@@ -175,7 +175,7 @@ public class AutocombatHandler {
 
         }
         else if (challengeType.toLowerCase().equals("hide") || challengeType.equals("2")){
-            boolean success = runSimulationToSeeIfSuccessful("Survival", "wisdom", partyMembers, opponents);
+            boolean success = runSimulationToSeeIfSuccessful("Survival", "wisdom", partyMembers, opponents, encounterObject);
 
             if(success){
                 int experience = 0;
@@ -193,7 +193,7 @@ public class AutocombatHandler {
             }
         }
         else if(challengeType.toLowerCase().equals("goad") || challengeType.equals("3")){
-            double averagePartyMemberRoll = collectAverageForRoll("Performance, Deception, or Persuasion", partyMembers);
+            double averagePartyMemberRoll = collectAverageForRoll("Performance, Deception, or Persuasion", partyMembers, encounterObject);
             double crowdBraveryModifier = opponents.size()/10d;
 
             braveryChallenge = braveryChallenge - (crowdBraveryModifier + averagePartyMemberRoll);
@@ -201,7 +201,7 @@ public class AutocombatHandler {
 
         }
         else if(challengeType.toLowerCase().equals("scare") || challengeType.equals("4")){
-            double averagePartyMemberRoll = collectAverageForRoll("Intimidation", partyMembers);
+            double averagePartyMemberRoll = collectAverageForRoll("Intimidation", partyMembers, encounterObject);
             double crowdBraveryModifier = opponents.size()/10d;
 
             braveryChallenge = braveryChallenge - crowdBraveryModifier + averagePartyMemberRoll;
@@ -218,15 +218,17 @@ public class AutocombatHandler {
 
         boolean glyphPresent = false;
 
-        for(Person opponent : opponents){
-            if(opponent.getBravery() < braveryChallenge){
+        for(Person opponent : opponents) {
+            if (opponent.getBravery() < braveryChallenge) {
                 encounterObject.opponentsWhoRanAway.add(opponent);
-            }
-            else{
+            } else {
                 encounterObject.opponentsWhoStayed.add(opponent);
             }
-            if(opponent.getHasCallGlyph()){
-                glyphPresent = true;
+            if (opponent.getHasCallGlyph()) {
+                if (RandomGenerator.randomD20Roll() >= encounterObject.averageRoll) {
+                    glyphPresent = true;
+                    break;
+                }
             }
         }
 
@@ -635,7 +637,7 @@ public class AutocombatHandler {
                     } else if (howToProceed.equals("3") || howToProceed.toLowerCase().equals("leave")) {
                         return encounterObject;
                     } else if(howToProceed.equals("4") || howToProceed.toLowerCase().equals("hide")){
-                        double rollAverage = collectAverageForRoll("Stealth", partyMembers);
+                        double rollAverage = collectAverageForRoll("Stealth", partyMembers, encounterObject);
 
                         Screen.println("Stealth roll averaged: " + rollAverage);
 
@@ -674,10 +676,9 @@ public class AutocombatHandler {
     }
 
 
-    private static boolean runSimulationToSeeIfSuccessful(String typeOfRoll, String attribute, List<PartyMember> players, List<Person> opponents) {
-        double averagePartyRoll = collectAverageForRoll(typeOfRoll, players);
+    private static boolean runSimulationToSeeIfSuccessful(String typeOfRoll, String attribute, List<PartyMember> players, List<Person> opponents, EncounterObject encounterObject) {
+        double averagePartyRoll = collectAverageForRoll(typeOfRoll, players, encounterObject);
         double averageOpponentRoll = 0;
-
 
 
         for (Person opponent : opponents) {
@@ -712,7 +713,7 @@ public class AutocombatHandler {
         }
     }
 
-    private static double collectAverageForRoll(String typeOfRoll, List<PartyMember> players){
+    private static double collectAverageForRoll(String typeOfRoll, List<PartyMember> players, EncounterObject encounterObject){
         double averagePartyRoll = 0;
 
         for(int i = 0; i < players.size(); i++){
@@ -721,7 +722,9 @@ public class AutocombatHandler {
 
         Screen.println("Average Roll: " + averagePartyRoll/players.size());
 
-         return averagePartyRoll/players.size();
+
+        encounterObject.averageRoll = Math.round(averagePartyRoll/players.size());
+        return averagePartyRoll/players.size();
     }
 
     private static String green(String textThatIsGreen){

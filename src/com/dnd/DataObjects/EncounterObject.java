@@ -18,6 +18,7 @@ public class EncounterObject {
     public List<Person> opponentsWhoRanAway = new ArrayList<>();
     public List<Person> opponentsWhoStayed = new ArrayList<>();
     public boolean encounterFinished = false;
+    public long averageRoll = 0;
     public int totalGoldFound = 0;
 
 
