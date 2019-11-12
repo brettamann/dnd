@@ -2261,6 +2261,12 @@ zircon_gem_50gp
 
     public Spell getRandomSpellByLevel(int level) {
         List<Spell> randomOptions = getSpellListByLevel(level);
+        // if the spell list is empty, this blows up and throws an exception, so passing
+        // in a default to something
+        if(randomOptions.size() == 0)
+            return new Spell("Animal Friendship", 1, "Enchantment", "1 action", 30, "V, S, M, a morsel of food", "24 Hours", "Bard, Druid, Ranger", "This is the default spell. This spell lets you be friends with any cute, fuzzy, animal your heart desires. This defaulted spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast’s Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the spell’s duration. If you or one of your companions harms the target, the spells ends.");
+
+
         return randomOptions.get(randomIntInRange(0,(randomOptions.size() - 1)));
     }
 }

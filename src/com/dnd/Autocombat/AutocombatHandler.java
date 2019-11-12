@@ -1,7 +1,10 @@
 package com.dnd.Autocombat;
 
 import com.dnd.DataObjects.*;
+import com.dnd.DataObjects.Items.Armor;
+import com.dnd.DataObjects.Items.Loot;
 import com.dnd.DataObjects.Items.StandardWeapons;
+import com.dnd.DataObjects.Items.Weapon;
 import com.dnd.Utilities.Colors;
 import com.dnd.Utilities.Input;
 import com.dnd.Utilities.RandomGenerator;
@@ -607,16 +610,36 @@ public class AutocombatHandler {
 
                 while (roundCount <= callTime) {
 
-                    String howToProceed = Input.promptTextInput("Current Round: " + roundCount + "\nAll enemies are dead! How would you like to proceed? \n1. loot\n2. callingcard \n3. leave\n4. hide\nSelection", List.of("1", "2", "3", "4", "loot", "callingcard", "leave", "hide"));
+                    String howToProceed = Input.promptTextInput("\n\nCurrent Round: " + roundCount + "\nAll enemies are dead! How would you like to proceed? \n1. loot\n2. callingcard \n3. leave\n4. hide\nSelection", List.of("1", "2", "3", "4", "loot", "callingcard", "leave", "hide"));
 
                     int goldFound = 0;
 
 
                     if (howToProceed.equals("1") || howToProceed.toLowerCase().equals("loot")) {
+                        List<Loot> pickedUpLoot = new ArrayList<>();
+                        List<Weapon> pickedUpWeapon = new ArrayList<>();
+                        List<Armor> pickedUpArmor = new ArrayList<>();
+
+
                         for (int i = 0; i < partyInfo.getMemberCount(); i++) {
                             if(opponentsWhoHaveLoot.size() != 0) {
                                 Person lootableOpponent = opponentsWhoHaveLoot.get(RandomGenerator.randomIntInRange(0, opponentsWhoHaveLoot.size() - 1));
                                 goldFound += lootableOpponent.getGold();
+                                if(lootableOpponent.getMainhandWeapon() != null){
+                                    pickedUpWeapon.add(lootableOpponent.getMainhandWeapon());
+                                }
+                                if(lootableOpponent.getOffhandWeapon() != null){
+                                    pickedUpWeapon.add(lootableOpponent.getOffhandWeapon());
+                                }
+                                if(lootableOpponent.getWornArmor() != null){
+                                    pickedUpArmor.addAll(lootableOpponent.getWornArmor());
+                                }
+                                if(lootableOpponent.getPackCarried() != null){
+                                    pickedUpLoot.addAll(lootableOpponent.getPackCarried().lootCarried);
+                                    pickedUpWeapon.addAll(lootableOpponent.getPackCarried().weaponsCarried);
+                                    pickedUpArmor.addAll(lootableOpponent.getPackCarried().armorCarried);
+                                }
+
                                 opponentsWhoHaveLoot.remove(lootableOpponent);
 
 
@@ -625,7 +648,23 @@ public class AutocombatHandler {
                         }
 
                         Screen.println("\nLooted " + goldFound + " gold.");
+
+                        Screen.println("\n Looted the following items: ");
+
+                        for(Weapon weapon : pickedUpWeapon){
+                            Screen.println(weapon.name);
+                        }
+                        for(Armor armor : pickedUpArmor){
+                            Screen.println(armor.name);
+                        }
+                        for(Loot loot : pickedUpLoot){
+                            Screen.println(loot.name);
+                        }
+
                         encounterObject.totalGoldFound += goldFound;
+                        encounterObject.lootedArmor.addAll(pickedUpArmor);
+                        encounterObject.lootedWeapons.addAll(pickedUpWeapon);
+                        encounterObject.lootedLoot.addAll(pickedUpLoot);
 
                         if(opponentsWhoHaveLoot.size() == 0) {
                             Screen.println("\nYou have looted all available enemies!\n");
