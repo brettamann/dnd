@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StandardLoot {
-    //TODO: fill out loot items
     //good to find loot descriptions https://www.dndbeyond.com/search?q=backpack
     //money is always a loot type but doesn't need to be explicitly stated here
+    //Each class of loot can include the loot classes below it
 
     public static final Loot callGlyph = new Loot("Call Glyph Tablet", "A circular stone tablet ~1\" thick and 5\" in diameter with an etching of Grand Bastion's emblem, used to call emergency services.", ItemTypes.misc, new ArrayList<>(Arrays.asList("Call guards","Call Fire services","Call medical services")), 1, Rarities.common, 0, 0, 0, 0);
 
     //Basic items / beggar class
-    public static final Loot barrel = new Loot("barrel","a 1x1 wooden barrel with a lid",ItemTypes.misc, new ArrayList<>(Arrays.asList("Stores items")), 1,Rarities.common,0,0,0,1);
-    public static final Loot backpack = new Loot("backpack", "leather pack carried on the back, typically with straps to secure it", ItemTypes.misc, new ArrayList<>(Arrays.asList("can hold 1 cubic foot/ 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack")), 1, Rarities.common, 0, 0, 0, 2);
-    public static final Loot ballBearings = new Loot("ball bearings", "A bag of 1000 tiny metal balls in a pouch", ItemTypes.misc, new ArrayList<>(Arrays.asList("As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn’t need to make the save.")), 1, Rarities.common, 0, 1, 0, 0);
-    public static final Loot basket = new Loot("basket", "a 2x2 wicker basket with no lid", ItemTypes.misc, new ArrayList<>(Arrays.asList("Stores items")), 1, Rarities.common, 0, 0, 0, 1);
-    public static final Loot bedroll = new Loot("bedroll", "bedding and a thing blanket small enough to roll up and tie.", ItemTypes.misc, new ArrayList<>(Arrays.asList("You never know where you’re going to sleep, and a bedroll helps you get better sleep in a hayloft or on the cold ground. A bedroll consists of bedding and a blanket thin enough to be rolled up and tied. In an emergency, it can double as a stretcher.")), 1, Rarities.common, 0, 1, 0, 0);;
-    public static final Loot arrow1 = new Loot("1 arrow", "1 standard arrow", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
-    public static final Loot arrows5 = new Loot("5 arrows", "5 standard arrows", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot barrel = new Loot("Barrel","a 1x1 wooden barrel with a lid",ItemTypes.misc, new ArrayList<>(Arrays.asList("Stores items")), 1,Rarities.common,0,0,0,1);
+    public static final Loot backpack = new Loot("Backpack", "leather pack carried on the back, typically with straps to secure it", ItemTypes.misc, new ArrayList<>(Arrays.asList("can hold 1 cubic foot/ 30 pounds of gear. You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack")), 1, Rarities.common, 0, 0, 0, 2);
+    public static final Loot ballBearings = new Loot("Ball bearings", "A bag of 1000 tiny metal balls in a pouch", ItemTypes.misc, new ArrayList<>(Arrays.asList("As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn’t need to make the save.")), 1, Rarities.common, 0, 1, 0, 0);
+    public static final Loot basket = new Loot("Basket", "a 2x2 wicker basket with no lid", ItemTypes.misc, new ArrayList<>(Arrays.asList("Stores items")), 1, Rarities.common, 0, 0, 0, 1);
+    public static final Loot bucket = new Loot("Bucket", "A bucket can hold 3 gallons of liquid, or 1/2 cubic foot of solid material", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 5);
+    public static final Loot bedroll = new Loot("Bedroll", "bedding and a thing blanket small enough to roll up and tie.", ItemTypes.misc, new ArrayList<>(Arrays.asList("You never know where you’re going to sleep, and a bedroll helps you get better sleep in a hayloft or on the cold ground. A bedroll consists of bedding and a blanket thin enough to be rolled up and tied. In an emergency, it can double as a stretcher.")), 1, Rarities.common, 0, 1, 0, 0);;
+    public static final Loot arrow1 = new Loot("Arrow", "Standard arrow", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrows5 = new Loot("Arrow", "Standard arrow", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
     public static final Loot bagofBallBearings1000 = new Loot("Bag of 1000 ball bearings", "As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the save.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 1, 0, 0);
     public static final Loot bell = new Loot("Bell", "A standard bell that rings, typically used for signaling.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 1, 0, 0);
     public static final Loot blanket = new Loot("Blanket", "A thick, quilted, blanket made to keep you warm in cold weather.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 5, 0);
@@ -103,435 +104,326 @@ public class StandardLoot {
     public static final Loot wornShoes = new Loot("Worn Shoes", "These boots have clearly seen much walking.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 1);
     public static final Loot haversack = new Loot("Haversack", "Similar to a backpack but with more pockets and better suited for travel", ItemTypes.misc, new ArrayList<>(Arrays.asList("abilities")), 1, Rarities.common, 0, 0, 0, 20);
 
+    //Poor item tiers, can include beggar
+    public static final Loot acidVial = new Loot("Acid Vial", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrows10 = new Loot("Arrow", "Standard arrow", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blockTackleLifting = new Loot("Block and Tackle (Lifting)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blowgunNeedles10 = new Loot("Blowgun Needle", "Ammunition for a blowgun", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blueQuartz = new Loot("Blue Quartz", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot brewersSupplies = new Loot("Brewers Supplies", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot bullseyeLantern = new Loot("Bullseye Lantern", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot burglarsPack = new Loot("Burglars Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot carpentersTools = new Loot("Carpenters Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot cartographersTools = new Loot("CartographersTools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot carvedBoneStatuette = new Loot("Carved Bone Statuette", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot chalcedonyGem = new Loot("Chalcedony (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot climbersKit = new Loot("Climbers Kit", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot cobblersTools = new Loot("Cobblers Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot costumeClothes = new Loot("Costume (clothes)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBoltCase = new Loot("Crossbow Bolt Case", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBolts1 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBolts5 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBolts10 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crowbar = new Loot("Crowbar", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crystal = new Loot("Crystal", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot disguiseKit = new Loot("Disguise Kit", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot dragonChessSet = new Loot("Dragon Chess Set", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot drum = new Loot("Drum", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot entertainersPack = new Loot("Entertainers Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot eyeAgateGem = new Loot("Eye Agate (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot fishingTackle = new Loot("Fishing Tackle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot forgeryKit = new Loot("Forgery Kit", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot glassblowersTools = new Loot("Glassblowers Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot hematiteGem = new Loot("Hematite (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot hempenRope50ft = new Loot("Hempen Rope (50 ft)", "Has 2 hit points and can be burst with a DC 17 Strength check.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 1, 0, 0);
+    public static final Loot holyEmblem = new Loot("Holy Emblem", "A holy Symbol is a representation of a god or pantheon. It might be an Amulet depicting a Symbol representing a deity, the same Symbol carefully engraved or inlaid as an emblem on a Shield, or a tiny box holding a fragment of a sacred relic. Pantheons lists the symbols commonly associated with many gods in the multiverse. A Cleric or Paladin can use a holy Symbol as a Spellcasting focus. To use the Symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a Shield.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot hourglass = new Loot("Hourglass", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot huntingTrap = new Loot("Hunting Trap", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot jasperGem = new Loot("Jasper (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot jewelersTools = new Loot("Jewelers Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot lapisLazuliGem = new Loot("Lapis Lazuli (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot leatherworkersTools = new Loot("Leatherworkers Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot malachiteGem = new Loot("Malachite (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot masonsTools = new Loot("Masons Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot merchantsScale = new Loot("Merchants Scale", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot parchment1 = new Loot("Parchment", "A sheet of parchment is a piece of goat hide or sheepskin that has been prepared for writing on.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 1, 0);
+    public static final Loot parchment5 = new Loot("Parchment", "A sheet of parchment is a piece of goat hide or sheepskin that has been prepared for writing on.", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 1, 0);
+    public static final Loot posonersKit = new Loot("Poisoners Kit", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionOfClimbing = new Loot("Potion of Climbing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionOfHealing = new Loot("Potion of Healing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot pottersTools = new Loot("Potters Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot priestsPack = new Loot("Priests Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot rhodochositeGem = new Loot("Rhodochosite (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot rod = new Loot("Rod", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot sealingWax = new Loot("Sealing Wax", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot sickle = new Loot("Sickle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot sledgeHammer = new Loot("Sledge Hammer", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot slingBullet15 = new Loot("Sling Bullet", "Small shaped stone used for a sling", ItemTypes.misc, new ArrayList<>(Arrays.asList("Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.")), 15, Rarities.common, 0, 0, 0, 4);
+    public static final Loot smithsTools = new Loot("Smiths Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot staff = new Loot("staff", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot totem = new Loot("Totem", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot turquiseGem = new Loot("Turquise (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot yewWand = new Loot("Yew Wand", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
 
-    /*
-    need to add these to support the poor item tiers
-acid_vial
-arrows_x10
-block_and_tackle_for_lifting
-blowgun_needles_x10
-blue_quartz_10gp
-brewers_supplies
-bucket
-bullseye_lantern
-burglars_pack
-carpenters_tools
-cartographers_tools
-carved_bone_statuette_x1_25gp
-chalcedony_gem_50gp
-climbers_kit
-cobblers_tools
-costume_clothes
-crossbow_bolt_case
-crossbow_bolts_x1
-crossbow_bolts_x5
-crossbow_bolts_x10
-crowbar
-crystal_10_gp
-disguise_kit
-dragon_chess_set
-drum
-entertainers_pack
-eye_agate_10gp
-fishing_tackle
-forgery_kit
-glassblowers_tools
-hematite_10gp
-hempen_rope_50_ft
-holy_symbol_amulet
-holy_symbol_emblem
-holy_symbol_reliquary
-hourglass
-hunting_trap
-jasper_gem_50gp
-jewelers_tools
-lapis_lazuli_10gp
-leatherworkers_tools
-malachite_10gp
-masons_tools
-merchants_scale
-moss_agate_10gp
-parchment_x1_sheet
-parchment_x5_sheet
-poisoners_kit
-potion_of_climbing
-potion_of_healing
-potters_tools
-priests_pack
-rhodochosite_10_gp
-rod
-sealing_wax
-sickle
-sledge_hammer
-sling_bullets_x10
-smiths_tools
-staff
-totem
-turquise_10gp
-yew_wand
-     */
+    //Middle-class items
+    public static final Loot abacus = new Loot("Abacus", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot alchemistsSupplies = new Loot("Alchemists Supplies", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot amberGem = new Loot("Amber (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot antitoxin = new Loot("Antitoxin", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrows15 = new Loot("Arrow", "Standard arrow", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 15, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrowPlusOne1 = new Loot("Arrow +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.uncommon, 0, 0, 0, 0);
+    public static final Loot arrowPlusOne5 = new Loot("Arrow +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.uncommon, 0, 0, 0, 0);
+    public static final Loot azuriteGem = new Loot("Azurite (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bagpipes = new Loot("Bagpipes", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bandedAgateGem = new Loot("Banded Agate (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot basicPoisonVial = new Loot("Vial of Basic Poison", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot beadNourishment = new Loot("Bead of Nourishment", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot beadRefreshment = new Loot("Bead of Refreshment", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bloodstoneGem = new Loot("Bloodstong (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot blowgunNeedles15 = new Loot("Blowgun Needle", "Ammunition for a blowgun", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 15, Rarities.common, 0, 0, 0, 0);
+    public static final Loot book25gp = new Loot("Book", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot bootsFalseTracks = new Loot("Boots of False Tracks", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot carnelianGem = new Loot("Carnelian (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot carvedIvoryStatuette = new Loot("Carved Ivory Statuette", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot chain5ft = new Loot("Chain (5 ft)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot chain10ft = new Loot("Chain (10 ft)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot cloakBillowing = new Loot("Cloak of Billowing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot clothGoldVestments = new Loot("Cloth of Gold Vestments", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot clothesMending = new Loot("Clothes of Mending", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBoltsPlusOne1 = new Loot("Crossbow Bolt +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.uncommon, 0, 0, 0, 0);
+    public static final Loot crossbowBoltsPlusOne5 = new Loot("Crossbow Bolt +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.uncommon, 0, 0, 0, 0);
+    public static final Loot crossbowBolts15 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 15, Rarities.common, 0, 0, 0, 0);
+    public static final Loot embroideredSilkHandkerchief = new Loot("Embroidered Silk Handkerchief", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot enduringSpellbook = new Loot("Enduring Spellbook", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot explorersPack = new Loot("Explorers Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot fineClothes = new Loot("Fine Clothes", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 15, 0, 0);
+    public static final Loot glovesThievery = new Loot("Gloves of Thievery", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot gogglesNight = new Loot("Goggles of Night", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot grapplingHook = new Loot("Grappling Hook", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot holyWaterFlask = new Loot("Flask of Holy Water", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot instrumentIllusions = new Loot("Instrument of Illusions", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot instrumentScribing = new Loot("Instrument of Scribing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot jadeGem = new Loot("Jade (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 100, 0);
+    public static final Loot lockTrickery = new Loot("Lock of Trickery", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot monsterHunterPack = new Loot("Monster Hunters Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot moonstoneGem = new Loot("Moonstone (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot mysteryKey = new Loot("Mystery Key", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot obsidianGem = new Loot("Obsidian (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot oilSlipperiness = new Loot("Oil of Slipperiness", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot onyxGem = new Loot("Onyx (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot orbDirection = new Loot("Orb of Direction", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot paintersSupplies = new Loot("Painters Supplies", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot paperBirdMagical = new Loot("Paper Bird (magical)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot perfumeVial = new Loot("Vial of Perfume", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot poisonersKit = new Loot("Poisoners Kit", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1,Rarities.common,0,0,0,0);
+    public static final Loot potionAcidResistance = new Loot("Potion of Acid Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 5, 0, 0);
+    public static final Loot potionColdResistance = new Loot("Potion of Cold Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionGreaterHealing = new Loot("Potion of Greater Healing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionFireBreath = new Loot("Potion of Fire Breath", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionfireResistance = new Loot("Potion of Fire Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionForceResistance = new Loot("Potion of Force Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionHillGiantStrength = new Loot("Potion of Hill Giant Strength", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionInvisibility = new Loot("Potion of Invisibility", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionLightningResistance = new Loot("Potion of Lightning Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionNecroticResistance = new Loot("Potion of Necrotic Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionPoison = new Loot("Potion of Poison", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionPoisonResistance = new Loot("Potion of Poison Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionPsychicResistance = new Loot("Potion of Psychic Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionRadiantResistance = new Loot("Potion of Radiant Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionThunderResistance = new Loot("Potion of Thunder Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot quartzGem = new Loot("Quartz (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot ringFeatherFalling = new Loot("Ring of Feather Falling", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringForceResistance = new Loot("Ring of Force Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringTruthTelling = new Loot("Ring of Truth Telling", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringMending = new Loot("Ring of Mending", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringSwimming = new Loot("Ring of Swimming", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ropeMending = new Loot("Rope of Mending", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot sardonyxGem = new Loot("Sardonyx (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot scholarsPack = new Loot("Scholars Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot silkRope25ft = new Loot("Silk Rope (25 ft)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot silkRope50ft = new Loot("Silk Rope (50 ft)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot silverEwer = new Loot("Silver Ewer", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot slingBulletPlusOne1 = new Loot("Sling Bullet +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.uncommon, 0, 0, 0, 0);
+    public static final Loot slingBulletPlusOne5 = new Loot("Sling Bullet +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.uncommon, 0, 0, 0, 0);
+    public static final Loot slingBullet20 = new Loot("Sling Bullet", "Small shaped stone used for a sling", ItemTypes.misc, new ArrayList<>(Arrays.asList("Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.")), 20, Rarities.common, 0, 0, 0, 4);
+    public static final Loot smallGoldBracelet = new Loot("Small Gold Bracelet", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot smallMirrorPaintedWood = new Loot("Small Mirror", "Set in a painted wooden frame", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot smokepowder = new Loot("Smokepowder", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvlCantrip = new Loot("Spell Scroll", "Contains a {random spell} cantrip", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl1 = new Loot("Spell Scroll", "Contains a {random spell} of level 1", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl2 = new Loot("Spell Scroll", "Contains a {random spell} of level 2", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl3 = new Loot("Spell Scroll", "Contains a {random spell} of level 3", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl4 = new Loot("Spell Scroll", "Contains a {random spell} of level 4", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl5 = new Loot("Spell Scroll", "Contains a {random spell} of level 5", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl6 = new Loot("Spell Scroll", "Contains a {random spell} of level 6", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellScrollLvl7 = new Loot("Spell Scroll", "Contains a {random spell} of level 7", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot spellbook = new Loot("Spellbook", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot staffAdornment = new Loot("Staff of Adornment", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot staffBirdcalls = new Loot("Staff of Bird Calls", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot staffFlowers = new Loot("Staff of Flowers", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot staffAdder = new Loot("Staff of the Adder", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot starRoseQuartzGem = new Loot("Star Rose Quartz (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot tankardSobriety = new Loot("Tankard of Sobriety", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot tinkersTools = new Loot("Tinkers Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot truthSerum = new Loot("Truth Serum", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot unbreakableArrow1 = new Loot("Unbreakable Arrow", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wallopingArrow1 = new Loot("Walloping Arrow", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wallopingBlowgunNeedle1 = new Loot("Walloping Blowgun Needle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wallopingCrossbowBolt1 = new Loot("Walloping Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wallopingSlingBullet1 = new Loot("Walloping Sling Bullet", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandConductiong = new Loot("Wand of Conducting", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandEntangle = new Loot("Wand of Entangle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandMagicMissiles = new Loot("Wand of Magic Missiles", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandScowls = new Loot("Wand of Scowls", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandSmiles = new Loot("Wand of Smiles", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot weaversTools = new Loot("Weavers Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot woodcarversTools = new Loot("", "Woodcarvers Tools", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot zirconGem = new Loot("Zircon (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
 
-
-     /*
-     Need to add these to support middle-class
-abacus_x1
-alchemists_supplies
-amber_gem_100gp
-antitoxin
-arrows_+1_x1
-arrows_+1_x5
-arrows_x15
-azurite_gem_10gp
-bagpipes
-banded_agate_gem_10gp
-basic_poison_vial
-bead_of_nourishment
-bead_of_refreshment
-bloodstone_gem_50gp
-blowgun_needles_x15
-blue_quartz_10gp
-book_25_gp
-boots_of_false_tracks
-carnelian_gem_50gp
-carved_ivory_statuette_250_gp
-chain_5_ft
-chain_10_ft
-cloak_of_billowing
-cloth_of_gold_vestments_25gp
-clothes_of_mending
-crossbow_bolts_+1_x1
-crossbow_bolts_+1_x5
-crossbow_bolts_x15
-crystal_10_gp
-disguise_kit
-embroidered_silk_handkerchief_25_gp
-enduring_spellbook
-explorers_pack
-eye_agate_10gp
-fine_clothes_15gp
-fishing_tackle
-glaive
-gloves_of_thievery
-goggles_of_night
-grappling_hook_x1
-healers_kit
-hematite_10gp
-holy_water_flask_25gp
-hourglass_25gp
-hunting_trap
-instrument_of_illusions
-instrument_of_scribing
-jade_gem_100gp
-jasper_gem_50gp
-jewelers_tools
-lock_of_trickery
-malachite_10gp
-masons_tools
-merchants_scale
-monster_hunters_pack
-moonstone_gem_50gp
-moss_agate_10gp
-mystery_key
-obsidian_10gp
-oil_of_slipperiness_x1
-onyx_gem_50gp
-orb_of_direction
-painters_supplies
-paper_bird_magical
-perfume_vial_5gp
-potion_of_acid_resistance_x1
-potion_of_climbing
-potion_of_cold_resistance
-potion_of_fire_breath
-potion_of_fire_resistance
-potion_of_force_resistance
-potion_of_greater_healing
-potion_of_healing
-potion_of_hill_giant_strength
-potion_of_invisibility
-potion_of_lightning_resistance
-potion_of_necrotic_resistance
-potion_of_poison
-potion_of_poison_resistance
-potion_of_psychic_resistance
-potion_of_radiant_resistance
-potion_of_thunder_resistance
-potters_tools
-quartz_gem_50gp
-ring_of_feather_falling
-ring_of_force_resistance
-ring_of_swimming
-ring_of_truth_telling
-rope_of_mending
-sardonyx_gem_50gp
-scholars_pack_40gp
-sealing_wax
-silk_rope_50ft
-silver_ewer_25gp
-sledge_hammer
-sling_bullets_+1_x1
-sling_bullets_+1_x5
-sling_bullets_x15
-small_gold_bracelet_25gp
-small_mirror_set_in_a_painted_wooden_frame_25gp
-smiths_tools
-smokepowder
-spell_scroll_cantrip
-spell_scroll_lvl_1
-spell_scroll_lvl_2
-spell_scroll_lvl_3
-spell_scroll_lvl_4
-spell_scroll_lvl_5
-spell_scroll_lvl_6
-spell_scroll_lvl_7
-spellbook_50gp
-staff
-staff_of_adornment
-staff_of_birdcalls
-staff_of_flowers
-staff_of_the_adder
-star_rose_quarts_50gp
-tankard_of_sobriety
-tinkers_tools
-truth_serum_150_gp
-unbreakable_arrow_x1
-walloping_arrow_x1
-walloping_blowgun_needle_x1
-walloping_crossbow_bolt_x1
-walloping_sling_bullet_x1
-wand_of_conductiong
-wand_of_entangle
-wand_of_magic_missiles
-wand_of_scowls
-wand_of_smiles
-weavers_tools
-woodcarvers_tools
-wooden_staff
-yew_wand
-zircon_gem_50gp
-      */
-
+    //Wealthy Items
+    //public static final Loot thing = new Loot("", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot alchemistsFireFlask = new Loot("Alchemists Fire Flask", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot amethystGem = new Loot("Amethyst (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot amuletOfProofAgainstDetectionLocation = new Loot("Amulet of Proof against Detection and Location", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("abilities")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrowPlusOne10 = new Loot("Arrow +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrowsPlusTwo5 = new Loot("Arrow +2", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrows20 = new Loot("Arrow", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 20, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrows30 = new Loot("Arrow", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 30, Rarities.common, 0, 0, 0, 0);
+    public static final Loot arrows40 = new Loot("Arrow", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 40, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bagHolding = new Loot("Bag of Holding", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot beltDwarvenkind = new Loot("Belt of Dwarvenkind", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot beltStoneGiantStrength = new Loot("Belt of Stone Giant Strength", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blowgunNeedlesPlusOne10 = new Loot("Blowgun Needle +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blowgunNeedlesPlusTwo5 = new Loot("Blowgun Needle +2", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blowgunNeedles20 = new Loot("Blowgun Needle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 20, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blowgunNeedles30 = new Loot("Blowgun Needle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 30, Rarities.common, 0, 0, 0, 0);
+    public static final Loot blowgunNeedles40 = new Loot("Blowgun Needle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 40, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bootsElvenkind = new Loot("Boots of Elvenkind", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bottledBreath = new Loot("Bottled Breath", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot boxturquiseanimalfigurines = new Loot("Box of turquise Animal Figurines", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot bootsArchery = new Loot("Boots of Archery", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot bootsDefense = new Loot("Boots of Defense", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot brassMugJadeInlay = new Loot("Brass Mug with Jade Inlay", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot breastplateGleaming = new Loot("Breastplate of Gleaming", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot broochShielding = new Loot("Brooch of Shielding", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot candleDeep = new Loot("Candle of the Deep", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot candle10 = new Loot("Candle", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot capWaterBreathing = new Loot("Cap of Water Breathing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot chainShirtGleaming = new Loot("Chain Shirt of Gleaming", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot chrysoberylGem = new Loot("Chrysoberyl (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot chrysopraseGem = new Loot("Chrysoprase (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot circletBlasting = new Loot("Circlet of Blasting", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot citrineGem = new Loot("Citrine (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 50, 0, 0);
+    public static final Loot cloakElvenkind = new Loot("Cloak of Elvenkind", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot cloakManyFashions = new Loot("Cloak of Many Fashions", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot clockworkAmulet = new Loot("Clockwork Amulet", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBoltsPlusOne10 = new Loot("Crossbow Bolt +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBoltsPlusTwo5 = new Loot("Crossbow Bolt +2", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBolts20 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 20, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBolts30 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 30, Rarities.common, 0, 0, 0, 0);
+    public static final Loot crossbowBolts40 = new Loot("Crossbow Bolt", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 40, Rarities.common, 0, 0, 0, 0);
+    public static final Loot diplomatsPack = new Loot("Diplomats Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot dreadHelm = new Loot("Dread Hekm", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot dungeoneersPack = new Loot("Dungeoneers Pack", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot dustDisappearance = new Loot("Dust of Disappearance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot dustDryness = new Loot("Dust of Dryness", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot dustSneezingChoking = new Loot("Dust of Sneezing and Choking", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot electrumRing = new Loot("Ellectrum Ring", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 580, 0, 0);
+    public static final Loot elementalBlueSapphire = new Loot("Elemental Blue Sapphire (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot elementalEmerald = new Loot("Elemental Emerald (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot elementalRedCorundum = new Loot("Elemental Red Corundum (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot elementalYellowDiamond = new Loot("Elemental Yellow Diamond (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot elixirHealth = new Loot("Elixir of Health", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot fineGoldChainFireOpal = new Loot("Fine Gold Chain set with a Fire Opal", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 2500, 0, 0);
+    public static final Loot fineWine5gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 5, 0, 0);
+    public static final Loot fineWine10gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot fineWine12gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 12, 0, 0);
+    public static final Loot fineWine15gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 15, 0, 0);
+    public static final Loot fineWine25gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot fineWine30gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 30, 0, 0);
+    public static final Loot fineWine40gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 40, 0, 0);
+    public static final Loot fineWine60gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 60, 0, 0);
+    public static final Loot fineWine80gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 80, 0, 0);
+    public static final Loot fineWine100gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot fineWine150gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 150, 0, 0);
+    public static final Loot fineWine200gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 200, 0, 0);
+    public static final Loot fineWine250gp = new Loot("Bottle of Fine Wine", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot garnetGem = new Loot("Garnet (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot gauntletsOgrePower = new Loot("Gauntlets of Ogre Power", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot goldDragonCombRedGarnets = new Loot("Gold Dragon Comb set with Red Garnets as Eyes", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 750, 0, 0);
+    public static final Loot goldLocketPaintedPortrait = new Loot("Gold Locket with a Painted Portrait Inside", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 25, 0, 0);
+    public static final Loot goldRingBloodstones = new Loot("Gold Ring set with Bloodstones", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot hatDisguise = new Loot("Hat of Disguise", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot hatVermin = new Loot("Hat of Vermin", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot hatWizardry = new Loot("Hat of Wizardry", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot hideArmorGleaming = new Loot("Hide Armor of Gleaming", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot hornSilentAlarm = new Loot("Horn of Silent Alarm", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot immovableRod = new Loot("Immovable Rod", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot jetGem = new Loot("Jet (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot largeGoldBracelet = new Loot("Large Gold Bracelet", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot magnifyingGlass = new Loot("Magnifying Glass", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot mapGrandBastion = new Loot("Map of Grand Bastion", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 2, 0, 0);
+    public static final Loot maskBeast = new Loot("Mask of the Beast", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot navigatorsTools = new Loot("Navigators Tools", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot necklaceStringSmallPinkPearls = new Loot("Necklace with a String of Small Pink Pearls", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 2500, 0, 0);
+    public static final Loot orbTime = new Loot("Orb of Time", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot painting10gp = new Loot("A painting", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 10, 0, 0);
+    public static final Loot painting15gp = new Loot("A painting", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 15, 0, 0);
+    public static final Loot painting20gp = new Loot("A painting", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 20, 0, 0);
+    public static final Loot paperBirdMagical5 = new Loot("A paper Bird (magical)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 5, 0, 0);
+    public static final Loot paperSheet10 = new Loot("A sheet of paper", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot paperSheet20 = new Loot("A sheet of paper", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot getParchment10 = new Loot("Parchment", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot getParchment20 = new Loot("Parchment", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 20, Rarities.common, 0, 0, 0, 0);
+    public static final Loot pearlGem = new Loot("Pearl (gem)", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 100, 0, 0);
+    public static final Loot perfumeBewitching = new Loot("Perfume of Bewitching", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot periaptHealth = new Loot("Periapt of Health", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot pipeSmokeMonsters = new Loot("Pipe of Smoke Monsters", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot poetryBook5gp = new Loot("A book of Poetry", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 5, 0, 0);
+    public static final Loot poetryBook15gp = new Loot("A book of Poetry", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 15, 0, 0);
+    public static final Loot potionAnimalFriendship = new Loot("Potion of Animal Friendship", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionGrowth = new Loot("Potion of Growth", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionSpeed = new Loot("Potion of Speed", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionWaterBreathing = new Loot("Potion of Water Breathing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionEvasion = new Loot("Potion of Evasion", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionMindShielding = new Loot("Potion of Mind Shielding", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionProtection = new Loot("Potion of Protection", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot potionRegeneration = new Loot("Potion of Regeneration", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringRegeneration = new Loot("Ring of Regeneration", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringThunderResistance = new Loot("Ring of Resistance", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot ringScintillatingColors = new Loot("Ring of Scintillating Colors", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot robeScintillatingColors = new Loot("Robe of Scintillating Colors", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot scrollProtection = new Loot("Scroll of Protection", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot shieldExpressions = new Loot("Shield of Expressions", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot silkBedclothes = new Loot("Silk Bedclothes", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 30, 0, 0);
+    public static final Loot silkBlanket = new Loot("Silk Blanket", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 60, 0, 0);
+    public static final Loot silkRobeGoldEmbroidery = new Loot("Silk Robe with Gold Embroidery", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot silverGoldBroach = new Loot("Silver and Gold Broach", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 750, 0, 0);
+    public static final Loot silverNecklaceGemstonePendant = new Loot("Silver Necklace with a Gemstone Pendant", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 250, 0, 0);
+    public static final Loot slingBulletPlusOne10 = new Loot("Sling Bullet +1", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 10, Rarities.common, 0, 0, 0, 0);
+    public static final Loot slingBulletPlusTwo5 = new Loot("Sling Bullet +2", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
+    public static final Loot slingBullet30 = new Loot("Sling Bullet", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 30, Rarities.common, 0, 0, 0, 0);
+    public static final Loot slingBullet40 = new Loot("Sling Bullet", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 40, Rarities.common, 0, 0, 0, 0);
+    public static final Loot smallGoldIdol = new Loot("Small Gold Idol", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 750, 0, 0);
+    public static final Loot spellScrollLvl8 = new Loot("Spell Scroll", "Contains a {random spell} of level 8", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot staffHealing = new Loot("Staff of Healing", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot staffPython = new Loot("Staff of the Python", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot stoneGoodLuck = new Loot("Stone of Good Luck", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot stoneIllLuck = new Loot("Stone of Ill Luck", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot unbreakableArrow5 = new Loot("Unbreakablle Arrow", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 5, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandEnemyDetection = new Loot("Wand of Enemy Detection", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandMagicDetection = new Loot("Wand of Magic Detection", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandPyrotechnics = new Loot("Wand of Pyrotechnics", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot wandSecrets = new Loot("Wand of Secrets", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
+    public static final Loot windFan = new Loot("Wind Fan", "", ItemTypes.misc, new ArrayList<>(Arrays.asList("")), 1, Rarities.common, 0, 0, 0, 0);
 
       /*
       These need to be added to support the wealthy loot classes
-alchemists_fire_flask
-amber_gem_100gp
-amethyst_gem_100gp
-amulet_of_health
-antitoxin
-arrows_+1_x10
-arrows_+2_x5
-arrows_x20
-arrows_x40
-azurite_gem_10gp
-bag_of_holding
-bead_of_nourishment
-bead_of_refreshment
-belt_of_dwarvenking
-belt_of_stone_giant_strength
-blowgun_needles_+1_x10
-blowgun_needles_+2_x5
-blowgun_needles_x20
-blowgun_needles_x40
-blue_quartz_10gp
-book_25_gp
-boots_of_elvenkind
-boots_of_false_tracks
-bottled_breath
-box_of_turquise_animal_figurines_250gp
-bracers_of_archery
-bracers_of_defense
-brass_mug_with_jade_inlay_250gp
-breastplate_of_gleaming
-brooch_of_shielding
-candle_of_the_deep
-candle_x10
-cap_of_water_breathing
-carnelian_gem_50gp
-carved_ivory_statuette
-chain_shirt_of_gleaming
-chalcedony_gem_50gp
-chrysoberyl_gem_100gp
-chrysoprase_gem_50gp
-circlet_of_blasting
-citrine_gem_50gp
-cloak_of_billowing
-cloak_of_elvenkind
-cloak_of_many_fashions
-clockwork_amulet
-cloth_of_gold_vestments_25gp
-clothes_of_mending
-component_pouch
-crossbow_bolt_case
-crossbow_bolts_+1_x10
-crossbow_bolts_+2_x5
-crossbow_bolts_x20
-crossbow_bolts_x40
-crystal_10_gp
-dart_+1_x10
-dart_+1_x20
-dart_+2_x5
-dart_+2_x10
-dart_x20
-dart_x40
-diplomats_pack
-disguise_kit
-dragon_chess_set
-dread_helm
-dungeoneers_pack
-dust_of_disappearance
-dust_of_dryness
-dust_of_sneezing_and_choking
-electrum_ring_580gp
-elemental_gem_blue_sapphire
-elemental_gem_emerald
-elemental_gem_red_corundum
-elemental_gem_yellow_diamond
-elixer_of_health
-embroidered_silk_handkerchief_25gp
-explorers_pack
-eye_agate_10gp
-fine_clothes_15gp
-fine_gold_chain_set_with_a_fire_opal_2500gp
-fine_wine_bottle_5gp
-fine_wine_bottle_10gp
-fine_wine_bottle_12gp
-fine_wine_bottle_15gp
-fine_wine_bottle_25gp
-fine_wine_bottle_30gp
-fine_wine_bottle_40gp
-fine_wine_bottle_60gp
-fine_wine_bottle_80gp
-fine_wine_bottle_100gp
-garnet_gem_100gp
-gauntlets_of_ogre_power
-goggles_of_night
-gold_dragon_comb_set_with_red_garnets_as_eyes_750gp
-gold_locket_with_a_painted_portrait_inside_25gp
-gold_ring_set_with_bloodstones_250gp
-hat_of_disguise
-hat_of_vermin
-hat_of_wizardry
-hide_armor_of_gleaming
-holy_symbol_amulet
-holy_symbol_emblem
-holy_symbol_reliquary
-holy_water_flask_25gp
-horn_of_silent_alarm
-hourglass
-immovable_rod
-jade_gem_100gp
-jasper_gem_50gp
-jet_gem_100gp
-large_gold_bracelet_250gp
-magnifying_glass_100gp
-malachite_10gp
-map_of_Grand_Bastion_2gp
-map_or_scroll_case
-mask_of_the_beast
-merchants_scale
-mess_kit
-monster_hunters_pack
-moon-touched_rapier
-moon-touched_scimitar
-moon-touched_shortsword
-moonstone_gem_50gp
-mystery_key
-naviagtion_orb
-navigators_tools
-necklace_string_of_small_pink_pearls_2500gp
-oil_of_slipperiness_x1
-orb_of_direction
-orb_of_time
-painters_supplies
-painting_10gp
-painting_25gp
-pair_of_engraved_bone_dice
-paper_bird_magical_x5
-paper_x10_sheet
-paper_x20_sheet
-parchment_x10_sheet
-parchment_x20_sheet
-pearl_100gp
-perfume_of_bewitching
-perfume_vial_5gp
-periapt_of_health
-pipe-of_smoke_monsters
-poetry_book_15_gp
-potion_of_acid_resistance_x1
-potion_of_animal_friendship
-potion_of_cold_resistance
-potion_of_fire_breath
-potion_of_fire_resistance
-potion_of_force_resistance
-potion_of_greater_healing
-potion_of_growth
-potion_of_healing
-potion_of_invisibility
-potion_of_lightning_resistance
-potion_of_necrotic_resistance
-potion_of_poison
-potion_of_poison_resistance
-potion_of_psychic_resistance
-potion_of_radiant_resistance
-potion_of_speed
-potion_of_water_breathing
-priests_pack
-rhodochosite_10_gp
-ring_of_evasion
-ring_of_mind_shielding
-ring_of_necrotic_resistance
-ring_of_poison_resistance
-ring_of_protection
-ring_of_psychic_resistance
-ring_of_radiant_resistance
-ring_of_regeneration
-ring_of_thunder_resistance
-ring_of_truth_telling
-robe-of_scintillating_colors
-rod_of_the_pact_keeper
-sardonyx_gem_50gp
-scholars_pack_40gp
-scroll_of_protection
-shield_of_expressions
-silk_bedclothes_30gp
-silk_blanket_60gp
-silk_robe_with_gold_embroidery_250gp
-silver_and_gold_broach_750gp
-silver_ewer_25gp
-silver_necklace_with_a_gemstone_pendant_250gp
-sling_bullets_+1_x10
-sling_bullets_+2_x5
-sling_bullets_x20
-sling_bullets_x40
-small_gold_bracelet_25gp
-small_gold_idol_750gp
-small_mirror_set_in_a_painted_wooden_frame_25gp
-spellbook_50gp
-staff
-staff_of_adornment
-staff_of_birdcalls
-staff_of_flowers
-staff_of_healing
-staff_of_the_adder
-staff_of_the_python
-star_rose_quarts_50gp
-steel_mirror
-stone_of_good_luck
-stone_of_ill_luck
-tankard_of_sobriety
-unbreakable_arrow_x5
-wand_of_conducting
-wand_of_enemy_detection
-wand_of_magic_detection
-wand_of_magic_missiles
-wand_of_pyrotechnics
-wand_of_secrets
-wind_fan
+moon-touched_rapier, vicious, gleaming
+ADD IN ALL SPELL SCROLLS
+
        */
 
     //public static final Loot thing = new Loot("name","desc",ItemTypes.misc, new ArrayList<>(Arrays.asList("abilities")),1,Rarities.common,0,0,0,0);
 
-    //blowgun
-    //club
 }
