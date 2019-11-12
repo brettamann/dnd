@@ -838,20 +838,21 @@ public class RandomGenerator {
 
     private Loot getBeggarLootTier1() {
         RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(5, new Loot(StandardLoot.barrel))
+                .add(3, new Loot(StandardLoot.barrel))
+                .add(3, new Loot(StandardLoot.bucket))
                 .add(3, new Loot(StandardLoot.basket))
                 .add(3, new Loot(StandardLoot.arrow1))
                 .add(3, new Loot(StandardLoot.bell))
                 .add(3, new Loot(StandardLoot.blowgunNeedles1))
                 .add(3, new Loot(StandardLoot.candle1))
                 .add(3, new Loot(StandardLoot.chalk1))
-                .add(3, new Loot(StandardLoot.commonClothes))
+                .add(5, new Loot(StandardLoot.commonClothes))
                 .add(3, new Loot(StandardLoot.cooksUtinsels))
-                .add(3, new Loot(StandardLoot.diceSet))
+                .add(2, new Loot(StandardLoot.diceSet))
                 .add(3, new Loot(StandardLoot.flask))
-                .add(3, new Loot(StandardLoot.glassBottle))
+                .add(2, new Loot(StandardLoot.glassBottle))
                 .add(3, new Loot(StandardLoot.ironPot))
-                .add(3, new Loot(StandardLoot.ironSpikes1))
+                .add(2, new Loot(StandardLoot.ironSpikes1))
                 .add(5, new Loot(StandardLoot.jug))
                 .add(5, new Loot(StandardLoot.lamp))
                 .add(3, new Loot(StandardLoot.manacles))
@@ -943,549 +944,701 @@ public class RandomGenerator {
     }
 
     private Loot getPoorLootTier1() {
-        /*
-acid_vial
-arrows_x1
-arrows_x5
-arrows_x10
-backpack
-ball_bearings_bag_of_1000
-basket
-blanket
-block_and_tackle_for_lifting
-blowgun
-blowgun_needles_x1
-blowgun_needles_x5
-blowgun_needles_x10
-blue_quartz_10gp
-brewers_supplies
-bucket
-bullseye_lantern
-burglars_pack
-candle_x1
-candle_x5
-carpenters_tools
-cartographers_tools
-carved_bone_statuette_x1_25gp
-chalcedony_gem_50gp
-climbers_kit
-club
-cobblers_tools
-common_clothes
-component_pouch
-cooks_utinsels
-costume_clothes
-crossbow_bolt_case
-crossbow_bolts_x1
-crossbow_bolts_x5
-crossbow_bolts_x10
-crowbar
-crystal_10_gp
-dagger
-dagger_+1
-dart_x5
-dart_x_1
-dice_set
-disguise_kit
-dragon_chess_set
-drum
-entertainers_pack
-eye_agate_10gp
-fishing_tackle
-flask_x1
-flute
-forgery_kit
-glass_bottle
-glassblowers_tools
-hammer
-healers_kit
-hematite_10gp
-hempen_rope_25_ft
-hempen_rope_50_ft
-herbalism_kit
-holy_symbol_amulet
-holy_symbol_emblem
-holy_symbol_reliquary
-hooded_lantern
-horn_instrument
-hourglass
-hunting_trap
-ink_1_oz_bottle
-ink_pen
-iron_pot
-jasper_gem_50gp
-jewelers_tools
-jug
-lamp
-lapis_lazuli_10gp
-leatherworkers_tools
-light_crossbow
-light_hammer
-lock
-lute
-malachite_10gp
-manacles
-map_or_scroll_case
-masons_tools
-merchants_scale
-mess_kit
-miners_pick
-moss_agate_10gp
-net
-oil_flask
-pan_flute
-paper_x1_sheet
-paper_x5_sheet
-parchment_x1_sheet
-parchment_x5_sheet
-pitcher
-playing_card_set
-poisoners_kit
-potion_of_climbing
-potion_of_healing
-potters_tools
-pouch
-priests_pack
-quiver
-rations_1_day
-rations_2_days
-rations_3_days
-rhodochosite_10_gp
-robes
-rod
-sack
-sealing_wax
-shortbow
-shovel
-sickle
-signal_whistle
-sledge_hammer
-sling
-sling_bullets_x1
-sling_bullets_x5
-sling_bullets_x10
-smiths_tools
-soap
-staff
-tankard
-thieves_tools
-tigers_eye_10gp
-tinderbox
-torch
-totem
-travelers_clothes
-trinket
-turquise_10gp
-vial
-wand
-waterskin
-whetstone
-whip
-yew_wand
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.backpack),
+                new Loot(StandardLoot.basket),
+                new Loot(StandardLoot.blanket),
+                new Loot(StandardLoot.arrow1),
+                new Loot(StandardLoot.blockTackleLifting),
+                new Loot(StandardLoot.blowgunNeedles1),
+                new Loot(StandardLoot.bucket),
+                new Loot(StandardLoot.burglarsPack),
+                new Loot(StandardLoot.candle1),
+                new Loot(StandardLoot.climbersKit),
+                new Loot(StandardLoot.commonClothes),
+                new Loot(StandardLoot.commonClothes),
+                new Loot(StandardLoot.commonClothes),
+                new Loot(StandardLoot.commonClothes),
+                new Loot(StandardLoot.crossbowBolts1),
+                new Loot(StandardLoot.crowbar),
+                new Loot(StandardLoot.diceSet),
+                new Loot(StandardLoot.drum),
+                new Loot(StandardLoot.fishingTackle),
+                new Loot(StandardLoot.flask),
+                new Loot(StandardLoot.hempenRope25ft),
+                new Loot(StandardLoot.hammer),
+                new Loot(StandardLoot.ironPot),
+                new Loot(StandardLoot.jug),
+                new Loot(StandardLoot.lamp),
+                new Loot(StandardLoot.lock),
+                new Loot(StandardLoot.manacles),
+                new Loot(StandardLoot.messKit),
+                new Loot(StandardLoot.minersPick),
+                new Loot(StandardLoot.paperSheet1),
+                new Loot(StandardLoot.parchment1),
+                new Loot(StandardLoot.playingCardSet),
+                new Loot(StandardLoot.pouch),
+                new Loot(StandardLoot.quiver),
+                new Loot(StandardLoot.dayRations1),
+                new Loot(StandardLoot.dayRations2),
+                new Loot(StandardLoot.rod),
+                new Loot(StandardLoot.sack),
+                new Loot(StandardLoot.shovel),
+                new Loot(StandardLoot.sickle),
+                new Loot(StandardLoot.signalWhistle),
+                new Loot(StandardLoot.sledgeHammer),
+                new Loot(StandardLoot.slingBullet5),
+                new Loot(StandardLoot.soap),
+                new Loot(StandardLoot.staff),
+                new Loot(StandardLoot.tankard),
+                new Loot(StandardLoot.tinderbox),
+                new Loot(StandardLoot.torch),
+                new Loot(StandardLoot.trinket),
+                new Loot(StandardLoot.vial),
+                new Loot(StandardLoot.wand),
+                new Loot(StandardLoot.walkingStick),
+                new Loot(StandardLoot.waterskin)
 
-     */
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, StandardLoot.barrel);
-        return rc.next();
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getPoorLootTier2() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.bagofBallBearings1000),
+                new Loot(StandardLoot.arrows5),
+                new Loot(StandardLoot.blowgunNeedles5),
+                new Loot(StandardLoot.brewersSupplies),
+                new Loot(StandardLoot.bullseyeLantern),
+                new Loot(StandardLoot.candle5),
+                new Loot(StandardLoot.carpentersTools),
+                new Loot(StandardLoot.cartographersTools),
+                new Loot(StandardLoot.cobblersTools),
+                new Loot(StandardLoot.componentPouch),
+                new Loot(StandardLoot.costumeClothes),
+                new Loot(StandardLoot.crossbowBolts5),
+                new Loot(StandardLoot.disguiseKit),
+                new Loot(StandardLoot.entertainersPack),
+                new Loot(StandardLoot.flute),
+                new Loot(StandardLoot.glassblowersTools),
+                new Loot(StandardLoot.haversack),
+                new Loot(StandardLoot.hempenRope50ft),
+                new Loot(StandardLoot.holyEmblem),
+                new Loot(StandardLoot.healersKit),
+                new Loot(StandardLoot.herbalismKit),
+                new Loot(StandardLoot.holySymbol),
+                new Loot(StandardLoot.hornInstrument),
+                new Loot(StandardLoot.huntingTrap),
+                new Loot(StandardLoot.ink1ozBottle),
+                new Loot(StandardLoot.inkPen),
+                new Loot(StandardLoot.leatherworkersTools),
+                new Loot(StandardLoot.mapScrollCase),
+                new Loot(StandardLoot.masonsTools),
+                new Loot(StandardLoot.merchantsScale),
+                new Loot(StandardLoot.panFlute),
+                new Loot(StandardLoot.paperSheet5),
+                new Loot(StandardLoot.parchment5),
+                new Loot(StandardLoot.pottersTools),
+                new Loot(StandardLoot.priestsPack),
+                new Loot(StandardLoot.dayRations3),
+                new Loot(StandardLoot.dayRations4),
+                new Loot(StandardLoot.robes),
+                new Loot(StandardLoot.signetRing),
+                new Loot(StandardLoot.slingBullet10),
+                new Loot(StandardLoot.smithsTools),
+                new Loot(StandardLoot.thievesTools),
+                new Loot(StandardLoot.travelersClothes),
+                new Loot(StandardLoot.totem),
+                new Loot(StandardLoot.whetstone),
+                new Loot(StandardLoot.yewWand)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getPoorLootTier3() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.acidVial),
+                new Loot(StandardLoot.arrows10),
+                new Loot(StandardLoot.blowgunNeedles10),
+                new Loot(StandardLoot.blueQuartz),
+                new Loot(StandardLoot.carvedBoneStatuette),
+                new Loot(StandardLoot.chalcedonyGem),
+                new Loot(StandardLoot.crossbowBoltCase),
+                new Loot(StandardLoot.crossbowBolts10),
+                new Loot(StandardLoot.crystal),
+                new Loot(StandardLoot.dragonChessSet),
+                new Loot(StandardLoot.eyeAgateGem),
+                new Loot(StandardLoot.forgeryKit),
+                new Loot(StandardLoot.glassBottle),
+                new Loot(StandardLoot.hematiteGem),
+                new Loot(StandardLoot.hoodedLantern),
+                new Loot(StandardLoot.hourglass),
+                new Loot(StandardLoot.jasperGem),
+                new Loot(StandardLoot.jewelersTools),
+                new Loot(StandardLoot.lapisLazuliGem),
+                new Loot(StandardLoot.malachiteGem),
+                new Loot(StandardLoot.mossAgateGem),
+                new Loot(StandardLoot.oilFlask),
+                new Loot(StandardLoot.posonersKit),
+                new Loot(StandardLoot.potionOfClimbing),
+                new Loot(StandardLoot.potionOfHealing),
+                new Loot(StandardLoot.dayRations5),
+                new Loot(StandardLoot.dayRations6),
+                new Loot(StandardLoot.rhodochositeGem),
+                new Loot(StandardLoot.sealingWax),
+                new Loot(StandardLoot.slingBullet15),
+                new Loot(StandardLoot.tigersEyeGem),
+                new Loot(StandardLoot.turquiseGem)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getMiddleClassLootTier1() {
-    /*
-    abacus_x1
-alchemists_supplies
-amber_gem_100gp
-antitoxin
-arrows_+1_x1
-arrows_+1_x5
-arrows_x5
-arrows_x10
-arrows_x15
-azurite_gem_10gp
-backpack
-bagpipes
-ball_bearings_bag_of_1000
-banded_agate_gem_10gp
-basic_poison_vial
-basket
-bead_of_nourishment
-bead_of_refreshment
-bloodstone_gem_50gp
-blowgun
-blowgun_+1
-blowgun_needles_x5
-blowgun_needles_x10
-blowgun_needles_x15
-blue_quartz_10gp
-book_25_gp
-boots_of_false_tracks
-brewers_supplies
-burglars_pack
-caltrops_x5
-caltrops_x10
-caltrops_x15
-candle_x5
-carnelian_gem_50gp
-carpenters_tools
-cartographers_tools
-carved_bone_statuette_x1_25gp
-carved_ivory_statuette_250_gp
-chain_5_ft
-chain_10_ft
-climbers_kit
-cloak_of_billowing
-cloth_of_gold_vestments_25gp
-clothes_of_mending
-club
-club_+1
-cobblers_tools
-common_clothes
-component_pouch
-cooks_utinsels
-costume_clothes
-crossbow_bolts_+1_x1
-crossbow_bolts_+1_x5
-crossbow_bolts_x5
-crossbow_bolts_x10
-crossbow_bolts_x15
-crystal_10_gp
-dagger
-dagger_+1
-dart_+1_x1
-dart_+1_x5
-dart_x5
-dart_x10
-dice_set
-disguise_kit
-embroidered_silk_handkerchief_25_gp
-enduring_spellbook
-entertainers_pack
-explorers_pack
-eye_agate_10gp
-fine_clothes_15gp
-fishing_tackle
-flail
-flail_+1
-flask
-flute
-forgery_kit
-glaive
-glass_bottle
-glassblowers_tools
-gloves_of_thievery
-goggles_of_night
-grappling_hook_x1
-greataxe
-greatclub
-greatclub_+1
-greatsword
-greatsword_+1
-halberd
-halberd_+1
-hammer
-hand_crossbow
-hand_crossbow_+1
-handaxe
-handaxe_+1
-healers_kit
-hematite_10gp
-hempen_rope_25_ft
-hempen_rope_50_ft
-herbalism_kit
-holy_water_flask_25gp
-hooded_lantern
-horn_instrument
-hourglass_25gp
-hunting_trap
-ink_1_oz_bottle
-ink_pen
-instrument_of_illusions
-instrument_of_scribing
-iron_pot
-iron_spikes_x5
-iron_spikes_x10
-jade_gem_100gp
-jasper_gem_50gp
-javelin_+1_x1
-javelin_x1
-jewelers_tools
-jug
-lamp
-lance
-lance_+1
-lapis_lazuli_10gp
-leatherworkers_tools
-light_crossbow
-light_crossbow_+1
-light_hammer
-light_hammer_+1
-lock
-lock_of_trickery
-longbow
-longbow_+1
-longsword
-longsword_+1
-lute
-lyre
-mace
-mace_+1
-malachite_10gp
-manacles
-map_or_scroll_case
-masons_tools
-maul
-maul_+1
-merchants_scale
-mess_kit
-miners_pick
-monster_hunters_pack
-moonstone_gem_50gp
-morningstar
-morningstar_+1
-moss_agate_10gp
-mystery_key
-net
-net_+1_x1
-obsidian_10gp
-oil_flask
-oil_of_slipperiness_x1
-onyx_gem_50gp
-orb_of_direction
-painters_supplies
-pan_flute
-paper_bird_magical
-paper_x5_sheet
-parchment_x5_sheet
-perfume_vial_5gp
-pike
-pike_+1
-pitcher
-playing_card_set
-poisoners_kit
-potion_of_acid_resistance_x1
-potion_of_climbing
-potion_of_cold_resistance
-potion_of_fire_breath
-potion_of_fire_resistance
-potion_of_force_resistance
-potion_of_greater_healing
-potion_of_healing
-potion_of_hill_giant_strength
-potion_of_invisibility
-potion_of_lightning_resistance
-potion_of_necrotic_resistance
-potion_of_poison
-potion_of_poison_resistance
-potion_of_psychic_resistance
-potion_of_radiant_resistance
-potion_of_thunder_resistance
-potters_tools
-pouch
-quarterstaff
-quarterstaff_+1
-quartz_gem_50gp
-quiver
-rapier
-rapier_+1
-rations_1_day
-rations_2_days
-rations_3_days
-ring_of_feather_falling
-ring_of_force_resistance
-ring_of_swimming
-ring_of_truth_telling
-robes
-rope_of_mending
-sack
-sardonyx_gem_50gp
-scholars_pack_40gp
-scimitar_+1
-sealing_wax
-shield
-shield_+1
-shortbow
-shortbox_+1
-shortsword
-shortsword_+1
-shovel
-sickle
-sickle_+1
-signal_whistle
-signet_ring_5gp
-silk_rope_50ft
-silver_ewer_25gp
-sledge_hammer
-sling
-sling_+1
-sling_bullets_+1_x1
-sling_bullets_+1_x5
-sling_bullets_x5
-sling_bullets_x10
-sling_bullets_x15
-small_gold_bracelet_25gp
-small_mirror_set_in_a_painted_wooden_frame_25gp
-smiths_tools
-smokepowder
-soap
-spear
-spear_+1
-spell_scroll_cantrip
-spell_scroll_lvl_1
-spell_scroll_lvl_2
-spell_scroll_lvl_3
-spell_scroll_lvl_4
-spell_scroll_lvl_5
-spell_scroll_lvl_6
-spell_scroll_lvl_7
-spellbook_50gp
-staff
-staff_of_adornment
-staff_of_birdcalls
-staff_of_flowers
-staff_of_the_adder
-star_rose_quarts_50gp
-steel_mirror
-tankard
-tankard_of_sobriety
-thieves_tools
-tigers_eye_10gp
-tinderbox
-tinkers_tools
-torch
-totem
-travelers_clothes
-trident
-trident_+1
-trinket
-truth_serum_150_gp
-turquise_10gp
-two-person_tent
-unbreakable_arrow_x1
-vial
-vicious_battleaxe
-vicious_blowgun
-vicious_club
-vicious_dagger
-vicious_dart_x2
-vicious_dart_x5
-vicious_flail
-vicious_glaive
-vicious_greataxe
-vicious_greatclub
-vicious_greatsword
-vicious_halberd
-vicious_hand_crossbow
-vicious_handaxe
-vicious_heavy_crowssbow
-vicious_javelin
-vicious_lance
-vicious_light_crossbow
-vicious_light_hammer
-vicious_longbow
-vicious_longsword
-vicious_mace
-vicious_maul
-vicious_morningstar
-vicious_pike
-vicious_quarterstaff
-vicious_rapier
-vicious_scimitar
-vicious_shortbow
-vicious_shortsword
-vicious_sickle
-vicious_sling
-vicious_spear
-vicious_trident
-vicious_war_pick
-vicious_warhammer
-vicious_whip
-viol_instrument
-walloping_arrow_x1
-walloping_blowgun_needle_x1
-walloping_crossbow_bolt_x1
-walloping_sling_bullet_x1
-wand
-wand_of_conductiong
-wand_of_entangle
-wand_of_magic_missiles
-wand_of_scowls
-wand_of_smiles
-war_pick
-war_pick_+1
-warhammer
-warhammer_+1
-waterskin
-weavers_tools
-whetstone
-whip
-whip_+1
-woodcarvers_tools
-wooden_staff
-yew_wand
-zircon_gem_50gp
-     */
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.abacus),
+                new Loot(StandardLoot.antitoxin),
+                new Loot(StandardLoot.arrows10),
+                new Loot(StandardLoot.azuriteGem),
+                new Loot(StandardLoot.backpack),
+                new Loot(StandardLoot.bagpipes),
+                new Loot(StandardLoot.bagofBallBearings1000),
+                new Loot(StandardLoot.bandedAgateGem),
+                new Loot(StandardLoot.basket),
+                new Loot(StandardLoot.blowgunNeedles5),
+                new Loot(StandardLoot.blowgunNeedles10),
+                new Loot(StandardLoot.blueQuartz),
+                new Loot(StandardLoot.brewersSupplies),
+                new Loot(StandardLoot.burglarsBackpack),
+                new Loot(StandardLoot.caltropsBag),
+                new Loot(StandardLoot.candle1),
+                new Loot(StandardLoot.candle5),
+                new Loot(StandardLoot.carpentersTools),
+                new Loot(StandardLoot.cartographersTools),
+                new Loot(StandardLoot.chain5ft),
+                new Loot(StandardLoot.climbersKit),
+                new Loot(StandardLoot.cobblersTools),
+                new Loot(StandardLoot.commonClothes),
+                new Loot(StandardLoot.cooksUtinsels),
+                new Loot(StandardLoot.componentPouch),
+                new Loot(StandardLoot.costumeClothes),
+                new Loot(StandardLoot.crossbowBolts5),
+                new Loot(StandardLoot.crystal),
+                new Loot(StandardLoot.diceSet),
+                new Loot(StandardLoot.disguiseKit),
+                new Loot(StandardLoot.entertainersPack),
+                new Loot(StandardLoot.eyeAgateGem),
+                new Loot(StandardLoot.fishingTackle),
+                new Loot(StandardLoot.flask),
+                new Loot(StandardLoot.flute),
+                new Loot(StandardLoot.glassBottle),
+                new Loot(StandardLoot.glassblowersTools),
+                new Loot(StandardLoot.hammer),
+                new Loot(StandardLoot.healersKit),
+                new Loot(StandardLoot.hematiteGem),
+                new Loot(StandardLoot.hempenRope25ft),
+                new Loot(StandardLoot.herbalismKit),
+                new Loot(StandardLoot.hoodedLantern),
+                new Loot(StandardLoot.hourglass),
+                new Loot(StandardLoot.huntingTrap),
+                new Loot(StandardLoot.inkPen),
+                new Loot(StandardLoot.ink1ozBottle),
+                new Loot(StandardLoot.ironPot),
+                new Loot(StandardLoot.ironSpikes5),
+                new Loot(StandardLoot.jug),
+                new Loot(StandardLoot.lamp),
+                new Loot(StandardLoot.lapisLazuliGem),
+                new Loot(StandardLoot.leatherworkersTools),
+                new Loot(StandardLoot.lock),
+                new Loot(StandardLoot.lute),
+                new Loot(StandardLoot.lyre),
+                new Loot(StandardLoot.malachiteGem),
+                new Loot(StandardLoot.manacles),
+                new Loot(StandardLoot.mapScrollCase),
+                new Loot(StandardLoot.masonsTools),
+                new Loot(StandardLoot.merchantsScale),
+                new Loot(StandardLoot.messKit),
+                new Loot(StandardLoot.minersPick),
+                new Loot(StandardLoot.mossAgateGem),
+                new Loot(StandardLoot.obsidianGem),
+                new Loot(StandardLoot.oilFlask),
+                new Loot(StandardLoot.paintersSupplies),
+                new Loot(StandardLoot.panFlute),
+                new Loot(StandardLoot.paperSheet5),
+                new Loot(StandardLoot.parchment5),
+                new Loot(StandardLoot.perfumeVial),
+                new Loot(StandardLoot.playingCardSet),
+                new Loot(StandardLoot.pottersTools),
+                new Loot(StandardLoot.pouch),
+                new Loot(StandardLoot.quiver),
+                new Loot(StandardLoot.dayRations1),
+                new Loot(StandardLoot.dayRations2),
+                new Loot(StandardLoot.dayRations3),
+                new Loot(StandardLoot.robes),
+                new Loot(StandardLoot.sack),
+                new Loot(StandardLoot.scholarsPack),
+                new Loot(StandardLoot.sealingWax),
+                new Loot(StandardLoot.shovel),
+                new Loot(StandardLoot.sickle),
+                new Loot(StandardLoot.signetRing),
+                new Loot(StandardLoot.signalWhistle),
+                new Loot(StandardLoot.sledgeHammer),
+                new Loot(StandardLoot.slingBullet10),
+                new Loot(StandardLoot.smithsTools),
+                new Loot(StandardLoot.smokepowder),
+                new Loot(StandardLoot.soap),
+                new Loot(StandardLoot.staff),
+                new Loot(StandardLoot.steelMirror),
+                new Loot(StandardLoot.tankard),
+                new Loot(StandardLoot.thievesTools),
+                new Loot(StandardLoot.tinderbox),
+                new Loot(StandardLoot.tinkersTools),
+                new Loot(StandardLoot.torch),
+                new Loot(StandardLoot.totem),
+                new Loot(StandardLoot.travelersClothes),
+                new Loot(StandardLoot.trinket),
+                new Loot(StandardLoot.turquiseGem),
+                new Loot(StandardLoot.vial),
+                new Loot(StandardLoot.violInstrument),
+                new Loot(StandardLoot.wand),
+                new Loot(StandardLoot.waterskin),
+                new Loot(StandardLoot.weaversTools),
+                new Loot(StandardLoot.whetstone),
+                new Loot(StandardLoot.woodcarversTools)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getMiddleClassLootTier2() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.explorersPack),
+                new Loot(StandardLoot.bloodstoneGem),
+                new Loot(StandardLoot.clothGoldVestments),
+                new Loot(StandardLoot.forgeryKit),
+                new Loot(StandardLoot.yewWand),
+                new Loot(StandardLoot.arrows15),
+                new Loot(StandardLoot.basicPoisonVial),
+                new Loot(StandardLoot.book25gp),
+                new Loot(StandardLoot.carvedBoneStatuette),
+                new Loot(StandardLoot.embroideredSilkHandkerchief),
+                new Loot(StandardLoot.haversack),
+                new Loot(StandardLoot.silverEwer),
+                new Loot(StandardLoot.poisonersKit),
+                new Loot(StandardLoot.silkRope25ft),
+                new Loot(StandardLoot.spellScrollLvlCantrip),
+                new Loot(StandardLoot.spellScrollLvl1),
+                new Loot(StandardLoot.spellScrollLvl2),
+                new Loot(StandardLoot.staffAdornment),
+                new Loot(StandardLoot.staffBirdcalls),
+                new Loot(StandardLoot.staffFlowers),
+                new Loot(StandardLoot.wandScowls),
+                new Loot(StandardLoot.wandSmiles),
+                new Loot(StandardLoot.wandMagicMissiles),
+                new Loot(StandardLoot.tigersEyeGem),
+                new Loot(StandardLoot.sardonyxGem),
+                new Loot(StandardLoot.zirconGem),
+                new Loot(StandardLoot.quartzGem),
+                new Loot(StandardLoot.onyxGem),
+                new Loot(StandardLoot.starRoseQuartzGem),
+                new Loot(StandardLoot.moonstoneGem),
+                new Loot(StandardLoot.jewelersTools),
+                new Loot(StandardLoot.jasperGem),
+                new Loot(StandardLoot.hempenRope50ft),
+                new Loot(StandardLoot.smallGoldBracelet),
+                new Loot(StandardLoot.smallMirrorPaintedWood),
+                new Loot(StandardLoot.grapplingHook),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.carnelianGem),
+                new Loot(StandardLoot.crossbowBolts10),
+                new Loot(StandardLoot.chain10ft)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getMiddleClassLootTier3() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.silkRope50ft),
+                new Loot(StandardLoot.spellbook),
+                new Loot(StandardLoot.bootsFalseTracks),
+                new Loot(StandardLoot.lockTrickery),
+                new Loot(StandardLoot.spellScrollLvl3),
+                new Loot(StandardLoot.spellScrollLvl4),
+                new Loot(StandardLoot.slingBulletPlusOne1),
+                new Loot(StandardLoot.tankardSobriety),
+                new Loot(StandardLoot.staffAdder),
+                new Loot(StandardLoot.ropeMending),
+                new Loot(StandardLoot.paperBirdMagical),
+                new Loot(StandardLoot.monsterHunterPack),
+                new Loot(StandardLoot.orbDirection),
+                new Loot(StandardLoot.oilSlipperiness),
+                new Loot(StandardLoot.jadeGem),
+                new Loot(StandardLoot.holyWaterFlask),
+                new Loot(StandardLoot.enduringSpellbook),
+                new Loot(StandardLoot.gogglesNight),
+                new Loot(StandardLoot.potionOfHealing),
+                new Loot(StandardLoot.potionPoison),
+                new Loot(StandardLoot.potionOfClimbing),
+                new Loot(StandardLoot.crossbowBoltsPlusOne1),
+                new Loot(StandardLoot.crossbowBolts15),
+                new Loot(StandardLoot.slingBullet15),
+                new Loot(StandardLoot.blowgunNeedles15),
+                new Loot(StandardLoot.clothesMending),
+                new Loot(StandardLoot.beadNourishment),
+                new Loot(StandardLoot.beadRefreshment),
+                new Loot(StandardLoot.arrowPlusOne1),
+                new Loot(StandardLoot.amberGem),
+                new Loot(StandardLoot.truthSerum),
+                new Loot(StandardLoot.cloakBillowing),
+                new Loot(StandardLoot.alchemistsSupplies)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getMiddleClassLootTier4() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.wallopingArrow1),
+                new Loot(StandardLoot.wallopingBlowgunNeedle1),
+                new Loot(StandardLoot.wallopingCrossbowBolt1),
+                new Loot(StandardLoot.wallopingSlingBullet1),
+                new Loot(StandardLoot.spellScrollLvl5),
+                new Loot(StandardLoot.spellScrollLvl6),
+                new Loot(StandardLoot.slingBullet20),
+                new Loot(StandardLoot.potionAcidResistance),
+                new Loot(StandardLoot.potionColdResistance),
+                new Loot(StandardLoot.potionFireBreath),
+                new Loot(StandardLoot.potionfireResistance),
+                new Loot(StandardLoot.potionForceResistance),
+                new Loot(StandardLoot.potionGreaterHealing),
+                new Loot(StandardLoot.potionHillGiantStrength),
+                new Loot(StandardLoot.potionInvisibility),
+                new Loot(StandardLoot.potionLightningResistance),
+                new Loot(StandardLoot.potionNecroticResistance),
+                new Loot(StandardLoot.potionPoisonResistance),
+                new Loot(StandardLoot.potionPsychicResistance),
+                new Loot(StandardLoot.potionRadiantResistance),
+                new Loot(StandardLoot.potionThunderResistance),
+                new Loot(StandardLoot.ringFeatherFalling),
+                new Loot(StandardLoot.ringForceResistance),
+                new Loot(StandardLoot.ringSwimming),
+                new Loot(StandardLoot.ringTruthTelling),
+                new Loot(StandardLoot.ringMending),
+                new Loot(StandardLoot.unbreakableArrow1),
+                new Loot(StandardLoot.wandConductiong),
+                new Loot(StandardLoot.wandEntangle),
+                new Loot(StandardLoot.slingBulletPlusOne5),
+                new Loot(StandardLoot.instrumentScribing),
+                new Loot(StandardLoot.instrumentIllusions),
+                new Loot(StandardLoot.mysteryKey),
+                new Loot(StandardLoot.glovesThievery),
+                new Loot(StandardLoot.carvedIvoryStatuette),
+                new Loot(StandardLoot.crossbowBoltsPlusOne5),
+                new Loot(StandardLoot.arrowPlusOne5)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getWealthyLootTier1() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<Loot>(Arrays.asList(
+                new Loot(StandardLoot.alchemistsFireFlask),
+                new Loot(StandardLoot.amethystGem),
+                new Loot(StandardLoot.arrows20),
+                new Loot(StandardLoot.blowgunNeedles20),
+                new Loot(StandardLoot.bootsElvenkind),
+                new Loot(StandardLoot.bottledBreath),
+                new Loot(StandardLoot.candle10),
+                new Loot(StandardLoot.chrysoberylGem),
+                new Loot(StandardLoot.chrysopraseGem),
+                new Loot(StandardLoot.citrineGem),
+                new Loot(StandardLoot.cloakManyFashions),
+                new Loot(StandardLoot.clockworkAmulet),
+                new Loot(StandardLoot.crossbowBolts20),
+                new Loot(StandardLoot.diplomatsPack),
+                new Loot(StandardLoot.dungeoneersPack),
+                new Loot(StandardLoot.fineWine5gp),
+                new Loot(StandardLoot.fineWine10gp),
+                new Loot(StandardLoot.fineWine12gp),
+                new Loot(StandardLoot.fineWine15gp),
+                new Loot(StandardLoot.fineWine25gp),
+                new Loot(StandardLoot.fineWine30gp),
+                new Loot(StandardLoot.fineWine40gp),
+                new Loot(StandardLoot.fineWine60gp),
+                new Loot(StandardLoot.fineWine80gp),
+                new Loot(StandardLoot.fineWine100gp),
+                new Loot(StandardLoot.garnetGem),
+                new Loot(StandardLoot.goldDragonCombRedGarnets),
+                new Loot(StandardLoot.jetGem),
+                new Loot(StandardLoot.magnifyingGlass),
+                new Loot(StandardLoot.mapGrandBastion),
+                new Loot(StandardLoot.navigatorsTools),
+                new Loot(StandardLoot.painting10gp),
+                new Loot(StandardLoot.painting15gp),
+                new Loot(StandardLoot.painting20gp),
+                new Loot(StandardLoot.paperSheet10),
+                new Loot(StandardLoot.paperSheet20),
+                new Loot(StandardLoot.getParchment10),
+                new Loot(StandardLoot.getParchment20),
+                new Loot(StandardLoot.poetryBook5gp),
+                new Loot(StandardLoot.poetryBook15gp),
+                new Loot(StandardLoot.silkBedclothes),
+                new Loot(StandardLoot.silkBlanket),
+                new Loot(StandardLoot.slingBullet20),
+                new Loot(StandardLoot.stoneIllLuck),
+                new Loot(StandardLoot.windFan),
+                new Loot(StandardLoot.spellScrollLvlCantrip),
+                new Loot(StandardLoot.spellScrollLvl1),
+                new Loot(StandardLoot.spellScrollLvl2),
+                new Loot(StandardLoot.spellScrollLvl3),
+                new Loot(StandardLoot.spellScrollLvl4),
+                new Loot(StandardLoot.wandConductiong),
+                new Loot(StandardLoot.wandEntangle),
+                new Loot(StandardLoot.slingBulletPlusOne5),
+                new Loot(StandardLoot.instrumentScribing),
+                new Loot(StandardLoot.instrumentIllusions),
+                new Loot(StandardLoot.crossbowBoltsPlusOne5),
+                new Loot(StandardLoot.arrowPlusOne5),
+                new Loot(StandardLoot.silkRope50ft),
+                new Loot(StandardLoot.spellbook),
+                new Loot(StandardLoot.bootsFalseTracks),
+                new Loot(StandardLoot.lockTrickery),
+                new Loot(StandardLoot.spellScrollLvl3),
+                new Loot(StandardLoot.spellScrollLvl4),
+                new Loot(StandardLoot.slingBulletPlusOne1),
+                new Loot(StandardLoot.tankardSobriety),
+                new Loot(StandardLoot.staffAdder),
+                new Loot(StandardLoot.ropeMending),
+                new Loot(StandardLoot.paperBirdMagical),
+                new Loot(StandardLoot.monsterHunterPack),
+                new Loot(StandardLoot.orbDirection),
+                new Loot(StandardLoot.oilSlipperiness),
+                new Loot(StandardLoot.jadeGem),
+                new Loot(StandardLoot.holyWaterFlask),
+                new Loot(StandardLoot.enduringSpellbook),
+                new Loot(StandardLoot.gogglesNight),
+                new Loot(StandardLoot.potionOfHealing),
+                new Loot(StandardLoot.potionPoison),
+                new Loot(StandardLoot.potionOfClimbing),
+                new Loot(StandardLoot.crossbowBoltsPlusOne1),
+                new Loot(StandardLoot.crossbowBolts15),
+                new Loot(StandardLoot.slingBullet15),
+                new Loot(StandardLoot.blowgunNeedles15),
+                new Loot(StandardLoot.clothesMending),
+                new Loot(StandardLoot.beadNourishment),
+                new Loot(StandardLoot.beadRefreshment),
+                new Loot(StandardLoot.arrowPlusOne1),
+                new Loot(StandardLoot.amberGem),
+                new Loot(StandardLoot.truthSerum),
+                new Loot(StandardLoot.cloakBillowing),
+                new Loot(StandardLoot.alchemistsSupplies),
+                new Loot(StandardLoot.turquiseGem),
+                new Loot(StandardLoot.tigersEyeGem),
+                new Loot(StandardLoot.obsidianGem),
+                new Loot(StandardLoot.eyeAgateGem),
+                new Loot(StandardLoot.hematiteGem),
+                new Loot(StandardLoot.mossAgateGem),
+                new Loot(StandardLoot.quartzGem),
+                new Loot(StandardLoot.staffFlowers),
+                new Loot(StandardLoot.staffBirdcalls),
+                new Loot(StandardLoot.staffAdornment),
+                new Loot(StandardLoot.scholarsPack),
+                new Loot(StandardLoot.explorersPack),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.fineClothes),
+                new Loot(StandardLoot.clothGoldVestments),
+                new Loot(StandardLoot.clothGoldVestments),
+                new Loot(StandardLoot.clothGoldVestments),
+                new Loot(StandardLoot.clothGoldVestments),
+                new Loot(StandardLoot.alchemistsSupplies),
+                new Loot(StandardLoot.parchment5),
+                new Loot(StandardLoot.parchment1),
+                new Loot(StandardLoot.paperSheet1),
+                new Loot(StandardLoot.paperSheet5),
+                new Loot(StandardLoot.jasperGem),
+                new Loot(StandardLoot.crystal),
+                new Loot(StandardLoot.playingCardSet),
+                new Loot(StandardLoot.diceSet),
+                new Loot(StandardLoot.pairEngravedBoneDice),
+                new Loot(StandardLoot.waterskin),
+                new Loot(StandardLoot.steelMirror),
+                new Loot(StandardLoot.dayRations1),
+                new Loot(StandardLoot.mapScrollCase),
+                new Loot(StandardLoot.ink1ozBottle),
+                new Loot(StandardLoot.inkPen),
+                new Loot(StandardLoot.trinket),
+                new Loot(StandardLoot.holyEmblem),
+                new Loot(StandardLoot.holySymbol),
+                new Loot(StandardLoot.componentPouch)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getWealthyLootTier2() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<>(Arrays.asList(
+                new Loot(StandardLoot.arrows30),
+                new Loot(StandardLoot.blowgunNeedles30),
+                new Loot(StandardLoot.unbreakableArrow1),
+                new Loot(StandardLoot.staffPython),
+                new Loot(StandardLoot.slingBullet30),
+                new Loot(StandardLoot.scrollProtection),
+                new Loot(StandardLoot.ringScintillatingColors),
+                new Loot(StandardLoot.robeScintillatingColors),
+                new Loot(StandardLoot.ringThunderResistance),
+                new Loot(StandardLoot.pipeSmokeMonsters),
+                new Loot(StandardLoot.pearlGem),
+                new Loot(StandardLoot.paperBirdMagical5),
+                new Loot(StandardLoot.orbTime),
+                new Loot(StandardLoot.maskBeast),
+                new Loot(StandardLoot.largeGoldBracelet),
+                new Loot(StandardLoot.hideArmorGleaming),
+                new Loot(StandardLoot.goldRingBloodstones),
+                new Loot(StandardLoot.fineWine150gp),
+                new Loot(StandardLoot.fineWine200gp),
+                new Loot(StandardLoot.fineWine250gp),
+                new Loot(StandardLoot.dreadHelm),
+                new Loot(StandardLoot.crossbowBolts30),
+                new Loot(StandardLoot.candleDeep),
+                new Loot(StandardLoot.brassMugJadeInlay),
+                new Loot(StandardLoot.boxturquiseanimalfigurines),
+                new Loot(StandardLoot.ringFeatherFalling),
+                new Loot(StandardLoot.ringForceResistance),
+                new Loot(StandardLoot.ringSwimming),
+                new Loot(StandardLoot.ringTruthTelling),
+                new Loot(StandardLoot.ringMending),
+                new Loot(StandardLoot.spellScrollLvl3),
+                new Loot(StandardLoot.spellScrollLvl4),
+                new Loot(StandardLoot.mysteryKey),
+                new Loot(StandardLoot.glovesThievery),
+                new Loot(StandardLoot.carvedIvoryStatuette),
+                new Loot(StandardLoot.tankardSobriety),
+                new Loot(StandardLoot.staffAdder),
+                new Loot(StandardLoot.ropeMending),
+                new Loot(StandardLoot.paperBirdMagical),
+                new Loot(StandardLoot.monsterHunterPack),
+                new Loot(StandardLoot.orbDirection),
+                new Loot(StandardLoot.oilSlipperiness),
+                new Loot(StandardLoot.jadeGem),
+                new Loot(StandardLoot.holyWaterFlask),
+                new Loot(StandardLoot.enduringSpellbook),
+                new Loot(StandardLoot.gogglesNight),
+                new Loot(StandardLoot.potionOfHealing),
+                new Loot(StandardLoot.potionPoison),
+                new Loot(StandardLoot.potionOfClimbing),
+                new Loot(StandardLoot.wallopingArrow1),
+                new Loot(StandardLoot.wallopingBlowgunNeedle1),
+                new Loot(StandardLoot.wallopingCrossbowBolt1),
+                new Loot(StandardLoot.wallopingSlingBullet1)
+        ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getWealthyLootTier3() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<>(Arrays.asList(
+                new Loot(StandardLoot.broochShielding),
+                new Loot(StandardLoot.blowgunNeedles40),
+                new Loot(StandardLoot.unbreakableArrow5),
+                new Loot(StandardLoot.slingBullet40),
+                new Loot(StandardLoot.shieldExpressions),
+                new Loot(StandardLoot.ringRegeneration),
+                new Loot(StandardLoot.potionAnimalFriendship),
+                new Loot(StandardLoot.potionGrowth),
+                new Loot(StandardLoot.potionSpeed),
+                new Loot(StandardLoot.potionWaterBreathing),
+                new Loot(StandardLoot.potionEvasion),
+                new Loot(StandardLoot.potionMindShielding),
+                new Loot(StandardLoot.potionProtection),
+                new Loot(StandardLoot.potionRegeneration),
+                new Loot(StandardLoot.potionAcidResistance),
+                new Loot(StandardLoot.potionColdResistance),
+                new Loot(StandardLoot.potionFireBreath),
+                new Loot(StandardLoot.potionfireResistance),
+                new Loot(StandardLoot.potionForceResistance),
+                new Loot(StandardLoot.potionGreaterHealing),
+                new Loot(StandardLoot.potionHillGiantStrength),
+                new Loot(StandardLoot.potionLightningResistance),
+                new Loot(StandardLoot.potionNecroticResistance),
+                new Loot(StandardLoot.potionPoisonResistance),
+                new Loot(StandardLoot.potionPsychicResistance),
+                new Loot(StandardLoot.potionRadiantResistance),
+                new Loot(StandardLoot.potionThunderResistance),
+                new Loot(StandardLoot.hatWizardry),
+                new Loot(StandardLoot.dustDisappearance),
+                new Loot(StandardLoot.dustDryness),
+                new Loot(StandardLoot.dustSneezingChoking),
+                new Loot(StandardLoot.crossbowBolts40),
+                new Loot(StandardLoot.circletBlasting),
+                new Loot(StandardLoot.capWaterBreathing),
+                new Loot(StandardLoot.chainShirtGleaming),
+                new Loot(StandardLoot.breastplateGleaming),
+                new Loot(StandardLoot.bootsArchery),
+                new Loot(StandardLoot.bootsDefense),
+                new Loot(StandardLoot.arrows40),
+                new Loot(StandardLoot.spellScrollLvl5),
+                new Loot(StandardLoot.spellScrollLvl6)
+                ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getWealthyLootTier4() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<>(Arrays.asList(
+                new Loot(StandardLoot.wandEnemyDetection),
+                new Loot(StandardLoot.wandMagicDetection),
+                new Loot(StandardLoot.stoneGoodLuck),
+                new Loot(StandardLoot.staffHealing),
+                new Loot(StandardLoot.slingBulletPlusOne10),
+                new Loot(StandardLoot.slingBulletPlusOne10),
+                new Loot(StandardLoot.silverNecklaceGemstonePendant),
+                new Loot(StandardLoot.silkRobeGoldEmbroidery),
+                new Loot(StandardLoot.periaptHealth),
+                new Loot(StandardLoot.perfumeBewitching),
+                new Loot(StandardLoot.hornSilentAlarm),
+                new Loot(StandardLoot.hatVermin),
+                new Loot(StandardLoot.hatDisguise),
+                new Loot(StandardLoot.goldLocketPaintedPortrait),
+                new Loot(StandardLoot.elixirHealth),
+                new Loot(StandardLoot.electrumRing),
+                new Loot(StandardLoot.electrumRing),
+                new Loot(StandardLoot.crossbowBoltsPlusOne10),
+                new Loot(StandardLoot.crossbowBoltsPlusOne10),
+                new Loot(StandardLoot.blowgunNeedlesPlusOne10),
+                new Loot(StandardLoot.blowgunNeedlesPlusOne10),
+                new Loot(StandardLoot.arrowPlusOne10),
+                new Loot(StandardLoot.arrowPlusOne10),
+                new Loot(StandardLoot.spellScrollLvl7),
+                new Loot(StandardLoot.potionInvisibility)
+                ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     private Loot getWealthyLootTier5() {
-        RandomCollectionWeighted<Loot> rc = new RandomCollectionWeighted<Loot>()
-                .add(100, new Loot(StandardLoot.barrel));
-        return rc.next();
+        List<Loot> lootList = new ArrayList<>(Arrays.asList(
+                new Loot(StandardLoot.cloakElvenkind),
+                new Loot(StandardLoot.gauntletsOgrePower),
+                new Loot(StandardLoot.wandSecrets),
+                new Loot(StandardLoot.wandPyrotechnics),
+                new Loot(StandardLoot.smallGoldIdol),
+                new Loot(StandardLoot.slingBulletPlusTwo5),
+                new Loot(StandardLoot.silverGoldBroach),
+                new Loot(StandardLoot.necklaceStringSmallPinkPearls),
+                new Loot(StandardLoot.immovableRod),
+                new Loot(StandardLoot.fineGoldChainFireOpal),
+                new Loot(StandardLoot.elementalBlueSapphire),
+                new Loot(StandardLoot.elementalEmerald),
+                new Loot(StandardLoot.elementalRedCorundum),
+                new Loot(StandardLoot.elementalYellowDiamond),
+                new Loot(StandardLoot.crossbowBoltsPlusTwo5),
+                new Loot(StandardLoot.blowgunNeedlesPlusTwo5),
+                new Loot(StandardLoot.beltStoneGiantStrength),
+                new Loot(StandardLoot.beltDwarvenkind),
+                new Loot(StandardLoot.bagHolding),
+                new Loot(StandardLoot.arrowsPlusTwo5),
+                new Loot(StandardLoot.spellScrollLvl8),
+                new Loot(StandardLoot.amuletOfProofAgainstDetectionLocation)
+                ));
+        return lootList.get(randomIntInRange(0, lootList.size() - 1));
     }
 
     public Weapon getRandomCustomWeaponByTier(int tier) {
