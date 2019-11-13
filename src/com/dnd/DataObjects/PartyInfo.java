@@ -6,6 +6,13 @@ public class PartyInfo {
     int reputation;
     int averageLevel;
 
+    //public PartyInfo(int memberCount, int currentXP, int reputation, int averageLevel) {
+    //    this.memberCount = memberCount;
+    //    this.currentXP = currentXP;
+    //    this.reputation = reputation;
+    //    this.averageLevel = averageLevel;
+    //}
+
     public int getMemberCount() {
         return memberCount;
     }

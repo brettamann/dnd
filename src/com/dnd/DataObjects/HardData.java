@@ -9,6 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HardData {
+    public PartyInfo partyInfo = new PartyInfo(3,0,0,10);
+    public List<Person> commonersInArea = new ArrayList<>();
+    public List<String> guardsInArea = new ArrayList<>();
+    public int guardCountInArea = 0;
+    public Location currentSelectedLocation;
     Races races = new Races();
     List<Race> raceData = races.generateRaceData();
     List<Location> locationList = new ArrayList<Location>((Arrays.asList(

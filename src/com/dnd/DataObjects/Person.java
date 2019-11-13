@@ -218,14 +218,14 @@ public class Person {
         //screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass),name + ", the " + raceData.raceName + ", " + age + " yrs (" + "");
     }
 
-    public Person create(Location currentLocation, HardData hardData) {
+    public Person create(HardData hardData) {
         //economic traits
-        getEconomicClassFromLocation(currentLocation, hardData.locationList);
+        getEconomicClassFromLocation(hardData.currentSelectedLocation, hardData.locationList);
         getLevelFromClass();
 
         getRaceFromLocation();
         raceData = getRaceDataFromRace(hardData);
-        getInventoryFromClass(currentLocation);
+        getInventoryFromClass(hardData.currentSelectedLocation);
         getRacialTraitsFromRace();
         getNameFromRace(raceData.raceName);
         getAlignmentFromRace(hardData);
