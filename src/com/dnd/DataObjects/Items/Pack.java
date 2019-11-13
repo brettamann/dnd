@@ -103,22 +103,46 @@ public class Pack {
     }
 
     private void getLootInPack(int amount, String economicClass, RandomGenerator randGen) {
+        RandomCollectionWeighted<String> rc; //Won't accept a primitive type argument, so String it is
+
         for (int i = 0; i < amount; i++) {
             switch (economicClass) {
                 case EconomicClasses.beggar:
-                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.beggar, RandomGenerator.randomIntInRange(1, 3)));
+                    rc = new RandomCollectionWeighted<String>()
+                            .add(60, "1")
+                            .add(30, "2")
+                            .add(10, "3");
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.beggar, Integer.parseInt(rc.next())));
                     break;
                 case EconomicClasses.poor:
-                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.poor, RandomGenerator.randomIntInRange(1, 3)));
+                    rc = new RandomCollectionWeighted<String>()
+                            .add(50, "1")
+                            .add(35, "2")
+                            .add(15, "3");
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.poor, Integer.parseInt(rc.next())));
                     break;
                 case EconomicClasses.middleClass:
-                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.middleClass, RandomGenerator.randomIntInRange(1, 4)));
+                    rc = new RandomCollectionWeighted<String>()
+                            .add(40, "1")
+                            .add(30, "2")
+                            .add(20, "3")
+                            .add(10, "4");
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.middleClass, Integer.parseInt(rc.next())));
                     break;
                 case EconomicClasses.wealthy:
-                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(1, 5)));
+                    rc = new RandomCollectionWeighted<String>()
+                            .add(33, "1")
+                            .add(25, "2")
+                            .add(20, "3")
+                            .add(15, "4")
+                            .add(7, "5");
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, Integer.parseInt(rc.next())));
                     break;
                 case EconomicClasses.elite:
-                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, RandomGenerator.randomIntInRange(4, 5)));
+                    rc = new RandomCollectionWeighted<String>()
+                            .add(60, "4")
+                            .add(40, "5");
+                    lootCarried.add(randGen.getLootByEconomyAndTier(EconomicClasses.wealthy, Integer.parseInt(rc.next())));
                     break;
             }
         }

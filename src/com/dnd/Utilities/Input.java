@@ -28,6 +28,27 @@ public class Input {
         System.out.println("User Input from console: " + input);
     }
 
+    public static String promptTextInputQuiet(List<String> validCommands) {
+        boolean badInput = true;
+        String input = "";
+
+        while (badInput) {
+            try {
+                Scanner scanner = new Scanner(new InputStreamReader(System.in));
+                input = scanner.nextLine();
+
+                badInput = !validCommands.contains(input.toLowerCase());
+
+            } catch (Exception ex) {
+                System.out.println("Invalid Input! Retry!");
+                badInput = true;
+            }
+
+        }
+
+        return input;
+    }
+
     public static String promptTextInput(String promptText, List<String> validCommands) {
         boolean badInput = true;
         String input = "";

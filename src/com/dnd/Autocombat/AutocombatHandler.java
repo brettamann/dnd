@@ -767,15 +767,15 @@ public class AutocombatHandler {
     }
 
     private static String green(String textThatIsGreen){
-        return Colors.ANSI_GREEN + textThatIsGreen + Colors.ANSI_RESET;
+        return Colors.GREEN + textThatIsGreen + Colors.RESET;
     }
 
     private static String red(String textThatIsRed){
-        return Colors.ANSI_RED + textThatIsRed + Colors.ANSI_RESET;
+        return Colors.RED + textThatIsRed + Colors.RESET;
     }
 
     private static String yellow(String textThatIsYellow){
-        return Colors.ANSI_YELLOW + textThatIsYellow + Colors.ANSI_RESET;
+        return Colors.YELLOW + textThatIsYellow + Colors.RESET;
     }
 
 }

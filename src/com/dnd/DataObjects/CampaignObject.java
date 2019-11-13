@@ -11,6 +11,7 @@ public class CampaignObject {
     List<Location> locations;
     List<Person> killedList;
     List<Person> capturedList;
+    HardData hardData;
 
     public CampaignObject() {
         partyInfo = new PartyInfo();
@@ -62,6 +63,15 @@ public class CampaignObject {
 
     public CampaignObject setCapturedList(List<Person> capturedList) {
         this.capturedList = capturedList;
+        return this;
+    }
+
+    public HardData getHardData() {
+        return hardData;
+    }
+
+    public CampaignObject setHardData(HardData hardData) {
+        this.hardData = hardData;
         return this;
     }
 
