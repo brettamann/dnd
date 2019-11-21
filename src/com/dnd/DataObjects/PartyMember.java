@@ -5,13 +5,8 @@ public class PartyMember {
     private int hpMax;
     private int currentHp;
     private int ac;
-    private int damageRangeLow;
-    private int damageRangeHigh;
-    private int toHitBonus;
-    private int initiativeBonus;
-    private int numberOfAttacks;
 
-    public PartyMember(String name, int hpMax, int currentHp, int ac, int damageRangeLow, int damageRangeHigh, int toHitBonus, int initiativeBonus) {
+    public PartyMember(String name, int hpMax, int currentHp, int ac, int damageRangeLow, int damageRangeHigh, int toHitBonus, int initiativeBonus, int numberOfAttacks) {
         this.name = name;
         this.hpMax = hpMax;
         this.currentHp = currentHp;
@@ -20,7 +15,15 @@ public class PartyMember {
         this.damageRangeHigh = damageRangeHigh;
         this.toHitBonus = toHitBonus;
         this.initiativeBonus = initiativeBonus;
+        this.numberOfAttacks = numberOfAttacks;
     }
+
+    private int damageRangeLow;
+    private int damageRangeHigh;
+    private int toHitBonus;
+    private int initiativeBonus;
+    private int numberOfAttacks;
+
 
     public PartyMember(PartyMember other) {
         this.name = other.name;

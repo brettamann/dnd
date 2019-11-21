@@ -1,10 +1,10 @@
 package com.dnd.DataObjects;
 
 public class PartyInfo {
-    int memberCount;
-    int currentXP;
-    int reputation;
-    int averageLevel;
+    int memberCount = 3;
+    int currentXP = 0;
+    int reputation = 0;
+    int averageLevel = 10;
 
     //public PartyInfo(int memberCount, int currentXP, int reputation, int averageLevel) {
     //    this.memberCount = memberCount;

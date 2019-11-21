@@ -46,8 +46,8 @@ public class Loot {
         this.copperValuePer = copperValuePer;
     }
 
-    public String getDescriptionStringForDisplay(Screen screen) {
-        String stringToReturn = name + " (x" + quantity + ", " + rarity + ", " + itemType;
+    public String getDescriptionStringForDisplay() {
+        String stringToReturn = "* " + name + " (x" + quantity + ", " + rarity;
         if (platinumValuePer > 0) {
             stringToReturn = stringToReturn + ", " + platinumValuePer + "pp";
         }

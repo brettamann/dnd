@@ -331,13 +331,14 @@ public class RandomGenerator {
     public Armor getRandomCustomArmorByTier(int tier, int enchantmentLevel) {
         Armor armorToReturn = new Armor(getRandomStandardArmor());
         armorToReturn.setPlusEnchantmentByLevel(enchantmentLevel);
+        armorToReturn.name = "Enchanted " + armorToReturn.name;
         armorToReturn.abilities.add(getRandomArmorAbilityByTier(tier));
         if (tier >= 3) { //tier 3 gets 2 enchantments, 4 gets 3, 5 gets 4
             for (int i = 0; i < tier - 2; i++) {
                 armorToReturn.abilities.add(getRandomArmorAbilityByTier(i));
             }
         }
-        armorToReturn.setPlusEnchantmentByLevel(tier);
+        //armorToReturn.setPlusEnchantmentByLevel(tier);
         return armorToReturn;
     }
 
@@ -653,7 +654,6 @@ public class RandomGenerator {
                         return new Weapon(getWealthyWeaponTier5());
                     default:
                         return new Weapon(getWealthyWeaponTier1());
-
                 }
             default:
                 return new Weapon(getBeggarWeaponTier1());
@@ -661,63 +661,47 @@ public class RandomGenerator {
     }
 
     private Weapon getBeggarWeaponTier1() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getBeggarWeaponTier2() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getBeggarWeaponTier3() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getPoorWeaponTier1() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getPoorWeaponTier2() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getPoorWeaponTier3() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getMiddleClassWeaponTier1() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getMiddleClassWeaponTier2() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getRandomStandardWeapon());
     }
 
     private Weapon getMiddleClassWeaponTier3() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        Weapon weapontoReturn = new Weapon(getRandomStandardWeapon());
+        weapontoReturn.rarity = Rarities.rare;
+        weapontoReturn.valueGold += Rarities.rareCostModlow;
+        weapontoReturn.setPlusLevelEnchantment(1);
+        return weapontoReturn;
     }
 
     private Weapon getMiddleClassWeaponTier4() {
-        RandomCollectionWeighted<Weapon> rc = new RandomCollectionWeighted<Weapon>()
-                .add(100, new Weapon(StandardWeapons.club));
-        return rc.next();
+        return new Weapon(getCustomWeaponRandomTier1());
     }
 
     private Weapon getWealthyWeaponTier1() {
@@ -1707,67 +1691,54 @@ public class RandomGenerator {
         //get bonus damage
         switch (getRandomDamageType()) {
             case DamageTypes.acid:
-                customWeapon.name += " of lesser " + DamageTypes.acid;
                 customWeapon.acidDamageMin += 1;
                 customWeapon.acidDamageMax += randomIntInRange(1,3);
                 break;
             case DamageTypes.bludgeoning:
-                customWeapon.name += " of lesser " + DamageTypes.bludgeoning;
                 customWeapon.bludgeoningDamageMin +=  1;
                 customWeapon.bludgeoningDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.cold:
-                customWeapon.name += " of lesser " + DamageTypes.cold;
                 customWeapon.coldDamageMin += 1;
                 customWeapon.coldDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.fire:
-                customWeapon.name += " of lesser " + DamageTypes.fire;
                 customWeapon.fireDamageMin += 1;
                 customWeapon.fireDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.necrotic:
-                customWeapon.name = "lesser " + DamageTypes.necrotic + " " + customWeapon.name;
                 customWeapon.necroticDamageMin += 1;
                 customWeapon.necroticDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.force:
-                customWeapon.name += " of lesser " + DamageTypes.force;
                 customWeapon.forceDamageMin += 1;
                 customWeapon.forceDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.lightning:
-                customWeapon.name += " of lesser " + DamageTypes.lightning;
                 customWeapon.lightningDamageMin += 1;
                 customWeapon.lightningDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.piercing:
-                customWeapon.name += " of lesser " + DamageTypes.piercing;
                 customWeapon.piercingDamageMin += 1;
                 customWeapon.piercingDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.poison:
-                customWeapon.name += " of lesser " + DamageTypes.poison;
                 customWeapon.poisonDamageMin += 1;
                 customWeapon.poisonDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.psychic:
-                customWeapon.name = "lesser " + DamageTypes.psychic + " " + customWeapon.name;
                 customWeapon.psychicDamageMin += 1;
                 customWeapon.psychicDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.radiant:
-                customWeapon.name = "lesser" + DamageTypes.radiant + " " + customWeapon.name;
                 customWeapon.radiantDamageMin += 1;
                 customWeapon.radiantDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.slashing:
-                customWeapon.name += " of lesser " + DamageTypes.slashing;
                 customWeapon.slashingDamageMin += 1;
                 customWeapon.slashingDamageMax += randomIntInRange(1, 3);
                 break;
             case DamageTypes.thunder:
-                customWeapon.name += " of lesser " + DamageTypes.thunder;
                 customWeapon.thunderDamageMin += 1;
                 customWeapon.thunderDamageMax += randomIntInRange(1, 3);
                 break;
@@ -1785,67 +1756,54 @@ public class RandomGenerator {
         for (int i = 0; i < randomIntInRange(1, 2); i++) {
             switch (getRandomDamageType()) {
                 case DamageTypes.acid:
-                    customWeapon.name += " of " + DamageTypes.acid;
                     customWeapon.acidDamageMin += randomIntInRange(1, 2);
                     customWeapon.acidDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.bludgeoning:
-                    customWeapon.name += " of " + DamageTypes.bludgeoning;
                     customWeapon.bludgeoningDamageMin += randomIntInRange(1, 2);
                     customWeapon.bludgeoningDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.cold:
-                    customWeapon.name += " of " + DamageTypes.cold;
                     customWeapon.coldDamageMin += randomIntInRange(1, 2);
                     customWeapon.coldDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.fire:
-                    customWeapon.name += " of " + DamageTypes.fire;
                     customWeapon.fireDamageMin += randomIntInRange(1, 2);
                     customWeapon.fireDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.necrotic:
-                    customWeapon.name = DamageTypes.necrotic + " " + customWeapon.name;
                     customWeapon.necroticDamageMin += randomIntInRange(1, 2);
                     customWeapon.necroticDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.force:
-                    customWeapon.name += " of " + DamageTypes.force;
                     customWeapon.forceDamageMin += randomIntInRange(1, 2);
                     customWeapon.forceDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.lightning:
-                    customWeapon.name += " of " + DamageTypes.lightning;
                     customWeapon.lightningDamageMin += randomIntInRange(1, 2);
                     customWeapon.lightningDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.piercing:
-                    customWeapon.name += " of " + DamageTypes.piercing;
                     customWeapon.piercingDamageMin += randomIntInRange(1, 2);
                     customWeapon.piercingDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.poison:
-                    customWeapon.name += " of " + DamageTypes.poison;
                     customWeapon.poisonDamageMin += randomIntInRange(1, 2);
                     customWeapon.poisonDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.psychic:
-                    customWeapon.name = DamageTypes.psychic + " " + customWeapon.name;
                     customWeapon.psychicDamageMin += randomIntInRange(1, 2);
                     customWeapon.psychicDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.radiant:
-                    customWeapon.name = DamageTypes.radiant + " " + customWeapon.name;
                     customWeapon.radiantDamageMin += randomIntInRange(1, 2);
                     customWeapon.radiantDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.slashing:
-                    customWeapon.name += " of " + DamageTypes.slashing;
                     customWeapon.slashingDamageMin += randomIntInRange(1, 2);
                     customWeapon.slashingDamageMax += randomIntInRange(2, 5);
                     break;
                 case DamageTypes.thunder:
-                    customWeapon.name += " of " + DamageTypes.thunder;
                     customWeapon.thunderDamageMin += randomIntInRange(1, 2);
                     customWeapon.thunderDamageMax += randomIntInRange(2, 5);
                     break;
@@ -1867,67 +1825,54 @@ public class RandomGenerator {
         for (int i = 0; i < randomIntInRange(2, 4); i++) {
             switch (getRandomDamageType()) {
                 case DamageTypes.acid:
-                    customWeapon.name += " of major " + DamageTypes.acid;
                     customWeapon.acidDamageMin += randomIntInRange(2, 4);
                     customWeapon.acidDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.bludgeoning:
-                    customWeapon.name += " of major" + DamageTypes.bludgeoning;
                     customWeapon.bludgeoningDamageMin += randomIntInRange(2, 4);
                     customWeapon.bludgeoningDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.cold:
-                    customWeapon.name += " of major" + DamageTypes.cold;
                     customWeapon.coldDamageMin += randomIntInRange(2, 4);
                     customWeapon.coldDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.fire:
-                    customWeapon.name += " of major" + DamageTypes.fire;
                     customWeapon.fireDamageMin += randomIntInRange(2, 4);
                     customWeapon.fireDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.necrotic:
-                    customWeapon.name = "major " + DamageTypes.necrotic + " " + customWeapon.name;
                     customWeapon.necroticDamageMin += randomIntInRange(2, 4);
                     customWeapon.necroticDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.force:
-                    customWeapon.name += " of major " + DamageTypes.force;
                     customWeapon.forceDamageMin += randomIntInRange(2, 4);
                     customWeapon.forceDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.lightning:
-                    customWeapon.name += " of major " + DamageTypes.lightning;
                     customWeapon.lightningDamageMin += randomIntInRange(2, 4);
                     customWeapon.lightningDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.piercing:
-                    customWeapon.name += " of major " + DamageTypes.piercing;
                     customWeapon.piercingDamageMin += randomIntInRange(2, 4);
                     customWeapon.piercingDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.poison:
-                    customWeapon.name += " of major " + DamageTypes.poison;
                     customWeapon.poisonDamageMin += randomIntInRange(2, 4);
                     customWeapon.poisonDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.psychic:
-                    customWeapon.name = "major " + DamageTypes.psychic + " " + customWeapon.name;
                     customWeapon.psychicDamageMin += randomIntInRange(2, 4);
                     customWeapon.psychicDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.radiant:
-                    customWeapon.name = "major " + DamageTypes.radiant + " " + customWeapon.name;
                     customWeapon.radiantDamageMin += randomIntInRange(2, 4);
                     customWeapon.radiantDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.slashing:
-                    customWeapon.name += " of major " + DamageTypes.slashing;
                     customWeapon.slashingDamageMin += randomIntInRange(2, 4);
                     customWeapon.slashingDamageMax += randomIntInRange(4, 8);
                     break;
                 case DamageTypes.thunder:
-                    customWeapon.name += " of major " + DamageTypes.thunder;
                     customWeapon.thunderDamageMin += randomIntInRange(2, 4);
                     customWeapon.thunderDamageMax += randomIntInRange(4, 8);
                     break;
@@ -1952,67 +1897,54 @@ public class RandomGenerator {
         for (int i = 0; i < randomIntInRange(3,5); i++) {
             switch (getRandomDamageType()) {
                 case DamageTypes.acid:
-                    customWeapon.name += " of legendary " + DamageTypes.acid;
                     customWeapon.acidDamageMin += randomIntInRange(4, 6);
                     customWeapon.acidDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.bludgeoning:
-                    customWeapon.name += " of legendary" + DamageTypes.bludgeoning;
                     customWeapon.bludgeoningDamageMin += randomIntInRange(4, 6);
                     customWeapon.bludgeoningDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.cold:
-                    customWeapon.name += " of legendary" + DamageTypes.cold;
                     customWeapon.coldDamageMin += randomIntInRange(4, 6);
                     customWeapon.coldDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.fire:
-                    customWeapon.name += " of legendary" + DamageTypes.fire;
                     customWeapon.fireDamageMin += randomIntInRange(4, 6);
                     customWeapon.fireDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.necrotic:
-                    customWeapon.name = "legendary " + DamageTypes.necrotic + " " + customWeapon.name;
                     customWeapon.necroticDamageMin += randomIntInRange(4, 6);
                     customWeapon.necroticDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.force:
-                    customWeapon.name += " of legendary " + DamageTypes.force;
                     customWeapon.forceDamageMin += randomIntInRange(4, 6);
                     customWeapon.forceDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.lightning:
-                    customWeapon.name += " of legendary " + DamageTypes.lightning;
                     customWeapon.lightningDamageMin += randomIntInRange(4, 6);
                     customWeapon.lightningDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.piercing:
-                    customWeapon.name += " of legendary " + DamageTypes.piercing;
                     customWeapon.piercingDamageMin += randomIntInRange(4, 6);
                     customWeapon.piercingDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.poison:
-                    customWeapon.name += " of legendary " + DamageTypes.poison;
                     customWeapon.poisonDamageMin += randomIntInRange(4, 6);
                     customWeapon.poisonDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.psychic:
-                    customWeapon.name = "legendary " + DamageTypes.psychic + " " + customWeapon.name;
                     customWeapon.psychicDamageMin += randomIntInRange(4, 6);
                     customWeapon.psychicDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.radiant:
-                    customWeapon.name = "legendary " + DamageTypes.radiant + " " + customWeapon.name;
                     customWeapon.radiantDamageMin += randomIntInRange(4, 6);
                     customWeapon.radiantDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.slashing:
-                    customWeapon.name += " of legendary " + DamageTypes.slashing;
                     customWeapon.slashingDamageMin += randomIntInRange(4, 6);
                     customWeapon.slashingDamageMax += randomIntInRange(6, 12);
                     break;
                 case DamageTypes.thunder:
-                    customWeapon.name += " of legendary " + DamageTypes.thunder;
                     customWeapon.thunderDamageMin += randomIntInRange(4, 6);
                     customWeapon.thunderDamageMax += randomIntInRange(6, 12);
                     break;
@@ -2415,10 +2347,9 @@ public class RandomGenerator {
     public Spell getRandomSpellByLevel(int level) {
         List<Spell> randomOptions = getSpellListByLevel(level);
         // if the spell list is empty, this blows up and throws an exception, so passing
-        // in a default to something
         if(randomOptions.size() == 0)
-            return new Spell("Animal Friendship", 1, "Enchantment", "1 action", 30, "V, S, M, a morsel of food", "24 Hours", "Bard, Druid, Ranger", "This is the default spell. This spell lets you be friends with any cute, fuzzy, animal your heart desires. This defaulted spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast’s Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the spell’s duration. If you or one of your companions harms the target, the spells ends.");
-
+            Screen.redText("Empty randomOptions list");
+            //return new Spell("Animal Friendship", 1, "Enchantment", "1 action", 30, "V, S, M, a morsel of food", "24 Hours", "Bard, Druid, Ranger", "This is the default spell. This spell lets you be friends with any cute, fuzzy, animal your heart desires. This defaulted spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast’s Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the spell’s duration. If you or one of your companions harms the target, the spells ends.");
 
         return randomOptions.get(randomIntInRange(0,(randomOptions.size() - 1)));
     }

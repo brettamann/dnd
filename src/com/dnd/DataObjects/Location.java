@@ -1,5 +1,6 @@
 package com.dnd.DataObjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Location {
@@ -143,5 +144,75 @@ public class Location {
         this.chanceOfCommonersInArea = chanceOfCommonersInArea;
         this.commonerGroupLowSize = commonerGroupLowSize;
         this.commonerGroupHighSize = commonerGroupHighSize;
+    }
+
+    public Location(Location other) {
+        this.name = other.name;
+        this.description = other.description;
+        this.pointsOfInterest = new ArrayList<>(other.pointsOfInterest);
+        this.connectsTo = new ArrayList<>(other.connectsTo);
+        this.reputationInArea = other.reputationInArea;
+        this.alertLevel = other.alertLevel;
+        this.aarakocraChance = other.aarakocraChance;
+        this.aasimarChance = other.aasimarChance;
+        this.animalHybridChance = other.animalHybridChance;
+        this.bugbearChance = other.bugbearChance;
+        this.centaurChance = other.centaurChance;
+        this.dragonbornChance = other.dragonbornChance;
+        this.dwarfChance = other.dwarfChance;
+        this.elephantineChance = other.elephantineChance;
+        this.elfChance = other.elfChance;
+        this.firbolgChance = other.firbolgChance;
+        this.genasiChance = other.genasiChance;
+        this.githChance = other.githChance;
+        this.gnomeChance = other.gnomeChance;
+        this.goblinChance = other.goblinChance;
+        this.goliathChance = other.goliathChance;
+        this.halfElfChance = other.halfElfChance;
+        this.halfOrcChance = other.halfOrcChance;
+        this.halflingChance = other.halflingChance;
+        this.hobgoblinChance = other.hobgoblinChance;
+        this.humanChance = other.humanChance;
+        this.kenkuChance = other.kenkuChance;
+        this.koboldChance = other.koboldChance;
+        this.lizardfolkChance = other.lizardfolkChance;
+        this.minotaurChance = other.minotaurChance;
+        this.orcChance = other.orcChance;
+        this.yuanTiChance = other.yuanTiChance;
+        this.tabaxiChance = other.tabaxiChance;
+        this.tieflingChance = other.tieflingChance;
+        this.tritonChance = other.tritonChance;
+        this.tortleChance = other.tortleChance;
+        this.vedalkenChance = other.vedalkenChance;
+        this.travelerChance = other.travelerChance;
+        this.beggarChance = other.beggarChance;
+        this.poorChance = other.poorChance;
+        this.middleClassChance = other.middleClassChance;
+        this.wealthyChance = other.wealthyChance;
+        this.eliteChance = other.eliteChance;
+        this.toleranceModifier = other.toleranceModifier;
+        this.aggressionModifier = other.aggressionModifier;
+        this.chanceToCallGuardsModifier = other.chanceToCallGuardsModifier;
+        this.pickpocketDcModifier = other.pickpocketDcModifier;
+        this.platinumLow = other.platinumLow;
+        this.platinumHigh = other.platinumHigh;
+        this.goldLow = other.goldLow;
+        this.goldHigh = other.goldHigh;
+        this.silverLow = other.silverLow;
+        this.silverHigh = other.silverHigh;
+        this.copperLow = other.copperLow;
+        this.copperHigh = other.copperHigh;
+        this.lockDCLow = other.lockDCLow;
+        this.lockDCHigh = other.lockDCHigh;
+        this.itemsCarriedLow = other.itemsCarriedLow;
+        this.itemsCarriedHigh = other.itemsCarriedHigh;
+        this.chanceOfGuardsInArea = other.chanceOfGuardsInArea;
+        this.guardGroupLowSize = other.guardGroupLowSize;
+        this.guardGroupHighSize = other.guardGroupHighSize;
+        this.fastestCallTime = other.fastestCallTime;
+        this.slowestCallTime = other.slowestCallTime;
+        this.chanceOfCommonersInArea = other.chanceOfCommonersInArea;
+        this.commonerGroupLowSize = other.commonerGroupLowSize;
+        this.commonerGroupHighSize = other.commonerGroupHighSize;
     }
 }

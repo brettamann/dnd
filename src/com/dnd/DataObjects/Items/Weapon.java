@@ -1,5 +1,6 @@
 package com.dnd.DataObjects.Items;
 
+import com.dnd.Utilities.RandomGenerator;
 import com.dnd.Utilities.Screen;
 
 import java.util.ArrayList;
@@ -212,6 +213,7 @@ public class Weapon {
     }
 
     public void setPlusLevelEnchantment(int levelEnchantment) {
+        name = name +  " +" + levelEnchantment;
         toHitBonus = levelEnchantment;
         switch (getMainPhysicalDamageType()) {
             case DamageTypes.piercing:
@@ -355,7 +357,8 @@ public class Weapon {
                     if (fireDamageMin == fireDamageMax) {
                         return fireDamageMax + " " + DamageTypes.fire + " damage";
                     } else {
-                        return fireDamageMin + "-" + fireDamageMax + DamageTypes.fire + " damage";
+                        return RandomGenerator.randomIntInRange(fireDamageMin, fireDamageMax) + " " + DamageTypes.fire + " damage,";
+                        //return fireDamageMin + "-" + fireDamageMax + " " + DamageTypes.fire + " damage";
                     }
                 }
                 break;
@@ -364,7 +367,8 @@ public class Weapon {
                     if (coldDamageMin == coldDamageMax) {
                         return coldDamageMax + " " + DamageTypes.cold + " damage";
                     } else {
-                        return coldDamageMin + "-" + coldDamageMax + DamageTypes.cold + " damage";
+                        return RandomGenerator.randomIntInRange(coldDamageMin, coldDamageMax) + " " + DamageTypes.cold + " damage,";
+                        //return coldDamageMin + "-" + coldDamageMax + " " + DamageTypes.cold + " damage";
                     }
                 }
                 break;
@@ -373,7 +377,8 @@ public class Weapon {
                     if (poisonDamageMin == poisonDamageMax) {
                         return poisonDamageMax + " " + DamageTypes.poison + " damage";
                     } else {
-                        return poisonDamageMin + "-" + poisonDamageMax + DamageTypes.poison + " damage";
+                        return RandomGenerator.randomIntInRange(poisonDamageMin, poisonDamageMax) + " " + DamageTypes.poison + " damage,";
+                        //return poisonDamageMin + "-" + poisonDamageMax + " " + DamageTypes.poison + " damage";
                     }
                 }
                 break;
@@ -382,7 +387,8 @@ public class Weapon {
                     if (psychicDamageMin == psychicDamageMax) {
                         return psychicDamageMax + " " + DamageTypes.psychic + " damage";
                     } else {
-                        return psychicDamageMin + "-" + psychicDamageMax + DamageTypes.psychic + " damage";
+                        return RandomGenerator.randomIntInRange(psychicDamageMin, psychicDamageMax) + " " + DamageTypes.psychic + " damage,";
+                        //return psychicDamageMin + "-" + psychicDamageMax + " " + DamageTypes.psychic + " damage";
                     }
                 }
                 break;
@@ -391,7 +397,8 @@ public class Weapon {
                     if (necroticDamageMin == necroticDamageMax) {
                         return necroticDamageMax + " " + DamageTypes.necrotic + " damage";
                     } else {
-                        return necroticDamageMin + "-" + necroticDamageMax + DamageTypes.necrotic + " damage";
+                        return RandomGenerator.randomIntInRange(necroticDamageMin, necroticDamageMax) + " " + DamageTypes.necrotic + " damage,";
+                        //return necroticDamageMin + "-" + necroticDamageMax + " " + DamageTypes.necrotic + " damage";
                     }
                 }
                 break;
@@ -400,7 +407,8 @@ public class Weapon {
                     if (radiantDamageMin == radiantDamageMax) {
                         return radiantDamageMax + " " + DamageTypes.radiant + " damage";
                     } else {
-                        return radiantDamageMin + "-" + radiantDamageMax + DamageTypes.radiant + " damage";
+                        return RandomGenerator.randomIntInRange(radiantDamageMin, radiantDamageMax) + " " + DamageTypes.radiant + " damage,";
+                        //return radiantDamageMin + "-" + radiantDamageMax + " " + DamageTypes.radiant + " damage";
                     }
                 }
                 break;
@@ -409,7 +417,8 @@ public class Weapon {
                     if (lightningDamageMin == lightningDamageMax) {
                         return lightningDamageMax + " " + DamageTypes.lightning + " damage";
                     } else {
-                        return lightningDamageMin + "-" + lightningDamageMax + DamageTypes.lightning + " damage";
+                        return RandomGenerator.randomIntInRange(lightningDamageMin, lightningDamageMax) + " " + DamageTypes.lightning + " damage,";
+                        //return lightningDamageMin + "-" + lightningDamageMax + " " + DamageTypes.lightning + " damage";
                     }
                 }
                 break;
@@ -418,7 +427,8 @@ public class Weapon {
                     if (thunderDamageMin == thunderDamageMax) {
                         return thunderDamageMax + " " + DamageTypes.thunder + " damage";
                     } else {
-                        return thunderDamageMin + "-" + thunderDamageMax + DamageTypes.thunder + " damage";
+                        return RandomGenerator.randomIntInRange(thunderDamageMin, thunderDamageMax) + " " + DamageTypes.thunder + " damage,";
+                        //return thunderDamageMin + "-" + thunderDamageMax + " " + DamageTypes.thunder + " damage";
                     }
                 }
                 break;
@@ -427,7 +437,8 @@ public class Weapon {
                     if (forceDamageMin == forceDamageMax) {
                         return forceDamageMax + " " + DamageTypes.force + " damage";
                     } else {
-                        return forceDamageMin + "-" + forceDamageMax + DamageTypes.force + " damage";
+                        return RandomGenerator.randomIntInRange(forceDamageMin, forceDamageMax) + " " + DamageTypes.force + " damage,";
+                        //return forceDamageMin + "-" + forceDamageMax + " " + DamageTypes.force + " damage";
                     }
                 }
                 break;
@@ -437,16 +448,16 @@ public class Weapon {
     }
 
     public String getDamageForDisplay() {
-        String weaponDamageText = "+" + combinedToHitBonus + " to hit, ";
+        String weaponDamageText = "+" + combinedToHitBonus + " to hit (" + toHitFromStats + " stats, " + toHitBonus + " weapon)";
         switch (getMainPhysicalDamageType()) {
             case DamageTypes.piercing:
-                weaponDamageText = weaponDamageText + piercingDamageMin + "-" + piercingDamageMax + " " + DamageTypes.piercing + " ";
+                weaponDamageText = weaponDamageText + piercingDamageMin + "-" + piercingDamageMax + " " + DamageTypes.piercing + ", ";
                 break;
             case DamageTypes.slashing:
-                weaponDamageText = weaponDamageText + slashingDamageMin + "-" + slashingDamageMax + " " + DamageTypes.slashing + " ";
+                weaponDamageText = weaponDamageText + slashingDamageMin + "-" + slashingDamageMax + " " + DamageTypes.slashing + ", ";
                 break;
             case DamageTypes.bludgeoning:
-                weaponDamageText = weaponDamageText + bludgeoningDamageMin + "-" + bludgeoningDamageMax + " " + DamageTypes.bludgeoning + " ";
+                weaponDamageText = weaponDamageText + bludgeoningDamageMin + "-" + bludgeoningDamageMax + " " + DamageTypes.bludgeoning + ", ";
                 break;
             default:
                 weaponDamageText = "(No physical damage)";
@@ -454,7 +465,7 @@ public class Weapon {
         }
         for (int i = 0; i < DamageTypes.damageTypesList.size() - 1; i++) {
             if (!returnStringIfHasDamageNoPhysical(DamageTypes.damageTypesList.get(i)).equals("")) {
-                weaponDamageText = weaponDamageText + " + " + returnStringIfHasDamageNoPhysical(DamageTypes.damageTypesList.get(i));
+                weaponDamageText = weaponDamageText + ", + " + returnStringIfHasDamageNoPhysical(DamageTypes.damageTypesList.get(i));
             }
         }
         return weaponDamageText;
@@ -474,7 +485,7 @@ public class Weapon {
         if (abilities.size() > 0) {
             for (int i = 0; i < abilities.size() - 1; i++) {
                 if (!abilities.get(i).equals("")) {
-                    textToReturn = textToReturn + "\n\t" + name + " ability " + i + ": " + abilities.get(i);
+                    textToReturn = textToReturn + "\n\t\t>>^ ability " + i + ": " + abilities.get(i);
                 }
             }
         }
