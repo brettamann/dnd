@@ -43,4 +43,18 @@ public class FileUtility {
         // don't accidentally overwrite your existing file.
         return new CampaignObject();
     }
+
+    public static CampaignObject getFileOnStartup() {
+        if (!Files.exists(Paths.get(FILE_NAME))) {
+            Screen.redText("No data.txt file found at " + Paths.get(FILE_NAME) + ", creating a new one.");
+            return new CampaignObject();
+        } else {
+            Screen.greenText("data.txt found at " + Paths.get(FILE_NAME));
+            return FileUtility.load();
+        }
+    }
+
+    public static CampaignObject getNewCampaignObject() {
+        return new CampaignObject();
+    }
 }

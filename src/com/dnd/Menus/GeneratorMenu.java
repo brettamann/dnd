@@ -8,9 +8,10 @@ import java.util.List;
 
 public class GeneratorMenu {
     public static void display(HardData hardData) {
-        String input = Input.promptTextInput("What do you want to get?\n0. What's around me?\n1. Create Commoners\n2. Create a Guard Encounter\n3. Call Time\n4. Lock DC\n5. Recognition DC\n\nb. Back", List.of("0","1","2","3","4","5","b"));
-        if (!input.equals("b")) {
-            switch (Integer.parseInt(input)) {
+        Screen.greenText("\t\tGENERATOR MENU\n");
+        String inputOne = Input.promptTextInput("What do you want to get?\n0. What's around me?\n1. Create Commoners\n2. Create a Guard Encounter\n3. Call Time\n4. Lock DC\n5. Recognition DC\n\nb. Back", List.of("0","1","2","3","4","5","b"));
+        if (!inputOne.equals("b")) {
+            switch (Integer.parseInt(inputOne)) {
                 case 0:
                     Utilities.getWhatsAroundMe(hardData);
                 case 1:

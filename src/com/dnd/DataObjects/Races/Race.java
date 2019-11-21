@@ -1,7 +1,5 @@
 package com.dnd.DataObjects.Races;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Race {
@@ -69,5 +67,35 @@ public class Race {
         this.maxAge = maxAge;
         this.braveryMod = braveryMod;
         this.familySizeMax = familySizeMax;
+    }
+
+    public Race(Race other) {
+        this.raceName = other.raceName;
+        this.bodySize = other.bodySize;
+        this.walkSpeed = other.walkSpeed;
+        this.flySpeed = other.flySpeed;
+        this.swimSpeed = other.swimSpeed;
+        this.climbSpeed = other.climbSpeed;
+        this.lawfulGoodChance = other.lawfulGoodChance;
+        this.chaoticGoodChance = other.chaoticGoodChance;
+        this.neutralGoodChance = other.neutralGoodChance;
+        this.lawfulEvilChance = other.lawfulEvilChance;
+        this.chaoticEvilChance = other.chaoticEvilChance;
+        this.neutralEvilChance = other.neutralEvilChance;
+        this.lawfulNeutralChance = other.lawfulNeutralChance;
+        this.chaoticNeutralChance = other.chaoticNeutralChance;
+        this.trueNeutralChance = other.trueNeutralChance;
+        this.strMod = other.strMod;
+        this.dexMod = other.dexMod;
+        this.conMod = other.conMod;
+        this.wisMod = other.wisMod;
+        this.intMod = other.intMod;
+        this.chrMod = other.chrMod;
+        this.abilities = other.abilities;
+        this.languages = other.languages;
+        this.minAge = other.minAge;
+        this.maxAge = other.maxAge;
+        this.braveryMod = other.braveryMod;
+        this.familySizeMax = other.familySizeMax;
     }
 }

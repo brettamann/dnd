@@ -1,5 +1,6 @@
 package com.dnd.Utilities;
 
+import com.dnd.DataObjects.Guards.GuardTypes;
 import com.dnd.DataObjects.HardData;
 import com.dnd.DataObjects.Items.Weapon;
 import com.dnd.DataObjects.Location;
@@ -84,13 +85,6 @@ public class Utilities {
 
         int standardGuardCount = Math.min(10, RandomGenerator.randomIntInRange(1, repSelector));
 
-        int recallClericCount = 0;
-        if (RandomGenerator.randomIntInRange(1, 5) == 1) {
-            //20% chance for a recall cleric in any encounter
-            //If these are in the group, they don't get removed
-            recallClericCount++;
-        }
-
         int arresterCount = 0;
         if (repSelector >= 1) {
             arresterCount = Math.min(6, Math.max(0, RandomGenerator.randomIntInRange(1, 6) - 5 + (repSelector / 5)));
@@ -106,10 +100,30 @@ public class Utilities {
             lawcasterCount = Math.min(6, Math.max(0, RandomGenerator.randomIntInRange(1, 4) - 5 + (repSelector / 2)));
         }
 
+        int recallClericCount = 0;
+        if (repSelector >= 5 && RandomGenerator.randomIntInRange(1, 100) <= 20) {
+            recallClericCount = 1;
+        }
+
+        int aeromancerCount = 0;
+        if (repSelector >= 5) {
+            aeromancerCount = Math.min(6, Math.max(0, RandomGenerator.randomIntInRange(1, 4) - 5 + (repSelector / 2)));
+        }
+
+        int subhydromancerCount = 0;
+        if (repSelector >= 6) {
+            subhydromancerCount = Math.min(6, Math.max(0, RandomGenerator.randomIntInRange(1, 4) - 5 + (repSelector / 2)));
+        }
+
         int healerCount = 0;
         if (repSelector >= 6) {
             healerCount = Math.min(2, Math.max(0, RandomGenerator.randomIntInRange(1, 6) - 5 + (repSelector / 5)));
             //Once they are placed in, they don't get removed
+        }
+
+        int pyromancerCount = 0;
+        if (repSelector >= 7) {
+            pyromancerCount = Math.min(6, Math.max(0, RandomGenerator.randomIntInRange(1, 4) - 5 + (repSelector / 2)));
         }
 
         int entanglerCount = 0;
@@ -127,6 +141,11 @@ public class Utilities {
             purgerCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 6) - 7 + (repSelector / 3)));
         }
 
+        int geomancerCount = 0;
+        if (repSelector >= 11) {
+            geomancerCount = Math.min(6, Math.max(0, RandomGenerator.randomIntInRange(1, 4) - 5 + (repSelector / 2)));
+        }
+
         int skyhelmCount = 0;
         if (repSelector >= 12) {
             skyhelmCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 4) - 5 + (repSelector / 5)));
@@ -142,9 +161,24 @@ public class Utilities {
             earthHelmCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 6) - 7 + (repSelector / 4)));
         }
 
+        int linebreakerCount = 0;
+        if (repSelector >= 15) {
+            linebreakerCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 6) - 7 + (repSelector / 4)));
+        }
+
+        int suppressorCount = 0;
+        if (repSelector >= 16) {
+            suppressorCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 8) - 9 + (repSelector / 6)));
+        }
+
         int holyArchmageCount = 0;
         if (repSelector >= 16) {
             holyArchmageCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 8) - 9 + (repSelector / 6)));
+        }
+
+        int demonHunterCount = 0;
+        if (repSelector >= 18) {
+            demonHunterCount = Math.min(15, Math.max(0, RandomGenerator.randomIntInRange(1, 8) - 9 + (repSelector / 6)));
         }
 
         int bastionShieldCount = 0;
@@ -158,81 +192,121 @@ public class Utilities {
             //once they are put in, they don't get removed
         }
 
-        int totalGuards = standardGuardCount + recallClericCount + arresterCount + watchmanCount + lawcasterCount + healerCount + entanglerCount + enforcerCount + purgerCount + skyhelmCount + sniperCount + earthHelmCount + holyArchmageCount + bastionShieldCount + dawnbringerCount;
+        int totalGuards = standardGuardCount + recallClericCount + arresterCount + aeromancerCount + watchmanCount + lawcasterCount + healerCount + subhydromancerCount + pyromancerCount + entanglerCount + enforcerCount + purgerCount + skyhelmCount + geomancerCount + sniperCount + earthHelmCount + holyArchmageCount + suppressorCount + linebreakerCount + bastionShieldCount + demonHunterCount + dawnbringerCount;
         while (totalGuards >= totalReinforcementsCap) {
-            totalGuards = standardGuardCount + recallClericCount + arresterCount + watchmanCount + lawcasterCount + healerCount + entanglerCount + enforcerCount + purgerCount + skyhelmCount + sniperCount + earthHelmCount + holyArchmageCount + bastionShieldCount + dawnbringerCount;
+            totalGuards = standardGuardCount + recallClericCount + arresterCount + aeromancerCount + watchmanCount + lawcasterCount + healerCount + subhydromancerCount + pyromancerCount + entanglerCount + enforcerCount + purgerCount + skyhelmCount + geomancerCount + sniperCount + earthHelmCount + holyArchmageCount + linebreakerCount + bastionShieldCount + demonHunterCount + dawnbringerCount;
             //this loop removes the "worse" guards in the group until the number is within the cap. Quality over quantity
-            if (standardGuardCount > 0) {
+            //I want there to be potential variance in who gets removed, so even the worst guards have a small chance to stick around
+            if (standardGuardCount > 0 && RandomGenerator.randomIntInRange(1,100) <= 95) {
                 standardGuardCount--;
-            } else if (arresterCount > 0) {
+            } else if (arresterCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 90) {
                 arresterCount--;
-            } else if (watchmanCount > 0) {
+            } else if (watchmanCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 85) {
                 watchmanCount--;
-            } else if (lawcasterCount > 0) {
+            } else if (lawcasterCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 80) {
                 lawcasterCount--;
-            } else if (entanglerCount > 0) {
+            } else if (aeromancerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 75) {
+                aeromancerCount--;
+            } else if (subhydromancerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 70) {
+                subhydromancerCount--;
+            } else if (pyromancerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 65) {
+                pyromancerCount--;
+            } else if (entanglerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 60) {
                 entanglerCount--;
-            } else if (enforcerCount > 0) {
+            } else if (enforcerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 55) {
                 enforcerCount--;
-            } else if (purgerCount > 0) {
+            } else if (purgerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 50) {
                 purgerCount--;
-            } else if (skyhelmCount > 0) {
+            } else if (geomancerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 45) {
+                geomancerCount--;
+            } else if (skyhelmCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 40) {
                 skyhelmCount--;
-            } else if (sniperCount > 0) {
+            } else if (sniperCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 35) {
                 sniperCount--;
-            } else if (earthHelmCount > 0) {
+            } else if (earthHelmCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 30) {
                 earthHelmCount--;
-            } else if (holyArchmageCount > 0) {
-                holyArchmageCount--;
-            } else if (bastionShieldCount > 0) {
+            } else if (linebreakerCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 25) {
+                linebreakerCount--;
+            } else if (suppressorCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 20) {
+                if (RandomGenerator.randomIntInRange(1,100) <= 50) {
+                    suppressorCount--;
+                } else {
+                    holyArchmageCount--;
+                }
+            } else if (holyArchmageCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 20) {
+
+            } else if (demonHunterCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 15) {
+                demonHunterCount--;
+            } else if (bastionShieldCount > 0 && RandomGenerator.randomIntInRange(1, 100) <= 10) {
                 bastionShieldCount--;
             }
         }
 
         for (int i = 0; i < standardGuardCount; i++) {
-            hardData.guardsInArea.add("Standard Guard");
+            hardData.guardsInArea.add(GuardTypes.standardGuard);
         }
         for (int i = 0; i < recallClericCount; i++) {
-            hardData.guardsInArea.add("Recall Cleric");
+            hardData.guardsInArea.add(GuardTypes.recallCleric);
         }
         for (int i = 0; i < arresterCount; i++) {
-            hardData.guardsInArea.add("Arrester");
+            hardData.guardsInArea.add(GuardTypes.arrester);
+        }
+        for (int i = 0; i < aeromancerCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.aeromancer);
+        }
+        for (int i = 0; i < subhydromancerCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.subhydromancer);
+        }
+        for (int i = 0; i < pyromancerCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.pyromancer);
         }
         for (int i = 0; i < watchmanCount; i++) {
-            hardData.guardsInArea.add("Watchman");
+            hardData.guardsInArea.add(GuardTypes.watchman);
         }
         for (int i = 0; i < lawcasterCount; i++) {
-            hardData.guardsInArea.add("Lawcaster");
+            hardData.guardsInArea.add(GuardTypes.lawcaster);
         }
         for (int i = 0; i < healerCount; i++) {
-            hardData.guardsInArea.add("Healer");
+            hardData.guardsInArea.add(GuardTypes.healer);
         }
         for (int i = 0; i < entanglerCount; i++) {
-            hardData.guardsInArea.add("Entangler");
+            hardData.guardsInArea.add(GuardTypes.entangler);
         }
         for (int i = 0; i < enforcerCount; i++) {
-            hardData.guardsInArea.add("Enforcer");
+            hardData.guardsInArea.add(GuardTypes.enforcer);
         }
         for (int i = 0; i < purgerCount; i++) {
-            hardData.guardsInArea.add("Purger");
+            hardData.guardsInArea.add(GuardTypes.purger);
+        }
+        for (int i = 0; i < geomancerCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.geomancer);
         }
         for (int i = 0; i < skyhelmCount; i++) {
-            hardData.guardsInArea.add("Skyhelm");
+            hardData.guardsInArea.add(GuardTypes.skyHelm);
         }
         for (int i = 0; i < sniperCount; i++) {
-            hardData.guardsInArea.add("Sniper");
+            hardData.guardsInArea.add(GuardTypes.sniper);
         }
         for (int i = 0; i < earthHelmCount; i++) {
-            hardData.guardsInArea.add("Earth-Helm");
+            hardData.guardsInArea.add(GuardTypes.earthHelm);
+        }
+        for (int i = 0; i < linebreakerCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.linebreaker);
+        }
+        for (int i = 0; i < suppressorCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.suppressor);
         }
         for (int i = 0; i < holyArchmageCount; i++) {
-            hardData.guardsInArea.add("Holy Archmage");
+            hardData.guardsInArea.add(GuardTypes.holyArchmage);
+        }
+        for (int i = 0; i < demonHunterCount; i++) {
+            hardData.guardsInArea.add(GuardTypes.demonHunter);
         }
         for (int i = 0; i < bastionShieldCount; i++) {
-            hardData.guardsInArea.add("Bastion's Shield");
+            hardData.guardsInArea.add(GuardTypes.bastionShield);
         }
         for (int i = 0; i < dawnbringerCount; i++) {
-            hardData.guardsInArea.add("Dawnbringer");
+            hardData.guardsInArea.add(GuardTypes.dawnbringer);
         }
     }
 

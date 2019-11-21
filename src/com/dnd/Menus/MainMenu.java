@@ -1,13 +1,10 @@
 package com.dnd.Menus;
 
 import com.dnd.Autocombat.AutocombatHandler;
-import com.dnd.DataObjects.CampaignObject;
-import com.dnd.DataObjects.HardData;
-import com.dnd.Utilities.Colors;
-import com.dnd.Utilities.Input;
-import com.dnd.Utilities.Screen;
-import com.dnd.Utilities.Utilities;
+import com.dnd.DataObjects.*;
+import com.dnd.Utilities.*;
 
+import java.io.File;
 import java.util.List;
 
 public class MainMenu {
@@ -15,14 +12,13 @@ public class MainMenu {
     public static void display(CampaignObject gameObject, HardData hardData) {
         boolean quitProgram = false;
         while (!quitProgram) {
-            Screen.println("In " + Colors.YELLOW + hardData.currentSelectedLocation.name + Colors.RESET + " with " + Colors.YELLOW + hardData.currentSelectedLocation.reputationInArea + Colors.RESET + " rep in the area. (Alert Level " + hardData.currentSelectedLocation.reputationInArea + ": " + Utilities.translateAlertLevelToString(hardData.currentSelectedLocation.alertLevel) + ")");
-            Screen.println("");
-            //Screen.clear();
             Screen.print("\t\t\tMain Menu\n\n");
-            String input = Input.promptTextInput("0. Change Location\n1. DC & Person Generator Menu\n2. Autocombat Simulator\n3. Update Party XP & Rep\n4. Update Area Alert & Rep\n\nd. Display What's Around", List.of("0","1","2","3","4"));
+            Screen.println("In " + Colors.YELLOW + hardData.currentSelectedLocation.name + Colors.RESET + " with " + Colors.YELLOW + hardData.currentSelectedLocation.reputationInArea + Colors.RESET + " rep in the area. (Alert Level " + (hardData.currentSelectedLocation.reputationInArea / 100) + ": " + Utilities.translateAlertLevelToString(hardData.currentSelectedLocation.alertLevel) + ")\n");
+            Screen.println("Commoners in area: " + hardData.commonersInArea.size() + ", Guards in area: " + hardData.guardsInArea.size());
+            String input = Input.promptTextInput("0. Change Location\n1. DC & Person Generator Menu\n2. Autocombat Simulator\n3. Update Party XP & Rep\n4. Update Area Alert & Rep\n5. See, save, load form previous commoner lists\n\nd. Display What's Around\nreset. Reset all data", List.of("0","1","2","3","4","5","d","s","reset"));
             switch (input) {
                 case "0":
-                    ChangeLocation.changeSelectedLocation(hardData);
+                    ChangeLocation.changeSelectedLocation(true, hardData);
                     break;
                 case "1":
                     GeneratorMenu.display(hardData);
@@ -46,14 +42,59 @@ public class MainMenu {
                     }
                     break;
                 case "3":
-                    //TODO update party rep & xp
+                    switch (Input.promptTextInput("What are we updating?\n1. Reputation\n2. XP\nb. Back", List.of("1", "2", "b"))) {
+                        case "1":
+                            gameObject.getPartyInfo().setReputation(Input.promptIntInputWithinRange("Enter the new reputation value:",0,9999999));
+                            FileUtility.save(gameObject);
+                            break;
+                        case "2":
+                            gameObject.getPartyInfo().setCurrentXP(Input.promptIntInputWithinRange("Enter the new XP value:",0,999999999));
+                            FileUtility.save(gameObject);
+                            break;
+                    }
                     break;
                 case "4":
-                    //TODO update area rep & alert level
+                    ChangeLocation.updateLocationRep(hardData);
                     break;
+                case "5":
+                    SaveLoadCommonerLists.saveLoadCommonerMenu(gameObject);
                 case "d":
-                    //TODO display created commoners & guards
+                    switch (Input.promptTextInput("What are we displaying?\n1. Commoners\n2. Guards\n3. Both\nb. Back", List.of("1", "2", "3", "b"))) {
+                        case "1":
+                            for (Person temp : hardData.commonersInArea) {
+                                temp.displayAll();
+                            }
+                            break;
+                        case "2":
+                            for (String guard : hardData.guardsInArea) {
+                                Screen.println(guard);
+                            }
+                            break;
+                        case "3":
+                            for (Person temp : hardData.commonersInArea) {
+                                temp.displayAll();
+                            }
+                            for (String guard : hardData.guardsInArea) {
+                                Screen.println(guard);
+                            }
+                            break;
+                        default:
+                            Screen.println("Cancelling");
+                            break;
+                    }
                     break;
+                case "s":
+                    FileUtility.save(gameObject);
+                    Screen.greenText("Game saved!");
+                case "reset":
+                    if (Input.promptTextInput(Colors.RED + "THIS ERASES ALL DATA! ARE YOU SURE YOU WANT TO?! (y/n)" + Colors.RESET, List.of("y","n")).equals("y")) {{
+                        gameObject = new CampaignObject();
+                        FileUtility.save(gameObject);
+                        ChangeLocation.changeSelectedLocation(false, gameObject.getHardData());
+                        FileUtility.save(gameObject);
+                    }
+
+                }
             }
                     //change location
                     //autocombat

@@ -55,6 +55,7 @@ public class Armor {
     }
 
     public void setPlusEnchantmentByLevel(int plusEnchantmentLevel) {
+        name = name + " +" + plusEnchantmentLevel;
         ac += plusEnchantmentLevel;
     }
 
@@ -64,14 +65,13 @@ public class Armor {
     }
 
     public void displayArmorStats() {
-        Screen screen = new Screen();
-        screen.print("Armor: " + name + ", AC: " + ac + " + " + dexBonusMax + " max DEX bonus ");
+        Screen.print("Armor: " + name + ", AC: " + ac + " + " + dexBonusMax + " max DEX bonus ");
         for (int i = 0; i < abilities.size() - 1; i++){
-            screen.print(abilities.get(i));
+            Screen.print(abilities.get(i));
         }
     }
 
-    public String getArmorStatsStringForDisplay(Screen screen) {
+    public String getArmorStatsStringForDisplay() {
         String stringToReturn = "Armor: " + name + ", AC: " + ac + " + " + dexBonusMax + " max DEX bonus ";
         for (int i = 0; i < abilities.size() - 1; i++) {
             if (!abilities.get(i).equals(""))

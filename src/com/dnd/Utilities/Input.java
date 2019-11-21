@@ -56,7 +56,7 @@ public class Input {
         while(badInput) {
             try {
                 Scanner scanner = new Scanner(new InputStreamReader(System.in));
-                System.out.print(promptText + ": ");
+                System.out.print(promptText + "\nInput : ");
                 input = scanner.nextLine();
 
                 badInput = !validCommands.contains(input.toLowerCase());
@@ -70,6 +70,7 @@ public class Input {
 
         return input;
     }
+
     public static int promptIntInputWithinRange(String promptText, int min, int max) {
         boolean badInput = true;
         int input = 0;
@@ -88,5 +89,27 @@ public class Input {
         }
 
             return input;
+    }
+
+    public static String promptOpenInput(String promptText) {
+        //no input validation here, good for open-ended prompts with variable options
+        boolean badInput = true;
+        String input = "";
+
+        while (badInput) {
+            try {
+                Scanner scanner = new Scanner(new InputStreamReader(System.in));
+                System.out.print(promptText + "\nInput : ");
+                input = scanner.nextLine();
+
+                //badInput = !validCommands.contains(input.toLowerCase());
+
+            } catch (Exception ex) {
+                System.out.println("Invalid Input! Retry!");
+                badInput = true;
+            }
+
+        }
+        return input;
     }
 }

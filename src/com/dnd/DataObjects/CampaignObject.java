@@ -2,6 +2,7 @@ package com.dnd.DataObjects;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 // Overall game object, just a rough sample
@@ -11,14 +12,22 @@ public class CampaignObject {
     List<Location> locations;
     List<Person> killedList;
     List<Person> capturedList;
+
+    ArrayList<SavedCommonerList> savedCommonerLists;
     HardData hardData;
 
     public CampaignObject() {
         partyInfo = new PartyInfo();
-        partyMembers = new ArrayList<>();
+        partyMembers = new ArrayList<>(Arrays.asList(
+            new PartyMember("Mark (Mork)", 86, 86, 15, 8, 5, 3, 3,2),
+            new PartyMember("Chris (Gandwarf)", 113, 113, 22, 7, 14, 10, 0,2),
+            new PartyMember("Ellie (Ember)", 63, 63, 16, 4, 9, 7, 3,1)
+        ));
         locations = new ArrayList<>();
         killedList = new ArrayList<>();
         capturedList = new ArrayList<>();
+        hardData = new HardData();
+        savedCommonerLists = new ArrayList<>();
     }
 
     public PartyInfo getPartyInfo() {
@@ -75,4 +84,12 @@ public class CampaignObject {
         return this;
     }
 
+    public ArrayList<SavedCommonerList> getSavedCommonerLists() {
+        return savedCommonerLists;
+    }
+
+    public CampaignObject setSavedCommonerLists(ArrayList<SavedCommonerList> savedCommonerLists) {
+        this.savedCommonerLists = savedCommonerLists;
+        return this;
+    }
 }

@@ -1,5 +1,6 @@
 package com.dnd.DataObjects;
 
+import com.dnd.DataObjects.Guards.GuardTypes;
 import com.dnd.DataObjects.Items.*;
 import com.dnd.DataObjects.Races.Race;
 import com.dnd.DataObjects.Races.Races;
@@ -8,11 +9,10 @@ import com.dnd.Utilities.RandomCollectionWeighted;
 import com.dnd.Utilities.RandomGenerator;
 import com.dnd.Utilities.Screen;
 
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.util.*;
 
 public class Person {
-    //TODO: give the ability for some people with higher intelligence or wisdom to have a chance of knowing spells
-    Rarities rarities = new Rarities();
     private RandomCollectionWeighted<String> rc;
     private RandomGenerator randGen = new RandomGenerator();
 
@@ -36,7 +36,6 @@ public class Person {
     private int[][] spellSlots = { {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0} }; //The amount of spells known per spell level. For example, [1][0] is spell level 1, [1][1] is how many level 1 spell slots. [0][0] is cantrips.
     private List<Spell> spellsKnown = new ArrayList<>();
 
-
     private boolean hasFamily;
     private int familyMemberCount;
     private String mood;
@@ -50,7 +49,6 @@ public class Person {
     private Weapon offhandWeapon;
     private List<Armor> wornArmor = new ArrayList<>(2); //index 0 is the main armor, index 1 is shield, if applicable
     private boolean hasShield = false;
-
 
     //non-equipped items that are being carried
     private Pack packCarried = new Pack();
@@ -88,11 +86,12 @@ public class Person {
     //TODO: create a function that attaches bodyguards to the person
     private List<Person> bodyguardList = new ArrayList<>();
 
+    private boolean hasSpecialAbilities = false; //a regular person will not have special abilities.
+    private List<String> specialAbilities = new ArrayList<>();
 
     public Person(){}
 
     public Person(Person other) {
-        this.rarities = other.rarities;
         this.rc = other.rc;
         this.randGen = other.randGen;
         this.economicClass = other.economicClass;
@@ -152,70 +151,125 @@ public class Person {
         this.bodyguardList = new ArrayList<>(other.bodyguardList);
     }
 
-    public void displayAll(Screen screen) {
-        screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), name + ", the " + age + " (" + agePercent + "% of " + raceData.maxAge + ") yrs old " + gender + " " + raceData.raceName + ". Level " + level + ", EXP Value: " + xpValue);
-        screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass),hpCurrent + "/" + hpMax + " hp, " + ac + " AC");
-        displayPersonalityTraits(screen);
-        displayCombatStats(screen, false);
-        displayPackContents(screen);
-        screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Pickpocket DC: " + dcToPickpocket);
-    }
+    public void displayAll() {
+        Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), name + ", " + age + " (" + agePercent + "%/" + raceData.maxAge + ") yrs, " + gender + ", " + raceData.raceName + ". Level " + level + ", EXP Value: " + xpValue + ". Lives in " + livesIn.name + ", family of " + familyMemberCount);
+        displayPersonalityTraits();
+        Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass),hpCurrent + "/" + hpMax + " hp, " + ac + " AC (" + wornArmor.get(0).name + ")");
+        if (raceData.walkSpeed != 30)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), ", " + raceData.walkSpeed + " ft Run");
+        if (raceData.swimSpeed > 15)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), ", " + raceData.swimSpeed + " ft Swim");
+        if (raceData.climbSpeed > 15)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), ", " + raceData.climbSpeed + " ft Climb");
+        if (raceData.flySpeed > 0)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), ", " + raceData.flySpeed + " ft Fly");
+        Screen.println("");
+        displaySpecialAbilities();
+        displayCombatStats(false);
+        displayPackContents();
+        Screen.redText("----------------------------------------------");
+        }
 
-    public void displayPersonalityTraits(Screen screen) {
-        screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Personality Traits: (" + alignment + ", " + mood + " mood)");
+    private void displayPersonalityTraits() {
+        Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Personality Traits: " + economicClass + ", " + alignment + ", \"" + mood + "\" mood");
         for (int i = 0; i < quirks.size() - 1; i++) {
             if (!quirks.get(i).equals("")) {
-                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "\t" + quirks.get(i));
+                Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + quirks.get(i));
             }
         }
     }
 
-    public void displayPackContents(Screen screen) {
-        screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Items in " + name + "'s pack:");
-        for (int i = 0; i < packCarried.weaponsCarried.size() - 1; i++) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "\t" + packCarried.weaponsCarried.get(i).getWeaponStatsStringForDisplay());
+    private void displayPackContents() {
+        int allPackCount = packCarried.weaponsCarried.size() + packCarried.armorCarried.size() + packCarried.lootCarried.size();
+        Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Items in " + name + "'s pack (" + allPackCount + "), Pickpocket DC " + dcToPickpocket + ":");
+        Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\tMoney: ");
+        if (platinum > 0)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), platinum + " Plat, ");
+        if (gold > 0)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), gold + " Gold, ");
+        if (silver > 0)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), silver + " Silver, ");
+        if (copper > 0)
+            Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), copper + " Copper ");
+        Screen.println("");
+        for (int i = 0; i < packCarried.weaponsCarried.size(); i++) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + packCarried.weaponsCarried.get(i).getWeaponStatsStringForDisplay());
         }
-        for (int i = 0; i < packCarried.armorCarried.size() - 1; i++) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "\t" + packCarried.armorCarried.get(i).getArmorStatsStringForDisplay(screen));
+        for (int i = 0; i < packCarried.armorCarried.size(); i++) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + packCarried.armorCarried.get(i).getArmorStatsStringForDisplay());
         }
-        for (int i = 0; i < packCarried.lootCarried.size() - 1; i++) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "\t" + packCarried.lootCarried.get(i).getDescriptionStringForDisplay(screen));
+        for (int i = 0; i < packCarried.lootCarried.size(); i++) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + packCarried.lootCarried.get(i).getDescriptionStringForDisplay());
         }
     }
 
-    public void displayCombatStats(Screen screen, boolean shouldPrintName) {
+    private void displaySpecialAbilities() {
+        if (hasSpecialAbilities) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Special Actions & Abilities:");
+            for (String ability : specialAbilities) {
+                Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + ability);
+            }
+        }
+    }
+
+    private void displayCombatStats(boolean shouldPrintName) {
         if (shouldPrintName) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), name + ", the " + raceData.raceName + ": " + hpCurrent + "/" + hpMax + " hp, " + ac + " AC");
-        }
-        screen.printByColor(rarities.getColorByRarityOrEconomy(economicClass), "STR: " + strength + "(" + strMod + ")," + " DEX: " + dexterity + "(" + dexMod + "), " + " CON: " + constitution + "(" + conMod + "), " + " INT: " + intelligence + "(" + intMod + "), " + " WIS: " + wisdom + "(" + wisMod + "), " + " CHR: " + charisma + "(" + chrMod + "), " + "Passive Perception: " + passivePerception);
-        screen.printByColor(rarities.getColorByRarityOrEconomy(economicClass), "Armor: " + wornArmor.get(0).name);
-        if (hasShield) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), " + " + wornArmor.get(1).name);
-        } else {
-            System.out.println(" ");
-        }
-        for (int i = 0; i < wornArmor.size() - 1; i++) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), wornArmor.get(i).name + " abilities:");
-            for (int j = 0; j < wornArmor.get(i).abilities.size() - 1; j++) {
-                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), wornArmor.get(i).name + " ability " + j + ": " + wornArmor.get(i).abilities.get(j));
-            }
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), name + ", the " + raceData.raceName + ": " + hpCurrent + "/" + hpMax + " hp, " + ac + " AC");
         }
         if (mainhandWeapon != null && mainhandWeapon.getIsTwoHanded()) {
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Both Hands: " + mainhandWeapon.getWeaponStatsStringForDisplay());
-        } else if(mainhandWeapon != null){
-            screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Main Hand: " + mainhandWeapon.getWeaponStatsStringForDisplay());
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Both Hands: " + mainhandWeapon.getWeaponStatsStringForDisplay());
+        } else if (mainhandWeapon != null) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Main Hand: " + mainhandWeapon.getWeaponStatsStringForDisplay());
             if (offhandWeapon != null) {
-                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: " + offhandWeapon.getWeaponStatsStringForDisplay());
+                Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: " + offhandWeapon.getWeaponStatsStringForDisplay());
             } else if (hasShield) {
-                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: (Shield)");
+                Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Off Hand: (Shield)");
             }
         }
-        for (int i = 0; i < raceData.abilities.size() - 1; i++) {
+        //Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Armor: " + wornArmor.get(0).getArmorStatsStringForDisplay());
+        if (hasShield) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), " + " + wornArmor.get(1).getArmorStatsStringForDisplay());
+        }
+        for (int i = 0; i < wornArmor.size(); i++) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), wornArmor.get(i).getArmorStatsStringForDisplay());
+        }
+        for (int i = 0; i < raceData.abilities.size(); i++) {
             if (!raceData.abilities.get(i).equals("")) {
-                screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass), raceData.raceName + " ability: " + raceData.abilities.get(i));
+                Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "  -- " + raceData.raceName + " ability: " + raceData.abilities.get(i));
             }
         }
-        //screen.printLnByColor(rarities.getColorByRarityOrEconomy(economicClass),name + ", the " + raceData.raceName + ", " + age + " yrs (" + "");
+        Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), "STR: " + strength + "(" + strMod + ")," + " DEX: " + dexterity + "(" + dexMod + "), " + " CON: " + constitution + "(" + conMod + "), " + " INT: " + intelligence + "(" + intMod + "), " + " WIS: " + wisdom + "(" + wisMod + "), " + " CHR: " + charisma + "(" + chrMod + "), " + "Passive Perception: " + passivePerception + " ");
+        Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "+" + spellAttackMod + " Spell attack, Spell DC:" + spellDc);
+        if (isSpellcaster) {
+            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Known Spells (" + spellsKnown.size() + ")");
+            for (int i = 0; i < 10; i++) {
+                if (spellSlots[i][1] > 0) { //don't bother printing if they have no slots
+                    List<Spell> spellsOfLevel = getKnownSpellsOfLevel(i);
+                    if (i == 0 && spellSlots[0][1] > 0) {
+                        Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Cantrips: ");
+                        for (int j = 0; j < spellsOfLevel.size(); j++) {
+                            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + spellsOfLevel.get(j).getSpellTextForDisplay());
+                        }
+                    } else {
+                        Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Level " + i + " (" + spellSlots[i][1] + " slots):");
+                        for (int j = 0; j < spellsOfLevel.size(); j++) {
+                            Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "\t" + spellsOfLevel.get(j).getSpellTextForDisplay());
+                        }
+                    }
+                }
+            }
+        }
+        //screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass),name + ", the " + raceData.raceName + ", " + age + " yrs (" + "");
+    }
+
+    private List<Spell> getKnownSpellsOfLevel(int level) {
+        List<Spell> spellListToReturn = new ArrayList<>();
+        for (Spell spell : spellsKnown) {
+            if (spell.level == level) {
+                spellListToReturn.add(spell);
+            }
+        }
+        return spellListToReturn;
     }
 
     public Person create(HardData hardData) {
@@ -224,24 +278,33 @@ public class Person {
         getLevelFromClass();
 
         getRaceFromLocation();
-        raceData = getRaceDataFromRace(hardData);
+        raceData = new Race(getRaceDataFromRace(hardData));
         getInventoryFromClass(hardData.currentSelectedLocation);
         getRacialTraitsFromRace();
         getNameFromRace(raceData.raceName);
-        getAlignmentFromRace(hardData);
-        getRacialTraitsFromRace();
+        getAlignmentFromRace();
         getStatsBasedOnLevel();
-        determineSpellcasterTraits(hardData);
+        determineSpellcasterTraits();
         calculateDcToPickpocket();
         determineBodyguards();
         determineCallGlyphs();
         determineFamily();
         setQuirks();
         mood = randGen.getRandomMood();
-
+        calculateAC();
         calculateXPValue();
-
         return this;
+    }
+
+    private void calculateAC() {
+        if (!raceData.raceName.equalsIgnoreCase(Races.tortle)) {
+            ac = Math.max(wornArmor.get(0).dexBonusMax * -1, Math.min(wornArmor.get(0).dexBonusMax, dexMod)) + wornArmor.get(0).ac;
+        } else {
+            ac = 13 + conMod;
+        }
+        if (hasShield) {
+            ac += Math.max(wornArmor.get(1).dexBonusMax * -1, Math.min(wornArmor.get(1).dexBonusMax, dexMod));
+        }
     }
 
     public void determineIfTraveler(Location currentLocation, List<Location> locationlist) {
@@ -266,14 +329,15 @@ public class Person {
         determineIfTraveler(currentLocation, locationlist);
         //because travelers are no longer in the equation but are a part of the 100% (and we need to add up to 100%) this divides the traveler chance evenly among all types
         rc = new RandomCollectionWeighted<String>()
-            .add(livesIn.beggarChance + (livesIn.travelerChance / 4), EconomicClasses.beggar)
-            .add(livesIn.poorChance + (livesIn.travelerChance / 4), EconomicClasses.poor)
-            .add(livesIn.middleClassChance + (livesIn.travelerChance / 4), EconomicClasses.middleClass)
-            .add(livesIn.wealthyChance + (livesIn.travelerChance / 4), EconomicClasses.wealthy);
+            .add(livesIn.beggarChance + (livesIn.travelerChance / 5), EconomicClasses.beggar)
+            .add(livesIn.poorChance + (livesIn.travelerChance / 5), EconomicClasses.poor)
+            .add(livesIn.middleClassChance + (livesIn.travelerChance / 5), EconomicClasses.middleClass)
+            .add(livesIn.wealthyChance + (livesIn.travelerChance / 5), EconomicClasses.wealthy)
+            .add(livesIn.eliteChance + (livesIn.travelerChance / 5), EconomicClasses.elite);
         economicClass = rc.next();
     }
 
-    public void getLevelFromClass() {
+    private void getLevelFromClass() {
         switch(economicClass) {
             case EconomicClasses.beggar:
                 rc = new RandomCollectionWeighted<String>()
@@ -295,43 +359,41 @@ public class Person {
                 break;
             case EconomicClasses.middleClass:
                 rc = new RandomCollectionWeighted<String>()
-                    .add(8, "1")
-                    .add(10, "2")
+                    .add(2, "1")
+                    .add(5, "2")
                     .add(15, "3")
                     .add(18, "4")
                     .add(14, "5")
-                    .add(10, "6")
-                    .add(10, "7")
-                    .add(8, "8")
-                    .add(4, "9")
-                    .add(3, "10");
+                    .add(13, "6")
+                    .add(13, "7")
+                    .add(9, "8")
+                    .add(7, "9")
+                    .add(4, "10");
                 break;
             case EconomicClasses.wealthy:
                 rc = new RandomCollectionWeighted<String>()
-                    .add(1, "1")
-                    .add(3, "2")
-                    .add(9, "3")
-                    .add(10, "4")
-                    .add(11, "5")
+                    .add(5, "3")
+                    .add(8, "4")
+                    .add(10, "5")
                     .add(15, "6")
-                    .add(20, "7")
-                    .add(16, "8")
-                    .add(8, "9")
-                    .add(7, "10");
+                    .add(15, "7")
+                    .add(15, "8")
+                    .add(10, "9")
+                    .add(10, "10")
+                    .add(7, "11")
+                    .add(5, "12");
                 break;
             case EconomicClasses.elite:
                 rc = new RandomCollectionWeighted<String>()
-                        .add(25, "10")
-                        .add(20, "11")
-                        .add(15, "12")
-                        .add(12, "13")
-                        .add(7, "14")
-                        .add(6, "15")
-                        .add(5, "16")
-                        .add(4, "17")
-                        .add(3, "18")
-                        .add(2, "19")
-                        .add(1, "20");
+                    .add(20, "12")
+                    .add(20, "13")
+                    .add(15, "14")
+                    .add(10, "15")
+                    .add(9, "16")
+                    .add(8, "17")
+                    .add(7, "18")
+                    .add(6, "19")
+                    .add(5, "20");
                 break;
         }
         level = Integer.parseInt(rc.next());
@@ -682,8 +744,7 @@ public class Person {
         return hardData.raceData.get(0);
     }
 
-    private void getAlignmentFromRace(HardData hardData) {
-        raceData = getRaceDataFromRace(hardData);
+    private void getAlignmentFromRace() {
         rc = new RandomCollectionWeighted<String>()
             .add(raceData.lawfulGoodChance,Alignments.lawfulGood)
             .add(raceData.neutralGoodChance, Alignments.neutralGood)
@@ -784,12 +845,12 @@ public class Person {
                 break;
             case EconomicClasses.elite: //these are the top of the wealth category, the big business moguls, the mayors, the famed adventurers, guard captains, heroes, etc. Guaranteed no penalties from class
                 dieMax = randGen.randomIntInRange(10, 12); //
-                classStr = randGen.randomIntInRange(0, 6); //
-                classDex = randGen.randomIntInRange(0, 6); //
-                classCon = randGen.randomIntInRange(0, 6); //
-                classWis = randGen.randomIntInRange(0, 6); //
-                classInt = randGen.randomIntInRange(0, 6); //
-                classChr = randGen.randomIntInRange(0, 6); //
+                classStr = randGen.randomIntInRange(1, 6); //
+                classDex = randGen.randomIntInRange(1, 6); //
+                classCon = randGen.randomIntInRange(1, 6); //
+                classWis = randGen.randomIntInRange(1, 6); //
+                classInt = randGen.randomIntInRange(1, 6); //
+                classChr = randGen.randomIntInRange(1, 6); //
                 break;
         }
         if (agePercent >= 80) {// old people get more intelligence and wisdom, but weaker bodies
@@ -1052,35 +1113,22 @@ public class Person {
                 }
                 break;
             case EconomicClasses.elite:
-                 if (armorTierSelected <= 50) {
+                 if (armorTierSelected <= 40) {
                     wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 3));//50%
-                } else if (armorTierSelected <= 75) {
+                } else if (armorTierSelected <= 70) {
                     wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 4));//25%
                 } else {
                     wornArmor.add(0, randGen.getArmorByEconomyAndTier(EconomicClasses.wealthy, 5));//25%
                 }
                 break;
         }
-        ac = wornArmor.get(0).ac;
-
-        //account for dex modifiers on the armor
-        if (dexMod < 0 && wornArmor.get(0).dexBonusMax > 0) {
-            ac += dexMod; //negative dexterity only affects AC if the armor allows for dexterity to modify the AC of the armor
-        }
-        if (wornArmor.get(0).dexBonusMax > 0 && dexMod >= wornArmor.get(0).dexBonusMax) { //can't add more than the max dex possible
-            ac += wornArmor.get(0).dexBonusMax;
-        } else if (wornArmor.get(0).dexBonusMax > 0 && dexMod > 0 && dexMod < wornArmor.get(0).dexBonusMax) { //just add some if you're not negative but not at or over the max
-            ac += dexMod;
-        }
-
-        if (hasShield && economicClass.equals(EconomicClasses.beggar) || economicClass.equals(EconomicClasses.poor)) {
-            wornArmor.add(1, StandardArmor.shield);
-        } else {
-            //TODO: allow wealthier people to have access to better shields
-            wornArmor.add(1, StandardArmor.shield);//placeholder for testing
-        }
         if (hasShield) {
-            ac = ac + wornArmor.get(1).ac;
+            if (economicClass.equals(EconomicClasses.beggar) || economicClass.equals(EconomicClasses.poor)) {
+                wornArmor.add(1, new Armor(StandardArmor.shield));
+            } else {
+                //TODO: allow wealthier people to have access to better shields
+                wornArmor.add(1, new Armor(StandardArmor.shield));//placeholder for testing
+            }
         }
         if (wornArmor.get(0).strRequirement > strength) {
             wornArmor.get(0).abilities.add("Is too heavy for " + name + " to use. Disadvantage on all physical saves and can't cast spells");
@@ -1090,7 +1138,6 @@ public class Person {
     private void getWeapons() {
         //TODO: make it so a versatile weapon is wielded as 2-handed (takes alt damage) when not using a shield
         mainhandWeapon = StandardWeapons.unarmed;
-
         if (hasShield) {
             getSingleWeapon(0, false);
         } else {
@@ -1165,6 +1212,9 @@ public class Person {
 
             if(offhandWeapon != null)
                 offhandWeapon.combinedToHitBonus +=  offhandWeapon.toHitFromStats + offhandWeapon.toHitBonus;
+        if (hasShield) {
+            offhandWeapon = null;
+        }
     }
 
     private void getSingleWeapon(int hand, boolean canBeTwoHanded) { //0 is 1 first hand, 1 is second hand
@@ -1276,6 +1326,9 @@ public class Person {
     }
 
     private void getLoot() {
+        if (livesIn.goldLow == 0 && livesIn.goldHigh ==0) {
+            Screen.redText("NO GOLD AMOUNTS IN CURRENT LOCALE");
+        }
         platinum = randGen.randomIntInRange(livesIn.platinumLow, livesIn.platinumHigh);
         gold = randGen.randomIntInRange(livesIn.goldLow, livesIn.goldHigh);
         silver = randGen.randomIntInRange(livesIn.silverLow, livesIn.silverHigh);
@@ -1306,13 +1359,18 @@ public class Person {
                 break;
         }
         int luckyGoldRoll = randGen.randomIntInRange(1, 1000); //there's a 10% chance for any commoner to get a bonus to the money they carry, with the lower the roll the better the bonus.
+        if (luckyGoldRoll <= 1) {
+            name = "{JACKPOT!!!} " + name;
+        } else if (luckyGoldRoll <= 100) {
+            name = "{LUCKY MONEY!} " + name;
+        }
         if (luckyGoldRoll == 1) { //0.1% chance for a LOT of gold
             platinum = (platinum + randGen.randomIntInRange(11, 25)) * (level);
             gold = (gold + randGen.randomIntInRange(5,20)) * (level * 3);
             silver = (silver + randGen.randomIntInRange(5,20)) * (level * 15);
             copper = (copper + randGen.randomIntInRange(5,20)) * (level * 30);
         } else if (luckyGoldRoll <= 5) { //0.5% chance
-            platinum = (platinum + randGen.randomIntInRange(1, 10)) * (level / 2);
+            platinum = (platinum + randGen.randomIntInRange(1, 10)) * Math.max(level / 2, 2);
             gold = gold * level;
             silver = silver * (level * 4);
             copper = copper * (level * 8);
@@ -1320,7 +1378,7 @@ public class Person {
             platinum = platinum + randGen.randomIntInRange(1,10);
             gold = (gold + 1) * (level / 4);
             silver = (silver + randGen.randomIntInRange(1,100)) * (level / 2);
-            copper = copper * level;
+            copper = copper * Math.max(level, 4);
         } else if (luckyGoldRoll <= 80) { //8% chance
             gold = gold + randGen.randomIntInRange(6,15);
             silver = silver + randGen.randomIntInRange(1,100);
@@ -1338,19 +1396,19 @@ public class Person {
         dcToPickpocket = passivePerception;
         switch (economicClass) {
             case EconomicClasses.beggar:
-                dcToPickpocket = dcToPickpocket + randGen.randomIntInRange(-5, (level + 2)); //beggars would likely be well acquainted with the streets and pickpocketing techniques ... or be mentally unstable
+                dcToPickpocket += randGen.randomIntInRange(-5, (level + 2)); //beggars would likely be well acquainted with the streets and pickpocketing techniques ... or be mentally unstable
                 break;
             case EconomicClasses.poor:
-                dcToPickpocket = dcToPickpocket + randGen.randomIntInRange(-3, (level + 1));
+                dcToPickpocket += randGen.randomIntInRange(-3, (level + 1));
                 break;
             case EconomicClasses.middleClass:
-                dcToPickpocket = dcToPickpocket + randGen.randomIntInRange(-2, level);
+                dcToPickpocket += randGen.randomIntInRange(-2, level);
                 break;
             case EconomicClasses.wealthy:
-                dcToPickpocket = dcToPickpocket + randGen.randomIntInRange(-1, level);
+                dcToPickpocket += randGen.randomIntInRange(-1, level);
                 break;
             case EconomicClasses.elite:
-                dcToPickpocket = dcToPickpocket + randGen.randomIntInRange(5, (level + 5));
+                dcToPickpocket += randGen.randomIntInRange(5, (level + 5));
                 break;
         }
     }
@@ -1523,17 +1581,19 @@ public class Person {
         }
     }
 
-    private void determineSpellcasterTraits(HardData hardData) {
-        //the stats of a spellcaster (dc and attack mod) are already determined. This class is to see if they're a learned spellcaster, and if so, what spells / spell slots they know.
-        int spellCasterDeterminerRoll = randGen.randomIntInRange(1,1000);
+    private void determineSpellcasterTraits() {
+        //the stats of a spellcaster (dc and attack mod) are already determined.
+        //This class is to see if they're a learned spellcaster, and if so, what spells / spell slots they know. This is in addition to racial spells.
+        int spellCasterDeterminerRoll = randGen.randomIntInRange(1,1000) + (((wisMod + chrMod + intMod) / 3) * 10); //creatures with high traits used for spellcasting are more likely to be spellcasters.
+        //As different spellcasters use different stats, just take the average. Every 1 average mod points they have gives them an extra 1% chance to be a spellcaster, so only up to about 4% or so increase
         switch (economicClass) {
             case EconomicClasses.beggar:
-                if (spellCasterDeterminerRoll <= 1) {
+                if (spellCasterDeterminerRoll <= 5) {
                     isSpellcaster = true;
                 }
                 break;
             case EconomicClasses.poor:
-                if (spellCasterDeterminerRoll <= 5) {
+                if (spellCasterDeterminerRoll <= 15) {
                     isSpellcaster = true;
                 }
                 break;
@@ -1556,18 +1616,23 @@ public class Person {
         if (isSpellcaster) {
             setSpellcasterLevel();
             getSpellSlotsBySpellcasterLevel();
-            setSpellsKnownByLevel(hardData);
+            setSpellsKnownByLevel();
         }
     }
 
-    private void setSpellsKnownByLevel(HardData hardData) {
+    private void setSpellsKnownByLevel() {
+        Screen.redText("Setting spellcaster spells");
         for (int i = 0; i <= spellcasterLevel; i++) {
+            Screen.redText("Looking at " + i);
             for (int j = 0; j <= spellSlots[i][1]; j++) {
+                Screen.redText("Looking at " + j);
                 //get a spell, make sure it's not a duplicate, if it is, try again until you don't get a dupe
-                Spell spellToAdd = randGen.getRandomSpellByLevel(i);
+                Spell spellToAdd = new Spell(randGen.getRandomSpellByLevel(i));
+                Screen.redText("Checking that " + spellToAdd.name + " doesn't exist in the list");
                 while (isSpellAlreadyInList(spellToAdd)) {
-                    spellToAdd = randGen.getRandomSpellByLevel(i);
+                    spellToAdd = new Spell(randGen.getRandomSpellByLevel(i));
                 }
+                spellsKnown.add(new Spell(spellToAdd));
             }
         }
     }
@@ -1575,9 +1640,11 @@ public class Person {
     private boolean isSpellAlreadyInList(Spell spellToCheck) {
         for (Spell temp : spellsKnown) {
             if (temp.name.equals(spellToCheck.name)) {
+                Screen.redText(temp.name + " equals " + spellToCheck.name);
                 return true;
             }
         }
+        Screen.redText(spellToCheck.name + " was not in list. should be added.");
         return false;
     }
 
@@ -1773,26 +1840,26 @@ public class Person {
                 + dcToPickpocket; //as it's not a combat trait it won't add much, but it'll still add
         //account for dual-wielding
         if (offhandWeapon != null && !offhandWeapon.name.equals(StandardWeapons.unarmed.name) && !hasShield) {
-            xpValue = xpValue + (offhandWeapon.getTotalUntypedDamageMin() + 1) * offhandWeapon.getTotalUntypedDamageMax() + (offhandWeapon.combinedToHitBonus * 5);
+            xpValue += (offhandWeapon.getTotalUntypedDamageMin() + 1) * offhandWeapon.getTotalUntypedDamageMax() + (offhandWeapon.combinedToHitBonus * 5);
         }
         if (hasBodyguard) {
-            xpValue = xpValue + (100 * bodyguardList.size());
+            xpValue += (100 * bodyguardList.size());
         }
-        switch (economicClass) {
+        switch (economicClass) { //this makes sure you don't get a negative value and that all commoners give a guaranteed amount
             case EconomicClasses.beggar:
-                xpValue = xpValue - 10;
+                xpValue = Math.max(xpValue - 10, 10);
                 break;
             case EconomicClasses.poor:
-                xpValue = xpValue - 5;
+                xpValue = Math.max(xpValue - 5, 15);
                 break;
             case EconomicClasses.middleClass:
-                xpValue = xpValue + 5;
+                xpValue = Math.max(xpValue + 5, 25);
                 break;
             case EconomicClasses.wealthy:
-                xpValue = xpValue + 25;
+                xpValue = Math.max(xpValue + 25, 50);
                 break;
             case EconomicClasses.elite:
-                xpValue = xpValue + 200;
+                xpValue = Math.max(xpValue + 200, 200);
                 break;
         }
         if (isSpellcaster) {
@@ -1818,15 +1885,6 @@ public class Person {
                     break;
             }
         }
-    }
-
-    public Rarities getRarities() {
-        return rarities;
-    }
-
-    public Person setRarities(Rarities rarities) {
-        this.rarities = rarities;
-        return this;
     }
 
     public RandomCollectionWeighted<String> getRc() {
@@ -2352,6 +2410,162 @@ public class Person {
 
     public boolean isHasBodyguard() {
         return hasBodyguard;
+    }
+
+    public void createGuardByType(String type, HardData hardData) {
+        List<Spell> guardSpells = new ArrayList<>();
+        int[][] guardSpellSlots = {{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}};
+        List<String> guardSpecialAbilities = new ArrayList<>();
+        //TODO: all types in for guard creation
+        switch (type) {
+            case GuardTypes.standardGuard:
+                List<Armor> armorToSend = Arrays.asList( new Armor(StandardArmor.chainMail), new Armor(StandardArmor.shield));
+                List<Weapon>weaponsToSend = Arrays.asList( new Weapon(StandardWeapons.shortsword));
+                weaponsToSend.get(0).combinedToHitBonus = 6;
+                weaponsToSend.get(0).toHitFromStats = 6;
+                weaponsToSend.get(0).slashingDamageMax += 3;
+                guardSpecialAbilities.add("Defensive Formation: +1 AC for each other Standard Guard within 5 ft.");
+                guardSpecialAbilities.add("Shield Shove: 5 ft range, 1 action. Target makes DEX or STR save against a STR throw from the guard. On failure the target is pushed 5 ft and goes prone. This may trigger attacks of opportunity for the target's opponents");
+                guardSpecialAbilities.add("+5 athletics, +3 intimidation, +2 investigation, +2 medicine, +3 perception");
+
+                createGuard(GuardTypes.standardGuard,hardData, armorToSend, true, weaponsToSend, 35,30,16,13,14,10,12,10, 12,false,0,10,0,0, guardSpellSlots, guardSpells, true, guardSpecialAbilities, 200);
+                break;
+            case GuardTypes.recallCleric:
+
+                break;
+            case GuardTypes.arrester:
+
+                break;
+            case GuardTypes.watchman:
+
+                break;
+            case GuardTypes.lawcaster:
+
+                break;
+            case GuardTypes.healer:
+
+                break;
+            case GuardTypes.entangler:
+
+                break;
+            case GuardTypes.enforcer:
+
+                break;
+            case GuardTypes.purger:
+
+                break;
+            case GuardTypes.skyHelm:
+
+                break;
+            case GuardTypes.sniper:
+
+                break;
+            case GuardTypes.earthHelm:
+
+                break;
+            case GuardTypes.holyArchmage:
+
+                break;
+            case GuardTypes.bastionShield:
+
+                break;
+            case GuardTypes.dawnbringer:
+
+                break;
+        }
+    }
+
+    private void createGuard(String type, HardData hardData, List<Armor> armorListOfGuard, boolean usingShield, List<Weapon> weaponListOfGuard, int guardHealth, int guardSpeed, int str, int dex, int con, int intel, int wis, int chr, int pasPercep, boolean castsSpells, int spellProfBon, int splDC, int splAtkMod, int splCstLvl, int[][] splSlots, List<Spell> splsKnown, boolean guardHasSpecialAbilities, List<String> guardAbilities, int xp) {
+        economicClass = EconomicClasses.middleClass;
+        level = 10; //the level is irrelevant so i'll set all guards to 10
+
+        getLevelFromClass();
+
+        getRaceFromLocation();
+        raceData = new Race(getRaceDataFromRace(hardData));
+        //getInventoryFromClass(hardData.currentSelectedLocation);
+        getRacialTraitsFromRace();
+
+        getNameFromRace(raceData.raceName);
+        name = "(" + type + ") " + name;
+
+        getAlignmentFromRace();
+        getRacialTraitsFromRace();
+
+
+        hpMax = guardHealth;
+        hpCurrent = guardHealth;
+
+        //getStatsBasedOnLevel();
+        strength = str;
+        strMod = getModifierForStat(strength);
+        dexterity = dex;
+        dexMod = getModifierForStat(dexterity);
+        constitution = con;
+        conMod = getModifierForStat(constitution);
+        intelligence = intel;
+        intMod = getModifierForStat(intelligence);
+        wisdom = wis;
+        wisMod = getModifierForStat(wisdom);
+        charisma = chr;
+        chrMod = getModifierForStat(charisma);
+
+        passivePerception = pasPercep;
+
+        //determineSpellcasterTraits();
+        isSpellcaster = castsSpells;
+
+        int spellProficiencyBonus = spellProfBon;
+        int spellDc = splDC;
+        int spellAttackMod = splAtkMod;
+        int spellcasterLevel = splCstLvl;
+        int[][] spellSlots = splSlots;
+        List<Spell> spellsKnown = splsKnown;
+
+        calculateDcToPickpocket();
+        //determineBodyguards();
+        //determineCallGlyphs();
+        hasCallGlyph = true;
+        if (RandomGenerator.randomIntInRange(0, 100) <= 50) {
+            callGlyphType = CallGlyphTypes.armorEtching;
+            wornArmor.get(0).hasCallGlyph = true;
+        } else {
+            callGlyphType = CallGlyphTypes.tablet;
+        }
+
+        mainhandWeapon = weaponListOfGuard.get(0);
+        ac = armorListOfGuard.get(0).ac;
+        if (usingShield) {
+            setOffhandWeapon(null);
+            ac += wornArmor.get(1).ac;
+        }
+        if (wornArmor.get(0).dexBonusMax > 0 && !(dexMod == 0)) {
+            ac += Math.max(Math.min(wornArmor.get(0).dexBonusMax, dexMod), (wornArmor.get(0).dexBonusMax * -1));
+        }
+
+        if (guardHasSpecialAbilities) {
+            hasSpecialAbilities = true;
+            specialAbilities = guardAbilities;
+        }
+
+        determineFamily();
+        setQuirks();
+        mood = randGen.getRandomMood();
+
+        //guards don't carry a lot of money with them so as not to be targets for being killed.
+        gold = RandomGenerator.randomIntInRange(0,5);
+        silver = RandomGenerator.randomIntInRange(0,25);
+        copper = RandomGenerator.randomIntInRange(0,50);
+        if (RandomGenerator.randomIntInRange(1, 100) <= 3) {
+            //but every now and then some guard decides to carry more, 2-5x the typical amount
+            gold += gold * RandomGenerator.randomIntInRange(1,4);
+            silver += silver * RandomGenerator.randomIntInRange(1, 4);
+            copper += copper * RandomGenerator.randomIntInRange(1, 4);
+        }
+
+        xpValue = xp;
+
+
     }
 }
 

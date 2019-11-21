@@ -22,4 +22,20 @@ public class Spell {
         this.classes = classes;
         this.description = description;
     }
+
+    public Spell(Spell other) {
+        this.name = other.name;
+        this.level = other.level;
+        this.school = other.school;
+        this.castingTime = other.castingTime;
+        this.range = other.range;
+        this.components = other.components;
+        this.duration = other.duration;
+        this.classes = other.classes;
+        this.description = other.description;
+    }
+
+    public String getSpellTextForDisplay() {
+        return name + ": " + castingTime + ", " + duration + ", " + range + " ft, " + components + ", " + description;
+    }
 }
