@@ -508,7 +508,7 @@ public class Potion {
                 "a hollowed-out amber vial",
                 "a bottle of molded beeswax",
                 "a thick egg with a cork plug",
-                "a mysterious leathery organ stitched to contain liquid",
+                "a mysterious leathery organ stitched to contain liquid"
         )));
     }
 
