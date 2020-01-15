@@ -2353,4 +2353,32 @@ public class RandomGenerator {
     }
 
 
+    public List<String> getRandomAttunementRequirement(int level) {
+        /*
+            Ideas for attunement based on the item:
+            Defeat X creatures of a certain alignment
+            Defeat X creatures of a certain element (eg: dragon/dragonkind = fire, serpentblood = poison)
+            Defeat a creature of X CR in single combat
+            Pickpocket X amount of gold's worth of items
+            Succeed X backstabs against opponents
+            Defeat X opponents with a single action or spell
+         */
+        List<String> attunementOptionList = new ArrayList<>(Arrays.asList(
+                "Defeat (kill/unconscious) " + level + " sentients of a Good alignment",
+                "Defeat (kill/unconscious) " + level + " sentients of a Neutral alignment",
+                "Defeat (kill/unconscious) " + level + " sentients of an Evil alignment",
+                "Land the defeating blow on " + (level * 3) + " opponents",
+                "Defeat " + (level * 2) + " opponents without help. Can be done during a larger combat, but must be the only one to affect said enemies and those enemies must be focused on you.",
+                "Defeat an undead of at least CR " + (level * 2) + " and sprinkle its ashes on the item.",
+                "Defeat " + level + " humanoid of at least CR " + (level * 2) + ", and wet the item in their blood",
+                "Slay a dragon or dragonborn while using the item",
+                "Gain the favor of a deity while wearing the item (Deity must be pleased and specifically make it known)",
+                ""
+        ));
+        List<String> attunementRequirementList = new ArrayList<>(Arrays.asList());
+        for (int i = 0; i < level; i++) {
+            attunementRequirementList.add(getRandomFromStringList(attunementOptionList));
+        }
+        return attunementRequirementList;
+    }
 }
