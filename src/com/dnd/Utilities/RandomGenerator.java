@@ -49,11 +49,11 @@ public class RandomGenerator {
         return locationlist.get(randomIntInRange(0, locationlist.size() - 1));
     }
 
-    public String getRandomFromStringList(List<String> stringList) {
+    public static String getRandomFromStringList(List<String> stringList) {
         return stringList.get(randomIntInRange(0, stringList.size() - 1));
     }
 
-    public String getRandomRace() {
+    public static String getRandomRace() {
         List<String> allRaces = new ArrayList<>(Arrays.asList(
                 Races.aarakocra,
                 Races.aasimar,
@@ -90,7 +90,7 @@ public class RandomGenerator {
         return getRandomFromStringList(allRaces);
     }
 
-    public String getRandomLanguage() {
+    public static String getRandomLanguage() {
         List<String> allLanguages = new ArrayList<>(Arrays.asList(
             Languages.abyssal,
             Languages.aquan,
@@ -228,7 +228,6 @@ public class RandomGenerator {
         return rc.next();
     }
 
-    //TODO: add in weapon and armor data to these classes
     private Armor getPoorArmorTier1() {
         RandomCollectionWeighted<Armor> rc = new RandomCollectionWeighted<Armor>()
                 .add(100, new Armor(StandardArmor.natural));
@@ -1626,7 +1625,6 @@ public class RandomGenerator {
     }
 
     public Weapon getRandomCustomWeaponByTier(int tier) {
-        //TODO: make a way to randomly generate a weapon. This would be used in the high tiers for wealthy and for most elite commoners.
         switch (tier) {
             case 1:
                 return new Weapon(getCustomWeaponRandomTier1());
@@ -2159,7 +2157,7 @@ public class RandomGenerator {
         }
     }
 
-    public String getRandomPrimarySkill() {
+    public static String getRandomPrimarySkill() {
         List<String> primarySkillList = new ArrayList<>(Arrays.asList(
             PrimarySkills.strength,
             PrimarySkills.dexterity,
@@ -2171,7 +2169,7 @@ public class RandomGenerator {
         return primarySkillList.get(randomIntInRange(0, primarySkillList.size() - 1));
     }
 
-    public String getRandomSecondarySkill() {
+    public static String getRandomSecondarySkill() {
         List<String> secondarySkillList = new ArrayList<>(Arrays.asList(
             SecondarySkills.athletics,
             SecondarySkills.acrobatics,
@@ -2353,4 +2351,6 @@ public class RandomGenerator {
 
         return randomOptions.get(randomIntInRange(0,(randomOptions.size() - 1)));
     }
+
+
 }

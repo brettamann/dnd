@@ -1,6 +1,7 @@
 package com.dnd.Menus;
 
 import com.dnd.DataObjects.HardData;
+import com.dnd.DataObjects.Items.Potion;
 import com.dnd.DataObjects.PartyInfo;
 import com.dnd.Utilities.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class GeneratorMenu {
     public static void display(HardData hardData) {
         Screen.greenText("\t\tGENERATOR MENU\n");
-        String inputOne = Input.promptTextInput("What do you want to get?\n0. What's around me?\n1. Create Commoners\n2. Create a Guard Encounter\n3. Call Time\n4. Lock DC\n5. Recognition DC\n\nb. Back", List.of("0","1","2","3","4","5","b"));
+        String inputOne = Input.promptTextInput("What do you want to get?\n0. What's around me?\n1. Create Commoners\n2. Create a Guard Encounter\n3. Call Time\n4. Lock DC\n5. Recognition DC\n6. A random potion\n7. Random Primary Skill\n8. Random Secondary Skill\n9. Random Race\n10. Random Language\n\nb. Back", List.of("0","1","2","3","4","5","6","7","8","9","10","b"));
         if (!inputOne.equals("b")) {
             switch (Integer.parseInt(inputOne)) {
                 case 0:
@@ -27,8 +28,11 @@ public class GeneratorMenu {
                     }
                     break;
                 case 2:
+                    Screen.println("Guard in the encounter:\n");
                     Utilities.createGuardEncounter(hardData);
-                    //TODO: need to display the guard encounter
+                    for (String guard : hardData.guardsInArea) {
+                        Screen.println(guard);
+                    }
                     break;
                 case 3:
                     switch (Input.promptTextInput("\n\nWhat kind of call time?\n1. Call Glyph is in area\n2.Person ran away and is looking for guards\nb. Back (cancel)", List.of("1","2","b"))) {
@@ -51,6 +55,23 @@ public class GeneratorMenu {
                     int opponentModifier = Input.promptIntInputWithinRange("Enter the average passive perception of the creature(s) in question (or wisdom modifier), adding +5 if it's a guard or city official:", -5,50);
                     int recognitionDC = (hardData.partyInfo.getReputation() / 100) + opponentModifier - disguiseLevel;
                     Screen.println("The player must roll a D20 (can use persuasion skill if interacting) against a DC of " + Colors.YELLOW + recognitionDC + Colors.RESET);
+                    break;
+                case 6:
+                    Potion potion = new Potion();
+                    Screen.println("");
+                    potion.createAndDisplayWithDM();
+                    break;
+                case 7:
+                    Screen.println("\nRandom Primary Skill: " + RandomGenerator.getRandomPrimarySkill());
+                    break;
+                case 8:
+                    Screen.println("\nRandom Secondary Skill: " + RandomGenerator.getRandomSecondarySkill());
+                    break;
+                case 9:
+                    Screen.println("\nRandom Race: " + RandomGenerator.getRandomRace());
+                    break;
+                case 10:
+                    Screen.println("\nRandom Language: " + RandomGenerator.getRandomLanguage());
                     break;
                 default:
                     Screen.println("Cancelled");

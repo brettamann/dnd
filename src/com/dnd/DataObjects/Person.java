@@ -239,6 +239,7 @@ public class Person {
             }
         }
         Screen.printByColor(Rarities.getColorByRarityOrEconomy(economicClass), "STR: " + strength + "(" + strMod + ")," + " DEX: " + dexterity + "(" + dexMod + "), " + " CON: " + constitution + "(" + conMod + "), " + " INT: " + intelligence + "(" + intMod + "), " + " WIS: " + wisdom + "(" + wisMod + "), " + " CHR: " + charisma + "(" + chrMod + "), " + "Passive Perception: " + passivePerception + " ");
+
         Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "+" + spellAttackMod + " Spell attack, Spell DC:" + spellDc);
         if (isSpellcaster) {
             Screen.printLnByColor(Rarities.getColorByRarityOrEconomy(economicClass), "Known Spells (" + spellsKnown.size() + ")");

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StandardArmor {
-    //TODO: create a magical armor class, and a "custom armor" class for legendaries
     public static final Armor natural = new Armor("Natural", "Not wearing any armor (ac 10 + dex mod)", new ArrayList<>(), 0, 10, 100, "none", 0, 0, 0, 0, Rarities.common);
     public static final Armor padded = new Armor("Padded", "(ac 11 + dex mod) light armor", new ArrayList<>(Arrays.asList("Disadvantage on stealth rolls")), 0, 11, 100, "Quilted layers of cloth and batting", 0, 5, 0, 0, Rarities.common);
     public static final Armor leather = new Armor("Leather", "(ac 11 + dex mod) light armor", new ArrayList<>(), 0, 11, 100, "The Breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials", 0, 10, 0, 0, Rarities.common);

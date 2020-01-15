@@ -15,7 +15,7 @@ public class MainMenu {
             Screen.print("\t\t\tMain Menu\n\n");
             Screen.println("In " + Colors.YELLOW + hardData.currentSelectedLocation.name + Colors.RESET + " with " + Colors.YELLOW + hardData.currentSelectedLocation.reputationInArea + Colors.RESET + " rep in the area. (Alert Level " + (hardData.currentSelectedLocation.reputationInArea / 100) + ": " + Utilities.translateAlertLevelToString(hardData.currentSelectedLocation.alertLevel) + ")\n");
             Screen.println("Commoners in area: " + hardData.commonersInArea.size() + ", Guards in area: " + hardData.guardsInArea.size());
-            String input = Input.promptTextInput("0. Change Location\n1. DC & Person Generator Menu\n2. Autocombat Simulator\n3. Update Party XP & Rep\n4. Update Area Alert & Rep\n5. See, save, load form previous commoner lists\n\nd. Display What's Around\nreset. Reset all data", List.of("0","1","2","3","4","5","d","s","reset"));
+            String input = Input.promptTextInput("0. Change Location\n1. Generator Menu\n2. Autocombat Simulator\n3. Update Party XP & Rep\n4. Update Area Alert & Rep\n5. See, save, load form previous commoner lists\n\nd. Display What's Around\nreset. Reset all data", List.of("0","1","2","3","4","5","d","s","reset"));
             switch (input) {
                 case "0":
                     ChangeLocation.changeSelectedLocation(true, hardData);
