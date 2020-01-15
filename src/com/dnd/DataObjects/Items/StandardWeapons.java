@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StandardWeapons {
-    //TODO: create a magical weapon class, and a "custom weapon" class for legendaries
-
     //Simple melee weapons
     public static final Weapon unarmed = new Weapon("Unarmed", "Attacks with fist, claw, etc", 5, 0, 0, new ArrayList<>(Arrays.asList(WeaponTypes.light)), new ArrayList<>(Arrays.asList("+ 1 damage for each STR mod")), 0, 0, 0, 0, Rarities.common, 0, 0, 0, 1, 1, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, 0);
     public static final Weapon club = new Weapon("Club","",5,0,0, new ArrayList<>(Arrays.asList(WeaponTypes.light)), new ArrayList<>(Arrays.asList("")),0,0,1,0,Rarities.common,0,0,0,1,4,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,0);

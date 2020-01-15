@@ -41,9 +41,7 @@ public class Races {
     public static final String yuanTi = "yuan-ti";
 
     public List<Race> generateRaceData() {
-        //TODO: Fill out race data
         List<Race> raceData = new ArrayList<Race>((Arrays.asList(
-            //TODO: Finish filling out race data from genasi down
             new Race(aarakocra, Sizes.medium, 25, 50, 15, 15, 12, 11, 11, 11, 11, 11, 11, 11, 11, 0, 2, 0, 1, 0, 0, new ArrayList<>(Arrays.asList("Can fly, 50 speed")), new ArrayList<>(Arrays.asList(Languages.common, Languages.auran)),3,30,-3, 4),
             new Race(aasimar, Sizes.medium, 30, 0, 15, 15, 15, 15, 15, 5, 5, 5, 10, 10, 10, 0, 0, 0, 0, 0, 2, new ArrayList<>(Arrays.asList("Darkvision to 60 ft", "Resistances: necrotic, radiant","As an action can touch another creature and cause it to regain [level] hp", "Knows the Light cantrip (cause an object to glow)")), new ArrayList<>(Arrays.asList(Languages.common, Languages.celestial)),18,160,5, 4),
             new Race(animalHybrid, Sizes.medium, 30, 0, 15, 15, 12, 11, 11, 11, 11, 11, 11, 11, 11, 0, 0, 0, 0, 0, 0, new ArrayList<>(Arrays.asList("Combines 2 races")), new ArrayList<>(Arrays.asList(Languages.common, "other","other")),18,60,0, 6),
