@@ -1,0 +1,28 @@
+package com.masters_of_destiny.Ai.People;
+
+public enum NeedTypes {
+    FOOD,
+    WATER,
+    OXYGEN,
+    REST,
+    SHELTER,
+    INJURY_RESOLUTION,
+    HEALTH,
+    INCOME,
+    PROPERTY_RESOURCES,
+    SAFETY_FEELING,
+    FRIENDSHIP,
+    FAMILY,
+    INTIMACY,
+    CONNECTION,
+    SOCIALIZATION,
+    FUN,
+    FREEDOM,
+    RESPECT,
+    SOCIAL_STATUS,
+    RECOGNITION,
+    ACHIEVING_POTENTIAL,
+    KNOWLEDGE,
+    SKILL_ACQUISITION,
+    HOBBIES
+}

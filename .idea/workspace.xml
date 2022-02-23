@@ -1,12 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" afterDir="false" />
+    <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="changes">
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/Action.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/ActionCost.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/ActionExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/ActionTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/AreaOfEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/PhysicalMovementAct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/TargetTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/GeneralNotes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/AgeAppearances.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/Body.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartStatusCauses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartStatuses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartTraits.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Distribution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Genders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Need.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/NeedTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/DaysOfWeek.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/JobRequirements.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/Occupation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/OccupationTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/Shift.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/PersonAiTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Races/Race.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Races/RaceTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Mental.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Physical.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Social.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Spiritual.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Stats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Gas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Liquid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/MaterialDistribution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Object.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/SolidMaterial.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/ContainerTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/DamageTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/OpeningTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/PurposeTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Vector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Ammo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/dnd.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MastersOfDestiny.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Alignments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Alignments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/CampaignObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/EconomicClasses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/EconomicClasses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/EncounterObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/EncounterObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Genders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Genders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Guards/GuardTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Guards/GuardTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/HardData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Ammo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Armor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/CallGlyphTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/CallGlyphTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/DamageTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/DamageTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/ItemTiers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/ItemTiers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/ItemTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/ItemTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Loot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Loot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Pack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Pack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Rarities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Rarities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/StandardArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardLoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/StandardLoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardWeapons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/StandardWeapons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/WeaponTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/WeaponTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Languages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Languages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Locations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Locations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/PartyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/PartyMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/PrimarySkills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/PrimarySkills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Race.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Races/Race.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Races/Races.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/SavedCommonerList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/SavedCommonerList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/SecondarySkills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/SecondarySkills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Sizes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Sizes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Spells/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/StandardSpells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Spells/StandardSpells.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/ChangeLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/ChangeLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/GeneratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/GeneratorMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/SaveLoadCommonerLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/SaveLoadCommonerLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/FileUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/FileUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomCollectionWeighted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/RandomCollectionWeighted.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/RandomGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Utilities.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,250 +133,11 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.48138958">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Menus/MainMenu.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Menus/GeneratorMenu.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="30" column="59" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Utilities.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="960">
-                  <caret line="72" selection-start-line="72" selection-end-line="72" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Menus/SaveLoadCommonerLists.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/SavedCommonerList.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                  <caret line="16" selection-start-line="16" selection-end-line="16" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Rarities.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Main.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="26" selection-start-line="26" selection-end-line="26" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/Input.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1365">
-                  <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Potion.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="510" column="72" lean-forward="true" selection-start-line="510" selection-start-column="72" selection-end-line="510" selection-end-column="72" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="199">
-                  <caret line="2362" column="35" lean-forward="true" selection-start-line="2362" selection-start-column="35" selection-end-line="2362" selection-end-column="35" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardLoot.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="570">
-                  <caret line="43" column="65" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="11160">
-                  <caret line="755" column="15" selection-start-line="755" selection-start-column="15" selection-end-line="755" selection-end-column="15" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardWeapons.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardArmor.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/StandardSpells.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2940">
-                  <caret line="198" column="22" selection-start-line="198" selection-start-column="22" selection-end-line="198" selection-end-column="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Loot.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
-                  <caret line="48" column="48" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="48" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -315,6 +180,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -373,6 +246,9 @@
       </list>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenProjectNavigator">
     <treeState>
       <expand />
@@ -383,6 +259,7 @@
     <option name="width" value="1680" />
     <option name="height" value="1050" />
   </component>
+  <component name="ProjectId" id="23E1Bh6468I7AVqBoui8FJcXdb8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -475,6 +352,10 @@
       <pane id="PackagesPane" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -493,24 +374,12 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.dnd.Main" />
-      <module name="dnd" />
+      <option name="MAIN_CLASS_NAME" value="com.masters_of_destiny.Main" />
+      <module name="MastersOfDestiny" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
@@ -546,6 +415,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -668,48 +538,54 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Made some changes" />
     <MESSAGE value="Fixed some stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some stuff" />
+    <MESSAGE value="changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java</url>
           <line>596</line>
-          <properties />
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java</url>
           <line>684</line>
-          <properties />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java</url>
           <line>691</line>
-          <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java</url>
           <line>615</line>
-          <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java</url>
           <line>625</line>
-          <properties />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java</url>
           <line>232</line>
-          <properties />
           <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
