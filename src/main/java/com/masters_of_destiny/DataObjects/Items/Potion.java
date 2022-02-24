@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Potion {
+    /*
     private String name;
     private String title;
     private String container;
@@ -922,5 +923,5 @@ public class Potion {
                 "\"for the in-laws\"",
                 "\"pre-fight elixir\""
         )));
-    }
+    }*/
 }

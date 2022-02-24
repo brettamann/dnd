@@ -58,7 +58,7 @@ public class GeneratorMenu {
                 case 6:
                     Potion potion = new Potion();
                     Screen.println("");
-                    potion.createAndDisplayWithDM();
+                    //potion.createAndDisplayWithDM();
                     break;
                 case 7:
                     Screen.println("\nRandom Primary Skill: " + RandomGenerator.getRandomPrimarySkill());
