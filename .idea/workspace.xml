@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/Body.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Object.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -386,7 +382,21 @@
       <option name="project" value="LOCAL" />
       <updated>1645647231277</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="changes">
+      <created>1645715202139</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1645715202139</updated>
+    </task>
+    <task id="LOCAL-00008" summary="changes">
+      <created>1645715400285</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1645715400285</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
