@@ -5,111 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95418fd5-296a-4dd5-bedb-43494ad02a32" name="Default Changelist" comment="changes">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/ActionCost.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/ActionExecutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/ActionTags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/AreaOfEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/PhysicalMovementAct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Actions/TargetTags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/Database.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/GeneralNotes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/AgeAppearances.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/Body.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartStatusCauses.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartStatuses.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartTraits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Distribution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Genders.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Need.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/NeedTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/DaysOfWeek.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/JobRequirements.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/Occupation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/OccupationTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/OccupationStuff/Shift.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/PersonAiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Races/Race.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Races/RaceTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Mental.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Physical.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Social.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Spiritual.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/Statistics/Stats.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Container.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Gas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Liquid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/MaterialDistribution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Object.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/SolidMaterial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/ContainerTags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/DamageTags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/OpeningTags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Tags/PurposeTags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Vector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Ammo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/dnd.mwb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MastersOfDestiny.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Autocombat/AutocombatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Autocombat/AutocombatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Alignments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Alignments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/CampaignObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/CampaignObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/EconomicClasses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/EconomicClasses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/EncounterObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/EncounterObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Genders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Genders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Guards/GuardTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Guards/GuardTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/HardData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/HardData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Ammo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Armor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/CallGlyphTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/CallGlyphTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/DamageTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/DamageTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/ItemTiers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/ItemTiers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/ItemTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/ItemTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Loot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Loot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Pack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Pack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Rarities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Rarities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/StandardArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardLoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/StandardLoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/StandardWeapons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/StandardWeapons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Items/WeaponTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Items/WeaponTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Languages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Languages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Locations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Locations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/PartyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/PartyMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/PartyMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/PrimarySkills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/PrimarySkills.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Race.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Races/Race.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Races/Races.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Races/Races.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/SavedCommonerList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/SavedCommonerList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/SecondarySkills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/SecondarySkills.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Sizes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Sizes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Spells/Spell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/DataObjects/Spells/StandardSpells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/DataObjects/Spells/StandardSpells.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/ChangeLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/ChangeLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/GeneratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/GeneratorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Menus/SaveLoadCommonerLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Menus/SaveLoadCommonerLists.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/FileUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/FileUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomCollectionWeighted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/RandomCollectionWeighted.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/RandomGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/RandomGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dnd/Utilities/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Utilities/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/People/BodyParts/BodyPartData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/masters_of_destiny/Ai/WorldBuilding/Object.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +264,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../java-getting-started" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -375,6 +275,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.masters_of_destiny.Ai.WorldBuilding.Tags" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -474,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573143779577</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="changes">
+      <created>1645647231277</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1645647231277</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">

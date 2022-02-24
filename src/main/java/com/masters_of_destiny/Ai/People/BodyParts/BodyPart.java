@@ -31,20 +31,7 @@ public class BodyPart {
                         // and to detect abnormal behavior. is a list of uuid's in the DB
     public String side; // left, right, other, 1/2/3/4/5/6/etc
 
-    public BodyPart(String name, String description, HashMap<BodyPartStatuses, Object> statuses, List<BodyPartAbilities> abilities, List<BodyPartTraits> traits, double approxVolumePercentage, BodyPartTypes type, BodyPartTypes upstreamPart, boolean isVital, boolean expectBones, boolean hasBones, Object foreignObject) {
-        this.name = name;
-        this.description = description;
-        this.statuses = statuses;
-        this.abilities = abilities;
-        this.traits = traits;
-        this.approxVolumePercentage = approxVolumePercentage;
-        this.type = type;
-        this.upstreamPart = upstreamPart;
-        this.isVital = isVital;
-        this.expectBones = expectBones;
-        this.hasBones = hasBones;
-        this.foreignObject = foreignObject;
-    }
+
 
 
 

@@ -13,12 +13,12 @@ public class Body {
     public String race;
     public String age;
     public String gender;
-    public List<BodyPartAbilities> bodyAbilities; // abilities that require multiple parts to work, like echolacation requires a proper sound emitter and sensitive hearing
+    //public List<BodyPartAbilities> bodyAbilities; // abilities that require multiple parts to work, like echolacation requires a proper sound emitter and sensitive hearing
     public List<BodyPart> bodyPartList; // in the DB, all connected by a uuid
     //Average adult is ~3782 cubic inches
     public List<TargetTags> tagList;
 
-    public void GenerateHumanBody() {
+    /*public void GenerateHumanBody() {
         bodyPartList.add(new BodyPart("torso", "Chest area", new ArrayList<BodyPartStatuses>(), new ArrayList<BodyPartAbilities>(), new ArrayList<BodyPartTraits>(), 41.4, BodyPartTypes.TORSO, BodyPartTypes.BODY));
         bodyPartList.add(new BodyPart("pelvis", "Hips area", new ArrayList<BodyPartStatuses>(), new ArrayList<BodyPartAbilities>(), new ArrayList<BodyPartTraits>(), 13.7, BodyPartTypes.PELVIS, BodyPartTypes.TORSO));
         bodyPartList.add(new BodyPart("thigh", "Upper leg", new ArrayList<BodyPartStatuses>(), new ArrayList<BodyPartAbilities>(), new ArrayList<BodyPartTraits>(), 10.5, BodyPartTypes.LEFTTHIGH, BodyPartTypes.PELVIS));
@@ -42,7 +42,7 @@ public class Body {
         bodyPartList.add(new BodyPart("neck", "", new ArrayList<BodyPartStatuses>(), new ArrayList<BodyPartAbilities>(), new ArrayList<BodyPartTraits>(), 1.26, BodyPartTypes.NECK, BodyPartTypes.TORSO));
         bodyPartList.add(new BodyPart("head", "", new ArrayList<BodyPartStatuses>(), new ArrayList<BodyPartAbilities>(), new ArrayList<BodyPartTraits>(), 7, BodyPartTypes.HEAD, BodyPartTypes.TORSO));
 
-    }
+    }*/
     /*
         What I could do is create a different class for each race
         then I could compare a person with the expectation to point out interesting traits

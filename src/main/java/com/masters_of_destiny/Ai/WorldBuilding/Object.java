@@ -1,6 +1,7 @@
 package com.masters_of_destiny.Ai.WorldBuilding;
 
 import com.masters_of_destiny.Ai.Actions.ActionTags;
+import com.masters_of_destiny.Ai.WorldBuilding.Tags.DamageTags;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Object {
     public double height;
     public List<MaterialDistribution> materialDistribution; // 10% steel 50% wood, etc
     public double value;
-    public List<ObjectTags> damageTypes; // objects aren't meant to be weapons but can be made so depending on traits given here
+    public List<DamageTags> damageTypes; // objects aren't meant to be weapons but can be made so depending on traits given here
     public Vector position;
     public Vector movement;
     public Vector rotation;
