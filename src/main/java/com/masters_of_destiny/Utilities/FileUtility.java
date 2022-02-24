@@ -1,7 +1,7 @@
 package com.masters_of_destiny.Utilities;
 
 import com.masters_of_destiny.DataObjects.CampaignObject;
-import com.google.gson.*;
+//import com.google.gson.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 public class FileUtility {
 
     public static final String FILE_NAME = "data.txt";
-
+/*
     public static void save(CampaignObject gameObject){
         Gson gson = new Gson();
 
@@ -27,7 +27,9 @@ public class FileUtility {
         }
     }
 
-    public static CampaignObject load(){
+ */
+
+    /*public static CampaignObject load(){
         try{
             Gson gson = new Gson();
             String data = new String(Files.readAllBytes(Paths.get(FILE_NAME)), StandardCharsets.UTF_8);
@@ -56,5 +58,5 @@ public class FileUtility {
 
     public static CampaignObject getNewCampaignObject() {
         return new CampaignObject();
-    }
+    }*/
 }

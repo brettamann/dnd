@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaveLoadCommonerLists {
-    public static void saveLoadCommonerMenu(CampaignObject gameObject) {
+    public static void saveLoadCommonerMenu(CampaignObject gameObject) {/*
         String userInput = "run";
         while (!userInput.equalsIgnoreCase("b")) {
             Screen.println("\n");
@@ -51,5 +51,6 @@ public class SaveLoadCommonerLists {
                 }
             }
         }
-    }
+
+*/    }
 }

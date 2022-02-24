@@ -44,11 +44,11 @@ public class MainMenu {
                     switch (Input.promptTextInput("What are we updating?\n1. Reputation\n2. XP\nb. Back", List.of("1", "2", "b"))) {
                         case "1":
                             gameObject.getPartyInfo().setReputation(Input.promptIntInputWithinRange("Enter the new reputation value:",0,9999999));
-                            FileUtility.save(gameObject);
+                            //FileUtility.save(gameObject);
                             break;
                         case "2":
                             gameObject.getPartyInfo().setCurrentXP(Input.promptIntInputWithinRange("Enter the new XP value:",0,999999999));
-                            FileUtility.save(gameObject);
+                            //FileUtility.save(gameObject);
                             break;
                     }
                     break;
@@ -83,14 +83,14 @@ public class MainMenu {
                     }
                     break;
                 case "s":
-                    FileUtility.save(gameObject);
+                    //FileUtility.save(gameObject);
                     Screen.greenText("Game saved!");
                 case "reset":
                     if (Input.promptTextInput(Colors.RED + "THIS ERASES ALL DATA! ARE YOU SURE YOU WANT TO?! (y/n)" + Colors.RESET, List.of("y","n")).equals("y")) {{
                         gameObject = new CampaignObject();
-                        FileUtility.save(gameObject);
+                        //FileUtility.save(gameObject);
                         ChangeLocation.changeSelectedLocation(false, gameObject.getHardData());
-                        FileUtility.save(gameObject);
+                        //FileUtility.save(gameObject);
                     }
 
                 }
